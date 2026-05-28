@@ -1,6 +1,6 @@
 ---
 type: ticket
-status: todo
+status: done
 priority: high
 assignee: Kale Skinner
 sources:
