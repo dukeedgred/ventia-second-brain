@@ -2,8 +2,6 @@ import { useEffect, useRef, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import {
   Input,
-  Listbox,
-  ListboxItem,
   Modal,
   ModalBody,
   ModalContent,
@@ -98,28 +96,32 @@ export function SearchModal({ open, onClose }: { open: boolean; onClose: () => v
           )}
 
           {results.length > 0 && (
-            <Listbox
+            <div
+              role="listbox"
               aria-label="Search results"
-              variant="flat"
               className="max-h-[55vh] overflow-y-auto p-0"
-              onAction={(key) => go(String(key))}
             >
               {results.map((r) => (
-                <ListboxItem
+                <button
+                  type="button"
+                  role="option"
+                  aria-selected="false"
                   key={r.path}
-                  textValue={r.name}
-                  description={r.snippet}
-                  endContent={
-                    folderHint(r.path) ? (
-                      <span className="shrink-0 text-[11px] text-default-300">{folderHint(r.path)}</span>
-                    ) : undefined
-                  }
-                  classNames={{ description: 'line-clamp-1 text-default-400' }}
+                  className="flex w-full items-start justify-between gap-3 rounded-medium px-3 py-2 text-left outline-none transition-colors hover:bg-default-100 focus-visible:bg-default-100"
+                  onClick={() => go(r.path)}
                 >
-                  {r.name}
-                </ListboxItem>
+                  <span className="min-w-0">
+                    <span className="block truncate text-sm text-foreground">{r.name}</span>
+                    <span className="block truncate text-xs text-default-400">{r.snippet}</span>
+                  </span>
+                  {folderHint(r.path) && (
+                    <span className="shrink-0 pt-0.5 text-[11px] text-default-300">
+                      {folderHint(r.path)}
+                    </span>
+                  )}
+                </button>
               ))}
-            </Listbox>
+            </div>
           )}
         </ModalBody>
       </ModalContent>
