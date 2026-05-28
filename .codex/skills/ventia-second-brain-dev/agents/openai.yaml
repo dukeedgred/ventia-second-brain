@@ -1,0 +1,4 @@
+interface:
+  display_name: "Ventia Second Brain Dev"
+  short_description: "Work on the Ventia Second Brain app"
+  default_prompt: "Use this skill when modifying or maintaining the Ventia Second Brain repository."

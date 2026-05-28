@@ -1,0 +1,228 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: #0d0d12;
+  color: #e7e7ee;
+  font-family: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---- scrollbars ---- */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2a2a37;
+  border-radius: 6px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #3a3a4a;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* ---- rendered markdown ---- */
+.md {
+  line-height: 1.7;
+  font-size: 0.97rem;
+  color: #d6d6e0;
+  word-wrap: break-word;
+}
+.md > *:first-child {
+  margin-top: 0;
+}
+.md h1,
+.md h2,
+.md h3,
+.md h4 {
+  color: #f3f3f8;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 1.6em 0 0.6em;
+}
+.md h1 {
+  font-size: 1.7rem;
+}
+.md h2 {
+  font-size: 1.35rem;
+  border-bottom: 1px solid #ffffff10;
+  padding-bottom: 0.3em;
+}
+.md h3 {
+  font-size: 1.12rem;
+}
+.md p {
+  margin: 0.7em 0;
+}
+.md a {
+  color: #a78bfa;
+  text-decoration: none;
+}
+.md a:hover {
+  text-decoration: underline;
+}
+.md ul,
+.md ol {
+  margin: 0.6em 0;
+  padding-left: 1.4em;
+}
+.md li {
+  margin: 0.3em 0;
+}
+.md code {
+  background: #ffffff12;
+  padding: 0.15em 0.4em;
+  border-radius: 5px;
+  font-size: 0.85em;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+}
+.md pre {
+  background: #07070b;
+  border: 1px solid #ffffff12;
+  border-radius: 10px;
+  padding: 1em;
+  overflow-x: auto;
+  margin: 1em 0;
+}
+.md pre code {
+  background: none;
+  padding: 0;
+}
+.md blockquote {
+  border-left: 3px solid #8b5cf6;
+  margin: 1em 0;
+  padding: 0.2em 1em;
+  color: #b9b9c8;
+  background: #ffffff06;
+  border-radius: 0 8px 8px 0;
+}
+.md table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 1em 0;
+  font-size: 0.9rem;
+  display: block;
+  overflow-x: auto;
+}
+.md th,
+.md td {
+  border: 1px solid #ffffff14;
+  padding: 0.55em 0.8em;
+  text-align: left;
+}
+.md th {
+  background: #ffffff0a;
+  font-weight: 600;
+  color: #f3f3f8;
+}
+.md hr {
+  border: none;
+  border-top: 1px solid #ffffff14;
+  margin: 1.6em 0;
+}
+.md img {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+/* ---- wikilinks ---- */
+.wikilink {
+  color: #a78bfa;
+  border-bottom: 1px solid #a78bfa55;
+  cursor: pointer;
+  text-decoration: none;
+}
+.wikilink:hover {
+  background: #8b5cf61a;
+}
+.wikilink-broken {
+  color: #f87171;
+  border-bottom: 1px dashed #f8717188;
+  cursor: help;
+}
+
+/* ============================================================
+   Ventia (light) theme — overrides scoped to the .ventia class.
+   The dark "Obsidian" theme above is the default and untouched.
+   ============================================================ */
+.ventia {
+  color-scheme: light;
+}
+.ventia body {
+  background: #f7f6f2;
+  color: #0d0a15;
+}
+.ventia ::-webkit-scrollbar-thumb {
+  background: #cfced0;
+}
+.ventia ::-webkit-scrollbar-thumb:hover {
+  background: #b3b2b6;
+}
+.ventia .sidebar {
+  background: #ffffff;
+}
+.ventia .md {
+  color: #2e2b36;
+}
+.ventia .md h1,
+.ventia .md h2,
+.ventia .md h3,
+.ventia .md h4 {
+  color: #0d0a15;
+}
+.ventia .md h2 {
+  border-bottom-color: #0000000f;
+}
+.ventia .md a {
+  color: #006dff;
+}
+.ventia .md code {
+  background: #0000000d;
+}
+.ventia .md pre {
+  background: #f2f2f2;
+  border-color: #00000012;
+}
+.ventia .md pre code {
+  background: none;
+}
+.ventia .md blockquote {
+  border-left-color: #006dff;
+  background: #006dff0a;
+  color: #53514a;
+}
+.ventia .md th {
+  background: #00000008;
+  color: #0d0a15;
+}
+.ventia .md th,
+.ventia .md td,
+.ventia .md hr {
+  border-color: #0000001f;
+}
+.ventia .wikilink {
+  color: #006dff;
+  border-bottom-color: #006dff55;
+}
+.ventia .wikilink:hover {
+  background: #006dff14;
+}
+.ventia .wikilink-broken {
+  color: #b6003c;
+  border-bottom-color: #b6003c88;
+}

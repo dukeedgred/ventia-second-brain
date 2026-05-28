@@ -1,4 +1,0 @@
-interface:
-  display_name: "Add Tickets to Tab"
-  short_description: "Persist tickets into the Tickets tab"
-  default_prompt: "Use this skill to add action items as persistent tickets in the ResMed Second Brain Tickets tab."
