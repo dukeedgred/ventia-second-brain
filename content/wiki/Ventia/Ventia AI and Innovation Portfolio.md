@@ -1,7 +1,7 @@
 ---
 type: overview
 topic: Ventia
-sources: ["raw/DAII Monthly Meeting Transcript.md"]
+sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
 date-created: 2026-05-28
 date-updated: 2026-05-28
 tags: [ai, innovation, investor-day, safety, venspark]
@@ -34,8 +34,17 @@ AI Apprentice was presented as a voice- and vision-enabled assistant for field w
 - VenSpark: a company-wide campaign had more than 500 ideas and 1,500 likes, with a push for continued engagement over the remaining 130 business days before year-end shutdown.
 - SWIMS AI: an automation concept for Safe Work Method Statements that could check submissions against critical risk protocols and state-level requirements, then return required corrections automatically.
 
+## Transport Innovation Themes
+
+The Transport Data and AI Working Group source adds bid-facing innovation themes for [[Transport Gen 3 Tender Innovation]]. These include autonomous defect and hazard recognition, SAP/IBM/Nextspace demo work, IoT-enabled predictive maintenance, crowdsourced maintenance tasks, and AI decision support that combines historical data, real-time sensor inputs, and weather forecasts.
+
+The source stresses that Transport innovation needs to be visual and actionable. The output should help teams kick off remediation projects, programs, work orders, or intervention backlog items rather than only provide a dashboard.
+
 ## Related Pages
 
 - [[EDW Ernie]]
 - [[Ventia Data Governance Framework]]
 - [[DAII Monthly Meeting Transcript]]
+- [[Transport Data and AI Working Group]]
+- [[Transport Gen 3 Tender Innovation]]
+- [[Transport Asset Intelligence Roadmap]]

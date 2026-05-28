@@ -20,3 +20,6 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Ventia Databricks Platform]] | concept | Databricks-on-Azure platform architecture, ingestion patterns, metadata-driven pipelines, federated queries, Power BI consumption, and production promotion |
 | [[Transport Data Landscape]] | concept | Transport data landscape across SAP financials, Asset Vision operational data, contract schemas, GIS, safety/compliance, and source-standardisation gaps |
 | [[Asset Vision]] | entity | Transport work management and asset source system replicated into Azure SQL and queried through Databricks federated connections |
+| [[Transport Data and AI Working Group]] | source-summary | Source summary of the Transport SOW kickoff email and Evolve/RAMC transcript covering stakeholders, asset-defect data, tender innovation, and integration questions |
+| [[Transport Asset Intelligence Roadmap]] | concept | Roadmap for geolocated defect capture, visualisation, duplicate detection, work-order actionability, predictive maintenance, and asset-system integration |
+| [[Transport Gen 3 Tender Innovation]] | concept | RAMC/Gen 3 tender innovation themes around TMR expectations, AI and autonomous recognition, SAP/IBM/Nextspace demo strategy, and Asset Vision transition |

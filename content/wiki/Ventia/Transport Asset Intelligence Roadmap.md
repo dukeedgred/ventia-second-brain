@@ -1,0 +1,45 @@
+---
+type: concept
+topic: Ventia
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+date-created: 2026-05-28
+date-updated: 2026-05-28
+tags: [transport, asset-data, ai, predictive-maintenance, digital-twin]
+---
+
+# Transport Asset Intelligence Roadmap
+
+The Transport asset intelligence roadmap describes the capabilities Transport wants from asset-condition capture, visualisation, analytics, and digital action workflows. It connects road-defect capture and operational work management to [[Transport Gen 3 Tender Innovation]], [[Transport Data Landscape]], and [[Asset Vision]].
+
+## Defect And Attribute Capture
+
+John Parisella's input identifies the practical road-defect data that needs to be captured for VRMC, RAMC, and most roads contracts. Inputs include cracking, potholes, foliage, sign damage, crocodile cracking, shoving, rutting, raveling, flushing, edge damage, faded line marking, kerb and channel, barriers and guardrails, litter and debris, vegetation, overhanging branches, ponding water, sweeping, roadkill, graffiti, deformed signage, faded signage, and deformed guideposts.
+
+Future scope may include tunnel assets such as fans and wall cracks. This makes the roadmap broader than simple defect detection: it needs an extensible asset and condition model that can support multiple roads contracts and later asset classes.
+
+## Output Requirements
+
+The data needs to be geolocated and usable in visualisation or action platforms including Maximo, SAP, [[Asset Vision]], and Nextspace. Required outputs include location, defect data, duplicate capture detection, patterns, and work order details.
+
+The source stresses that visual output is important, but not enough on its own. Outputs need to support digital action, such as remediation projects, programs, work orders, or intervention backlog items.
+
+## Integration Themes
+
+The note states that Retina Vision is not currently connected to [[Asset Vision]], and describes that connection as a lower-hanging opportunity before deeper SAP integration. It also raises the possibility of a working prototype across Retina Vision, Nextspace, SAP S/4HANA, and SAP SAC.
+
+The architecture question remains unsettled: SAP, Retina Vision, Nextspace, [[Asset Vision]], SAP S/4HANA, SAP SAC, and SAP Asset Performance Management all appear in the discussion, but their target roles and boundaries have not been resolved.
+
+## Predictive Capability
+
+The source asks whether the team can demonstrate planned predictive capability, including use of IoT data to predict failures and trigger intervention backlog items. SAP Asset Performance Management is mentioned as providing an IoT aggregation database capability that could support predictive failure or intervention use cases.
+
+Traffic types, traffic volumes, weather, historic condition data, real-time sensor inputs, and maintenance history may be important future inputs, but their availability for the Transport SOW still needs validation through [[Engagement Team]] contacts.
+
+## Related Pages
+
+- [[Transport Data and AI Working Group]]
+- [[Transport Gen 3 Tender Innovation]]
+- [[Transport Data Landscape]]
+- [[Asset Vision]]
+- [[Ventia Databricks Platform]]
+- [[Ventia Data Platform Modernisation]]

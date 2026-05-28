@@ -13,3 +13,7 @@ Created six wiki pages summarising DAII monthly meeting themes: data governance,
 ## [2026-05-28] ingest | Databricks walk-through
 
 Created Databricks platform, Transport data landscape, Asset Vision, and source-summary pages from Kale Skinner's walkthrough; refreshed Engagement Team contacts.
+
+## [2026-05-28] ingest | Transport Data and AI Working Group
+
+Created Transport working group, asset intelligence roadmap, and Gen 3 tender innovation pages; updated Transport, Asset Vision, innovation, Evolve, and stakeholder context.

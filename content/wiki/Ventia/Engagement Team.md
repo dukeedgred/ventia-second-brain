@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
 date-created: 2026-05-28
 date-updated: 2026-05-28
 tags: [stakeholders, transport, databricks, spend-cube]
@@ -26,6 +26,22 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 - Jade was referenced as helping with access or Confluence context and as having started a Transport working group with relevant SMEs.
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
 
+## Transport Data And AI Stakeholders
+
+The Transport Data and AI Working Group source expands the stakeholder map for the Transport SOW:
+
+- Liz Jessop is the digital business engagement partner for Transport and a digital Transport SME.
+- John Parisella provided VRMC, RAMC, and roads-contract defect capture and output requirements for [[Transport Asset Intelligence Roadmap]].
+- David Tellar and Jacinta Milner were identified for Transport pre-contract, work-winning, and strategy input. Jacinta can provide an overview of existing contacts and the service catalogue.
+- Adam Lloyd, GM for SHeQ, was nominated by the Group Executive for Transport as a key contact because he is looking at asset data strategy.
+- Portia Pitt, GM for Operations, should be consulted to identify operational contact points across contracts.
+- Claire Wells was named as the RAMC operational contact.
+- Gary Dring was identified for previous Transport-related innovations and pilots.
+- Kale Skinner remains the key contact for the data engineering team.
+- Brigette Lo should be optional on stakeholder meetings, with meetings recorded in Teams and transcripts retained.
+- Sanja is working on Nextspace and SAP in the Transport space through Evolve, with IBM recommending Nextspace.
+- Claire, Rhys, Wayne, Barry, Katrina, Chris, Edmond, and Anna appear in the Evolve/RAMC discussion around demo development, data provision, SAP/Nextspace comparison, tender positioning, and implementation planning.
+
 ## Follow-Up Paths
 
 The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh should be consulted before assuming that platform-level data structures match contract-level business definitions.
@@ -33,6 +49,9 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 ## Related Pages
 
 - [[Databricks Walk-Through]]
+- [[Transport Data and AI Working Group]]
+- [[Transport Asset Intelligence Roadmap]]
+- [[Transport Gen 3 Tender Innovation]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]

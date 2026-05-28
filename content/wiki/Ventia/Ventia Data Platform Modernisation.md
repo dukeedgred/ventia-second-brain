@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DAII Monthly Meeting Transcript.md"]
+sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
 date-created: 2026-05-28
 date-updated: 2026-05-28
 tags: [data-platform, databricks, program-evolve, sap, power-bi]
@@ -34,8 +34,17 @@ This creates two linked workloads:
 
 The data engineering team is dependent on IBM and the broader Evolve project delivery. No red flags were raised in the meeting, but delivery timing flows directly into the data team's platform and reporting work.
 
+## Transport Evolve Thread
+
+The Transport Data and AI Working Group source adds a Transport-specific Evolve thread around SAP, Nextspace, and tender innovation. Sanja was described as looking at Nextspace and SAP in the Transport space, with IBM recommending Nextspace, while the source owner was unclear how SAP, Retina Vision, Nextspace, and [[Asset Vision]] are intended to fit together.
+
+The Evolve/RAMC transcript also discusses SAP Asset Performance Management, SAP SAC, S/4HANA, IoT aggregation, and predictive failure/intervention backlog use cases. These ideas connect Program Evolve to [[Transport Gen 3 Tender Innovation]] and [[Transport Asset Intelligence Roadmap]], but still need architecture, data ownership, and implementation boundaries clarified.
+
 ## Related Pages
 
 - [[EDW Ernie]]
 - [[Ventia Data Governance Framework]]
 - [[DAII Monthly Meeting Transcript]]
+- [[Transport Data and AI Working Group]]
+- [[Transport Gen 3 Tender Innovation]]
+- [[Transport Asset Intelligence Roadmap]]
