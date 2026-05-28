@@ -16,3 +16,7 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Ventia Data Platform Modernisation]] | concept | Program Evolve, S/4HANA to Databricks reporting architecture, BW decommissioning, SIT/UAT status, and related data engineering risks |
 | [[EDW Ernie]] | entity | AI agent for enterprise data warehouse design, Databricks discovery, SQL peer review, and BW replatforming support |
 | [[Ventia AI and Innovation Portfolio]] | overview | Portfolio of DAII AI and innovation initiatives including Investor Day showcases, VenIQ, AI Apprentice, safety trials, VenSpark, and SWIMS AI |
+| [[Databricks Walk-Through]] | source-summary | Source summary of Kale Skinner's walkthrough of Ventia Databricks, Transport data sources, platform patterns, access, and SMEs |
+| [[Ventia Databricks Platform]] | concept | Databricks-on-Azure platform architecture, ingestion patterns, metadata-driven pipelines, federated queries, Power BI consumption, and production promotion |
+| [[Transport Data Landscape]] | concept | Transport data landscape across SAP financials, Asset Vision operational data, contract schemas, GIS, safety/compliance, and source-standardisation gaps |
+| [[Asset Vision]] | entity | Transport work management and asset source system replicated into Azure SQL and queried through Databricks federated connections |
