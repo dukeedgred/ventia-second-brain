@@ -1,0 +1,7 @@
+# Auto-sync: the append-heavy knowledge-base files are touched by almost every
+# ingest (new log entry, new index/resources rows). The built-in `union` merge
+# driver keeps BOTH sides' lines on conflict instead of failing the merge, so
+# two members ingesting at once don't collide. (Lint dedupes any doubled rows.)
+content/log.md        merge=union
+content/index.md      merge=union
+content/resources.md  merge=union
