@@ -23,3 +23,6 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Transport Data and AI Working Group]] | source-summary | Source summary of the Transport SOW kickoff email and Evolve/RAMC transcript covering stakeholders, asset-defect data, tender innovation, and integration questions |
 | [[Transport Asset Intelligence Roadmap]] | concept | Roadmap for geolocated defect capture, visualisation, duplicate detection, work-order actionability, predictive maintenance, and asset-system integration |
 | [[Transport Gen 3 Tender Innovation]] | concept | RAMC/Gen 3 tender innovation themes around TMR expectations, AI and autonomous recognition, SAP/IBM/Nextspace demo strategy, and Asset Vision transition |
+| [[DB Walkthrough With Pranav Kumar]] | source-summary | Source summary of Pranav Kumar's walkthrough of the Transport contract portfolio, Databricks schemas, reporting maturity, and enterprise data opportunities |
+| [[Transport Contract Portfolio]] | concept | Portfolio view of Transport roads and tunnel contracts across Australia and New Zealand, including contract types, systems, and reporting maturity |
+| [[Transport Sector Reporting Opportunities]] | concept | Enterprise Transport reporting opportunities around bid support, mobilization, delivery reporting, predictive maintenance, and benchmarking |

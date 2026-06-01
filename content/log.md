@@ -17,3 +17,7 @@ Created Databricks platform, Transport data landscape, Asset Vision, and source-
 ## [2026-05-28] ingest | Transport Data and AI Working Group
 
 Created Transport working group, asset intelligence roadmap, and Gen 3 tender innovation pages; updated Transport, Asset Vision, innovation, Evolve, and stakeholder context.
+
+## [2026-06-01] ingest | DB walkthrough with Pranav Kumar
+
+Created Transport contract portfolio and reporting opportunity pages; updated Databricks, Asset Vision, Transport landscape, asset intelligence, and stakeholder context.

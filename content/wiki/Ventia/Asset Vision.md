@@ -1,9 +1,9 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-01
 tags: [asset-vision, transport, work-management, asset-data, federated-query]
 ---
 
@@ -16,6 +16,10 @@ Asset Vision is the main source system mentioned for Transport work order, work 
 Asset Vision provides operational reporting data for Transport contracts. The source described Transport Australia as having multiple contract groupings and noted a separate mobilization effort for New Zealand Transport databases that were not yet fully in production.
 
 The data supports contract-level operational reporting, including work management and asset views. It is one of the key systems to understand for the [[Transport Data Landscape]] gap analysis.
+
+The Pranav walkthrough positions Asset Vision mainly in open-road contracts. Western Roads Upgrade was one of the first Transport contracts to adopt Asset Vision, followed by SRAPC. Queensland contracts such as RAMC, Port of Brisbane, and Brisbane Airport have data coming into Databricks, while VRMC Grampians and Metro East were being mobilized for a 2026-07-01 go-live.
+
+Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses Maximo, and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
 
 ## Databricks Access Pattern
 
@@ -35,9 +39,13 @@ The Evolve/RAMC discussion also says the Asset Vision contract should be renewed
 
 In the [[Transport Gen 3 Tender Innovation]] context, Asset Vision needs to be compared side by side with SAP and Nextspace for functionality, cost, data ownership, and ability to support digitally actionable outputs from [[Transport Asset Intelligence Roadmap]].
 
+The Pranav walkthrough adds that cross-contract reporting is difficult even inside Asset Vision because activity specifications use activity category, activity, and intervention levels, and each contract has configured those levels differently. This makes [[Transport Sector Reporting Opportunities]] dependent on definition alignment, not just source-system access.
+
 ## Related Pages
 
 - [[Transport Data Landscape]]
+- [[Transport Contract Portfolio]]
+- [[Transport Sector Reporting Opportunities]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Data and AI Working Group]]

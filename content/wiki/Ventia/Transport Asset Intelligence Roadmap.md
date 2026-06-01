@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-01
 tags: [transport, asset-data, ai, predictive-maintenance, digital-twin]
 ---
 
@@ -35,10 +35,16 @@ The source asks whether the team can demonstrate planned predictive capability, 
 
 Traffic types, traffic volumes, weather, historic condition data, real-time sensor inputs, and maintenance history may be important future inputs, but their availability for the Transport SOW still needs validation through [[Engagement Team]] contacts.
 
+The Pranav walkthrough adds a concrete failure-code path for predictive maintenance. Contracts could capture why a defect occurred as well as what repair was applied, then use patterns such as flooding-related potholes to plan upstream interventions. SRAPC started work on failure-code setup but did not complete the full list; Sydney Harbour Tunnel was described as having a stronger Maximo failure-code setup.
+
+Vehicle telemetry was also raised as a possible internal Ventia opportunity. The value would come from connecting engine or asset telemetry to maintenance history so that the team can predict issues such as battery failures or future vehicle maintenance needs.
+
 ## Related Pages
 
 - [[Transport Data and AI Working Group]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Sector Reporting Opportunities]]
+- [[Transport Contract Portfolio]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]
 - [[Ventia Databricks Platform]]

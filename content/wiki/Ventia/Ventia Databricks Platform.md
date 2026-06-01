@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-01
 tags: [databricks, azure, data-platform, power-bi, data-engineering]
 ---
 
@@ -35,6 +35,16 @@ Most report consumers use Power BI and may not know Databricks is behind their r
 
 Digital Services acts as the gatekeeper between development and production. Business-created Databricks assets can be peer-reviewed, backed up to the repository, migrated to production, and rolled back if needed.
 
+The Pranav walkthrough adds the Transport operating detail. Transport users can develop tables, views, and SQL in development schemas, but production is owned by Kale Skinner's Digital Services team. Once Transport has built and tested a view, Digital Services promotes it into production.
+
+Transport also manages object ownership carefully. Pranav described moving ownership from individual users to groups so that members of the right group can maintain the tables and views without being blocked by a single-person owner.
+
+## Transport Catalog Pattern
+
+Transport has a development catalog organized with schemas for contracts or purposes. Examples mentioned in the walkthrough include Auckland West, Brisbane Airport, finance, FNDC, SDC, NZLNNO, and SRAPC.
+
+Within contract schemas, user tables and user views support downstream reporting. WRU was described as having the largest number of tables and views, while SRAPC was described as advanced in technology and delivery practice. The contract-schema pattern supports local flexibility but reinforces the standardisation questions on [[Transport Data Landscape]] and [[Transport Contract Portfolio]].
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -43,6 +53,7 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 
 - [[Databricks Walk-Through]]
 - [[Transport Data Landscape]]
+- [[Transport Contract Portfolio]]
 - [[Asset Vision]]
 - [[Ventia Data Platform Modernisation]]
 - [[EDW Ernie]]

@@ -1,9 +1,9 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-01
 tags: [stakeholders, transport, databricks, spend-cube]
 ---
 
@@ -25,6 +25,7 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 - Bhupesh was identified as the Transport reporting sector lead for financial and SAP-related Transport data.
 - Jade was referenced as helping with access or Confluence context and as having started a Transport working group with relevant SMEs.
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
+- Pranav Kumar can validate the [[Transport Contract Portfolio]], Transport Databricks schema pattern, contract reporting maturity, Maximo versus [[Asset Vision]] boundaries, and realistic [[Transport Sector Reporting Opportunities]].
 
 ## Transport Data And AI Stakeholders
 
@@ -41,6 +42,8 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Brigette Lo should be optional on stakeholder meetings, with meetings recorded in Teams and transcripts retained.
 - Sanja is working on Nextspace and SAP in the Transport space through Evolve, with IBM recommending Nextspace.
 - Claire, Rhys, Wayne, Barry, Katrina, Chris, Edmond, and Anna appear in the Evolve/RAMC discussion around demo development, data provision, SAP/Nextspace comparison, tender positioning, and implementation planning.
+- Conor Murphy, Rui Luan, Toby Lynn, Anna Coville, and Hui Yinlun were named in the Pranav walkthrough as known data contacts for larger Transport contracts.
+- A New Zealand business engagement manager is working on reporting across New Zealand contracts, but her name was not captured in the transcript.
 
 ## Follow-Up Paths
 
@@ -52,6 +55,8 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 - [[Transport Data and AI Working Group]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Contract Portfolio]]
+- [[Transport Sector Reporting Opportunities]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]
