@@ -19,10 +19,11 @@ import { lint } from './lint'
 import { readResources } from './resources'
 import { commitContent, syncPullNow, forceSync, getSyncStatus, initSync } from './git'
 import { listDocs, generateDoc } from './docs'
+import { extractFileText } from './fileExtract'
 
 const app = express()
 app.use(cors())
-app.use(express.json({ limit: '4mb' }))
+app.use(express.json({ limit: '25mb' }))
 
 const PORT = Number(process.env.PORT) || 8787
 
@@ -204,6 +205,23 @@ app.post('/api/extract', async (req, res) => {
     res.json(await extractFromNote(b.path, kind))
   } catch (e) {
     res.status(500).json({ error: (e as Error).message })
+  }
+})
+
+app.post('/api/extract-file', async (req, res) => {
+  try {
+    const b = req.body as { name?: string; data?: string }
+    const name = String(b.name || '').trim()
+    if (!name) throw new Error('name required')
+    if (!b.data) throw new Error('file data required')
+    const buf = Buffer.from(String(b.data), 'base64')
+    const result = extractFileText(name, buf)
+    if (!result.text.trim()) {
+      throw new Error(`Could not extract readable text from ${name}`)
+    }
+    res.json(result)
+  } catch (e) {
+    res.status(400).json({ error: (e as Error).message })
   }
 })
 
