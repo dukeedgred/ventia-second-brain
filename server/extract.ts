@@ -44,3 +44,25 @@ export async function extractFromNote(notePath: string, kind: Kind): Promise<{ i
   const { text } = await runCodex(prompt, { sandbox: 'read-only' })
   return { items: parseItems(text) }
 }
+
+export async function extractTodosFromNotes(notePaths: string[]): Promise<{ items: unknown[] }> {
+  const paths = Array.from(new Set(notePaths.map((p) => p.trim()).filter(Boolean))).slice(0, 12)
+  if (paths.length < 2) throw new Error('Select at least two notes')
+
+  const notes = await Promise.all(paths.map((p) => readNote(p)))
+  const prompt = [
+    'You extract and rank concrete to-dos across multiple meeting notes.',
+    'Prioritise items that recur across notes, unblock other work, mention owners, mention dates, or are framed as risks/dependencies.',
+    'Merge duplicates into one stronger to-do. Do not invent work that is not explicitly stated or clearly implied.',
+    'Set relevance to "high" when the item appears in 2+ notes or is a blocker/risk/dependency; "medium" for a single clear owner/date/action; "low" for a useful but weaker follow-up.',
+    'Return JSON of this exact shape:',
+    '{"items":[{"title":"<short imperative title>","description":"<1-2 sentences, include why it matters>","priority":"low|medium|high","assignee":"<person/role named, else Unassigned>","relevance":"low|medium|high","evidence":"<short evidence summary, including recurrence if applicable>","sources":["<exact note path>", "..."]}]}',
+    '',
+    'Respond with ONLY the JSON object. No prose. No code fences.',
+    '',
+    ...notes.map((note) => `--- NOTE: ${note.path} ---\n${note.content}`),
+  ].join('\n\n')
+
+  const { text } = await runCodex(prompt, { sandbox: 'read-only' })
+  return { items: parseItems(text) }
+}

@@ -13,7 +13,7 @@ import { search } from './search'
 import { askBrainCli } from './brain'
 import type { BrainEvent } from './brain'
 import { listItems, createItem, updateItem } from './items'
-import { extractFromNote } from './extract'
+import { extractFromNote, extractTodosFromNotes } from './extract'
 import { ingest } from './ingest'
 import { lint } from './lint'
 import { readResources } from './resources'
@@ -202,6 +202,16 @@ app.post('/api/extract', async (req, res) => {
     if (!b.path) throw new Error('path required')
     const kind = b.kind === 'decisions' ? 'decisions' : 'tickets'
     res.json(await extractFromNote(b.path, kind))
+  } catch (e) {
+    res.status(500).json({ error: (e as Error).message })
+  }
+})
+
+app.post('/api/extract-todos', async (req, res) => {
+  try {
+    const paths = (req.body as { paths?: unknown[] })?.paths
+    if (!Array.isArray(paths)) throw new Error('paths required')
+    res.json(await extractTodosFromNotes(paths.map((p) => String(p))))
   } catch (e) {
     res.status(500).json({ error: (e as Error).message })
   }
