@@ -71,6 +71,12 @@ export const api = {
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ path, kind }),
     }),
+  extractTodos: (paths: string[]) =>
+    json<{ items: unknown[] }>('/api/extract-todos', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ paths }),
+    }),
   sync: () => json<SyncStatus>('/api/sync'),
   syncNow: () => json<SyncStatus>('/api/sync', { method: 'POST' }),
   docs: () => json<DocStatus[]>('/api/docs'),
