@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-01
-tags: [transport, asset-data, ai, predictive-maintenance, digital-twin]
+date-updated: 2026-06-02
+tags: [transport, asset-data, ai, predictive-maintenance, digital-twin, telemetry]
 ---
 
 # Transport Asset Intelligence Roadmap
@@ -39,9 +39,16 @@ The Pranav walkthrough adds a concrete failure-code path for predictive maintena
 
 Vehicle telemetry was also raised as a possible internal Ventia opportunity. The value would come from connecting engine or asset telemetry to maintenance history so that the team can predict issues such as battery failures or future vehicle maintenance needs.
 
+## Sensing And Telemetry Inputs
+
+The [[Transport First Two Week Plan]] turns sensing and telemetry into a named week-2 deep-dive area. Candidate inputs include Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets.
+
+These inputs should support the initial operational decision use case and the decision gate for week 3. The key integration question is which sources can be accessed quickly enough to provide a credible proof point while still fitting the longer-term [[Integrated Transport Data Asset]] and [[Transport Data Landscape]].
+
 ## Related Pages
 
 - [[Transport Data and AI Working Group]]
+- [[Transport First Two Week Plan]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

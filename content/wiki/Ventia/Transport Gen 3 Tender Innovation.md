@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-02
 tags: [transport, tender, innovation, ramc, ai]
 ---
 
@@ -16,6 +16,8 @@ Transport Gen 3 tender innovation is the bid-driven push to demonstrate credible
 The embedded Evolve/RAMC discussion says TMR's documents may not explicitly require AI or technology uplift, but there is an underlying expectation for innovation. Claire and Liz described a need to show tangible current capability plus a credible future roadmap, while avoiding overpromising untested technology.
 
 The group expected competitors to promise advanced features, so the response needs evidence of deliverable solutions, a clear implementation timeline, and a balance of automation with human oversight.
+
+The [[Transport First Two Week Plan]] adds the immediate RAMC bid workstream: develop a risk-based road maintenance narrative, identify bid proof points, and choose an initial operational decision use case. This makes the tender story dependent on concrete proof-point selection during the first two weeks of the broader Transport programme.
 
 ## Demo Strategy
 
@@ -36,6 +38,7 @@ Future themes include IoT-enabled predictive maintenance, crowdsourced maintenan
 ## Related Pages
 
 - [[Transport Data and AI Working Group]]
+- [[Transport First Two Week Plan]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]

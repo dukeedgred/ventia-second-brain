@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-06-02
 date-updated: 2026-06-02
 tags: [transport, data-asset, databricks, telematics, fleet]
@@ -44,6 +44,12 @@ The expected outcomes after six weeks are:
 - A live use case tested by the business.
 - A delivery roadmap covering priorities, timeline, effort, operational changes, and investment recommendations.
 
+## First Two-Week Mobilisation Plan
+
+The [[Transport First Two Week Plan]] details how the programme should move from initial alignment into the week 3 delivery phase. Week 1 focuses on sponsor alignment, stakeholder interviews, and current-state systems and data mapping. Week 2 moves into sensing and RAMC deep dives, validation, access-blocker resolution, proof-of-concept selection, and roadmap definition.
+
+The decision gate before week 3 needs explicit agreement on the proof point, owner, data access, and commencement conditions. This makes the first two weeks a mobilisation and de-risking phase for the broader six-week asset programme, rather than a standalone discovery exercise.
+
 ## Live Use Case Options
 
 The brief leaves the live use case open but names the likely value zones: bid support, service mobilisation and readiness, contract operations and reporting, and benchmarking or insights.
@@ -60,6 +66,7 @@ The right use case should prove near-term value while leaving reusable foundatio
 ## Related Pages
 
 - [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

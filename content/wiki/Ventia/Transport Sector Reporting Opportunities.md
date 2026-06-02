@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-06-01
 date-updated: 2026-06-02
 tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset]
@@ -45,10 +45,13 @@ The executive brief expects one business-tested live use case within six weeks. 
 
 The same brief expects a roadmap covering future priorities, timeline and effort estimates, operational changes, and investment recommendations. This makes the reporting opportunity work both a near-term proof point and a decision input for longer-term Transport data investment.
 
+The [[Transport First Two Week Plan]] adds the immediate selection mechanics: the decision gate should agree the proof point, proof-point owner, data access, and week 3 commencement conditions. That means reporting opportunities should be assessed not only for value, but also for whether enough source access and stakeholder ownership can be secured within the first two weeks.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
 - [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Contract Portfolio]]
 - [[Transport Data Landscape]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-02
 tags: [transport, data-landscape, asset-data, sap, gis, data-asset]
@@ -30,6 +30,8 @@ These requirements are tracked in [[Transport Asset Intelligence Roadmap]] becau
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
+
+The [[Transport First Two Week Plan]] makes the first pass more explicit: the enterprise Transport data product should map core and adjacent data domains, source systems, ownership, access paths, and reusable asset patterns before week 3 starts. This raises access and ownership mapping to first-week deliverables, not later documentation tasks.
 
 ## Contract-Level Schemas
 
@@ -61,11 +63,14 @@ The Damien brief adds the expected foundation scope for the integrated asset: as
 
 Ventia has enterprise safety and compliance data in Databricks, which may apply to Transport analysis. ESRI/GIS data is managed by a separate team, and Databricks can connect to the Postgres database behind ESRI for bespoke use cases. Whether Transport uses Ventia-managed GIS data or provider-managed GIS data still needs validation.
 
+The first-two-week plan also names sensing and telemetry inputs that sit adjacent to the existing operational landscape: Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets. These inputs connect the data landscape to [[Transport Asset Intelligence Roadmap]] and may require different owners, access paths, and integration patterns from existing Databricks-backed reporting sources.
+
 ## Related Pages
 
 - [[Databricks Walk-Through]]
 - [[Transport Data and AI Working Group]]
 - [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]

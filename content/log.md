@@ -25,3 +25,7 @@ Created Transport contract portfolio and reporting opportunity pages; updated Da
 ## [2026-06-02] ingest | Integrated Transport Data Asset executive brief
 
 Created source-summary and concept pages for Damien's Transport executive brief; updated Transport landscape, reporting opportunities, Databricks, and stakeholder context.
+
+## [2026-06-02] ingest | Transport first two-week plan
+
+Created a source-summary page for the Transport first-two-week plan and updated Transport data asset, landscape, RAMC, sensing, governance, reporting, and stakeholder pages.

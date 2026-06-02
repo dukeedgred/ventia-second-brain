@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DAII Monthly Meeting Transcript.md"]
+sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [data-governance, data-management, controls, risk]
+date-updated: 2026-06-02
+tags: [data-governance, data-management, controls, risk, operating-model]
 ---
 
 # Ventia Data Governance Framework
@@ -24,6 +24,12 @@ The framework is positioned as an enterprise control layer that helps de-risk bu
 - The transport project team is a focus for embedding governed delivery into a data product from the start.
 - Sustainability is a candidate area because the team has good business-process controls, but its data pipelines remain manual.
 
+## Transport Programme Governance
+
+The [[Transport First Two Week Plan]] applies the governance pattern to the [[Integrated Transport Data Asset]] mobilisation period. It names working groups, decision rights, access blockers, meeting evidence, and the handoff to weeks 3 to 6 as explicit operating-model outputs.
+
+This reinforces that [[Transport Data Landscape]] mapping should capture ownership and access paths alongside source systems. The decision gate before week 3 should confirm the proof point, owner, data access, and commencement conditions, so governance is part of delivery readiness rather than a later assurance step.
+
 ## Value Expected
 
 The meeting described the expected value as reduced data risk, clearer ownership, better consistency, better quality and integrity, less reconciliation and rework, and less time spent re-explaining definitions, schemas, and business logic. Catalogued definitions and context are intended to become reusable assets rather than tribal knowledge.
@@ -41,3 +47,6 @@ Ventia's breadth and lower maturity create challenges in explaining data governa
 - [[Safety Metrics Governance Pilot]]
 - [[Ventia Data Platform Modernisation]]
 - [[DAII Monthly Meeting Transcript]]
+- [[Transport First Two Week Plan]]
+- [[Integrated Transport Data Asset]]
+- [[Transport Data Landscape]]

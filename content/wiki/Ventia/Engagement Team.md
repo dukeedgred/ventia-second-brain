@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-02
 tags: [stakeholders, transport, databricks, spend-cube, data-asset]
@@ -50,6 +50,19 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Damien was the recipient of the executive briefing on the [[Integrated Transport Data Asset]]; the source does not capture his role or approval authority.
 - Omnia Collective / EdgeRed are named as the delivery partners for the six-week Transport data asset programme.
 
+## Transport First Two-Week Plan Stakeholders
+
+The [[Transport First Two Week Plan]] groups stakeholders by the first two weeks of programme work:
+
+- Sponsor: Jade Clarke.
+- Digital Transport and bid: Liz Jessop and John Parisella.
+- Pre-contract and strategy: David Teller and Jacinta Milner. This appears to be the same stakeholder earlier captured as David Tellar, but the spelling differs by source.
+- Operational proof point: Conor Murphy, Claire Wells, and Portia Pitt.
+- Data and engineering: Osaka Tillakaratne and Kale Skinner.
+- Innovation and external data: Gary Dring and Angus McDonald.
+
+The plan sequences interviews into four waves: sponsor/bid stakeholders, operational proof-point stakeholders, data/governance/access stakeholders, and validation or external-data stakeholders.
+
 ## Follow-Up Paths
 
 The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh should be consulted before assuming that platform-level data structures match contract-level business definitions.
@@ -63,6 +76,7 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 - [[Transport Contract Portfolio]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
 - [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
