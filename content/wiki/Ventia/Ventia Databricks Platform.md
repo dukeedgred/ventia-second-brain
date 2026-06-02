@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-01
-tags: [databricks, azure, data-platform, power-bi, data-engineering]
+date-updated: 2026-06-02
+tags: [databricks, azure, data-platform, power-bi, data-engineering, transport]
 ---
 
 # Ventia Databricks Platform
@@ -45,6 +45,8 @@ Transport has a development catalog organized with schemas for contracts or purp
 
 Within contract schemas, user tables and user views support downstream reporting. WRU was described as having the largest number of tables and views, while SRAPC was described as advanced in technology and delivery practice. The contract-schema pattern supports local flexibility but reinforces the standardisation questions on [[Transport Data Landscape]] and [[Transport Contract Portfolio]].
 
+The Damien executive brief makes Databricks centralisation an explicit discovery and delivery question for the [[Integrated Transport Data Asset]]. The six-week work needs to show what Transport data has already been centralised into Databricks, what remains decentralised, and how centralised assets can be expanded across GPS, telematics, fleet, job scheduling, asset, KPI, location, and service provision data.
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -52,6 +54,8 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 ## Related Pages
 
 - [[Databricks Walk-Through]]
+- [[Transport Executive Brief Damien]]
+- [[Integrated Transport Data Asset]]
 - [[Transport Data Landscape]]
 - [[Transport Contract Portfolio]]
 - [[Asset Vision]]

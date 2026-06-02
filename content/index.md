@@ -26,3 +26,5 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[DB Walkthrough With Pranav Kumar]] | source-summary | Source summary of Pranav Kumar's walkthrough of the Transport contract portfolio, Databricks schemas, reporting maturity, and enterprise data opportunities |
 | [[Transport Contract Portfolio]] | concept | Portfolio view of Transport roads and tunnel contracts across Australia and New Zealand, including contract types, systems, and reporting maturity |
 | [[Transport Sector Reporting Opportunities]] | concept | Enterprise Transport reporting opportunities around bid support, mobilization, delivery reporting, predictive maintenance, and benchmarking |
+| [[Integrated Transport Data Asset]] | concept | Six-week programme concept for unifying GPS, telematics, fleet, scheduling, asset, location, KPI, and service data into a Transport data foundation |
+| [[Transport Executive Brief Damien]] | source-summary | Source summary of Damien's executive briefing on the integrated Transport data asset engagement, expected six-week outcomes, live use case, and roadmap |

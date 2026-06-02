@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-01
-tags: [transport, data-landscape, asset-data, sap, gis]
+date-updated: 2026-06-02
+tags: [transport, data-landscape, asset-data, sap, gis, data-asset]
 ---
 
 # Transport Data Landscape
@@ -28,6 +28,8 @@ The Transport Data and AI Working Group source adds concrete roads-asset capture
 These requirements are tracked in [[Transport Asset Intelligence Roadmap]] because the key question is not only where the source data sits, but how captured observations become visual, trusted, and digitally actionable work.
 
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
+
+The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
 
 ## Contract-Level Schemas
 
@@ -53,6 +55,8 @@ Most Databricks-backed Transport reporting is converted into simplified views fo
 
 Enterprise opportunities are tracked on [[Transport Sector Reporting Opportunities]]. They include bid intelligence, mobilization support, delivery reporting, predictive maintenance, and benchmarking or activity-based costing. Pranav cautioned that earlier activity-based costing work struggled because SAP cost structures and contract-level activity models were not aligned.
 
+The Damien brief adds the expected foundation scope for the integrated asset: asset management, GPS, telematics, fleet management, job scheduling, vehicle and service locations, contract KPIs, and service provision information. Those inputs need to support a business-tested live use case within the six-week programme and a roadmap for further operational and investment decisions.
+
 ## Adjacent Data Domains
 
 Ventia has enterprise safety and compliance data in Databricks, which may apply to Transport analysis. ESRI/GIS data is managed by a separate team, and Databricks can connect to the Postgres database behind ESRI for bespoke use cases. Whether Transport uses Ventia-managed GIS data or provider-managed GIS data still needs validation.
@@ -61,6 +65,8 @@ Ventia has enterprise safety and compliance data in Databricks, which may apply 
 
 - [[Databricks Walk-Through]]
 - [[Transport Data and AI Working Group]]
+- [[Transport Executive Brief Damien]]
+- [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Contract Portfolio]]

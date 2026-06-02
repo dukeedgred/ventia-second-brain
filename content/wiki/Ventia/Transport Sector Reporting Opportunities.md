@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-01
-tags: [transport, reporting, benchmarks, predictive-maintenance, bids]
+date-updated: 2026-06-02
+tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset]
 ---
 
 # Transport Sector Reporting Opportunities
@@ -18,6 +18,8 @@ The walkthrough framed four broad value areas for Transport data. The first is b
 The second is mobilization: understanding whether vehicles, people, systems, and agreed operational processes are in place for a new contract. Pranav described mobilization as mostly implementing what was agreed in the bid, with occasional add-ons when the existing solution does not cover a requirement.
 
 The third is delivery reporting: improving reporting efficiency and standardizing views for senior management without getting trapped in every contract's detailed KPI definitions. The fourth is benchmarking, including activity-based costing and average maintenance-cost views that could support either service improvement or bid pricing.
+
+The Damien executive brief restates these as the north-star value areas for an [[Integrated Transport Data Asset]]: winning bids, mobilising workforce and equipment, delivery optimisation and support, and additional value through data and insights such as cost benchmarking.
 
 ## Standardisation Challenges
 
@@ -37,9 +39,17 @@ For bid support, Pranav suggested reusable data on asset types, probability of f
 
 This connects the reporting opportunity to [[Transport Gen 3 Tender Innovation]] and [[Transport Asset Intelligence Roadmap]]: the highest-value bid story is not only a dashboard, but an asset information management package where Ventia owns enough data to build its own AI and analytics capability.
 
+## Six-Week Use Case And Roadmap
+
+The executive brief expects one business-tested live use case within six weeks. Candidate areas are bid support, service mobilisation and readiness, contract operations and reporting, and benchmarking or insights.
+
+The same brief expects a roadmap covering future priorities, timeline and effort estimates, operational changes, and investment recommendations. This makes the reporting opportunity work both a near-term proof point and a decision input for longer-term Transport data investment.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
+- [[Transport Executive Brief Damien]]
+- [[Integrated Transport Data Asset]]
 - [[Transport Contract Portfolio]]
 - [[Transport Data Landscape]]
 - [[Transport Asset Intelligence Roadmap]]

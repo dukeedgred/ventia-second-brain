@@ -21,3 +21,7 @@ Created Transport working group, asset intelligence roadmap, and Gen 3 tender in
 ## [2026-06-01] ingest | DB walkthrough with Pranav Kumar
 
 Created Transport contract portfolio and reporting opportunity pages; updated Databricks, Asset Vision, Transport landscape, asset intelligence, and stakeholder context.
+
+## [2026-06-02] ingest | Integrated Transport Data Asset executive brief
+
+Created source-summary and concept pages for Damien's Transport executive brief; updated Transport landscape, reporting opportunities, Databricks, and stakeholder context.

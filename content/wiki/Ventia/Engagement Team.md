@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-01
-tags: [stakeholders, transport, databricks, spend-cube]
+date-updated: 2026-06-02
+tags: [stakeholders, transport, databricks, spend-cube, data-asset]
 ---
 
 # Engagement Team
@@ -45,6 +45,11 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Conor Murphy, Rui Luan, Toby Lynn, Anna Coville, and Hui Yinlun were named in the Pranav walkthrough as known data contacts for larger Transport contracts.
 - A New Zealand business engagement manager is working on reporting across New Zealand contracts, but her name was not captured in the transcript.
 
+## Transport Data Asset Briefing
+
+- Damien was the recipient of the executive briefing on the [[Integrated Transport Data Asset]]; the source does not capture his role or approval authority.
+- Omnia Collective / EdgeRed are named as the delivery partners for the six-week Transport data asset programme.
+
 ## Follow-Up Paths
 
 The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh should be consulted before assuming that platform-level data structures match contract-level business definitions.
@@ -57,6 +62,8 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Contract Portfolio]]
 - [[Transport Sector Reporting Opportunities]]
+- [[Transport Executive Brief Damien]]
+- [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]
