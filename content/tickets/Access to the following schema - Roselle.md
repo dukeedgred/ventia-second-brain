@@ -1,6 +1,6 @@
 ---
 type: ticket
-status: todo
+status: in-progress
 priority: high
 assignee: Unassigned
 sources: []
