@@ -1,7 +1,7 @@
 ---
 type: ticket
 status: todo
-priority: medium
+priority: high
 assignee: Unassigned
 sources: []
 date-created: '2026-06-02'
