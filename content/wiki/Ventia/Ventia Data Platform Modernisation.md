@@ -3,13 +3,13 @@ type: concept
 topic: Ventia
 sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
+date-updated: 2026-06-02
 tags: [data-platform, databricks, program-evolve, sap, power-bi]
 ---
 
 # Ventia Data Platform Modernisation
 
-Ventia's data platform modernisation is tied to Program Evolve and the replacement of SAP ECC6 with SAP S/4HANA. The meeting described this as an opportunity to decommission SAP BW, rebuild ingestion patterns into Databricks, and align enterprise reporting to a cleaner source-to-bronze-to-silver-to-gold-to-Power-BI architecture.
+Ventia's data platform modernisation is tied to Program Evolve and the replacement of SAP ECC6 with SAP S/4HANA. The meeting described this as an opportunity to decommission SAP BW, rebuild ingestion patterns into the [[Ventia Databricks Platform]], and align enterprise reporting to a cleaner source-to-bronze-to-silver-to-gold-to-Power-BI architecture.
 
 ## Reporting Architecture Shift
 
@@ -43,6 +43,7 @@ The Evolve/RAMC transcript also discusses SAP Asset Performance Management, SAP 
 ## Related Pages
 
 - [[EDW Ernie]]
+- [[Ventia Databricks Platform]]
 - [[Ventia Data Governance Framework]]
 - [[DAII Monthly Meeting Transcript]]
 - [[Transport Data and AI Working Group]]

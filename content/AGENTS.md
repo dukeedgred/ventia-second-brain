@@ -16,7 +16,7 @@ Procurement Spend Cube engagement.
 
 ## Conventions
 
-- Link pages with `[[Page Name]]` wikilinks matching target filenames.
+- Link pages with Obsidian wikilinks matching target filenames.
 - Use frontmatter on wiki pages: `type`, `topic: Ventia`, `sources`,
   `date-created`, `date-updated`, and `tags`.
 - Prefer curated `wiki/` pages over `raw/`.

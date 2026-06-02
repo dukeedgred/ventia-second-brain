@@ -29,3 +29,5 @@ Created source-summary and concept pages for Damien's Transport executive brief;
 ## [2026-06-02] ingest | Transport first two-week plan
 
 Created a source-summary page for the Transport first-two-week plan and updated Transport data asset, landscape, RAMC, sensing, governance, reporting, and stakeholder pages.
+
+## [2026-06-02] lint | Removed stale catalog rows, repaired metadata and link issues, and added a Databricks modernisation cross-reference.
