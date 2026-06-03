@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-03
 tags: [asset-vision, transport, work-management, asset-data, federated-query]
@@ -19,15 +19,19 @@ The data supports contract-level operational reporting, including work managemen
 
 The Pranav walkthrough positions Asset Vision mainly in open-road contracts. Western Roads Upgrade was one of the first Transport contracts to adopt Asset Vision, followed by SRAPC. Queensland contracts such as RAMC, Port of Brisbane, and Brisbane Airport have data coming into Databricks, while VRMC Grampians and Metro East were being mobilized for a 2026-07-01 go-live.
 
-Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses Maximo, and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
+Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses [[Maximo]], and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
 
 The SAP finance walkthrough adds that Asset Vision is deployed across about five Australian roads contracts, but each contract has a different configuration. This reinforces that Asset Vision is not one uniform activity model even when the same product name is used across contracts.
+
+The Rui Luan stakeholder interview reinforced this operating split from a Western Roads Upgrade perspective. Open-road maintenance needs rapid geolocated issue capture, while tunnel work needs componentised asset hierarchies. Rui described Asset Vision as the open-road system and [[Maximo]] as the tunnel system.
 
 ## Databricks Access Pattern
 
 Ventia has an Azure SQL Server in its cloud environment with elastic compute and seven databases associated with the Asset Vision reporting data. Asset Vision synchronizes data from its cloud into this Azure SQL Server.
 
 Databricks uses federated queries against those Azure SQL databases, so queries pass through rather than staging all Asset Vision reporting data through the full Databricks medallion pattern. The walk-through also described a migration from Asset Vision-hosted reporting data toward Ventia-hosted reporting data.
+
+Rui described the open-road Asset Vision reporting path as a direct integration that pulls raw data into Ventia data services, hosts reporting data in Azure Databricks, and runs Power BI over the collated tables. He described the standard open-road modules as inspections, defects, and jobs.
 
 ## Data Product Implications
 
@@ -47,6 +51,8 @@ The SAP walkthrough frames Asset Vision as one input to activity-based costing r
 
 Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo data for Sydney Harbour Tunnel was not yet connected into Databricks. Future contracts may be configured differently so Maximo data can be brought into Databricks more easily.
 
+The Rui Luan interview adds a field-capture constraint for this costing path. Asset Vision job records only become useful for bid intelligence and benchmarking when crews capture timesheets, materials, equipment, and job details accurately and those entries are easy to validate.
+
 ## Related Pages
 
 - [[Transport Data Landscape]]
@@ -54,6 +60,8 @@ Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo d
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Financial Reporting]]
 - [[Transport Data and AI Working Group]]

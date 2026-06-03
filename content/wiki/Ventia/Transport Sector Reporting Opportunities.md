@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-06-01
 date-updated: 2026-06-03
 tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset]
@@ -21,6 +21,8 @@ The third is delivery reporting: improving reporting efficiency and standardizin
 
 The Damien executive brief restates these as the north-star value areas for an [[Integrated Transport Data Asset]]: winning bids, mobilising workforce and equipment, delivery optimisation and support, and additional value through data and insights such as cost benchmarking.
 
+The Rui Luan interview adds a practical precondition for bid support and benchmarking: each job needs a reliable SAP cost linkage, regardless of whether it comes from an open-road or tunnel project. Without that linkage, actual job costs cannot be reused cleanly for tender pricing, contractor comparison, or benchmark views such as pothole repair cost.
+
 ## Standardisation Challenges
 
 Earlier sector-level reporting efforts struggled because costs came from SAP while operational activity was structured differently across contracts. Even within [[Asset Vision]], job and activity specifications use three levels: activity category, activity, and intervention. Each contract configured those levels to suit local needs, which makes cross-contract comparison difficult.
@@ -30,6 +32,8 @@ KPIs also vary heavily by contract. Pranav cautioned that enterprise reporting n
 The [[SAP Data Walk-Through Transport Sector]] adds that [[Transport Financial Reporting]] is already centralised for finance management reporting, but not for activity classification. The finance report can show SAP line items, WBS, work orders, claims, open commitments, and life-to-date cost, but it does not identify whether work is a repair job, safety fix, equipment failure, or other service category.
 
 For activity-based costing, Bhupesh Balani said the missing piece is a cross-system translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems. Without that guide, SAP costs and operational activities cannot be combined into a consistent sector view.
+
+Rui added that the capture process itself needs to be easy and validated for crews entering timesheets, materials, equipment, and job details. That makes field adoption and data quality part of the reporting opportunity, not just a downstream modelling issue.
 
 ## Predictive Maintenance And Failure Codes
 
@@ -59,6 +63,7 @@ The SAP walkthrough also adds a practical access constraint for finance reportin
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Contract Portfolio]]
@@ -66,3 +71,4 @@ The SAP walkthrough also adds a practical access constraint for finance reportin
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Asset Vision]]
+- [[Maximo]]

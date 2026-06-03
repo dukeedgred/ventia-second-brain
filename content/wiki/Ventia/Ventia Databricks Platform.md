@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-03
 tags: [databricks, azure, data-platform, power-bi, data-engineering, transport]
@@ -51,6 +51,8 @@ The Damien executive brief makes Databricks centralisation an explicit discovery
 
 The SAP walkthrough adds two finance-specific centralised assets to map: enterprise open commitment tables in Databricks, and a likely sector-contract dataset in Databricks or BW that can list all Transport contracts even when a monthly finance report filter omits contracts with no cost.
 
+The Rui Luan interview adds a business-facing description of the open-road [[Asset Vision]] reporting path: raw Asset Vision data is pulled into Ventia data services, hosted in Azure Databricks, and surfaced through Power BI. Rui described the core open-road reporting modules as inspections, defects, and jobs, which gives the discovery team a concrete starting point for validating Transport operational tables.
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -60,10 +62,12 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 - [[Databricks Walk-Through]]
 - [[Transport Executive Brief Damien]]
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Data Landscape]]
 - [[Transport Contract Portfolio]]
 - [[Asset Vision]]
+- [[Maximo]]
 - [[Ventia Data Platform Modernisation]]
 - [[EDW Ernie]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-03
 tags: [transport, data-landscape, asset-data, sap, gis, data-asset]
@@ -31,6 +31,10 @@ The Transport Data and AI Working Group source adds concrete roads-asset capture
 
 These requirements are tracked in [[Transport Asset Intelligence Roadmap]] because the key question is not only where the source data sits, but how captured observations become visual, trusted, and digitally actionable work.
 
+The Rui Luan stakeholder interview clarified the operational split behind those data requirements. Open-road contracts need fast location-based issue capture and response, while tunnel projects need componentised asset hierarchies and more planned work management. Rui described [[Asset Vision]] as the open-road system and [[Maximo]] as the tunnel system.
+
+For open-road Asset Vision reporting, Rui described a relatively standard module set of inspections, defects, and jobs. Those modules are an immediate candidate for current-state mapping in the [[Integrated Transport Data Asset]], but the field definitions still need contract-by-contract validation.
+
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
@@ -57,6 +61,8 @@ The Pranav walkthrough adds a more specific standardisation barrier: even when c
 
 The SAP finance walkthrough adds the operational-system side of the same gap. Activity-based costing requires a translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems so equivalent fields can be mapped before costs and activities are combined.
 
+Rui's interview adds the field-capture side of the same issue: SAP job-cost linkage is only useful if crews capture time, materials, equipment, and job details accurately, and if those entries are validated in a way that is practical for field teams.
+
 ## Reporting And Opportunity Areas
 
 Most Databricks-backed Transport reporting is converted into simplified views for downstream Power BI reports, with Excel still used in some cases. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature from a technology and delivery-practice perspective.
@@ -80,6 +86,8 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Maximo]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]

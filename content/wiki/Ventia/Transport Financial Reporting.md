@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-06-03
 date-updated: 2026-06-03
 tags: [transport, finance, sap, power-bi, reporting]
@@ -43,6 +43,8 @@ Activity-based costing remains a major gap because cost data and activity data a
 
 Bhupesh said the team needs a translation guide that maps equivalent fields across these systems before meaningful activity-based reporting can be built. This reinforces the standardisation challenge already tracked in [[Transport Sector Reporting Opportunities]] and [[Integrated Transport Data Asset]].
 
+The Rui Luan stakeholder interview adds the job-level operating requirement behind that gap. Rui said each job should ideally have a direct SAP linkage so actual costs can be captured for winning bids and benchmarking, but that linkage is not consistently present. Accurate costing also depends on crews capturing timesheets, materials, equipment, and job details in a way that can be validated.
+
 ## Access And Follow-Up
 
 Dashboard access is constrained by report security. Bhupesh can provide access to one project for logic review, but full-sector dashboard access requires approval from Damien. He also noted a pending request for read-only access to the Transport Databricks schema.
@@ -52,6 +54,7 @@ Relevant follow-up contacts include Bhupesh Balani for SAP and Transport finance
 ## Related Pages
 
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]
@@ -59,4 +62,5 @@ Relevant follow-up contacts include Bhupesh Balani for SAP and Transport finance
 - [[Ventia Databricks Platform]]
 - [[Ventia Data Platform Modernisation]]
 - [[Asset Vision]]
+- [[Maximo]]
 - [[Engagement Team]]

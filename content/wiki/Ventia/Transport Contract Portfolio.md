@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-06-01
 date-updated: 2026-06-03
 tags: [transport, contracts, portfolio, data-landscape]
@@ -23,7 +23,9 @@ New Zealand includes Auckland West, Transmission Gully, and several smaller Tran
 
 Pranav described a practical distinction between open-road contracts and tunnel or closed-road contracts. Open-road contracts cover distributed GPS locations across wide areas, while tunnel contracts require structured location hierarchies such as buildings, levels, rooms, and assets.
 
-This distinction matters for systems choices. [[Asset Vision]] is the lower-cost operational system used in open-road contexts, while tunnel contracts are expected to use Maximo because Asset Vision did not fit tunnel requirements. Sydney Harbour Tunnel is already on Maximo, while NZLNNO and T2D are expected to use Maximo as tunnel contracts.
+This distinction matters for systems choices. [[Asset Vision]] is the lower-cost operational system used in open-road contexts, while tunnel contracts are expected to use [[Maximo]] because Asset Vision did not fit tunnel requirements. Sydney Harbour Tunnel is already on Maximo, while NZLNNO and T2D are expected to use Maximo as tunnel contracts.
+
+The Rui Luan interview confirmed the same split from the Western Roads Upgrade perspective. Rui described Western Roads Upgrade as an open-road contract using Asset Vision, with open-road work centred on rapid geolocated response, and tunnel work centred on componentised asset hierarchies.
 
 ## Data And Reporting Maturity
 
@@ -37,9 +39,11 @@ The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Powe
 
 - [[DB Walkthrough With Pranav Kumar]]
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Financial Reporting]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Asset Vision]]
+- [[Maximo]]
 - [[Ventia Databricks Platform]]
 - [[Engagement Team]]

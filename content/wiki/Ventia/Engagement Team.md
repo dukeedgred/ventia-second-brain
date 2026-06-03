@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-03
 tags: [stakeholders, transport, databricks, spend-cube, data-asset]
@@ -26,6 +26,9 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 - Jade was referenced as helping with access or Confluence context and as having started a Transport working group with relevant SMEs.
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
 - Pranav Kumar can validate the [[Transport Contract Portfolio]], Transport Databricks schema pattern, contract reporting maturity, Maximo versus [[Asset Vision]] boundaries, and realistic [[Transport Sector Reporting Opportunities]].
+- Rui Luan works on Western Roads Upgrade and can explain open-road [[Asset Vision]] usage, the inspections/defects/jobs dataset, the Databricks and Power BI reporting path, and practical requirements for SAP job-cost linkage.
+- Adam Taylor and Barat were suggested by Rui as follow-up contacts for [[Maximo]] setup on tunnel projects; Barat's exact spelling should be validated.
+- Conor Murphy remains a useful follow-up for Transport cost and benchmarking context; Rui offered to help with an introduction if needed.
 
 ## Transport Data And AI Stakeholders
 
@@ -81,8 +84,10 @@ The [[SAP Data Walk-Through Transport Sector]] adds two concrete access paths: B
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]
+- [[Maximo]]
