@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-01
+date-updated: 2026-06-03
 tags: [transport, contracts, portfolio, data-landscape]
 ---
 
@@ -31,9 +31,13 @@ The portfolio does not yet have a single centralized report that lists all contr
 
 Large contracts often have their own data people, while smaller contracts usually ask the shared Transport data team for help. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature in technology practices and delivery approach. RAMC reporting uses Power BI dashboards as inputs to monthly PDF reports.
 
+The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Power BI filters are not a reliable source of truth for this portfolio. The report is filtered by whether cost appears in the selected month, so a contract may be visible one month and absent the next. Bhupesh Balani said separate Databricks or BW datasets should be used to list all contracts within a sector.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Asset Vision]]

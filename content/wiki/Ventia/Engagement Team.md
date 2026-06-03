@@ -1,9 +1,9 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [stakeholders, transport, databricks, spend-cube, data-asset]
 ---
 
@@ -22,7 +22,7 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 
 - Kale Skinner can explain [[Ventia Databricks Platform]] processing patterns, source onboarding, federated queries, production promotion, and Databricks access prerequisites.
 - Pranav Kumar was identified as the key Transport contact for operational data, work management data, asset data, Transport contract usage, and how Transport consumes Databricks assets.
-- Bhupesh was identified as the Transport reporting sector lead for financial and SAP-related Transport data.
+- Bhupesh Balani was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He was previously business process improvement manager in Transport finance under Matt Fuller, is now seconded into Ben's enterprise reporting team, and remains the key contact for [[Transport Financial Reporting]].
 - Jade was referenced as helping with access or Confluence context and as having started a Transport working group with relevant SMEs.
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
 - Pranav Kumar can validate the [[Transport Contract Portfolio]], Transport Databricks schema pattern, contract reporting maturity, Maximo versus [[Asset Vision]] boundaries, and realistic [[Transport Sector Reporting Opportunities]].
@@ -44,6 +44,7 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Claire, Rhys, Wayne, Barry, Katrina, Chris, Edmond, and Anna appear in the Evolve/RAMC discussion around demo development, data provision, SAP/Nextspace comparison, tender positioning, and implementation planning.
 - Conor Murphy, Rui Luan, Toby Lynn, Anna Coville, and Hui Yinlun were named in the Pranav walkthrough as known data contacts for larger Transport contracts.
 - A New Zealand business engagement manager is working on reporting across New Zealand contracts, but her name was not captured in the transcript.
+- The SAP data walkthrough added that Liz Jessop is working with Adam on an activity-based costing or dashboard solution for Damien and is a strong contact for [[Asset Vision]], Maximo, and client AWM/AVM integration questions alongside Pranav Kumar.
 
 ## Transport Data Asset Briefing
 
@@ -65,7 +66,9 @@ The plan sequences interviews into four waves: sponsor/bid stakeholders, operati
 
 ## Follow-Up Paths
 
-The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh should be consulted before assuming that platform-level data structures match contract-level business definitions.
+The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh Balani should be consulted before assuming that platform-level data structures match contract-level business definitions.
+
+The [[SAP Data Walk-Through Transport Sector]] adds two concrete access paths: Bhupesh can help with read-only access to the Transport Databricks schema, and access to the full Transport finance dashboard needs Damien's approval because the Power BI report is security-trimmed by contract.
 
 ## Related Pages
 
@@ -77,6 +80,8 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]

@@ -31,3 +31,7 @@ Created source-summary and concept pages for Damien's Transport executive brief;
 Created a source-summary page for the Transport first-two-week plan and updated Transport data asset, landscape, RAMC, sensing, governance, reporting, and stakeholder pages.
 
 ## [2026-06-02] lint | Removed stale catalog rows, repaired metadata and link issues, and added a Databricks modernisation cross-reference.
+
+## [2026-06-03] ingest | SAP data walk-through for Transport finance reporting
+
+Created source-summary and Transport financial reporting pages; updated Transport landscape, platform, reporting, portfolio, Asset Vision, integrated data asset, and stakeholder context.

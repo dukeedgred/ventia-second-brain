@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [data-platform, databricks, program-evolve, sap, power-bi]
 ---
 
@@ -14,6 +14,8 @@ Ventia's data platform modernisation is tied to Program Evolve and the replaceme
 ## Reporting Architecture Shift
 
 Current reporting includes a large amount of usage directly on bronze-layer data. The future-state pattern aims to move existing reporting onto governed gold-layer dimensional models while preserving business reporting outcomes.
+
+The [[SAP Data Walk-Through Transport Sector]] adds a concrete Transport finance example. [[Transport Financial Reporting]] currently uses SAP BW for detailed controlling-document line items because Databricks SAP data does not yet provide the same linked operational granularity. Bhupesh Balani expects the S/4HANA ACDOCA table may allow this report to move toward Databricks after go-live if the required detail is present.
 
 This creates two linked workloads:
 
@@ -40,6 +42,8 @@ The Transport Data and AI Working Group source adds a Transport-specific Evolve 
 
 The Evolve/RAMC transcript also discusses SAP Asset Performance Management, SAP SAC, S/4HANA, IoT aggregation, and predictive failure/intervention backlog use cases. These ideas connect Program Evolve to [[Transport Gen 3 Tender Innovation]] and [[Transport Asset Intelligence Roadmap]], but still need architecture, data ownership, and implementation boundaries clarified.
 
+The SAP walkthrough described the relevant S/4HANA go-live timing as roughly 2026-10-12 or 2026-10-14 and identified ACDOCA as the expected combined controlling and financial document table. That date and table expectation should be treated as a planning assumption until the S/4HANA output is validated.
+
 ## Related Pages
 
 - [[EDW Ernie]]
@@ -47,5 +51,7 @@ The Evolve/RAMC transcript also discusses SAP Asset Performance Management, SAP 
 - [[Ventia Data Governance Framework]]
 - [[DAII Monthly Meeting Transcript]]
 - [[Transport Data and AI Working Group]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Asset Intelligence Roadmap]]

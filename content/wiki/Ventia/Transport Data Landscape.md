@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [transport, data-landscape, asset-data, sap, gis, data-asset]
 ---
 
@@ -15,7 +15,11 @@ The Transport data landscape spans enterprise financial data, contract-specific 
 
 Most Transport financial data is managed in SAP like other Ventia sectors. The source described this as enterprise financial data rather than Transport-named data, with Transport reporting filtered through structures such as profit centres and sector-level hierarchy.
 
-Bhupesh was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He is a key contact on [[Engagement Team]] for understanding how SAP-derived financial data is used in Transport reporting.
+Bhupesh Balani was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He is a key contact on [[Engagement Team]] for understanding how SAP-derived financial data is used in [[Transport Financial Reporting]].
+
+The [[SAP Data Walk-Through Transport Sector]] clarifies the current finance source path. Detailed Transport finance line items come from SAP BW controlling-document data rather than Databricks because BW currently provides the granularity and table-linking needed by operations. Databricks contributes enterprise open commitment data for remaining purchase-order commitments, but the SAP line-item view still depends on BW.
+
+The same source warns that Transport finance report filters are not an authoritative contract inventory. The filters are based on cost in a selected month, so a contract can appear in one month and disappear in another even if it remains part of the [[Transport Contract Portfolio]]. Bhupesh said there are separate Databricks or BW datasets that can list all contracts within a sector.
 
 ## Operational And Asset Data
 
@@ -51,11 +55,15 @@ The later working group source reinforces this gap by naming several tools that 
 
 The Pranav walkthrough adds a more specific standardisation barrier: even when contracts use [[Asset Vision]], each contract can configure activity category, activity, and intervention structures differently. KPIs and SLAs also vary by contract, so cross-contract reporting needs a clear senior-management question before detailed KPI harmonisation.
 
+The SAP finance walkthrough adds the operational-system side of the same gap. Activity-based costing requires a translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems so equivalent fields can be mapped before costs and activities are combined.
+
 ## Reporting And Opportunity Areas
 
 Most Databricks-backed Transport reporting is converted into simplified views for downstream Power BI reports, with Excel still used in some cases. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature from a technology and delivery-practice perspective.
 
 Enterprise opportunities are tracked on [[Transport Sector Reporting Opportunities]]. They include bid intelligence, mobilization support, delivery reporting, predictive maintenance, and benchmarking or activity-based costing. Pranav cautioned that earlier activity-based costing work struggled because SAP cost structures and contract-level activity models were not aligned.
+
+The current [[Transport Financial Reporting]] layer is comparatively mature for finance management reporting: it is Power BI based, contract-secured, refreshed every three hours, and supports drilling from WBS to work orders and SAP line items. It does not cover contractual reporting obligations, SHeQ reporting, or operational activity classification.
 
 The Damien brief adds the expected foundation scope for the integrated asset: asset management, GPS, telematics, fleet management, job scheduling, vehicle and service locations, contract KPIs, and service provision information. Those inputs need to support a business-tested live use case within the six-week programme and a roadmap for further operational and investment decisions.
 
@@ -71,6 +79,8 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[Transport Data and AI Working Group]]
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]

@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-06-02
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [transport, data-asset, databricks, telematics, fleet]
 ---
 
@@ -34,6 +34,8 @@ The working data foundation should expand centralised Transport data assets, inc
 
 This scope depends on resolving the same standardisation issues already captured on [[Transport Data Landscape]]: which sources exist across contracts, which data has been centralised into Databricks, what remains decentralised, and why.
 
+The [[SAP Data Walk-Through Transport Sector]] adds a current-state finance anchor for this map. [[Transport Financial Reporting]] is already centralised enough for SAP-derived management reporting and open commitments, but it still relies on BW for detailed line items and does not solve operational activity classification.
+
 ## Six-Week Outcomes
 
 The expected outcomes after six weeks are:
@@ -56,17 +58,23 @@ The brief leaves the live use case open but names the likely value zones: bid su
 
 The right use case should prove near-term value while leaving reusable foundations for the longer roadmap. That makes it a practical bridge between [[Transport Sector Reporting Opportunities]] and the longer-term [[Transport Asset Intelligence Roadmap]].
 
+Activity-based costing is attractive but dependent on source alignment. The SAP walkthrough indicates that a credible proof point would need field mapping across [[Asset Vision]], Maximo, and client AWM/AVM systems, plus agreement on how SAP costs should join to operational activity records.
+
 ## Open Questions
 
 - Which live use case will be selected for the six-week programme?
 - Which Transport datasets are already centralised into Databricks, and which remain decentralised?
 - What business reasons explain the decentralised datasets?
 - Which operational changes and investment recommendations will be required beyond the initial six weeks?
+- Will S/4HANA ACDOCA provide enough detail to move Transport finance reporting from BW into Databricks?
+- Who owns the translation guide across Asset Vision, Maximo, and client AWM/AVM activity fields?
 
 ## Related Pages
 
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

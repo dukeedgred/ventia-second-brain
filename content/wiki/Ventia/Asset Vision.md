@@ -1,9 +1,9 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-01
+date-updated: 2026-06-03
 tags: [asset-vision, transport, work-management, asset-data, federated-query]
 ---
 
@@ -20,6 +20,8 @@ The data supports contract-level operational reporting, including work managemen
 The Pranav walkthrough positions Asset Vision mainly in open-road contracts. Western Roads Upgrade was one of the first Transport contracts to adopt Asset Vision, followed by SRAPC. Queensland contracts such as RAMC, Port of Brisbane, and Brisbane Airport have data coming into Databricks, while VRMC Grampians and Metro East were being mobilized for a 2026-07-01 go-live.
 
 Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses Maximo, and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
+
+The SAP finance walkthrough adds that Asset Vision is deployed across about five Australian roads contracts, but each contract has a different configuration. This reinforces that Asset Vision is not one uniform activity model even when the same product name is used across contracts.
 
 ## Databricks Access Pattern
 
@@ -41,6 +43,10 @@ In the [[Transport Gen 3 Tender Innovation]] context, Asset Vision needs to be c
 
 The Pranav walkthrough adds that cross-contract reporting is difficult even inside Asset Vision because activity specifications use activity category, activity, and intervention levels, and each contract has configured those levels differently. This makes [[Transport Sector Reporting Opportunities]] dependent on definition alignment, not just source-system access.
 
+The SAP walkthrough frames Asset Vision as one input to activity-based costing rather than the whole solution. Bhupesh Balani said Maximo and client AWM/AVM systems also need to be mapped, and the team needs a translation guide showing which fields in each system are equivalent before [[Transport Financial Reporting]] costs can be connected to operational activities.
+
+Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo data for Sydney Harbour Tunnel was not yet connected into Databricks. Future contracts may be configured differently so Maximo data can be brought into Databricks more easily.
+
 ## Related Pages
 
 - [[Transport Data Landscape]]
@@ -48,6 +54,8 @@ The Pranav walkthrough adds that cross-contract reporting is difficult even insi
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Transport Data and AI Working Group]]
 - [[Ventia Databricks Platform]]
 - [[Databricks Walk-Through]]

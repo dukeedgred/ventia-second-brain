@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [databricks, azure, data-platform, power-bi, data-engineering, transport]
 ---
 
@@ -29,6 +29,8 @@ Ventia uses Databricks jobs and pipelines rather than DBT, Airflow, or external 
 
 For complex systems such as SAP and Novus, metadata can drive dynamic creation of notebooks and ETL jobs. SAP HANA information schema metadata can populate the pipeline parameters table so new tables can be onboarded without manually building each pipeline.
 
+The [[SAP Data Walk-Through Transport Sector]] shows one current Transport finance limitation. SAP data is available in Databricks, but Bhupesh Balani said the raw table format does not yet provide the linked, granular operational finance view that SAP BW gives the [[Transport Financial Reporting]] report. That means some SAP-derived reporting still depends on BW until the S/4HANA and Databricks path is proven.
+
 ## Reporting And Promotion Model
 
 Most report consumers use Power BI and may not know Databricks is behind their reports. Power users and report builders can access Databricks directly, create views or tables in development, and build semantic models or dataflows for other report builders.
@@ -47,6 +49,8 @@ Within contract schemas, user tables and user views support downstream reporting
 
 The Damien executive brief makes Databricks centralisation an explicit discovery and delivery question for the [[Integrated Transport Data Asset]]. The six-week work needs to show what Transport data has already been centralised into Databricks, what remains decentralised, and how centralised assets can be expanded across GPS, telematics, fleet, job scheduling, asset, KPI, location, and service provision data.
 
+The SAP walkthrough adds two finance-specific centralised assets to map: enterprise open commitment tables in Databricks, and a likely sector-contract dataset in Databricks or BW that can list all Transport contracts even when a monthly finance report filter omits contracts with no cost.
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -55,6 +59,8 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 
 - [[Databricks Walk-Through]]
 - [[Transport Executive Brief Damien]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Data Landscape]]
 - [[Transport Contract Portfolio]]

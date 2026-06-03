@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-02
+date-updated: 2026-06-03
 tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset]
 ---
 
@@ -27,6 +27,10 @@ Earlier sector-level reporting efforts struggled because costs came from SAP whi
 
 KPIs also vary heavily by contract. Pranav cautioned that enterprise reporting needs a clear definition of what senior management wants before the team decides how to build it.
 
+The [[SAP Data Walk-Through Transport Sector]] adds that [[Transport Financial Reporting]] is already centralised for finance management reporting, but not for activity classification. The finance report can show SAP line items, WBS, work orders, claims, open commitments, and life-to-date cost, but it does not identify whether work is a repair job, safety fix, equipment failure, or other service category.
+
+For activity-based costing, Bhupesh Balani said the missing piece is a cross-system translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems. Without that guide, SAP costs and operational activities cannot be combined into a consistent sector view.
+
 ## Predictive Maintenance And Failure Codes
 
 Predictive maintenance was discussed as a longer-term opportunity rather than an immediate reporting win. Useful inputs may include vehicle telemetry, maintenance history, asset failure codes, environmental factors, and prior defect patterns.
@@ -47,11 +51,15 @@ The same brief expects a roadmap covering future priorities, timeline and effort
 
 The [[Transport First Two Week Plan]] adds the immediate selection mechanics: the decision gate should agree the proof point, proof-point owner, data access, and week 3 commencement conditions. That means reporting opportunities should be assessed not only for value, but also for whether enough source access and stakeholder ownership can be secured within the first two weeks.
 
+The SAP walkthrough also adds a practical access constraint for finance reporting as a live use case: Bhupesh can provide one-project dashboard access for logic review, but whole-sector Power BI access requires Damien's approval because report security limits contract visibility.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Contract Portfolio]]
 - [[Transport Data Landscape]]
