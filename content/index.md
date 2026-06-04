@@ -28,3 +28,6 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Transport Financial Reporting]] | concept | Current-state Transport financial reporting across SAP BW, Power BI, Databricks open commitments, S/4HANA migration dependencies, and management-reporting boundaries |
 | [[Transport Data Asset Stakeholder Interview]] | source-summary | Source summary of Rui Luan's stakeholder interview covering open-road versus tunnel systems, Asset Vision, Maximo, SAP job-cost linkage, and Databricks/Power BI reporting |
 | [[Maximo]] | entity | Tunnel-oriented Transport work management and asset system contrasted with Asset Vision for open-road maintenance |
+| [[Transport Data Asset Stakeholder Interview Toby Lin]] | source-summary | Source summary of Toby Lin's stakeholder interview covering asset inventory validation, condition inspections, defects and hazards, KPI reporting, and Asset Vision/Databricks workflows |
+| [[Transport Asset Inventory Validation]] | concept | Workflow for reconciling client handover asset data with field validation, GIS tools, Asset Vision updates, and ownership/status decisions |
+| [[Transport Asset Condition Inspections]] | concept | KPI-driven asset condition inspection and defect/hazard workflow covering condition ratings, response levels, routing, and monthly contractual reporting |

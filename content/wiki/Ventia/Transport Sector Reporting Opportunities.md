@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-03
-tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset]
+date-updated: 2026-06-04
+tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset, kpis]
 ---
 
 # Transport Sector Reporting Opportunities
@@ -23,6 +23,8 @@ The Damien executive brief restates these as the north-star value areas for an [
 
 The Rui Luan interview adds a practical precondition for bid support and benchmarking: each job needs a reliable SAP cost linkage, regardless of whether it comes from an open-road or tunnel project. Without that linkage, actual job costs cannot be reused cleanly for tender pricing, contractor comparison, or benchmark views such as pothole repair cost.
 
+The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds a contract KPI reporting opportunity. Condition inspection schedules, completion counts, asset classes, incidents, defect and hazard jobs, response due dates, and audit evidence are already reported to clients, but the definitions and ownership appear contract-specific rather than enterprise-standard.
+
 ## Standardisation Challenges
 
 Earlier sector-level reporting efforts struggled because costs came from SAP while operational activity was structured differently across contracts. Even within [[Asset Vision]], job and activity specifications use three levels: activity category, activity, and intervention. Each contract configured those levels to suit local needs, which makes cross-contract comparison difficult.
@@ -34,6 +36,8 @@ The [[SAP Data Walk-Through Transport Sector]] adds that [[Transport Financial R
 For activity-based costing, Bhupesh Balani said the missing piece is a cross-system translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems. Without that guide, SAP costs and operational activities cannot be combined into a consistent sector view.
 
 Rui added that the capture process itself needs to be easy and validated for crews entering timesheets, materials, equipment, and job details. That makes field adoption and data quality part of the reporting opportunity, not just a downstream modelling issue.
+
+Toby added that open-road contracts may share asset categories such as roads, pits, guardrails, signage, and line marking, while KPI measurement and condition definitions still differ by project. Reporting needs to preserve that project-level context instead of forcing all KPIs into one flattened sector metric.
 
 ## Predictive Maintenance And Failure Codes
 
@@ -57,6 +61,8 @@ The [[Transport First Two Week Plan]] adds the immediate selection mechanics: th
 
 The SAP walkthrough also adds a practical access constraint for finance reporting as a live use case: Bhupesh can provide one-project dashboard access for logic review, but whole-sector Power BI access requires Damien's approval because report security limits contract visibility.
 
+For asset-condition reporting, the nearest live-use-case question is whether Databricks exposes enough Asset Vision fields to rebuild inspection KPI status, urgency levels, SLA due dates, completion evidence, and asset-validation status without manual report assembly.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
@@ -64,7 +70,10 @@ The SAP walkthrough also adds a practical access constraint for finance reportin
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Financial Reporting]]
+- [[Transport Asset Condition Inspections]]
+- [[Transport Asset Inventory Validation]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Contract Portfolio]]
 - [[Transport Data Landscape]]

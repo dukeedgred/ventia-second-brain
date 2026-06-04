@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-06-02
-date-updated: 2026-06-03
-tags: [transport, data-asset, databricks, telematics, fleet]
+date-updated: 2026-06-04
+tags: [transport, data-asset, databricks, telematics, fleet, asset-data]
 ---
 
 # Integrated Transport Data Asset
@@ -40,6 +40,8 @@ The [[SAP Data Walk-Through Transport Sector]] adds a current-state finance anch
 
 The Rui Luan interview adds two immediate foundation inputs: open-road [[Asset Vision]] modules for inspections, defects, and jobs, and job-level SAP cost linkage across both open-road and [[Maximo]] tunnel contexts. These are necessary if the live use case is bid intelligence, activity costing, or benchmark reporting.
 
+The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds two more foundation inputs for open-road contracts: [[Transport Asset Inventory Validation]] and [[Transport Asset Condition Inspections]]. These define how asset locations, attributes, ownership status, condition ratings, hazards, defects, response levels, and inspection KPIs become reliable enough for downstream reporting or optimisation.
+
 ## Six-Week Outcomes
 
 The expected outcomes after six weeks are:
@@ -73,6 +75,8 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - Will S/4HANA ACDOCA provide enough detail to move Transport finance reporting from BW into Databricks?
 - Who owns the translation guide across Asset Vision, Maximo, and client AWM/AVM activity fields?
 - Which open-road inspections, defects, and jobs fields are standard enough to reuse across contracts?
+- Which Asset Vision fields expose condition ratings, urgency levels, SLA due dates, completion evidence, and inspection KPI status in Databricks?
+- Which asset-validation status and ownership-status fields are needed to distinguish client handover data from field-validated records?
 - Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
 
 ## Related Pages
@@ -81,7 +85,10 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Financial Reporting]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

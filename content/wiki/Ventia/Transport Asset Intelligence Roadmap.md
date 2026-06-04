@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md"]
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-02
-tags: [transport, asset-data, ai, predictive-maintenance, digital-twin, telemetry]
+date-updated: 2026-06-04
+tags: [transport, asset-data, ai, predictive-maintenance, digital-twin, telemetry, condition-inspections]
 ---
 
 # Transport Asset Intelligence Roadmap
@@ -17,11 +17,15 @@ John Parisella's input identifies the practical road-defect data that needs to b
 
 Future scope may include tunnel assets such as fans and wall cracks. This makes the roadmap broader than simple defect detection: it needs an extensible asset and condition model that can support multiple roads contracts and later asset classes.
 
+The Toby Lin interview adds how this plays out in the current open-road Asset Vision register. The Asset team maintains asset attributes such as guardrail length and type, pit material and lid type, inlet details, and accurate geolocation, while also correcting gaps in client handover data through [[Transport Asset Inventory Validation]].
+
 ## Output Requirements
 
 The data needs to be geolocated and usable in visualisation or action platforms including Maximo, SAP, [[Asset Vision]], and Nextspace. Required outputs include location, defect data, duplicate capture detection, patterns, and work order details.
 
 The source stresses that visual output is important, but not enough on its own. Outputs need to support digital action, such as remediation projects, programs, work orders, or intervention backlog items.
+
+Toby's workflow confirms that digital action depends on attaching defects or hazards to the correct asset, selecting the right category and urgency level, and allowing Asset Vision to calculate the response due date. This connects automated capture directly to [[Transport Asset Condition Inspections]] and work-order evidence, not just to a map layer.
 
 ## Integration Themes
 
@@ -39,6 +43,8 @@ The Pranav walkthrough adds a concrete failure-code path for predictive maintena
 
 Vehicle telemetry was also raised as a possible internal Ventia opportunity. The value would come from connecting engine or asset telemetry to maintenance history so that the team can predict issues such as battery failures or future vehicle maintenance needs.
 
+Toby added a capital-works angle for road pavement. Annual pavement testing helps predict which sections are likely to fail and supports targeted capital works proposals instead of broad road replacement.
+
 ## Sensing And Telemetry Inputs
 
 The [[Transport First Two Week Plan]] turns sensing and telemetry into a named week-2 deep-dive area. Candidate inputs include Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets.
@@ -48,7 +54,10 @@ These inputs should support the initial operational decision use case and the de
 ## Related Pages
 
 - [[Transport Data and AI Working Group]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport First Two Week Plan]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

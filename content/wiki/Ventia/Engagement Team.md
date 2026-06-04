@@ -1,9 +1,9 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-03
+date-updated: 2026-06-04
 tags: [stakeholders, transport, databricks, spend-cube, data-asset]
 ---
 
@@ -27,8 +27,10 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
 - Pranav Kumar can validate the [[Transport Contract Portfolio]], Transport Databricks schema pattern, contract reporting maturity, Maximo versus [[Asset Vision]] boundaries, and realistic [[Transport Sector Reporting Opportunities]].
 - Rui Luan works on Western Roads Upgrade and can explain open-road [[Asset Vision]] usage, the inspections/defects/jobs dataset, the Databricks and Power BI reporting path, and practical requirements for SAP job-cost linkage.
+- Toby Lin can explain open-road Asset team workflows for [[Transport Asset Inventory Validation]], [[Transport Asset Condition Inspections]], Asset Vision hierarchy, defect and hazard response levels, and KPI tracker use in Databricks.
 - Adam Taylor and Barat were suggested by Rui as follow-up contacts for [[Maximo]] setup on tunnel projects; Barat's exact spelling should be validated.
 - Conor Murphy remains a useful follow-up for Transport cost and benchmarking context; Rui offered to help with an introduction if needed.
+- Josie Wilson, Business Performance Manager, was suggested by Toby as a likely follow-up for contractual KPI and reporting requirements; Ray was also named as someone likely to understand the requirements and abatement context.
 
 ## Transport Data And AI Stakeholders
 
@@ -45,7 +47,7 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Brigette Lo should be optional on stakeholder meetings, with meetings recorded in Teams and transcripts retained.
 - Sanja is working on Nextspace and SAP in the Transport space through Evolve, with IBM recommending Nextspace.
 - Claire, Rhys, Wayne, Barry, Katrina, Chris, Edmond, and Anna appear in the Evolve/RAMC discussion around demo development, data provision, SAP/Nextspace comparison, tender positioning, and implementation planning.
-- Conor Murphy, Rui Luan, Toby Lynn, Anna Coville, and Hui Yinlun were named in the Pranav walkthrough as known data contacts for larger Transport contracts.
+- Conor Murphy, Rui Luan, Toby Lin, Anna Coville, and Hui Yinlun were named across the Pranav walkthrough and Toby interview as known data contacts for larger Transport contracts. Toby's name was previously transcribed as Toby Lynn.
 - A New Zealand business engagement manager is working on reporting across New Zealand contracts, but her name was not captured in the transcript.
 - The SAP data walkthrough added that Liz Jessop is working with Adam on an activity-based costing or dashboard solution for Damien and is a strong contact for [[Asset Vision]], Maximo, and client AWM/AVM integration questions alongside Pranav Kumar.
 
@@ -85,6 +87,9 @@ The [[SAP Data Walk-Through Transport Sector]] adds two concrete access paths: B
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]

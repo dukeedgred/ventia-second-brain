@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-03
-tags: [transport, contracts, portfolio, data-landscape]
+date-updated: 2026-06-04
+tags: [transport, contracts, portfolio, data-landscape, asset-data]
 ---
 
 # Transport Contract Portfolio
@@ -27,6 +27,8 @@ This distinction matters for systems choices. [[Asset Vision]] is the lower-cost
 
 The Rui Luan interview confirmed the same split from the Western Roads Upgrade perspective. Rui described Western Roads Upgrade as an open-road contract using Asset Vision, with open-road work centred on rapid geolocated response, and tunnel work centred on componentised asset hierarchies.
 
+The Toby Lin interview adds that open-road contracts likely share similar road asset categories, including roads, kerb and channel, pits, line marking, and signage, even where the detailed KPI and condition standards differ by contract. This supports reuse of asset-category mapping while keeping [[Transport Asset Condition Inspections]] contract-specific.
+
 ## Data And Reporting Maturity
 
 The portfolio does not yet have a single centralized report that lists all contracts, dates, data feeds, and reporting status. Pranav recalled an older cross-contract report that included Transport data, but he was unsure whether it remains active.
@@ -40,6 +42,9 @@ The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Powe
 - [[DB Walkthrough With Pranav Kumar]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Financial Reporting]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]

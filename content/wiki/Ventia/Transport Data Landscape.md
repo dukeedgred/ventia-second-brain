@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-03
-tags: [transport, data-landscape, asset-data, sap, gis, data-asset]
+date-updated: 2026-06-04
+tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections]
 ---
 
 # Transport Data Landscape
@@ -35,6 +35,8 @@ The Rui Luan stakeholder interview clarified the operational split behind those 
 
 For open-road Asset Vision reporting, Rui described a relatively standard module set of inspections, defects, and jobs. Those modules are an immediate candidate for current-state mapping in the [[Integrated Transport Data Asset]], but the field definitions still need contract-by-contract validation.
 
+The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds the asset-team operating detail behind those modules. Open-road roads assets include drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can carry defects or hazards, inspection records, condition ratings, and job history. The Asset team actively reconciles client handover data with site reality through [[Transport Asset Inventory Validation]].
+
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
@@ -63,6 +65,8 @@ The SAP finance walkthrough adds the operational-system side of the same gap. Ac
 
 Rui's interview adds the field-capture side of the same issue: SAP job-cost linkage is only useful if crews capture time, materials, equipment, and job details accurately, and if those entries are validated in a way that is practical for field teams.
 
+Toby's interview adds that open-road contracts may share broad asset categories, but condition definitions, KPI standards, response rules, and reporting measures remain contract-specific. That makes [[Transport Asset Condition Inspections]] a data-standardisation problem as much as an operational workflow.
+
 ## Reporting And Opportunity Areas
 
 Most Databricks-backed Transport reporting is converted into simplified views for downstream Power BI reports, with Excel still used in some cases. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature from a technology and delivery-practice perspective.
@@ -72,6 +76,8 @@ Enterprise opportunities are tracked on [[Transport Sector Reporting Opportuniti
 The current [[Transport Financial Reporting]] layer is comparatively mature for finance management reporting: it is Power BI based, contract-secured, refreshed every three hours, and supports drilling from WBS to work orders and SAP line items. It does not cover contractual reporting obligations, SHeQ reporting, or operational activity classification.
 
 The Damien brief adds the expected foundation scope for the integrated asset: asset management, GPS, telematics, fleet management, job scheduling, vehicle and service locations, contract KPIs, and service provision information. Those inputs need to support a business-tested live use case within the six-week programme and a roadmap for further operational and investment decisions.
+
+Toby's interview shows one concrete contract-reporting shape for this scope. Monthly client KPI reporting can include scheduled and completed condition inspections, inspection incidents, and counts by asset class, while annual audits may test job evidence and response compliance. The full KPI list is likely owned by commercial or project leadership rather than a single data table.
 
 ## Adjacent Data Domains
 
@@ -87,7 +93,10 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Maximo]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Financial Reporting]]
 - [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]

@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-03
-tags: [asset-vision, transport, work-management, asset-data, federated-query]
+date-updated: 2026-06-04
+tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections]
 ---
 
 # Asset Vision
@@ -25,6 +25,10 @@ The SAP finance walkthrough adds that Asset Vision is deployed across about five
 
 The Rui Luan stakeholder interview reinforced this operating split from a Western Roads Upgrade perspective. Open-road maintenance needs rapid geolocated issue capture, while tunnel work needs componentised asset hierarchies. Rui described Asset Vision as the open-road system and [[Maximo]] as the tunnel system.
 
+The Toby Lin stakeholder interview adds a field-level view of how Asset Vision is maintained by the open-road Asset team. Client handover data can be inaccurate at mobilisation, so crews and inspectors validate missing or wrongly located assets, then the asset team uses Nearmap, Google Street View, QGIS, and Asset Vision updates to keep the inventory aligned with site reality. This workflow is captured on [[Transport Asset Inventory Validation]].
+
+Toby also described the operating hierarchy inside Asset Vision: roads contain asset categories such as drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can then have defects or hazards attached. The scheduled inspection and response workflow is captured on [[Transport Asset Condition Inspections]].
+
 ## Databricks Access Pattern
 
 Ventia has an Azure SQL Server in its cloud environment with elastic compute and seven databases associated with the Asset Vision reporting data. Asset Vision synchronizes data from its cloud into this Azure SQL Server.
@@ -32,6 +36,8 @@ Ventia has an Azure SQL Server in its cloud environment with elastic compute and
 Databricks uses federated queries against those Azure SQL databases, so queries pass through rather than staging all Asset Vision reporting data through the full Databricks medallion pattern. The walk-through also described a migration from Asset Vision-hosted reporting data toward Ventia-hosted reporting data.
 
 Rui described the open-road Asset Vision reporting path as a direct integration that pulls raw data into Ventia data services, hosts reporting data in Azure Databricks, and runs Power BI over the collated tables. He described the standard open-road modules as inspections, defects, and jobs.
+
+Toby indicated that defect and hazard data is available through Transport Databricks views aligned to the Asset Vision hierarchy, but he had limited access and could not confirm whether SLA or response-time fields can be extracted directly. He uses Databricks mainly for KPI tracker and dashboard purposes.
 
 ## Data Product Implications
 
@@ -53,14 +59,19 @@ Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo d
 
 The Rui Luan interview adds a field-capture constraint for this costing path. Asset Vision job records only become useful for bid intelligence and benchmarking when crews capture timesheets, materials, equipment, and job details accurately and those entries are easy to validate.
 
+Toby's interview adds an asset-register constraint. Asset Vision data is only useful for routing, inspections, defects, hazards, and capital planning when location, asset type, condition, ownership status, and third-party works updates are actively maintained.
+
 ## Related Pages
 
 - [[Transport Data Landscape]]
 - [[Transport Contract Portfolio]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Financial Reporting]]
