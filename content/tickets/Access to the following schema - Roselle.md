@@ -1,10 +1,11 @@
 ---
 type: ticket
-status: done
+status: archived
 priority: high
 assignee: Unassigned
 sources: []
 date-created: '2026-06-02'
+date-archived: '2026-06-05'
 ---
 
 transport
