@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_jobs_all_attributes",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_jobs_all_attributes' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledStart` AS TIMESTAMP)), MAX(try_cast(`ScheduledEnd` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`ApprovalDate` AS TIMESTAMP)), MAX(try_cast(`AssignedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedStatus` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP)), MAX(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MAX(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MAX(try_cast(`CRMField6` AS TIMESTAMP)), MAX(try_cast(`JobStartChecklist-HotWorksPermit` AS TIMESTAMP)), MAX(try_cast(`JobStartChecklist-PlantPrestart` AS TIMESTAMP)), MAX(try_cast(`JobStartChecklist-StartCard` AS TIMESTAMP)), MAX(try_cast(`JobStartChecklist-VehicleMovementPlan` AS TIMESTAMP)), MAX(try_cast(`JobStartChecklist-WorkingatHeightsPermit` AS TIMESTAMP)), MAX(try_cast(`QAReview-JobStartFormSectionhasbeencompleted` AS TIMESTAMP)), MAX(try_cast(`QAReview-PlantPrestartAttached` AS TIMESTAMP)), MAX(try_cast(`QAReview-StartCardAttached` AS TIMESTAMP)), MAX(try_cast(`QAReview-Timesheetattachedandpopulated` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledStart` AS TIMESTAMP)), MIN(try_cast(`ScheduledEnd` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`ApprovalDate` AS TIMESTAMP)), MIN(try_cast(`AssignedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedStatus` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP)), MIN(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MIN(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MIN(try_cast(`CRMField6` AS TIMESTAMP)), MIN(try_cast(`JobStartChecklist-HotWorksPermit` AS TIMESTAMP)), MIN(try_cast(`JobStartChecklist-PlantPrestart` AS TIMESTAMP)), MIN(try_cast(`JobStartChecklist-StartCard` AS TIMESTAMP)), MIN(try_cast(`JobStartChecklist-VehicleMovementPlan` AS TIMESTAMP)), MIN(try_cast(`JobStartChecklist-WorkingatHeightsPermit` AS TIMESTAMP)), MIN(try_cast(`QAReview-JobStartFormSectionhasbeencompleted` AS TIMESTAMP)), MIN(try_cast(`QAReview-PlantPrestartAttached` AS TIMESTAMP)), MIN(try_cast(`QAReview-StartCardAttached` AS TIMESTAMP)), MIN(try_cast(`QAReview-Timesheetattachedandpopulated` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6|JobStartChecklist-HotWorksPermit|JobStartChecklist-PlantPrestart|JobStartChecklist-StartCard|JobStartChecklist-VehicleMovementPlan|JobStartChecklist-WorkingatHeightsPermit|QAReview-JobStartFormSectionhasbeencompleted|QAReview-PlantPrestartAttached|QAReview-StartCardAttached|QAReview-Timesheetattachedandpopulated' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_jobs_all_attributes`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "uvw_jobs_all_attributes",
+        "VIEW",
+        "8906",
+        "true",
+        "2025-12-31T23:59:00Z",
+        "2017-11-08T11:20:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6|JobStartChecklist-HotWorksPermit|JobStartChecklist-PlantPrestart|JobStartChecklist-StartCard|JobStartChecklist-VehicleMovementPlan|JobStartChecklist-WorkingatHeightsPermit|QAReview-JobStartFormSectionhasbeencompleted|QAReview-PlantPrestartAttached|QAReview-StartCardAttached|QAReview-Timesheetattachedandpopulated"
+      ]
+    ]
+  }
+}

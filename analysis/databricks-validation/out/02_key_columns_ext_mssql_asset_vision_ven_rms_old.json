@@ -1,0 +1,14 @@
+{
+  "name": "02_key_columns_ext_mssql_asset_vision_ven_rms_old",
+  "statement": "SELECT table_catalog, table_schema, table_name, column_name, data_type, ordinal_position\nFROM `ext_mssql_asset_vision_ven_rms_old`.information_schema.columns\nWHERE table_schema = 'dbo'\n  AND lower(table_name) IN ('asset', 'vassetlocation', 'job', 'vjob', 'jobasset', 'jobcomment', 'inspection', 'vinspection', 'inspectionstatus', 'photo', 'formfield', 'module', 'workflowstatus', 'contractreference', 'capitalwork', 'capitalworktask', 'resource', 'plannedresourceitem', 'timesheetitem')\nORDER BY table_name, ordinal_position",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[TABLE_OR_VIEW_NOT_FOUND] The table or view `ext_mssql_asset_vision_ven_rms_old`.`information_schema`.`columns` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 2 pos 5"
+    },
+    "sql_state": "42P01"
+  },
+  "manifest": null,
+  "result": null
+}

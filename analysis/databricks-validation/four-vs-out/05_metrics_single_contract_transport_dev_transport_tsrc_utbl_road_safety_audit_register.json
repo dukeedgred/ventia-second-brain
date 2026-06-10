@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_utbl_road_safety_audit_register",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'utbl_road_safety_audit_register' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`completeddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`completeddate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`createddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createddate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`createduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createduser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`startpointname` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startpointname` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`startdistancepast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdistancepast` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ReportSubmissionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ReportSubmissionDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ReportSubmissionDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ReportSubmissionDateTime` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`completeddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`completeddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`completeddate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`createddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`createddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createddate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`createduser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`createduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createduser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`startpointname` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`startpointname` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startpointname` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`startdistancepast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`startdistancepast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdistancepast` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ReportSubmissionDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ReportSubmissionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ReportSubmissionDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ReportSubmissionDateTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ReportSubmissionDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ReportSubmissionDateTime` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|TriggeredSectionDetails_-_EndDate|TriggeredSectionDetails_-_StartDate|ReportSubmissionDate|ReportSubmissionDateTime' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`utbl_road_safety_audit_register`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "utbl_road_safety_audit_register",
+        "MANAGED",
+        "1",
+        "true",
+        "2024-07-05T07:43:02.84Z",
+        "1970-01-01T00:07:24Z",
+        "deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|TriggeredSectionDetails_-_EndDate|TriggeredSectionDetails_-_StartDate|ReportSubmissionDate|ReportSubmissionDateTime"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,1957 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transport Contractor Data Maturity Report</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #edf2f4;
+      --ink: #17202a;
+      --muted: #5a6673;
+      --line: #d9e1e7;
+      --teal: #116d6e;
+      --teal-soft: #d9eeee;
+      --green: #277044;
+      --green-soft: #e3f0e8;
+      --amber: #ad6b00;
+      --amber-soft: #f5ead5;
+      --red: #a93a32;
+      --red-soft: #f5dedb;
+      --violet: #6c4a8f;
+      --violet-soft: #ece4f4;
+      --blue: #2f5f9f;
+      --blue-soft: #e3ebf6;
+      --shadow: 0 16px 36px rgba(29, 44, 58, 0.10);
+      --radius: 8px;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
+    a {
+      color: var(--teal);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, 0.94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(12px);
+    }
+
+    .topbar-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 12px 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+
+    .brand {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 240px;
+    }
+
+    .brand strong {
+      font-size: 14px;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a,
+    .control-button {
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--ink);
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .nav a:hover,
+    .control-button:hover,
+    .control-button.is-active {
+      background: var(--teal-soft);
+      border-color: #95cfd0;
+      text-decoration: none;
+    }
+
+    .hero {
+      background: var(--surface);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero-inner {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 32px 28px 24px;
+      display: grid;
+      grid-template-columns: minmax(0, 1.6fr) minmax(360px, 0.8fr);
+      gap: 28px;
+      align-items: end;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: clamp(28px, 4vw, 48px);
+      line-height: 1.06;
+      letter-spacing: 0;
+      max-width: 920px;
+    }
+
+    .lead {
+      margin: 14px 0 0;
+      max-width: 960px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 10px;
+      background: #fbfcfd;
+      color: var(--muted);
+      font-size: 12px;
+      white-space: nowrap;
+    }
+
+    .scope-box {
+      border-left: 4px solid var(--amber);
+      background: var(--amber-soft);
+      padding: 14px 16px;
+      border-radius: var(--radius);
+      color: #3d3122;
+      font-size: 13px;
+    }
+
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 28px 54px;
+    }
+
+    section {
+      margin-top: 28px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-size: 22px;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      max-width: 760px;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .metric-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      box-shadow: var(--shadow);
+      min-height: 124px;
+    }
+
+    .metric-card span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .metric-card strong {
+      display: block;
+      margin-top: 8px;
+      font-size: 30px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .metric-card p {
+      margin: 10px 0 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .report-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 430px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+
+    .panel-pad {
+      padding: 16px;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 170px 170px 170px;
+      gap: 10px;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .field label {
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .field input,
+    .field select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 9px 10px;
+      background: var(--surface);
+      color: var(--ink);
+      min-height: 40px;
+    }
+
+    .table-wrap {
+      overflow: auto;
+      max-height: 560px;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 12px;
+      text-align: left;
+      vertical-align: top;
+      font-size: 13px;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 3;
+      background: #f9fbfc;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      cursor: pointer;
+    }
+
+    tbody tr:hover,
+    tbody tr.is-selected {
+      background: var(--teal-soft);
+    }
+
+    .contract-name {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 150px;
+    }
+
+    .contract-name strong {
+      font-size: 14px;
+    }
+
+    .contract-name span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .score-cell {
+      min-width: 130px;
+    }
+
+    .score-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-weight: 700;
+    }
+
+    .bar {
+      height: 8px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: #e6ebef;
+      overflow: hidden;
+    }
+
+    .bar span {
+      display: block;
+      height: 100%;
+      width: var(--w);
+      background: var(--c);
+    }
+
+    .tag-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: var(--surface-soft);
+      color: var(--muted);
+      font-size: 11px;
+      white-space: nowrap;
+    }
+
+    .tag.is-green {
+      background: var(--green-soft);
+      color: var(--green);
+    }
+
+    .tag.is-amber {
+      background: var(--amber-soft);
+      color: var(--amber);
+    }
+
+    .tag.is-red {
+      background: var(--red-soft);
+      color: var(--red);
+    }
+
+    .tag.is-blue {
+      background: var(--blue-soft);
+      color: var(--blue);
+    }
+
+    .tag.is-violet {
+      background: var(--violet-soft);
+      color: var(--violet);
+    }
+
+    .detail-header {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+
+    .detail-header h3 {
+      margin: 0;
+      font-size: 20px;
+    }
+
+    .detail-header p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .dimension-list {
+      display: grid;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .dimension-item {
+      display: grid;
+      grid-template-columns: 120px 1fr 42px;
+      gap: 10px;
+      align-items: center;
+      font-size: 12px;
+    }
+
+    .detail-block {
+      padding: 16px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .detail-block:last-child {
+      border-bottom: 0;
+    }
+
+    .detail-block h4 {
+      margin: 0 0 8px;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+    }
+
+    .detail-block p,
+    .detail-block li {
+      color: var(--ink);
+      font-size: 13px;
+    }
+
+    .detail-block ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .detail-block li + li {
+      margin-top: 6px;
+    }
+
+    .rank-chart {
+      display: grid;
+      gap: 8px;
+    }
+
+    .rank-row {
+      display: grid;
+      grid-template-columns: 150px 1fr 48px;
+      gap: 10px;
+      align-items: center;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 8px;
+      background: var(--surface);
+      cursor: pointer;
+    }
+
+    .rank-row:hover,
+    .rank-row.is-selected {
+      border-color: #95cfd0;
+      background: var(--teal-soft);
+    }
+
+    .rank-row .name {
+      min-width: 0;
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .heatmap {
+      overflow: auto;
+    }
+
+    .heatmap table {
+      min-width: 860px;
+    }
+
+    .heatmap td,
+    .heatmap th {
+      text-align: center;
+    }
+
+    .heatmap td:first-child,
+    .heatmap th:first-child {
+      text-align: left;
+      position: sticky;
+      left: 0;
+      background: #f9fbfc;
+      z-index: 2;
+    }
+
+    .heat-cell {
+      min-width: 102px;
+      font-weight: 700;
+      color: #10202a;
+    }
+
+    .rubric-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .rubric-item {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 14px;
+      min-height: 150px;
+      box-shadow: var(--shadow);
+    }
+
+    .rubric-item strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 14px;
+    }
+
+    .rubric-item span {
+      display: inline-flex;
+      margin-bottom: 10px;
+      border-radius: 999px;
+      padding: 2px 8px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .rubric-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .notes-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .note {
+      border-left: 4px solid var(--teal);
+      background: var(--surface);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      box-shadow: var(--shadow);
+      min-height: 150px;
+    }
+
+    .note h3 {
+      margin: 0 0 8px;
+      font-size: 15px;
+    }
+
+    .note p,
+    .note li {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .note ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .ledger {
+      max-height: 420px;
+      overflow: auto;
+    }
+
+    .use-summary {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      padding: 14px;
+      border-bottom: 1px solid var(--line);
+      background: #fbfcfd;
+    }
+
+    .use-summary-item {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 12px;
+      background: var(--surface);
+    }
+
+    .use-summary-item span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      font-weight: 700;
+    }
+
+    .use-summary-item strong {
+      display: block;
+      margin-top: 6px;
+      font-size: 22px;
+      line-height: 1;
+    }
+
+    .use-table tbody tr {
+      cursor: default;
+    }
+
+    .coverage-panel {
+      margin-bottom: 14px;
+    }
+
+    .coverage-table tbody tr {
+      cursor: default;
+    }
+
+    .coverage-table td:nth-child(4) {
+      min-width: 260px;
+    }
+
+    .use-table td:nth-child(2) {
+      min-width: 240px;
+    }
+
+    .use-table td:nth-child(4) {
+      min-width: 340px;
+    }
+
+    .basis-list {
+      margin: 0;
+      padding-left: 16px;
+      color: var(--muted);
+    }
+
+    .basis-list li + li {
+      margin-top: 4px;
+    }
+
+    .support-block {
+      display: grid;
+      gap: 8px;
+      max-width: 680px;
+    }
+
+    .support-block p {
+      margin: 0;
+    }
+
+    .support-block strong {
+      display: inline-block;
+      margin-right: 4px;
+    }
+
+    .empty {
+      padding: 28px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @media (max-width: 1180px) {
+      .hero-inner,
+      .report-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .metric-grid,
+      .rubric-grid,
+      .notes-grid,
+      .use-summary {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .controls {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .topbar-inner,
+      .hero-inner,
+      main {
+        padding-left: 16px;
+        padding-right: 16px;
+      }
+
+      .topbar-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .metric-grid,
+      .rubric-grid,
+      .notes-grid,
+      .use-summary,
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .dimension-item,
+      .rank-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media print {
+      .topbar,
+      .controls,
+      .control-button {
+        display: none;
+      }
+
+      body {
+        background: #ffffff;
+      }
+
+      .panel,
+      .metric-card,
+      .rubric-item,
+      .note {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <div class="brand">
+        <strong>Ventia Transport Data Asset</strong>
+        <span>Contractor data-maturity comparison</span>
+      </div>
+      <nav class="nav" aria-label="Report sections">
+        <a href="#comparison">Comparison</a>
+        <a href="#table-use">Table use</a>
+        <a href="#rubric">Rubric</a>
+        <a href="#detail">Contractor detail</a>
+        <a href="#evidence">Evidence</a>
+        <button class="control-button" type="button" id="printButton">Print</button>
+      </nav>
+    </div>
+  </header>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <h1>Transport contractor data maturity report</h1>
+        <p class="lead">Interactive, evidence-backed comparison of documented Transport contract/schema contexts. The report scores data coverage, operational maturity, analytics sophistication, spatial readiness, and reuse/governance readiness using current wiki table documentation and Databricks metadata.</p>
+        <div class="meta-row">
+          <span class="pill">Updated 9 June 2026</span>
+          <span class="pill">Maximo deferred from this pass</span>
+          <span class="pill">Source: Transport table docs and curated wiki notes</span>
+          <span class="pill">Scores are metadata-based, not data-quality certification</span>
+        </div>
+      </div>
+      <div class="scope-box">
+        The available documentation proves contract/schema-level data assets, not always a legal contractor entity. The report therefore uses "contractor" as shorthand for documented Transport contract/schema contexts. Shared layers such as `transport`, `stg_enterprise_reporting`, Asset Vision source catalogues, and Maximo are excluded from the scored contractor comparison.
+      </div>
+    </div>
+  </div>
+
+  <main>
+    <section aria-labelledby="summary-title">
+      <div class="metric-grid" id="metricGrid"></div>
+    </section>
+
+    <section id="comparison" aria-labelledby="comparison-title">
+      <div class="section-head">
+        <div>
+          <h2 id="comparison-title">Contractor Comparison</h2>
+          <p>Scores use the rubric below and only documented evidence. Higher scores mean the documented schema is more ready for reporting, analytics, and reusable data-product work.</p>
+        </div>
+      </div>
+
+      <div class="report-grid">
+        <div class="panel">
+          <div class="controls">
+            <div class="field">
+              <label for="searchInput">Search</label>
+              <input id="searchInput" type="search" placeholder="Filter by contractor, schema, table, domain">
+            </div>
+            <div class="field">
+              <label for="tierFilter">Tier</label>
+              <select id="tierFilter"></select>
+            </div>
+            <div class="field">
+              <label for="domainFilter">Domain</label>
+              <select id="domainFilter"></select>
+            </div>
+            <div class="field">
+              <label for="sortSelect">Sort</label>
+              <select id="sortSelect">
+                <option value="maturity">Maturity score</option>
+                <option value="analytics">Analytics sophistication</option>
+                <option value="tables">Documented tables</option>
+                <option value="views">Views</option>
+                <option value="spatial">Spatial readiness</option>
+                <option value="name">Contractor name</option>
+              </select>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Contractor / schema</th>
+                  <th>Maturity</th>
+                  <th>Analytics</th>
+                  <th>Tables</th>
+                  <th>Domains</th>
+                  <th>Primary use evidenced</th>
+                </tr>
+              </thead>
+              <tbody id="contractTableBody"></tbody>
+            </table>
+          </div>
+        </div>
+
+        <aside class="panel" id="detail" aria-labelledby="detail-title">
+          <div id="detailContent"></div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="table-use" aria-labelledby="table-use-title">
+      <div class="section-head">
+        <div>
+          <h2 id="table-use-title">Table Use Inference</h2>
+          <p>Per-table use inferred from documented domains, table descriptions, column names, and view SQL where available. This does not overwrite the source-backed table docs and low-confidence rows should be treated as discovery prompts.</p>
+        </div>
+      </div>
+
+      <div class="panel coverage-panel">
+        <div class="panel-pad">
+          <h3>Common Analysis Coverage</h3>
+          <p>Analysis categories shown here appear in at least half of the documented contractor/schema contexts. Missing contractors mean the current table documentation does not yet show that analysis area.</p>
+        </div>
+        <div class="table-wrap">
+          <table class="coverage-table">
+            <thead>
+              <tr>
+                <th>Analysis</th>
+                <th>Coverage</th>
+                <th>Present in</th>
+                <th>Missing contractors</th>
+              </tr>
+            </thead>
+            <tbody id="commonAnalysisBody"></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="panel">
+        <div class="use-summary" id="tableUseSummary"></div>
+        <div class="controls">
+          <div class="field">
+            <label for="useSearchInput">Search table use</label>
+            <input id="useSearchInput" type="search" placeholder="Filter by table, source, inferred use, evidence">
+          </div>
+          <div class="field">
+            <label for="useContractFilter">Contractor</label>
+            <select id="useContractFilter"></select>
+          </div>
+          <div class="field">
+            <label for="useDomainFilter">Inferred use</label>
+            <select id="useDomainFilter"></select>
+          </div>
+          <div class="field">
+            <label for="useConfidenceFilter">Confidence</label>
+            <select id="useConfidenceFilter"></select>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="use-table">
+            <thead>
+              <tr>
+                <th>Contractor / schema</th>
+                <th>Table</th>
+                <th>Type</th>
+                <th>Inferred use</th>
+                <th>Confidence</th>
+                <th>Evidence basis</th>
+              </tr>
+            </thead>
+            <tbody id="tableUseBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section aria-labelledby="rank-title">
+      <div class="section-head">
+        <div>
+          <h2 id="rank-title">Ranked Score View</h2>
+          <p>Weighted maturity combines coverage, operational completeness, analytics sophistication, spatial readiness, and governance/reuse readiness.</p>
+        </div>
+        <div class="segmented" role="group" aria-label="Score chart mode">
+          <button class="control-button is-active" type="button" data-chart-mode="maturity">Maturity</button>
+          <button class="control-button" type="button" data-chart-mode="analytics">Analytics</button>
+          <button class="control-button" type="button" data-chart-mode="spatial">Spatial</button>
+        </div>
+      </div>
+      <div class="rank-chart" id="rankChart"></div>
+    </section>
+
+    <section id="rubric" aria-labelledby="rubric-title">
+      <div class="section-head">
+        <div>
+          <h2 id="rubric-title">Scoring Rubric</h2>
+          <p>Each dimension is scored from 1 to 5. A score of 5 requires broad, reusable, active, and well-evidenced data. No score claims production certification or row-level data quality.</p>
+        </div>
+      </div>
+      <div class="rubric-grid" id="rubricGrid"></div>
+    </section>
+
+    <section aria-labelledby="heat-title">
+      <div class="section-head">
+        <div>
+          <h2 id="heat-title">Dimension Heatmap</h2>
+          <p>The heatmap shows where each contractor has stronger documented evidence and where work is still needed.</p>
+        </div>
+      </div>
+      <div class="panel heatmap">
+        <table>
+          <thead id="heatmapHead"></thead>
+          <tbody id="heatmapBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section id="evidence" aria-labelledby="evidence-title">
+      <div class="section-head">
+        <div>
+          <h2 id="evidence-title">Evidence Ledger</h2>
+          <p>Key documented tables/views used as evidence. "KPI present" is not scored as a yes/no flag: richer KPI views score higher when they include definitions, operational joins, abatement/reporting logic, spatial context, or reusable reporting structure.</p>
+        </div>
+      </div>
+      <div class="panel ledger">
+        <table>
+          <thead>
+            <tr>
+              <th>Contractor / schema</th>
+              <th>Evidence used</th>
+              <th>What it supports</th>
+            </tr>
+          </thead>
+          <tbody id="evidenceBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="notes-title">
+      <div class="section-head">
+        <div>
+          <h2 id="notes-title">Assumptions, Risks, And Gaps</h2>
+          <p>These constraints are deliberately visible because unsupported maturity claims would be misleading.</p>
+        </div>
+      </div>
+      <div class="notes-grid">
+        <div class="note">
+          <h3>Assessment Boundary</h3>
+          <ul>
+            <li>Scores use documented schemas, table names, column counts, domains, and selected stakeholder notes.</li>
+            <li>They do not use row counts, actual refresh telemetry, Power BI usage logs, or direct data-quality profiling.</li>
+            <li>Where a table is identified as created by file upload UI, that is treated as weaker governance evidence unless other source details exist.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <h3>Known Exclusions</h3>
+          <ul>
+            <li>Maximo source-table documentation is deferred from this pass at the user's request.</li>
+            <li>Shared enterprise or staging schemas are not contractor scores.</li>
+            <li>Asset Vision source catalogues are evidence for source context, but not scored as contractors.</li>
+          </ul>
+        </div>
+        <div class="note">
+          <h3>Decision Use</h3>
+          <ul>
+            <li>Use high-scoring contracts as candidates for reusable data patterns.</li>
+            <li>Use low-scoring contracts to prioritise source discovery, ownership, and active-feed validation.</li>
+            <li>Do not treat any score as a certification that a schema is production-ready for enterprise asset master use.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <script src="transport-contractor-table-use-data.js"></script>
+  <script>
+    const weights = {
+      coverage: 0.25,
+      operational: 0.25,
+      analytics: 0.20,
+      spatial: 0.15,
+      governance: 0.15
+    };
+
+    const dimensions = [
+      {
+        key: "coverage",
+        label: "Domain breadth",
+        weight: "25%",
+        description: "Breadth of documented domains such as asset, job, inspection, incident, KPI, finance, weather, traffic, capital works, and evidence."
+      },
+      {
+        key: "operational",
+        label: "Operational completeness",
+        weight: "25%",
+        description: "Evidence for the operational chain across assets, inspections, defects or incidents, jobs or work orders, completion, and supporting context."
+      },
+      {
+        key: "analytics",
+        label: "Analytics sophistication",
+        weight: "20%",
+        description: "Documented KPI, reporting, Power BI export, weighted-score, pivoted, rolling, stripmap, or enriched analytical views."
+      },
+      {
+        key: "spatial",
+        label: "Spatial readiness",
+        weight: "15%",
+        description: "Evidence for latitude/longitude, WKT, ArcGIS, road IDs, chainage, stripmaps, sections, or other geospatial/linear-referencing fields."
+      },
+      {
+        key: "governance",
+        label: "Reuse and governance readiness",
+        weight: "15%",
+        description: "Readiness for reuse based on view depth, source-boundary clarity, reference tables, non-temporary assets, and documented caveats."
+      }
+    ];
+
+    const tableUses = Array.isArray(window.transportContractorTableUses) ? window.transportContractorTableUses : [];
+
+    const contractors = [
+      {
+        id: "transport_wru",
+        name: "WRU",
+        label: "Western Roads Upgrade",
+        schema: "transport_wru",
+        tier: "Leading",
+        tables: 78,
+        views: 60,
+        managed: 18,
+        domains: ["asset register / hierarchy", "jobs / work orders", "inspection / audit / condition", "defects / hazards / failures", "KPI / reporting", "lane access", "traffic counts / closures", "capital works / forward works", "resources / timesheets", "documents / evidence"],
+        use: "Operational reporting across assets, jobs, inspections, defects, lane access, traffic counts, capital works, timesheets, and inspection KPI dashboards.",
+        scores: { coverage: 5.0, operational: 4.6, analytics: 4.3, spatial: 4.1, governance: 3.7 },
+        strengths: [
+          "Broad documented coverage across asset, job, inspection, defect, KPI, lane access, traffic, capital works, document, and timesheet domains.",
+          "`uvw_job`, `uvw_rm_jobs_reporting`, `vw_job_export_final`, and `uvw_job_geom` provide multiple work-order/reporting views.",
+          "`uvw_inspection_hazard_defect`, `uvw_inspection_kpi_1_dashboard`, and `uvw_job_kpi_2` show reporting-ready inspection and KPI structures."
+        ],
+        risks: [
+          "Several managed input tables are marked as created by the file upload UI, so refresh ownership and cadence need validation.",
+          "High breadth creates mapping work before WRU patterns can be reused across other contracts.",
+          "Production readiness is not certified by the table documentation alone."
+        ],
+        recommendations: [
+          "Use WRU as a leading open-road candidate for reusable asset, job, inspection, and KPI mapping patterns.",
+          "Validate owners and refresh cadence for file-upload traffic, lane access, and reference inputs.",
+          "Define a small set of golden WRU views for asset, job, inspection, defect, and geometry before cross-contract reuse."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_wru", "../transport_wru/Transport%20Contract%20Tables%20-%20transport_wru.md", "78 documented tables/views with broad domain coverage"],
+          ["uvw_job", "../transport_wru/Transport%20Table%20-%20transport_wru%20-%20uvw_job.md", "87-column job/work-order view"],
+          ["uvw_inspection_hazard_defect", "../transport_wru/Transport%20Table%20-%20transport_wru%20-%20uvw_inspection_hazard_defect.md", "Inspection hazard/defect reporting"],
+          ["uvw_laneaccess_report", "../transport_wru/Transport%20Table%20-%20transport_wru%20-%20uvw_laneaccess_report.md", "Lane access reporting"],
+          ["utbl_counts_hourly", "../transport_wru/Transport%20Table%20-%20transport_wru%20-%20utbl_counts_hourly.md", "Hourly traffic count data"]
+        ]
+      },
+      {
+        id: "transport_tsrc",
+        name: "TSRC",
+        label: "TSRC",
+        schema: "transport_tsrc",
+        tier: "Leading",
+        tables: 88,
+        views: 46,
+        managed: 42,
+        domains: ["asset register / hierarchy", "jobs / work orders", "inspection / audit / condition", "incidents", "traffic counts / closures", "KPI / reporting", "capital works / forward works", "defects / hazards / failures", "lane access", "reference / mapping"],
+        use: "KPI and abatement reporting, incident and closure analysis, road safety, PCAS/pavement reporting, asset/work-order views, and traffic context.",
+        scores: { coverage: 5.0, operational: 4.2, analytics: 4.8, spatial: 4.3, governance: 3.4 },
+        strengths: [
+          "Largest documented contractor footprint in the current pass with 88 tables/views.",
+          "Strong KPI/reporting evidence across abatement, incident, stakeholder, road safety, ITS uptime, and toll-road unavailability views.",
+          "Spatial and linear evidence is present through bridge asset fields, incident-triggered map geometry, PCAS segment WKT, and section mapping tables."
+        ],
+        risks: [
+          "Many uploaded and reference tables mean source ownership and refresh cadence need confirmation.",
+          "Incident/closure data should not be treated as equivalent to work-order data without mapping.",
+          "The schema is analytically rich but complex, so semantic definitions may diverge without governance."
+        ],
+        recommendations: [
+          "Build a TSRC KPI semantic catalogue before reusing KPI views across other contracts.",
+          "Separate incident, closure, PCAS, asset, and work-order layers in the data product model.",
+          "Validate which uploaded tables are authoritative inputs and which are temporary working artefacts."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_tsrc", "../transport_tsrc/Transport%20Contract%20Tables%20-%20transport_tsrc.md", "88 documented tables/views"],
+          ["uvw_kpi_7_to_14_its_asset_uptime", "../transport_tsrc/Transport%20Table%20-%20transport_tsrc%20-%20uvw_kpi_7_to_14_its_asset_uptime.md", "ITS asset uptime KPI reporting"],
+          ["uvw_jobs_all_attributes", "../transport_tsrc/Transport%20Table%20-%20transport_tsrc%20-%20uvw_jobs_all_attributes.md", "127-column jobs/all-attributes view"],
+          ["uvw_incident_trigger_report_map_geom", "../transport_tsrc/Transport%20Table%20-%20transport_tsrc%20-%20uvw_incident_trigger_report_map_geom.md", "Incident map geometry reporting"],
+          ["uvw_pcas_seg_geom_wkt", "../transport_tsrc/Transport%20Table%20-%20transport_tsrc%20-%20uvw_pcas_seg_geom_wkt.md", "PCAS segment WKT evidence"]
+        ]
+      },
+      {
+        id: "transport_srapc",
+        name: "SRAPC",
+        label: "SRAPC",
+        schema: "transport_srapc",
+        tier: "Leading",
+        tables: 42,
+        views: 37,
+        managed: 5,
+        domains: ["asset register / hierarchy", "jobs / work orders", "inspection / audit / condition", "defects / hazards / failures", "forms / modules", "documents / evidence", "inventory / materials", "weather", "reference / mapping", "staging / backup"],
+        use: "Asset Vision style operational reporting, job and inspection enrichment, customer-request views, Power BI job exports, weighted job scoring, Formitize mapping, weather, and subcontractor monthly data.",
+        scores: { coverage: 4.8, operational: 4.2, analytics: 4.2, spatial: 3.5, governance: 3.4 },
+        strengths: [
+          "Strong operational view coverage for assets, jobs, inspections, customer requests, photos, and defect/intervention reporting.",
+          "`uvw_jobs_am_weighted_score`, `uvw_srapc_jobs_am_weighted_score`, and `uvw_jobspowerbi` show reporting/enrichment beyond raw operational extraction.",
+          "Monthly subcontractor views and the separate Formitize SRAPC schema add capture breadth beyond core work management."
+        ],
+        risks: [
+          "Formitize capture data sits in a separate schema and needs explicit linkage to SRAPC operational entities.",
+          "Large monthly subcontractor data views require definition control before comparison or KPI use.",
+          "Weather and TACP/reference views add value but increase the mapping surface."
+        ],
+        recommendations: [
+          "Create an SRAPC data-product map linking Asset Vision views, Formitize capture tables, photos, monthly reporting, and TACP data.",
+          "Document the weighted-score logic and define when it is suitable for analytics or performance reporting.",
+          "Confirm keys between job, asset, inspection, customer request, photo, and subcontractor capture views."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_srapc", "../transport_srapc/Transport%20Contract%20Tables%20-%20transport_srapc.md", "42 documented tables/views"],
+          ["uvw_job", "../transport_srapc/Transport%20Table%20-%20transport_srapc%20-%20uvw_job.md", "82-column job view"],
+          ["uvw_inspections_all", "../transport_srapc/Transport%20Table%20-%20transport_srapc%20-%20uvw_inspections_all.md", "Inspection coverage"],
+          ["uvw_monthly_subcontractor_data", "../transport_srapc/Transport%20Table%20-%20transport_srapc%20-%20uvw_monthly_subcontractor_data.md", "Monthly subcontractor capture/reporting"],
+          ["uvw_srapc_tfnsw_monthly_report_defect_intervention", "../transport_srapc/Transport%20Table%20-%20transport_srapc%20-%20uvw_srapc_tfnsw_monthly_report_defect_intervention.md", "Defect/intervention report view"]
+        ]
+      },
+      {
+        id: "transport_aklw",
+        name: "AKLW",
+        label: "Auckland West",
+        schema: "transport_aklw",
+        tier: "Established",
+        tables: 11,
+        views: 11,
+        managed: 0,
+        domains: ["asset register / hierarchy", "jobs / work orders", "inspection / audit / condition", "capital works / forward works", "forms / modules", "resources / timesheets", "workflow / status", "reference / mapping"],
+        use: "Core operational reporting through asset, job, inspection, capital works, formfield, timesheet, and workflow-status views.",
+        scores: { coverage: 3.8, operational: 4.0, analytics: 2.9, spatial: 2.6, governance: 3.3 },
+        strengths: [
+          "Clean set of views covering the core Asset Vision-style modules: asset, job, inspection, capital works, timesheets, formfield, and workflow status.",
+          "All documented objects are views, which is positive for reusable reporting compared with unmanaged one-off tables.",
+          "The structure is compact enough to validate quickly."
+        ],
+        risks: [
+          "No explicit KPI/reporting views are documented.",
+          "No strong spatial evidence is visible in the contract catalogues beyond what may exist inside individual views.",
+          "Smaller footprint means less evidence for advanced analytics or enterprise benchmarking."
+        ],
+        recommendations: [
+          "Use AKLW as a compact validation case for the standard asset-job-inspection model.",
+          "Add documented KPI, defect, and geospatial enrichment views if AKLW is selected for cross-contract comparison.",
+          "Confirm whether the timesheet views link reliably to job/work-order views."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_aklw", "../transport_aklw/Transport%20Contract%20Tables%20-%20transport_aklw.md", "11 documented views"],
+          ["uvw_asset", "../transport_aklw/Transport%20Table%20-%20transport_aklw%20-%20uvw_asset.md", "Asset hierarchy view"],
+          ["uvw_job", "../transport_aklw/Transport%20Table%20-%20transport_aklw%20-%20uvw_job.md", "80-column job/work-order view"],
+          ["uvw_inspection", "../transport_aklw/Transport%20Table%20-%20transport_aklw%20-%20uvw_inspection.md", "Inspection view"]
+        ]
+      },
+      {
+        id: "transport_ramc",
+        name: "RAMC",
+        label: "RAMC / QSTC context",
+        schema: "transport_ramc",
+        tier: "Established",
+        tables: 17,
+        views: 8,
+        managed: 9,
+        domains: ["jobs / work orders", "inspection / audit / condition", "staging / backup", "stripmap / road geometry"],
+        use: "Backlog movement, current and last-month job snapshots, job reporting, inspection views, road-last-inspected reporting, stripmap and WKT-style enrichment.",
+        scores: { coverage: 3.2, operational: 4.0, analytics: 3.3, spatial: 3.7, governance: 2.8 },
+        strengths: [
+          "Good documented evidence for jobs and backlog movement through current/last-month snapshots and backlog-reduction tables.",
+          "`uvw_stripmap_jobs`, `uvw_stripmap_full`, and `uvw_stripmap_wkt` support road/stripmap-style analysis.",
+          "Inspection view and road-last-inspected view provide operational status context."
+        ],
+        risks: [
+          "The catalog shows backup and snapshot tables, so the authoritative active layer needs confirmation.",
+          "No broad asset-master coverage is documented in the contract catalog.",
+          "Analytics are useful for backlog and stripmap reporting but less broad than WRU, TSRC, or SRAPC."
+        ],
+        recommendations: [
+          "Promote one authoritative job/backlog view and identify which backup/snapshot tables are historical only.",
+          "Add or locate the RAMC asset master if enterprise asset analysis is required.",
+          "Standardise stripmap and WKT fields for reusable spatial joins."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_ramc", "../transport_ramc/Transport%20Contract%20Tables%20-%20transport_ramc.md", "17 documented tables/views"],
+          ["uvw_stripmap_jobs", "../transport_ramc/Transport%20Table%20-%20transport_ramc%20-%20uvw_stripmap_jobs.md", "Stripmap job reporting"],
+          ["uvw_stripmap_wkt", "../transport_ramc/Transport%20Table%20-%20transport_ramc%20-%20uvw_stripmap_wkt.md", "WKT-style spatial evidence"],
+          ["utbl_current_month_job_snapshot", "../transport_ramc/Transport%20Table%20-%20transport_ramc%20-%20utbl_current_month_job_snapshot.md", "Current-month job snapshot"]
+        ]
+      },
+      {
+        id: "transport_sht",
+        name: "SHT",
+        label: "Sydney Harbour Tunnel reporting context",
+        schema: "transport_sht",
+        tier: "Developing",
+        tables: 27,
+        views: 14,
+        managed: 13,
+        domains: ["asset register / hierarchy", "jobs / work orders", "inspection / audit / condition", "weather", "user / security", "staging / backup"],
+        use: "Curated reporting views for assets, critical assets, inspection, job, user groups, segmented tunnel-like assets, and North Sydney weather context.",
+        scores: { coverage: 3.3, operational: 3.3, analytics: 3.0, spatial: 2.8, governance: 2.4 },
+        strengths: [
+          "Documented asset, critical-asset, inspection, and job views provide useful reporting evidence.",
+          "Weather and user/security views add contextual and governance-relevant dimensions.",
+          "The catalogue explicitly flags the source-boundary caveat, which prevents overclaiming Asset Vision as the SHT operating system."
+        ],
+        risks: [
+          "The SHT catalogue notes stakeholder documentation identifies SHT operational work management as Maximo; Maximo is deferred from this pass.",
+          "Many managed tables are one-column or temporary/upload-style artefacts.",
+          "Without Maximo source validation, the current SHT score should be treated as reporting-context maturity, not full operational-system maturity."
+        ],
+        recommendations: [
+          "Keep SHT in the comparison, but label it as a curated reporting context until Maximo is documented.",
+          "Validate how `uvw_job`, `uvw_inspection`, and critical-asset views relate to the source operational system.",
+          "Defer enterprise SHT benchmarking until the Maximo boundary and key joins are confirmed."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_sht", "../transport_sht/Transport%20Contract%20Tables%20-%20transport_sht.md", "27 documented tables/views plus source-boundary caveat"],
+          ["uvw_job", "../transport_sht/Transport%20Table%20-%20transport_sht%20-%20uvw_job.md", "80-column job view"],
+          ["uvw_inspection", "../transport_sht/Transport%20Table%20-%20transport_sht%20-%20uvw_inspection.md", "Inspection view"],
+          ["uvw_all_critical_assets", "../transport_sht/Transport%20Table%20-%20transport_sht%20-%20uvw_all_critical_assets.md", "Critical assets view"]
+        ]
+      },
+      {
+        id: "transport_fndc",
+        name: "FNDC",
+        label: "FNDC",
+        schema: "transport_fndc",
+        tier: "Developing",
+        tables: 14,
+        views: 11,
+        managed: 3,
+        domains: ["road network", "weather", "capital works / forward works", "commercial / finance", "dispatch / claims", "asset category views"],
+        use: "Road-network reference, asset-category style views, forward works, dispatch and claim views, cost view, and weather context.",
+        scores: { coverage: 3.1, operational: 2.7, analytics: 2.8, spatial: 4.0, governance: 2.7 },
+        strengths: [
+          "Strong road and asset-category documentation across road centreline, surface, drainage, footpath, pave layer, railings, sign, and treatment-length views.",
+          "Weather, cost, dispatch, claim, and forward-works views broaden the analysis context.",
+          "Road-network and treatment/asset views support spatial or linear-reference enrichment."
+        ],
+        risks: [
+          "Jobs, inspections, defects, and SLA-style operating data are not clearly tagged in the catalog.",
+          "Several domains remain blank in the current table catalogue and need business validation.",
+          "Spatial readiness is stronger than operational completeness."
+        ],
+        recommendations: [
+          "Use FNDC for road-network and asset-category enrichment, not as a complete operational activity source yet.",
+          "Confirm whether dispatch and claim views are the active work-order/commercial pathway.",
+          "Add explicit domain notes for the blank asset-category views after SME validation."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_fndc", "../transport_fndc/Transport%20Contract%20Tables%20-%20transport_fndc.md", "14 documented tables/views"],
+          ["byo_tbl_national_road_cl_nz", "../transport_fndc/Transport%20Table%20-%20transport_fndc%20-%20byo_tbl_national_road_cl_nz.md", "Road-network table"],
+          ["uvw_fw_forward_work_view", "../transport_fndc/Transport%20Table%20-%20transport_fndc%20-%20uvw_fw_forward_work_view.md", "Forward works view"],
+          ["uvw_mt_dispatch_claim", "../transport_fndc/Transport%20Table%20-%20transport_fndc%20-%20uvw_mt_dispatch_claim.md", "Dispatch claim view"]
+        ]
+      },
+      {
+        id: "formitize_srapc",
+        name: "Formitize SRAPC",
+        label: "SRAPC form-capture adjunct",
+        schema: "formitize_srapc",
+        tier: "Adjunct",
+        tables: 7,
+        views: 0,
+        managed: 7,
+        domains: ["forms / modules", "documents / evidence", "monthly subcontractor capture"],
+        use: "Form, attachment, pre-start, vehicle checklist, sustainable procurement, and monthly subcontractor data capture for SRAPC-related workflows.",
+        scores: { coverage: 2.4, operational: 1.6, analytics: 2.1, spatial: 1.2, governance: 2.5 },
+        strengths: [
+          "Useful capture layer for attachments, pre-start forms, vehicle checks, procurement questionnaire, and subcontractor monthly data.",
+          "Large structured capture tables indicate rich form/questionnaire detail is available.",
+          "Directly complements SRAPC rather than duplicating the Asset Vision-style operational views."
+        ],
+        risks: [
+          "This is an adjunct capture schema, not a complete contractor operational model.",
+          "No jobs, assets, inspections, or geospatial operational tables are documented here.",
+          "Analytics value depends on linkage back to SRAPC jobs, assets, subcontractors, periods, or reports."
+        ],
+        recommendations: [
+          "Score Formitize separately from SRAPC operational maturity and use it as capture evidence.",
+          "Document keys linking Formitize submissions, attachments, and subcontractor data to SRAPC reporting views.",
+          "Define which Formitize fields are authoritative for sustainability, safety, material, waste, and fuel reporting."
+        ],
+        evidence: [
+          ["Transport Contract Tables - formitize_srapc", "../formitize_srapc/Transport%20Contract%20Tables%20-%20formitize_srapc.md", "7 documented managed capture tables"],
+          ["srapc_monthly_subcontractor_data_capture_portal", "../formitize_srapc/Transport%20Table%20-%20formitize_srapc%20-%20srapc_monthly_subcontractor_data_capture_portal.md", "Monthly subcontractor capture portal"],
+          ["civil_maintenance_pre_start_form", "../formitize_srapc/Transport%20Table%20-%20formitize_srapc%20-%20civil_maintenance_pre_start_form.md", "Civil maintenance pre-start form"]
+        ]
+      },
+      {
+        id: "transport_nel",
+        name: "NEL",
+        label: "NEL",
+        schema: "transport_nel",
+        tier: "Early",
+        tables: 4,
+        views: 1,
+        managed: 3,
+        domains: ["KPI / reporting", "reference / mapping", "system AV devices"],
+        use: "KPI asset and work-order upload tables, date reference, and a system Asset Vision devices view.",
+        scores: { coverage: 1.9, operational: 2.1, analytics: 2.7, spatial: 1.8, governance: 2.1 },
+        strengths: [
+          "`utbl_kpi_assets` and `utbl_kpi_work_orders` provide a compact KPI-oriented asset and work-order footprint.",
+          "A system AV devices view and date reference table support reporting scaffolding.",
+          "The limited footprint is quick to review."
+        ],
+        risks: [
+          "The current catalogue is narrow and upload-oriented.",
+          "No general asset, inspection, defect, job, or geospatial model is documented beyond KPI-oriented tables.",
+          "It is not enough evidence for broad contractor analytics maturity."
+        ],
+        recommendations: [
+          "Validate whether the KPI upload tables are authoritative or interim reporting inputs.",
+          "Locate NEL operational source views for assets, jobs, defects, inspections, and geospatial context.",
+          "Keep NEL as a lower-evidence contract until active source and refresh ownership are documented."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_nel", "../transport_nel/Transport%20Contract%20Tables%20-%20transport_nel.md", "4 documented objects"],
+          ["utbl_kpi_assets", "../transport_nel/Transport%20Table%20-%20transport_nel%20-%20utbl_kpi_assets.md", "66-column KPI assets table"],
+          ["utbl_kpi_work_orders", "../transport_nel/Transport%20Table%20-%20transport_nel%20-%20utbl_kpi_work_orders.md", "26-column KPI work-orders table"]
+        ]
+      },
+      {
+        id: "transport_vsm",
+        name: "VSM",
+        label: "VSM",
+        schema: "transport_vsm",
+        tier: "Early",
+        tables: 1,
+        views: 1,
+        managed: 0,
+        domains: ["asset register / hierarchy", "documents / evidence"],
+        use: "Documented evidence is limited to a single all-asset-with-photo view.",
+        scores: { coverage: 1.2, operational: 1.3, analytics: 1.1, spatial: 2.0, governance: 1.8 },
+        strengths: [
+          "The single documented object is an asset-with-photo view, which is relevant to asset evidence.",
+          "The view structure may be a useful starting point for asset-photo validation.",
+          "Scope is small and easy to assess."
+        ],
+        risks: [
+          "No job, inspection, defect, KPI, timesheet, or work-order data is documented in the contract schema.",
+          "The score reflects lack of documented evidence, not necessarily lack of data in source systems.",
+          "Cannot support contractor-level analytics comparison without additional sources."
+        ],
+        recommendations: [
+          "Find the VSM job, inspection, defect, and work-order sources before treating it as analytically mature.",
+          "If the Asset Vision VSM source catalogue is in scope, map it to the curated `transport_vsm` view.",
+          "Use the asset-photo view only for narrow evidence and asset-capture assessment until more tables are documented."
+        ],
+        evidence: [
+          ["Transport Contract Tables - transport_vsm", "../transport_vsm/Transport%20Contract%20Tables%20-%20transport_vsm.md", "1 documented view"],
+          ["uvw_all_asset_with_photo", "../transport_vsm/Transport%20Table%20-%20transport_vsm%20-%20uvw_all_asset_with_photo.md", "Asset-with-photo view"]
+        ]
+      }
+    ];
+
+    const scoreExplanations = {
+      transport_wru: {
+        why: "Higher score because the documented schema covers the full operational chain: assets, inspections, defects, jobs, KPI views, lane access, traffic counts, capital works, documents, and timesheets.",
+        missing: "Still missing confirmed refresh ownership for some uploaded inputs, row-level data-quality profiling, and a defined set of golden reusable views for cross-contract comparison."
+      },
+      transport_tsrc: {
+        why: "Higher analytics score because KPI evidence is broad and detailed: abatement, road safety, incidents, stakeholder events, ITS uptime, PCAS, toll-road unavailability, and map/section geometry are documented.",
+        missing: "Still missing confirmed ownership for uploaded/reference inputs and a governed semantic layer that separates incidents, closures, PCAS, assets, and work orders."
+      },
+      transport_srapc: {
+        why: "High score because it has strong operational views for assets, jobs, inspections, customer requests, photos, defect/intervention reporting, Power BI exports, and weighted job scoring.",
+        missing: "Lower than the top scorers because Formitize is separate, weighted-score logic needs definition control, monthly subcontractor reporting needs clearer meaning, and spatial evidence is less broad."
+      },
+      transport_aklw: {
+        why: "Moderate score because it has a clean, reusable core set of Asset Vision-style views for assets, jobs, inspections, capital works, form fields, workflow status, and timesheets.",
+        missing: "Lower than WRU, TSRC, and SRAPC because no explicit KPI, defect, Power BI, weighted-score, or strong geospatial reporting views are documented."
+      },
+      transport_ramc: {
+        why: "Moderate score because job/backlog movement, job snapshots, inspections, road-last-inspected, stripmap, and WKT-style views support operational reporting.",
+        missing: "Lower score because the current docs do not show a broad asset register, defect model, capital-works layer, or rich KPI layer, and several tables look like snapshots or backups."
+      },
+      transport_sht: {
+        why: "Developing score because the documented reporting context includes asset, critical-asset, inspection, job, weather, and user/security views.",
+        missing: "Lower score because stakeholder notes identify Maximo as the SHT operational work-management source, Maximo is excluded from this pass, and several documented tables look temporary or upload-style."
+      },
+      transport_fndc: {
+        why: "Developing score with relatively strong spatial readiness because road-network, treatment, surface, drainage, footpath, forward-work, dispatch, claim, cost, and weather views are documented.",
+        missing: "Lower operational score because jobs, inspections, defects, SLA response, and asset-to-work-order lifecycle coverage are not clearly documented as a complete chain."
+      },
+      formitize_srapc: {
+        why: "Adjunct score because it supports form capture, attachments, pre-starts, vehicle checks, procurement questionnaire responses, and monthly subcontractor capture for SRAPC-related workflows.",
+        missing: "Not scored like a contractor operational model because it lacks documented asset register, job/work-order, inspection, defect, KPI, and spatial operating tables."
+      },
+      transport_nel: {
+        why: "Lower score even though KPI tables exist because the documented evidence is narrow: KPI asset and work-order upload tables, a date reference, and an AV devices view.",
+        missing: "Missing the detail that makes KPI analytics mature: KPI definitions, active source ownership, inspection/defect/job lifecycle views, asset hierarchy, geospatial context, and reporting-ready enriched views."
+      },
+      transport_vsm: {
+        why: "Lowest score because the documented contractor schema has only one asset-with-photo view, so it supports narrow asset evidence only.",
+        missing: "Missing documented jobs, inspections, defects, KPI/reporting, work orders, timesheets, refresh ownership, and broader operational context."
+      }
+    };
+
+    const tierOrder = ["Leading", "Established", "Developing", "Adjunct", "Early"];
+    let selectedId = "transport_wru";
+    let chartMode = "maturity";
+
+    function score(contractor, key) {
+      if (key === "maturity") {
+        return dimensions.reduce((total, item) => total + contractor.scores[item.key] * weights[item.key], 0);
+      }
+      if (key === "tables") return contractor.tables;
+      if (key === "views") return contractor.views;
+      return contractor.scores[key] || contractor.scores.analytics;
+    }
+
+    function scoreColour(value) {
+      if (value >= 4.0) return "var(--green)";
+      if (value >= 3.0) return "var(--teal)";
+      if (value >= 2.0) return "var(--amber)";
+      return "var(--red)";
+    }
+
+    function tierClass(tier) {
+      if (tier === "Leading") return "is-green";
+      if (tier === "Established") return "is-blue";
+      if (tier === "Developing") return "is-amber";
+      if (tier === "Adjunct") return "is-violet";
+      return "is-red";
+    }
+
+    function formatScore(value) {
+      return value.toFixed(1);
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replace(/[&<>"']/g, (char) => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;",
+        "'": "&#039;"
+      })[char]);
+    }
+
+    function confidenceClass(confidence) {
+      if (confidence === "High") return "is-green";
+      if (confidence === "Medium") return "is-amber";
+      return "is-red";
+    }
+
+    function contractorText(contractor) {
+      return [
+        contractor.name,
+        contractor.label,
+        contractor.schema,
+        contractor.tier,
+        contractor.use,
+        contractor.domains.join(" "),
+        contractor.strengths.join(" "),
+        contractor.risks.join(" "),
+        contractor.recommendations.join(" ")
+      ].join(" ").toLowerCase();
+    }
+
+    function contractorDisplay(context) {
+      const contractor = contractors.find((item) => item.id === context || item.schema === context);
+      return contractor ? `${contractor.name} (${contractor.schema})` : context;
+    }
+
+    function filteredContractors() {
+      const search = document.getElementById("searchInput").value.trim().toLowerCase();
+      const tier = document.getElementById("tierFilter").value;
+      const domain = document.getElementById("domainFilter").value;
+      const sort = document.getElementById("sortSelect").value;
+
+      const rows = contractors.filter((contractor) => {
+        const matchesSearch = !search || contractorText(contractor).includes(search);
+        const matchesTier = tier === "All" || contractor.tier === tier;
+        const matchesDomain = domain === "All" || contractor.domains.includes(domain);
+        return matchesSearch && matchesTier && matchesDomain;
+      });
+
+      rows.sort((a, b) => {
+        if (sort === "name") return a.name.localeCompare(b.name);
+        return score(b, sort) - score(a, sort);
+      });
+
+      return rows;
+    }
+
+    function renderMetrics() {
+      const scored = contractors.filter((item) => item.tier !== "Adjunct");
+      const totalTables = contractors.reduce((sum, item) => sum + item.tables, 0);
+      const bestMaturity = [...contractors].sort((a, b) => score(b, "maturity") - score(a, "maturity"))[0];
+      const bestAnalytics = [...contractors].sort((a, b) => score(b, "analytics") - score(a, "analytics"))[0];
+      const matureCount = scored.filter((item) => score(item, "maturity") >= 3).length;
+
+      const metrics = [
+        ["Scored contexts", scored.length.toString(), "Contract/schema contexts in the contractor comparison, excluding the adjunct Formitize capture layer from this KPI."],
+        ["Documented tables/views", totalTables.toString(), "Objects represented in the scored and adjunct contractor schemas."],
+        ["Highest maturity", bestMaturity.name + " " + formatScore(score(bestMaturity, "maturity")) + "/5", bestMaturity.label],
+        ["Operationally usable", matureCount.toString(), "Contractor schemas with maturity score at or above 3.0."]
+      ];
+
+      document.getElementById("metricGrid").innerHTML = metrics.map((item) => `
+        <div class="metric-card">
+          <span>${item[0]}</span>
+          <strong>${item[1]}</strong>
+          <p>${item[2]}</p>
+        </div>
+      `).join("");
+
+      document.querySelector(".brand span").textContent = `Top analytics: ${bestAnalytics.name} ${formatScore(score(bestAnalytics, "analytics"))}/5`;
+    }
+
+    function renderFilters() {
+      const tiers = ["All", ...tierOrder.filter((tier) => contractors.some((item) => item.tier === tier))];
+      const domains = ["All", ...Array.from(new Set(contractors.flatMap((item) => item.domains))).sort()];
+      document.getElementById("tierFilter").innerHTML = tiers.map((item) => `<option value="${item}">${item}</option>`).join("");
+      document.getElementById("domainFilter").innerHTML = domains.map((item) => `<option value="${item}">${item}</option>`).join("");
+    }
+
+    function renderCommonAnalysisCoverage() {
+      const contexts = contractors.map((item) => item.schema);
+      const threshold = Math.ceil(contexts.length / 2);
+      const categories = Array.from(new Set(tableUses.map((row) => row.inferredCategory).filter(Boolean)));
+      const rows = categories.map((category) => {
+        const present = Array.from(new Set(
+          tableUses.filter((row) => row.inferredCategory === category).map((row) => row.context)
+        )).sort((a, b) => contractorDisplay(a).localeCompare(contractorDisplay(b)));
+        const missing = contexts
+          .filter((context) => !present.includes(context))
+          .sort((a, b) => contractorDisplay(a).localeCompare(contractorDisplay(b)));
+        return { category, present, missing };
+      }).filter((row) => row.present.length >= threshold)
+        .sort((a, b) => b.present.length - a.present.length || a.category.localeCompare(b.category));
+
+      const body = document.getElementById("commonAnalysisBody");
+      if (!rows.length) {
+        body.innerHTML = `<tr><td colspan="4"><div class="empty">No analysis category appears in at least half of the documented contractor/schema contexts.</div></td></tr>`;
+        return;
+      }
+
+      body.innerHTML = rows.map((row) => `
+        <tr>
+          <td><strong>${escapeHtml(row.category)}</strong></td>
+          <td><span class="tag ${row.present.length >= 7 ? "is-green" : "is-amber"}">${row.present.length}/${contexts.length}</span></td>
+          <td><div class="tag-list">${row.present.map((context) => `<span class="tag is-blue">${escapeHtml(contractorDisplay(context))}</span>`).join("")}</div></td>
+          <td><div class="tag-list">${row.missing.map((context) => `<span class="tag is-red">${escapeHtml(contractorDisplay(context))}</span>`).join("")}</div></td>
+        </tr>
+      `).join("");
+    }
+
+    function renderContractTable() {
+      const rows = filteredContractors();
+      const body = document.getElementById("contractTableBody");
+      if (!rows.length) {
+        body.innerHTML = `<tr><td colspan="6"><div class="empty">No contractors match the current filters.</div></td></tr>`;
+        return;
+      }
+
+      body.innerHTML = rows.map((contractor) => {
+        const maturity = score(contractor, "maturity");
+        const analytics = score(contractor, "analytics");
+        const domains = contractor.domains.slice(0, 4).map((domain) => `<span class="tag">${domain}</span>`).join("");
+        const more = contractor.domains.length > 4 ? `<span class="tag">+${contractor.domains.length - 4}</span>` : "";
+        return `
+          <tr data-id="${contractor.id}" class="${contractor.id === selectedId ? "is-selected" : ""}">
+            <td>
+              <div class="contract-name">
+                <strong>${contractor.name}</strong>
+                <span>${contractor.label}</span>
+                <span><code>${contractor.schema}</code></span>
+              </div>
+            </td>
+            <td class="score-cell">
+              <div class="score-label"><span>${formatScore(maturity)}</span><span>/5</span></div>
+              <div class="bar" title="Maturity ${formatScore(maturity)} out of 5"><span style="--w:${maturity * 20}%; --c:${scoreColour(maturity)}"></span></div>
+            </td>
+            <td class="score-cell">
+              <div class="score-label"><span>${formatScore(analytics)}</span><span>/5</span></div>
+              <div class="bar" title="Analytics sophistication ${formatScore(analytics)} out of 5"><span style="--w:${analytics * 20}%; --c:${scoreColour(analytics)}"></span></div>
+            </td>
+            <td>${contractor.tables}<br><span class="tag">${contractor.views} views</span> <span class="tag">${contractor.managed} managed</span></td>
+            <td><div class="tag-list">${domains}${more}</div></td>
+            <td>${contractor.use}</td>
+          </tr>
+        `;
+      }).join("");
+
+      body.querySelectorAll("tr[data-id]").forEach((row) => {
+        row.addEventListener("click", () => selectContractor(row.dataset.id));
+      });
+    }
+
+    function renderDetail() {
+      const contractor = contractors.find((item) => item.id === selectedId) || contractors[0];
+      const maturity = score(contractor, "maturity");
+      const dimensionRows = dimensions.map((item) => {
+        const value = contractor.scores[item.key];
+        return `
+          <div class="dimension-item" title="${item.description}">
+            <span>${item.label}</span>
+            <div class="bar"><span style="--w:${value * 20}%; --c:${scoreColour(value)}"></span></div>
+            <strong>${formatScore(value)}</strong>
+          </div>
+        `;
+      }).join("");
+
+      document.getElementById("detailContent").innerHTML = `
+        <div class="detail-header">
+          <div class="tag-list">
+            <span class="tag ${tierClass(contractor.tier)}">${contractor.tier}</span>
+            <span class="tag">${contractor.tables} tables/views</span>
+            <span class="tag">${contractor.views} views</span>
+          </div>
+          <h3 id="detail-title">${contractor.name}: ${formatScore(maturity)} / 5</h3>
+          <p>${contractor.label} - <code>${contractor.schema}</code></p>
+          <div class="dimension-list">${dimensionRows}</div>
+        </div>
+        <div class="detail-block">
+          <h4>How The Data Is Used</h4>
+          <p>${contractor.use}</p>
+        </div>
+        <div class="detail-block">
+          <h4>Why This Score</h4>
+          <p>${scoreExplanations[contractor.id]?.why || "No additional score rationale documented."}</p>
+          <p><strong>Missing / limiting evidence:</strong> ${scoreExplanations[contractor.id]?.missing || "No additional missing-evidence note documented."}</p>
+        </div>
+        <div class="detail-block">
+          <h4>Evidence-Backed Strengths</h4>
+          <ul>${contractor.strengths.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </div>
+        <div class="detail-block">
+          <h4>Risks And Gaps</h4>
+          <ul>${contractor.risks.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </div>
+        <div class="detail-block">
+          <h4>Recommendations</h4>
+          <ul>${contractor.recommendations.map((item) => `<li>${item}</li>`).join("")}</ul>
+        </div>
+        <div class="detail-block">
+          <h4>Evidence Links</h4>
+          <div class="tag-list">${contractor.evidence.map((item) => `<a class="tag is-blue" href="${item[1]}">${item[0]}</a>`).join("")}</div>
+        </div>
+      `;
+    }
+
+    function renderRankChart() {
+      const max = chartMode === "tables" ? Math.max(...contractors.map((item) => item.tables)) : 5;
+      const rows = [...contractors].sort((a, b) => score(b, chartMode) - score(a, chartMode));
+      document.getElementById("rankChart").innerHTML = rows.map((contractor) => {
+        const value = score(contractor, chartMode);
+        const width = chartMode === "tables" ? value / max * 100 : value * 20;
+        return `
+          <div class="rank-row ${contractor.id === selectedId ? "is-selected" : ""}" data-id="${contractor.id}">
+            <div class="name">${contractor.name} <span class="tag ${tierClass(contractor.tier)}">${contractor.tier}</span></div>
+            <div class="bar" title="${contractor.name} ${chartMode} ${formatScore(value)}"><span style="--w:${width}%; --c:${scoreColour(chartMode === "tables" ? Math.min(5, value / max * 5) : value)}"></span></div>
+            <strong>${chartMode === "tables" ? value : formatScore(value)}</strong>
+          </div>
+        `;
+      }).join("");
+
+      document.querySelectorAll(".rank-row").forEach((row) => {
+        row.addEventListener("click", () => selectContractor(row.dataset.id));
+      });
+    }
+
+    function heatColour(value) {
+      const clamped = Math.max(1, Math.min(5, value));
+      if (clamped >= 4.3) return "#cce8d8";
+      if (clamped >= 3.5) return "#d9eeee";
+      if (clamped >= 2.7) return "#f5ead5";
+      if (clamped >= 2.0) return "#f3d8d4";
+      return "#ead9e9";
+    }
+
+    function renderHeatmap() {
+      document.getElementById("heatmapHead").innerHTML = `
+        <tr>
+          <th>Contractor / schema</th>
+          ${dimensions.map((item) => `<th title="${item.description}">${item.label}</th>`).join("")}
+          <th>Maturity</th>
+        </tr>
+      `;
+
+      const rows = [...contractors].sort((a, b) => score(b, "maturity") - score(a, "maturity"));
+      document.getElementById("heatmapBody").innerHTML = rows.map((contractor) => `
+        <tr data-id="${contractor.id}">
+          <td><strong>${contractor.name}</strong><br><span class="tag">${contractor.schema}</span></td>
+          ${dimensions.map((item) => {
+            const value = contractor.scores[item.key];
+            return `<td class="heat-cell" style="background:${heatColour(value)}" title="${contractor.name} ${item.label}: ${formatScore(value)} / 5">${formatScore(value)}</td>`;
+          }).join("")}
+          <td class="heat-cell" style="background:${heatColour(score(contractor, "maturity"))}">${formatScore(score(contractor, "maturity"))}</td>
+        </tr>
+      `).join("");
+
+      document.querySelectorAll("#heatmapBody tr").forEach((row) => {
+        row.addEventListener("click", () => selectContractor(row.dataset.id));
+      });
+    }
+
+    function renderRubric() {
+      document.getElementById("rubricGrid").innerHTML = dimensions.map((item) => `
+        <div class="rubric-item">
+          <span>${item.weight} weight</span>
+          <strong>${item.label}</strong>
+          <p>${item.description}</p>
+        </div>
+      `).join("");
+    }
+
+    function renderEvidence() {
+      document.getElementById("evidenceBody").innerHTML = contractors.map((contractor) => `
+        <tr>
+          <td>
+            <strong>${contractor.name}</strong><br>
+            <span class="tag">${contractor.schema}</span>
+          </td>
+          <td>
+            <div class="tag-list">
+              ${contractor.evidence.map((item) => `<a class="tag is-blue" href="${item[1]}">${item[0]}</a>`).join("")}
+            </div>
+          </td>
+          <td>
+            <div class="support-block">
+              <p><strong>Supports:</strong>${escapeHtml(contractor.evidence.map((item) => item[2]).join("; "))}.</p>
+              <p><strong>Why score differs:</strong>${escapeHtml(scoreExplanations[contractor.id]?.why || "No additional rationale documented.")}</p>
+              <p><strong>Missing / limiting evidence:</strong>${escapeHtml(scoreExplanations[contractor.id]?.missing || "No additional missing-evidence note documented.")}</p>
+            </div>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function tableUseText(row) {
+      return [
+        row.context,
+        row.contractor,
+        row.label,
+        row.tableName,
+        row.fullName,
+        row.tableType,
+        row.documentedDomain,
+        row.inferredCategory,
+        row.inferredUse,
+        row.confidence,
+        ...(row.evidenceBasis || [])
+      ].join(" ").toLowerCase();
+    }
+
+    function renderTableUseFilters() {
+      const contextOptions = Array.from(
+        new Map(tableUses.map((row) => [row.context, `${row.contractor || row.context} - ${row.context}`])).entries()
+      ).sort((a, b) => a[1].localeCompare(b[1]));
+      const categoryOptions = Array.from(new Set(tableUses.map((row) => row.inferredCategory).filter(Boolean))).sort();
+      const confidenceOptions = ["High", "Medium", "Low"].filter((item) => tableUses.some((row) => row.confidence === item));
+
+      document.getElementById("useContractFilter").innerHTML = [
+        `<option value="All">All</option>`,
+        ...contextOptions.map(([context, label]) => `<option value="${escapeHtml(context)}">${escapeHtml(label)}</option>`)
+      ].join("");
+
+      document.getElementById("useDomainFilter").innerHTML = [
+        `<option value="All">All</option>`,
+        ...categoryOptions.map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`)
+      ].join("");
+
+      document.getElementById("useConfidenceFilter").innerHTML = [
+        `<option value="All">All</option>`,
+        ...confidenceOptions.map((item) => `<option value="${escapeHtml(item)}">${escapeHtml(item)}</option>`)
+      ].join("");
+    }
+
+    function filteredTableUses() {
+      const search = document.getElementById("useSearchInput").value.trim().toLowerCase();
+      const context = document.getElementById("useContractFilter").value;
+      const category = document.getElementById("useDomainFilter").value;
+      const confidence = document.getElementById("useConfidenceFilter").value;
+
+      return tableUses.filter((row) => {
+        const matchesSearch = !search || tableUseText(row).includes(search);
+        const matchesContext = context === "All" || row.context === context;
+        const matchesCategory = category === "All" || row.inferredCategory === category;
+        const matchesConfidence = confidence === "All" || row.confidence === confidence;
+        return matchesSearch && matchesContext && matchesCategory && matchesConfidence;
+      }).sort((a, b) => (
+        (a.context || "").localeCompare(b.context || "") ||
+        (a.inferredCategory || "").localeCompare(b.inferredCategory || "") ||
+        (a.tableName || "").localeCompare(b.tableName || "")
+      ));
+    }
+
+    function renderTableUseSummary(rows) {
+      const categoryCount = new Set(rows.map((row) => row.inferredCategory).filter(Boolean)).size;
+      const highConfidence = rows.filter((row) => row.confidence === "High").length;
+      const views = rows.filter((row) => row.tableType === "VIEW").length;
+      const documentedDomains = rows.filter((row) => row.documentedDomain).length;
+
+      document.getElementById("tableUseSummary").innerHTML = [
+        ["Tables shown", rows.length.toString(), "After current filters"],
+        ["High confidence", highConfidence.toString(), "Based on documented domain or strong column/view signals"],
+        ["Views", views.toString(), "Rows where view SQL can strengthen the inference"],
+        ["Use categories", categoryCount.toString(), `${documentedDomains} rows have a documented domain signal`]
+      ].map((item) => `
+        <div class="use-summary-item">
+          <span>${item[0]}</span>
+          <strong>${item[1]}</strong>
+          <small>${item[2]}</small>
+        </div>
+      `).join("");
+    }
+
+    function renderTableUses() {
+      const rows = filteredTableUses();
+      renderTableUseSummary(rows);
+      const body = document.getElementById("tableUseBody");
+      if (!rows.length) {
+        body.innerHTML = `<tr><td colspan="6"><div class="empty">No table-use rows match the current filters.</div></td></tr>`;
+        return;
+      }
+
+      body.innerHTML = rows.map((row) => `
+        <tr>
+          <td>
+            <strong>${escapeHtml(row.contractor || row.context)}</strong><br>
+            <span class="tag">${escapeHtml(row.context)}</span>
+          </td>
+          <td>
+            <a href="${escapeHtml(row.tableUrl)}"><strong>${escapeHtml(row.tableName)}</strong></a><br>
+            <span class="tag">${escapeHtml(row.fullName)}</span>
+          </td>
+          <td>
+            <span class="tag">${escapeHtml(row.tableType || "Unknown")}</span><br>
+            <span class="tag">${escapeHtml(row.columnCount)} columns</span>
+          </td>
+          <td>
+            <strong>${escapeHtml(row.inferredCategory)}</strong><br>
+            ${escapeHtml(row.inferredUse)}
+          </td>
+          <td><span class="tag ${confidenceClass(row.confidence)}">${escapeHtml(row.confidence)}</span></td>
+          <td>
+            <ul class="basis-list">
+              ${(row.evidenceBasis || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
+            </ul>
+          </td>
+        </tr>
+      `).join("");
+    }
+
+    function selectContractor(id) {
+      selectedId = id;
+      renderContractTable();
+      renderDetail();
+      renderRankChart();
+    }
+
+    function renderAll() {
+      renderMetrics();
+      renderFilters();
+      renderTableUseFilters();
+      renderCommonAnalysisCoverage();
+      renderRubric();
+      renderContractTable();
+      renderTableUses();
+      renderDetail();
+      renderRankChart();
+      renderHeatmap();
+      renderEvidence();
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderAll();
+      ["searchInput", "tierFilter", "domainFilter", "sortSelect"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", renderContractTable);
+        document.getElementById(id).addEventListener("change", renderContractTable);
+      });
+
+      ["useSearchInput", "useContractFilter", "useDomainFilter", "useConfidenceFilter"].forEach((id) => {
+        document.getElementById(id).addEventListener("input", renderTableUses);
+        document.getElementById(id).addEventListener("change", renderTableUses);
+      });
+
+      document.querySelectorAll("[data-chart-mode]").forEach((button) => {
+        button.addEventListener("click", () => {
+          chartMode = button.dataset.chartMode;
+          document.querySelectorAll("[data-chart-mode]").forEach((item) => item.classList.toggle("is-active", item === button));
+          renderRankChart();
+        });
+      });
+
+      document.getElementById("printButton").addEventListener("click", () => window.print());
+    });
+  </script>
+</body>
+</html>

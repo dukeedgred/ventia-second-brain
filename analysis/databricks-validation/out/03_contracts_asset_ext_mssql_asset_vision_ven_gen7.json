@@ -1,0 +1,98 @@
+{
+  "name": "03_contracts_asset_ext_mssql_asset_vision_ven_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_gen7' AS catalog_name, 'asset' AS table_name, Contract, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_gen7`.dbo.asset\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY Contract\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "Contract",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 7
+      }
+    ],
+    "total_row_count": 7,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 7,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "Toowoomba Second Range Crossing",
+        "60854"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "RAMC - Gen 2 - 2019-2024",
+        "20092"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "Brisbane Airport",
+        "7328"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "Demo Contract, RAMC - Gen 2 - 2019-2024",
+        "6807"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "Port of Brisbane",
+        "1256"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "RAMC - Gen 2 - North",
+        "196"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "asset",
+        "Demo Contract",
+        "11"
+      ]
+    ]
+  }
+}

@@ -6,7 +6,7 @@ contract-schema: transport_sht
 table-name: utbl_tmp_tvs07_nb
 full-name: transport_dev.transport_sht.utbl_tmp_tvs07_nb
 date-created: 2026-06-05
-date-updated: 2026-06-05
+date-updated: 2026-06-09
 tags: [transport, data-table, databricks, transport-sht, temporary-staging]
 ---
 
@@ -23,13 +23,12 @@ tags: [transport, data-table, databricks, transport-sht, temporary-staging]
 | Contract/schema | `transport_sht` |
 | Table type | MANAGED |
 | Column count | 1 |
-| Last documented | 2026-06-05 |
+| Last documented | 2026-06-09 |
 
 ## Context
 
 | Field | Value |
 |---|---|
-| Business purpose | This table contains a temporary dataset created via the file upload interface, with a single string column named 'value'. It appears to serve as a staging or intermediate storage for data before further processing or transformation. Use cases include temporarily holding data imported from external sources for validation, cleansing, or loading into more structured tables. |
 | Data domain | temporary staging |
 
 ## Columns

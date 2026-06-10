@@ -1,0 +1,14 @@
+{
+  "name": "11_module_form_terms_ext_mssql_assetvisionreporting_av_ven_vicroads",
+  "statement": "SELECT 'ext_mssql_assetvisionreporting_av_ven_vicroads' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_assetvisionreporting_av_ven_vicroads`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_assetvisionreporting_av_ven_vicroads' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_assetvisionreporting_av_ven_vicroads`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nUser does not have USE CATALOG on Catalog 'ext_mssql_assetvisionreporting_av_ven_vicroads'. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

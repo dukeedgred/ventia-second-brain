@@ -1,0 +1,1256 @@
+{
+  "name": "11_module_form_terms_ext_mssql_asset_vision_vsm_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_vsm_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vsm_gen7`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vsm_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vsm_gen7`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "source_table",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "matched_value",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 200
+      }
+    ],
+    "total_row_count": 200,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 200,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "Client Details|SPARKS ID",
+        "24655"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "Client Details|Details",
+        "24655"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "Client Details|Environmental Suitability",
+        "24655"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|SPARKS Reference",
+        "21257"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|Description",
+        "21257"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|FOLLOW UP ACTIONS",
+        "21257"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (2)|Description",
+        "21256"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (2)|SPARKS Reference",
+        "21256"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (3)|SPARKS Reference",
+        "21255"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (3)|Description",
+        "21255"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Notes",
+        "21253"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|SIGN OFF",
+        "21252"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "21252"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Signature",
+        "21251"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Print Name",
+        "21243"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Date",
+        "21240"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (4)|SPARKS Reference",
+        "20904"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (5)|SPARKS Reference",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (6)|SPARKS Reference",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (5)|Description",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (7)|Description",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (6)|Description",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (4)|Description",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (8)|Description",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (7)|SPARKS Reference",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (8)|SPARKS Reference",
+        "20903"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (10)|Description",
+        "20902"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (10)|SPARKS Reference",
+        "20902"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (9)|SPARKS Reference",
+        "20902"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (9)|Description",
+        "20902"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|1.\tRecord asset condition and other details identified in Part 1",
+        "20654"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|2.\tRecord all identified faults in SPARKS",
+        "20654"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1\tDOCUMENTATION",
+        "20586"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|1.\tPhotograph a defects flagged for follow up and attached to the relevant SPARKS fault.",
+        "16140"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.1\tCheck inventory in SPARKS, ensure it reflects current configuration.  Update as required.",
+        "11877"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.2\tCheck for ingress of water and ensure all seals are in place and in good condition, repair/replace as required.",
+        "11421"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|8\tGENERAL ISSUES",
+        "7712"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.\tCABINET",
+        "6513"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.2\tCheck that Asset Drawings are present, undamaged, legible and correct. Prepare Red line mark up as required.",
+        "5865"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2\tCABINET",
+        "5207"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.2\tConfirm Solar panel is pointing North, or best direction for available sunlight exposure.",
+        "5175"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5\tSOLAR PANEL",
+        "5175"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4\tBATTERY",
+        "5175"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.1\tCheck and clean solar panel if required.",
+        "5175"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3\tBATTERY",
+        "5074"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.5\tEnsure all door latches are in place, and all locks operate freely, maintain and lubricate as required.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.1\tCheck for rodent or insect infestation and remediate if necessary.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.7\tCheck condition of decals comply with specification, replace if needed.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.4\tEnsure interior is clean, undamaged and secure. Maintain and restore (clean) if required.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.3\tCheck cabinet(s) for any physical damage and corrosion. Maintain, restore.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.6\tCheck status of excess vegetation near asset, prune/remove or complete Part 2 as required.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.1\tUpon arrival contact TOC and advise your presence on site and expected duration. Advise TOC when you are departing site.",
+        "4523"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.2\tConfirm Solar panel is pointing North, or best direction for available sunlight exposure.",
+        "4471"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.1\tCheck and clean solar panel if required.",
+        "4471"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.3\tEnsure interior is clean, undamaged and secure. Repair and/or clean as required.",
+        "4336"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5\tTESTING, CONNECTION & OPERATION",
+        "4333"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.1\tCheck for rodent or insect infestation, Record in Part 2 if required.",
+        "4198"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.16\tEarth all spare ring main and pole cables (if required) (See Note 5)",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.11\tCheck the physical condition of assemblies, terminations and internal wiring for copper exposure and loose connections. Maintain and restore if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.18\tMark up Asset drawing if the controller type, model, top hats etc. are not shown on the asset drawing. Complete Part 2 if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.14\tConfirm surge diverter (if exists), ensure it is operational. Maintain and restore if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.8\tCheck RCD’s and GPO’s condition and their operation including testing the RCD. Maintain and restore if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.13\tEnsure there is no corrosion present on internal components; maintain and restore. Complete Part 2 if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.17\tAre there sufficient spare cores for AGD installation? Complete Part 2 if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.9\tCheck earthing system and earth bar condition, maintain and restore if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.15\tCheck and ensure Modem Phone line is segregated from the LV cables. Complete Part 2 if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.10\tClean and wash down exterior of cabinet, including removal of 3rd party stickers and graffiti. Complete Part 2 and enter any graffiti faults into SPARKS that require >10% cabinet repainting.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.12\tCheck that the internal components are correctly aligned and securely connected. Maintain and restore if required.",
+        "4174"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.6\tCheck if all posts and pole numbers are present and undamaged, replace if needed.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.5\tCheck pit lid is undamaged and plugs fitted, maintain and restore if needed.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.2\tInspect and report any vehicle damage to poles or mast arms.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.7\tCheck all cable terminations are secure, terminated safely and free form damage.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.13\tCheck integrity of earthing system as per AS3000 (check bonding on poles). Maintain and restore to achieve compliance.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.9\tVisually check laminated cable charts, cable labelling in termination boxes and replace if needed.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.10\tCheck pit interior is clean, dry and undamaged. Maintain and restore if required. Complete Part 2 if there are signs of any drainage issues. (See note 2)",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.9\tCheck conduits for twisting or damage – maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.2\tEnsure battery terminals and casings are clean and free of salt growth or corrosion and that battery casings are not cracked or leaking. Replace batteries if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.1\tVisually check posts and poles for rust and cracks checking the base of the posts and pole.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.5\tVisually check that the signals are not obscured by foliage and any other furniture I.e. Signs, light poles etc.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.5\tCheck for 3rd party stickers remove if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5\tLOOPS",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.10\tInspect all paintwork and touch up.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.4\tCheck and Record Battery Voltage upon arrival.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.3\tCheck and ensure that all labelling of circuits and devices is correct and update as required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3\tPOLES, MAST ARMS AND JOINT USE POLES",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.7\tEnsure termination boxes, seals and cable glands are in good condition and tight. Maintain and restore silica bags as required. (See note 4)",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.1\tClean all lanterns, pedestrian lanterns, no right turn arrows, target boards and visors (use water pressure spray bottle - water only)",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.8\tCheck condition of terminals, QS2/QS3 plugs, glands. Maintain, restore and seal if required (See note 4).",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.4\tCheck for any insect infestation.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.4\tCheck for cable route markers maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.11\tMaintain and restore the post top bags and brush down wiring and terminals (see note 6).",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.3\tCheck that Asset Drawings and wiring charts are present, undamaged, legible and correct. Prepare Red line mark up as required. Complete Part 2 if required (Notes 1).",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.4\tVisually check alignment of all signals, pedestrian lanterns, no right turn arrows and realign, maintain and restore where necessary.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.2\tCheck pit is level with ground surface and is structurally sound. Maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|8.1\tCheck the condition of all non-electrical assets including kerbing, signs, road markings etc and report to the Compliance Manager if there are any issues.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.2\tCheck audio operation and arrow direction, remediate and restore any fault found.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.\tPITS",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6\tPEDESTRIAN PUSH BUTTONS",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.3\tEnsure that all mounting brackets are secure and free from damage.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.1\tVerify the operation of each push button and visually verify pedestrian signal operation. Maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.11\tCheck Pit and Conduit is not damaged.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.6\tVisually check target board condition and maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.3\tCheck if concrete surround is not cracked or damaged, maintain and restore, if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.3\tVisually check condition of all pole mounted equipment. Maintain and restore.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.6\tCheck pit gasket is present and undamaged, maintain and restore if needed.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.1\tVisually check loops in the roadway for sealant failure, cracks or potholes affecting the loops. Complete Part 2 if required and raise a loop fault in SPARKS.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.12\tCheck Main Earth connection and earth bar condition. Maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.1\tEnsure all battery terminals are properly secure. Maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.8\tVisually check earthing of each post/pole is correctly wired and integrity is intact. Maintain and restore if required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.7\tConfirm all Lantern outer conduit are pushed inside finial cap, if not, maintain and restore as required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.12\tConfirm loom under finial cap has not sagged. Maintain and restore. Complete Part 2.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.2\tCheck inventory in SPARKS, ensure it reflects current configuration.  Update as required.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7\tSIGNAL LANTERNS",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.1\tCheck for rodent or insect infestation and treat if necessary.",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.2\tVisually check operation of all signal lanterns (LED light source, etc.). Maintain and restore any faults found",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.2\tCheck loop joints for any signs of damage or deterioration. Replace and terminate if necessary (see Note 3).",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.3\tCheck push button decals for location, legibility, damage. Replace if required",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9\tUPS (SPECIFIC ITEMS)",
+        "4172"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.8\tCheck operation of UPS Bypass Switch. Maintain and restore. Complete Part 2.",
+        "4171"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.5\tCheck and Record Battery Voltage when operating on battery power immediately after switching to battery power.",
+        "4171"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.6\tCheck and Record Battery Voltage after running for 20 minutes on battery power.",
+        "4171"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.9\tMeasure impedance for each battery and replace if any measure above 7 milliohms.",
+        "4171"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|9.7\tCheck if UPS Operates on generator power successfully",
+        "4171"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|2.\tPits are to be cleaned on a five yearly basis according to the following schedule;  Financial Year 18/19 – all sites ending with 4 and 9 Financial Year 19/20 – all sites ending with 0 and 5   Financial Year 20/21 – all sites ending with 1 and 6  Financial Year 21/22 – all sites ending with 2 and 7  Financial Year 22/23 – all sites ending with 3 and 8",
+        "4169"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|6.\tBags to be replaced every other year according to the following schedule;  Financial Year 18/19 – all sites ending with 1, 3, 5, 7 and 9 Financial Year 19/20 – all sites ending with 0, 2, 4, 6 and 8  Financial Year 20/21 – all sites ending with 1, 3, 5, 7 and 9 Financial Year 21/22 – all sites ending with 0, 2, 4, 6 and 8 Financial Year 22/23 – all sites ending with 1, 3, 5, 7 and 9",
+        "4169"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|5.\tEarth all spare ring main cables and pole cables.",
+        "4169"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|3.\tIf loop demonstrates evidence of damage or poor performance test the insulation resistance. Raise a loop fault for measured values less than 1MegOhm.",
+        "4169"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|4.\tNote any broken cable glands, poor condition termination boxes, and short as required. Short cables: create a follow up action task with any cables preventing the termination box from being lifted out of the pit highlighted.",
+        "4169"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.1\tEnsure all battery clamps are properly secure.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.8\tEnsure sign communicates fully with STREAMS.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.6\tAssess the battery condition and report on replacement requirement. Complete Part 2.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6\tVISUAL DISPLAY UNIT(VDU) AND OPERATION",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.6\tIf sign descriptions and/or settings are changed, notify the compliance manager for escalation.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.1\tCheck all pits for damage including lids, gaskets and surrounds.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.8\tCheck nuts and tabs are secure and pole is stable and undamaged.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.5\tEnsure all cable route markers are present.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.6\tCheck for excess vegetation near sign, prune/remove or raise fault in SPARKS if follow up work required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.16\tEnsure all circuit boards are tightly in place and all clasps/screws are firmly fastened.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.9\tEnsure termination boxes, seals and cable glands are in good condition and tight. condition of Cabinet and pole are undamaged.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.3\tCheck for build-up of sand, dirt, debris etc and clean out if present.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.3\tCheck for rodent or insect infestation, raise fault in SPARKS if follow up work required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2\tSTATIC SIGN",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.4\tEnsure all pit terminations are free from damage and are not degraded.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.14\tEnsure all external labels are in place and free from damage, replace if necessary.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.2\tEnsure the times shown on the static signs correspond to the programmed ESLS times.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.10\tCheck that antenna, battery terminal, power and data connections within sign are securely connected.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.17\tEnsure there is no corrosion present on internal components; raise fault in SPARKS if follow up work required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.1\tCheck all static signs are attached securely and are correct as per the drawing.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|8.1\tIdentify any assets on site that have access issues requiring remediation (Note 2).",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.13\tClean and wash down exterior of enclosure including removal of 3rd party stickers and removal of graffiti raise fault in SPARKS if follow up work required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.4\tMeasure impedance of batteries and record values.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7.2\tCheck for vermin infestation and remediate.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3\tENCLOSURES, SWITCHBOARDS (SWB) AND POLES",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.5\tCheck for nearby vegetation likely to cause shading and clear if necessary.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.2\tCheck that all cable terminations for sheath damage and are terminated safely. Re-terminate if necessary.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.2\tCheck that Asset Drawings are present, correct, undamaged and legible. Prepare Red line mark up as required. Complete Part 2 if required (see Note 1).",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.3\tInterrogate signs, check that settings, calendars, clock & time zones are correct for sign/site and that control software is connecting to and interrogating correct sign.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.15\tEnsure interior is clean, undamaged and secure. Repair if required",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.4\tCheck if the Solar Panel requires Bird guard/spike/deterrent. Maintain and restore.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|5.3\tIf excessive battery drainage is occurring due to shaded location, notify raise fault in SPARKS if follow up work required. Complete Part 2.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.5\tEnsure all door latches are in place, and all locks operate freely, lubricate with graphite grease/repair as required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.5\tObtain sign status. Verify shown faults if any. Maintain and Restore sign’s operation, if necessary.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.11\tCheck that cables are not being pinched, crushed or damaged when sign is fully closed.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.3\tUpdate battery statistic on each battery",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.2\tCheck that correct speed and annulus flashing sequence is being displayed.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.4\tCheck for ingress of water and ensure all seals are in place and in good condition, repair/replace as required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.7\tEstablish remote connection, data retrieval and test display operation of all signs before leaving site.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.5\tReplace any battery with impedance outside of battery limits.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.9\tCheck if the sign is maintained as per Manufacturer’s recommended procedures. Complete Part 2.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.1\tCheck display; ensure all pixels are operational within accepted parameters and are similar brightness through the PHCS.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|7\tPITS",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.4\tVerify master/slave connection between paired signs.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.7\tClean light sensor",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.12\tInspect all paintwork and ensure any defects are ‘touched up’ or raise fault in SPARKS if follow up work required.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.1\tCheck if asset is electrically safe and compliant with AS3000 (SWB sites only)",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.2\tEnsure battery terminals and casings are clean, secure and free of salt growth or corrosion and that battery casings are not cracked or leaking. Replace batteries if leaking or damaged.",
+        "3540"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4\tSOLAR PANEL",
+        "3303"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|2.\tCheck that TOC have full control of the camera before leaving site.",
+        "2884"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6.4.\tCheck pit lid is undamaged and plugs fitted, replace if needed.",
+        "2710"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|6\tPITS",
+        "2710"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.4\tEnsure all door latches are in place, and all locks and hinges operate freely, lubricate/repair as required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.6\tCheck external labelling of the cabinet, replace if needed.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.1\tEnsure all battery terminals are properly secure.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.2\tEnsure battery terminals and casings are clean and free of salt growth or corrosion and that battery casings are not cracked or leaking. Replace batteries if required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.4\tMeasure and record battery impedance, replace battery if required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.3\tEnsure all batteries are secured with either a battery clamp or cable ties.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.1\tCheck for rodent or insect infestation, raise follow up action in SPARKS if treatment is required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.8\tCheck assemblies, terminations and wiring for copper exposure and loose connections.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.5\tCheck for excess vegetation near unit, prune/remove or report as required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.9\tCheck that the internal components are correctly aligned and securely connected.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.7\tClean and wash down exterior of asset including removal of 3rd party stickers, check for graffiti and record in part 2.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.3\tCheck panel for shading due to flora, raise follow-up action for pruning if required.",
+        "2700"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.4.\tEnsure all door latches and stays are in place, and all locks, hinges and door hold open mechanisms operate freely. Maintain and restore (Lubricate) as required.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4\tWASHER PUMP SYSTEM",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.17.\tCheck cables are correctly labelled at GPO. Affix labels if required.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.13.\tCheck all screws are present and tight on access panel, lubricate/repair as required.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|4.2.\tCheck and fill reservoir.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.11.\tCheck condition of Cabinet and pole are undamaged.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3\tCAMERA",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.14.\tCheck that all components are correctly aligned and securely connected.",
+        "2562"
+      ]
+    ]
+  }
+}

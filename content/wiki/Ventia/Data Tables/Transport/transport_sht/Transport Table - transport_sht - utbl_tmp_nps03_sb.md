@@ -6,7 +6,7 @@ contract-schema: transport_sht
 table-name: utbl_tmp_nps03_sb
 full-name: transport_dev.transport_sht.utbl_tmp_nps03_sb
 date-created: 2026-06-05
-date-updated: 2026-06-05
+date-updated: 2026-06-09
 tags: [transport, data-table, databricks, transport-sht, temporary-staging]
 ---
 
@@ -23,13 +23,12 @@ tags: [transport, data-table, databricks, transport-sht, temporary-staging]
 | Contract/schema | `transport_sht` |
 | Table type | MANAGED |
 | Column count | 1 |
-| Last documented | 2026-06-05 |
+| Last documented | 2026-06-09 |
 
 ## Context
 
 | Field | Value |
 |---|---|
-| Business purpose | This table contains a single column named 'value' and appears to be a temporary staging table created via the file upload interface. The data likely represents preliminary or intermediate information related to transport, but the exact content and purpose are not detailed here. It may be useful for short-term data processing or data import tasks before moving data into more structured tables. |
 | Data domain | temporary staging |
 
 ## Columns

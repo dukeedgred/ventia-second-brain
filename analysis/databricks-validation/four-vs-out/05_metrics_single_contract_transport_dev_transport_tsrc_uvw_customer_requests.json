@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_customer_requests",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_customer_requests' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`deltautc` AS TIMESTAMP)), MAX(try_cast(`modifiedutc` AS TIMESTAMP)), MAX(try_cast(`completeddate` AS TIMESTAMP)), MAX(try_cast(`createddate` AS TIMESTAMP)), MAX(try_cast(`createduser` AS TIMESTAMP)), MAX(try_cast(`startpointname` AS TIMESTAMP)), MAX(try_cast(`startdistancepast` AS TIMESTAMP)), MAX(try_cast(`EventType-DateReceived_Text` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-DateEventOccured_text` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-ResponseDate_text` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate_text` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-AgreedRectDueDate_text` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-MediaReqRespDueDate_text` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-CloseOut/ResolutionDate_text` AS TIMESTAMP)), MAX(try_cast(`Event-Close_Out_Date/Time` AS TIMESTAMP)), MAX(try_cast(`Event-Date/Time_Acknowledged` AS TIMESTAMP)), MAX(try_cast(`Event-Date/Time_Received` AS TIMESTAMP)), MAX(try_cast(`Event-Date/Time_Resolved` AS TIMESTAMP)), MAX(try_cast(`Event-Date_Event_Occured` AS TIMESTAMP)), MAX(try_cast(`SchedulingDetails-DueDate` AS TIMESTAMP)), MAX(try_cast(`SchedulingDetails-EarliestStartDate` AS TIMESTAMP)), MAX(try_cast(`SchedulingDetails-ScheduledDate` AS TIMESTAMP)), MAX(try_cast(`EventType-DateReceived` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-DateEventOccured` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-ResponseDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-AgreedRectDueDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-MediaReqRespDueDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-CloseOut/ResolutionDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`deltautc` AS TIMESTAMP)), MIN(try_cast(`modifiedutc` AS TIMESTAMP)), MIN(try_cast(`completeddate` AS TIMESTAMP)), MIN(try_cast(`createddate` AS TIMESTAMP)), MIN(try_cast(`createduser` AS TIMESTAMP)), MIN(try_cast(`startpointname` AS TIMESTAMP)), MIN(try_cast(`startdistancepast` AS TIMESTAMP)), MIN(try_cast(`EventType-DateReceived_Text` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-DateEventOccured_text` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-ResponseDate_text` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate_text` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-AgreedRectDueDate_text` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-MediaReqRespDueDate_text` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-CloseOut/ResolutionDate_text` AS TIMESTAMP)), MIN(try_cast(`Event-Close_Out_Date/Time` AS TIMESTAMP)), MIN(try_cast(`Event-Date/Time_Acknowledged` AS TIMESTAMP)), MIN(try_cast(`Event-Date/Time_Received` AS TIMESTAMP)), MIN(try_cast(`Event-Date/Time_Resolved` AS TIMESTAMP)), MIN(try_cast(`Event-Date_Event_Occured` AS TIMESTAMP)), MIN(try_cast(`SchedulingDetails-DueDate` AS TIMESTAMP)), MIN(try_cast(`SchedulingDetails-EarliestStartDate` AS TIMESTAMP)), MIN(try_cast(`SchedulingDetails-ScheduledDate` AS TIMESTAMP)), MIN(try_cast(`EventType-DateReceived` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-DateEventOccured` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-ResponseDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-AgreedRectDueDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-MediaReqRespDueDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-CloseOut/ResolutionDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|EventType-DateReceived_Text|CustInfoEnqDetails-DateEventOccured_text|CustInfoEnqDetails-ResponseDate_text|CloseOutDetails-NoiseLevelAssessmentDate_text|CloseOutDetails-AgreedRectDueDate_text|CloseOutDetails-MediaReqRespDueDate_text|CloseOutDetails-CloseOut/ResolutionDate_text|Event-Close_Out_Date/Time|Event-Date/Time_Acknowledged|Event-Date/Time_Received|Event-Date/Time_Resolved|Event-Date_Event_Occured|SchedulingDetails-DueDate|SchedulingDetails-EarliestStartDate|SchedulingDetails-ScheduledDate|EventType-DateReceived|CustInfoEnqDetails-DateEventOccured|CustInfoEnqDetails-ResponseDate|CloseOutDetails-NoiseLevelAssessmentDate|CloseOutDetails-AgreedRectDueDate|CloseOutDetails-MediaReqRespDueDate|CloseOutDetails-CloseOut/ResolutionDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_customer_requests`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "uvw_customer_requests",
+        "VIEW",
+        "34",
+        "true",
+        "2025-01-28T21:51:19.23Z",
+        "1970-01-01T00:00:00Z",
+        "deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|EventType-DateReceived_Text|CustInfoEnqDetails-DateEventOccured_text|CustInfoEnqDetails-ResponseDate_text|CloseOutDetails-NoiseLevelAssessmentDate_text|CloseOutDetails-AgreedRectDueDate_text|CloseOutDetails-MediaReqRespDueDate_text|CloseOutDetails-CloseOut/ResolutionDate_text|Event-Close_Out_Date/Time|Event-Date/Time_Acknowledged|Event-Date/Time_Received|Event-Date/Time_Resolved|Event-Date_Event_Occured|SchedulingDetails-DueDate|SchedulingDetails-EarliestStartDate|SchedulingDetails-ScheduledDate|EventType-DateReceived|CustInfoEnqDetails-DateEventOccured|CustInfoEnqDetails-ResponseDate|CloseOutDetails-NoiseLevelAssessmentDate|CloseOutDetails-AgreedRectDueDate|CloseOutDetails-MediaReqRespDueDate|CloseOutDetails-CloseOut/ResolutionDate"
+      ]
+    ]
+  }
+}

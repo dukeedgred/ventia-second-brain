@@ -1,0 +1,4 @@
+interface:
+  display_name: "Update Table Wiki Docs"
+  short_description: "Document transport table schemas and view SQL"
+  default_prompt: "Use this skill when Ventia Transport table metadata, schemas, view SQL, contract/schema context, or business context should be documented in the wiki."

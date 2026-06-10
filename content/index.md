@@ -13,6 +13,7 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Ventia AI and Innovation Portfolio]] | overview | Portfolio of DAII AI and innovation initiatives including Investor Day showcases, VenIQ, AI Apprentice, safety trials, VenSpark, and SWIMS AI |
 | [[Databricks Walk-Through]] | source-summary | Source summary of Kale Skinner's walkthrough of Ventia Databricks, Transport data sources, platform patterns, access, and SMEs |
 | [[Ventia Databricks Platform]] | concept | Databricks-on-Azure platform architecture, ingestion patterns, metadata-driven pipelines, federated queries, Power BI consumption, and production promotion |
+| [[Databricks Source Systems]] | source-system-catalog | Supplied Databricks source-system inventory listing external catalogs, Asset Vision Transport contract mappings, and blank schema/comment gaps |
 | [[Transport Data Landscape]] | concept | Transport data landscape across SAP financials, Asset Vision operational data, contract schemas, GIS, safety/compliance, and source-standardisation gaps |
 | [[Asset Vision]] | entity | Transport work management and asset source system replicated into Azure SQL and queried through Databricks federated connections |
 | [[Transport Data and AI Working Group]] | source-summary | Source summary of the Transport SOW kickoff email and Evolve/RAMC transcript covering stakeholders, asset-defect data, tender innovation, and integration questions |
@@ -372,4 +373,9 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Transport Table - transport_wru - vw_job_export_final]] | data-table | Schema documentation for the `transport_dev.transport_wru.vw_job_export_final` view |
 | [[Transport Enterprise Current State Visuals]] | visual-summary | Interactive current-state assessment for Transport enterprise asset, job, defect, inspection, condition, and geospatial readiness, including the decommissioned all-contract jobs caveat |
 | [[Transport Contract Data Maturity Assessment]] | maturity-assessment | Detailed current-state maturity assessment for each Transport contract/schema and its enterprise data readiness |
+| [[Transport Contractor Data Maturity Report]] | visual-summary | Interactive HTML report comparing documented Transport contract/schema contexts by data maturity, analytics sophistication, evidence-backed strengths, risks, recommendations, and per-table inferred use |
 
+| [[Transport Source Tables - asset_vision_ven_rms_new]] | source-table-catalog | Source table catalog for `ext_mssql_asset_vision_ven_rms_new.dbo` Asset Vision source tables |
+| [[Transport Contract Tables - formitize_srapc]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.formitize_srapc` |
+| [[Transport Contract Tables - stg_enterprise_reporting]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.stg_enterprise_reporting` |
+| [[Transport Contract Tables - transport_vsm]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.transport_vsm` |

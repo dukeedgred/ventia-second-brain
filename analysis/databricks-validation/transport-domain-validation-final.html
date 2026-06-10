@@ -1,0 +1,735 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transport Data Asset Domain Validation</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #5c667a;
+      --line: #d7dce5;
+      --page: #f5f7fa;
+      --panel: #ffffff;
+      --blue: #1f5f99;
+      --green: #18705c;
+      --green-bg: #e8f5f0;
+      --red: #a33a34;
+      --red-bg: #fae9e7;
+      --amber: #8a5a00;
+      --amber-bg: #fff3d6;
+      --grey-bg: #eef1f5;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--page);
+      color: var(--ink);
+      font-family: "Segoe UI", Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    header {
+      background: #101827;
+      color: white;
+      padding: 34px 42px;
+      border-bottom: 5px solid var(--blue);
+    }
+
+    main {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 26px 24px 48px;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 30px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h2 {
+      font-size: 22px;
+      margin-bottom: 14px;
+    }
+
+    h3 {
+      font-size: 17px;
+      margin: 20px 0 8px;
+    }
+
+    h4 {
+      font-size: 15px;
+      margin: 16px 0 6px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    ul {
+      margin: 8px 0 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    a {
+      color: var(--blue);
+    }
+
+    .subtitle {
+      max-width: 920px;
+      margin-top: 10px;
+      color: #cbd5e1;
+      font-size: 16px;
+    }
+
+    .meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      color: #edf2f7;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+      margin-top: 20px;
+      box-shadow: 0 1px 2px rgba(16, 24, 39, 0.04);
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fbfcfe;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 14px;
+    }
+
+    .tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 24px;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 650;
+      white-space: nowrap;
+    }
+
+    .source-backed {
+      background: var(--green-bg);
+      color: var(--green);
+    }
+
+    .partial {
+      background: var(--amber-bg);
+      color: var(--amber);
+    }
+
+    .not-backed {
+      background: var(--red-bg);
+      color: var(--red);
+    }
+
+    .interview {
+      background: var(--grey-bg);
+      color: #394150;
+    }
+
+    .corrected-doc {
+      counter-reset: domain;
+    }
+
+    .domain {
+      border-top: 1px solid var(--line);
+      padding-top: 18px;
+      margin-top: 18px;
+    }
+
+    .domain:first-of-type {
+      border-top: 0;
+      padding-top: 0;
+    }
+
+    .domain h3::before {
+      counter-increment: domain;
+      content: counter(domain) ". ";
+      color: var(--blue);
+    }
+
+    .finding-row {
+      display: grid;
+      grid-template-columns: 190px 1fr;
+      gap: 12px;
+      align-items: start;
+      margin: 10px 0;
+    }
+
+    .label {
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 650;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    ins {
+      background: var(--green-bg);
+      color: #0f513f;
+      text-decoration: none;
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    del {
+      background: var(--red-bg);
+      color: #842029;
+      text-decoration: line-through;
+      padding: 0 3px;
+      border-radius: 3px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 12px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      border-bottom: 1px solid var(--line);
+      padding: 10px 8px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #f0f4f8;
+      color: #293346;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    code {
+      font-family: Consolas, "Courier New", monospace;
+      font-size: 13px;
+      background: #edf1f5;
+      border: 1px solid #d7dde6;
+      padding: 1px 5px;
+      border-radius: 4px;
+    }
+
+    .callout {
+      border-left: 4px solid var(--blue);
+      background: #eef6fc;
+      padding: 12px 14px;
+      margin-top: 12px;
+      border-radius: 0 6px 6px 0;
+    }
+
+    .warning {
+      border-left-color: var(--amber);
+      background: var(--amber-bg);
+    }
+
+    .danger {
+      border-left-color: var(--red);
+      background: var(--red-bg);
+    }
+
+    @media (max-width: 900px) {
+      header {
+        padding: 28px 24px;
+      }
+
+      .grid-3,
+      .grid-2,
+      .finding-row {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Transport Data Asset Domain Validation</h1>
+    <p class="subtitle">
+      Corrected version of the lead's Transport data asset findings, checked against the current table documentation and live Databricks source-table evidence.
+    </p>
+    <div class="meta">
+      <span class="pill">Date: 09/06/2026</span>
+      <span class="pill">Scope: Transport source tables</span>
+      <span class="pill">Databricks host: adb-3391846726873609.9.azuredatabricks.net</span>
+      <span class="pill">No transport table used</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="panel">
+      <h2>Executive Verdict</h2>
+      <div class="grid grid-3">
+        <div class="card">
+          <strong>Overall assessment</strong>
+          The domain model is directionally right. The major correction is evidence strength: some items are source-backed, some are interview-led only, and some are not validated by the source tables.
+        </div>
+        <div class="card">
+          <strong>Keep</strong>
+          Contract as the partitioning key; asset hierarchy; inspections; defects/hazards; jobs/work orders; KPIs; tunnel event handling; capital works as a distinct domain.
+        </div>
+        <div class="card">
+          <strong>Challenge</strong>
+          RetinaVision, AID camera flow, dashcam frequency, GeoJSON handover, fleet telematics and the exact SLA calculation engine are not proven by the source-table validation.
+        </div>
+      </div>
+      <div class="callout warning">
+        Do not make the document sound more certain than the evidence allows. Where a claim comes from interviews, label it as interview-backed. Where the table evidence is absent or weak, do not treat it as confirmed.
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Evidence Basis</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Evidence source</th>
+            <th>Used for validation</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Current table documentation</td>
+            <td>Existing documented Transport Asset Vision source tables and view names.</td>
+            <td>Used to check whether her domain concepts align with documented source entities.</td>
+          </tr>
+          <tr>
+            <td>Live Databricks source tables</td>
+            <td>
+              Asset Vision source catalogs including <code>ext_mssql_asset_vision_ven_gen7</code>,
+              <code>ext_mssql_asset_vision_ven_rms</code>, <code>ext_mssql_asset_vision_ven_vicroads</code>,
+              <code>ext_mssql_asset_vision_vns_gen7</code>, <code>ext_mssql_asset_vision_vnz_gen7</code>,
+              and <code>ext_mssql_asset_vision_vsm_gen7</code>.
+            </td>
+            <td>
+              The live run succeeded after VPN reconnect. Raw outputs are in
+              <a href="./out/00_run_summary.json">out/00_run_summary.json</a> and
+              <a href="./out/13_precise_source_terms.json">out/13_precise_source_terms.json</a>.
+            </td>
+          </tr>
+          <tr>
+            <td>Interview findings</td>
+            <td>Used only where the source tables do not prove the statement.</td>
+            <td>Examples: commercial model effects, exact camera capture intervals, monthly Word report process, and some named systems.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel corrected-doc">
+      <h2>Corrected Lead Document</h2>
+
+      <article class="domain">
+        <h3>Contract &amp; Network Context</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Contract remains the spine of the model. Source-backed examples include <ins>WRU, SRAP-C, TSRC, RAMC Gen2, Brisbane Airport, Port of Brisbane, SHT/WHT, Auckland West Transport and VentureSmart</ins>.
+            Treat <del>NEL, City Harbour and VRMC as source-backed examples</del> unless separate evidence is provided; they were not validated in the live source-table run used here.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep business unit, client, contract type and commercial model as useful business context, but mark <del>commercial model as a source-table-proven driver of item-level data</del> as interview-backed unless contract reference data proves it.
+            Replace the generic lifecycle wording with: <ins>operational lifecycle and asset status/stage vary by contract and are partly visible in source data, but Bid -&gt; Mobilise -&gt; Plan -&gt; Inspect -&gt; Renew -&gt; Report is a business process frame, not a proven source-table structure.</ins>
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag source-backed">Source-backed</span>
+            Contract and spatial context are supported. Network/route/segment/linear referencing should be expressed more concretely as <ins>asset WKT, spatial information, parent asset, route-like asset hierarchy and chainage where populated</ins>.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Asset Register &amp; Hierarchy</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Asset register and hierarchy are strongly supported by source tables such as <code>asset</code>, <code>vassetlocation</code>, <code>assetclassification</code>, <code>assetattribute</code> and <code>assetaudit</code>.
+            Use <ins>parent asset / child asset hierarchy</ins> rather than assuming every hierarchy starts with <del>Road or Tunnel</del>.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep pavements, drainage, guardrails, signage, bridges, culverts, lighting and tunnel equipment as examples, but make the list contract-scoped.
+            <del>Ownership as ours vs disputed vs client's</del> was not validated in the source run. Source/provenance is partly supported by handover, practical completion and as-built fields, but <del>AI-detected as an asset provenance type</del> is too strong; AI Defect ID is supported for defects, not necessarily for asset origin.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag source-backed">Source-backed</span>
+            Asset hierarchy is real. Condition is real but patchy: for example, WRU/VicRoads has substantial condition population while SRAP-C and some other contracts have very little. Keep <ins>condition definitions contract-scoped</ins>; do not model a single global condition scale without mapping.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Inspections</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Inspections are a separate domain from defects and jobs. This is confirmed by <code>inspection</code>, <code>vinspection</code>, <code>inspectionrelationship</code> and <code>inspectionstatus</code>.
+            Inspection coverage includes scheduled dates, completed dates, asset links, job links, capital work links and WKT, but completeness varies by contract.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep scheduled inspection runs and inspection records. Change the method examples to: <ins>manual / field inspection / Asset Vision-style inspection forms / tunnel maintenance or event forms where present</ins>.
+            Do not assert <del>RetinaVision</del>, <del>AID camera inspections</del> or <del>dash cam capture every 5-10m</del> as source-backed. Those remain interview-led or unvalidated by the source tables.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag source-backed">Source-backed</span>
+            Inspection/job/asset relationships are supported, but the inspection method taxonomy is not cleanly standardised in the source run.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Defects &amp; Hazards</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Defects and hazards are best modelled together as work-generating events, with severity where populated. In <code>vjob</code>, <code>HazardDefectCode</code> is the reliable common field; <code>HazardCode</code> is materially patchier and absent in some catalogues.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep asset link, defect/hazard type, raised date, location and photo evidence. Change <del>Auto-calculated SLA / response time based on severity + asset category</del> to <ins>SLA due date and compliance outcome fields are present; the calculation rules are likely contract-scoped and were not proven from the source tables alone.</ins>
+            Raised-from categories such as inspection, public report and incidental observation should be retained only where source forms or interviews support them.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag source-backed">Source-backed</span>
+            Defect/hazard jobs, due dates, compliance, completion, made-safe flags, WKT and photo evidence are supported.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Jobs / Work Orders</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Jobs/work orders are strongly supported by <code>job</code>, <code>vjob</code>, <code>jobasset</code>, <code>jobcomment</code>, <code>plannedresourceitem</code>, <code>resource</code>, <code>timesheetitem</code>, <code>workflowstatus</code> and photo tables.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep triggered-by-defect/hazard and scheduled maintenance as practical sources. Treat <del>capital works proposal directly triggers work order</del> as not proven universally; the source supports links between inspection, job and capital work in some contracts, but not a single global trigger rule.
+            Keep routine maintenance versus capital works as a real distinction, with the business rule "routine can't fix -&gt; capital works" labelled as interview-backed.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag source-backed">Source-backed</span>
+            Job response, SLA due/compliance, completion and evidence are among the strongest validated areas.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Sensing &amp; Telemetry</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            This section needs the most restraint. Tunnel camera, CCTV, fan, alarm, OMCS-related maintenance and event terms appear in source forms. AI Defect ID is strongly present in SRAP-C source data. That does not prove every named sensing feed or the full sensor-to-event-to-work-order flow.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Replace <del>Asset Vision dash cam every 5-10m, RetinaVision every 3m, AID cameras, OMCS alarms, GPS/fleet telematics, vehicle locations</del> with:
+            <ins>Source forms contain camera/CCTV, GPS-like location fields, tunnel equipment alarm/check fields, OMCS references, AI Defect ID and Motorway Event Log terms. RetinaVision, AID camera incident detection, dashcam capture interval and fleet telematics are not validated by the source-table run.</ins>
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag partial">Partially source-backed</span>
+            Good support for tunnel equipment and event-form language. Weak support for full telemetry architecture.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>KPIs &amp; Reporting</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            KPIs must be contract-scoped. The source data supports KPI measurement inputs such as inspections scheduled/completed, jobs due/compliant/completed, asset condition where populated, workflow status and capital works fields.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Keep contract-scoped KPI definitions. Change <del>KPI definitions are fully represented in a source table</del> to <ins>KPI measurement fields are present, but the full definition/rule layer may sit outside the source tables or in contract-specific forms/reference data.</ins>
+            Keep monthly 50+ page Word report outputs only as interview/process evidence, not source-table evidence.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag partial">Partially source-backed</span>
+            Measurement inputs are validated. Complete KPI rule definitions are not proven as one global schema.
+          </div>
+        </div>
+      </article>
+
+      <article class="domain">
+        <h3>Incidents</h3>
+        <div class="finding-row">
+          <div class="label">Corrected wording</div>
+          <div>
+            Tunnel events/incidents should remain separate from ordinary defects/work orders in the conceptual model, but the source-table validation did not find a clean universal <code>incident</code> table. It found Motorway Event Log, OMCS-related fields and tunnel event/maintenance form evidence.
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">What changes</div>
+          <div>
+            Change <del>Incidents are captured in OMCS incident management and worth keeping separate from work orders</del> to <ins>Tunnel event/incident handling appears in source forms and OMCS-related language; model incidents separately, but do not claim the Asset Vision source data contains the full OMCS incident management record unless that table/feed is separately provided.</ins>
+          </div>
+        </div>
+        <div class="finding-row">
+          <div class="label">Evidence level</div>
+          <div>
+            <span class="tag partial">Partially source-backed</span>
+            The separation is analytically sensible and interview-backed. Source evidence is form/event-log based, not a complete incident platform extract.
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <section class="panel">
+      <h2>Additional Domains to Add</h2>
+      <div class="grid grid-2">
+        <div class="card">
+          <h3>Capital Works / Forward Programme</h3>
+          <p>
+            Add this as a first-class domain, not just a subtype of jobs. Source tables include <code>capitalwork</code>, <code>vcapitalwork</code>, <code>capitalworktask</code> and <code>vcapitalworktask</code>. Live coverage exists across the validated source catalogues.
+          </p>
+          <p><span class="tag source-backed">Source-backed</span></p>
+        </div>
+        <div class="card">
+          <h3>Contract-Specific Forms &amp; Extensions</h3>
+          <p>
+            Add this as a cross-cutting domain. The source layer is heavily form/module driven: <code>module</code>, <code>vmodule</code>, <code>custommoduleitem</code>, <code>formfield</code> and workflow/status tables carry contract-specific detail.
+          </p>
+          <p><span class="tag source-backed">Source-backed</span></p>
+        </div>
+        <div class="card">
+          <h3>Evidence / Media</h3>
+          <p>
+            Photo evidence is not just a minor attribute. The source photo coverage is large across job before/after/during, inspection, asset, capital work task and form-field contexts. This should be explicit in the model.
+          </p>
+          <p><span class="tag source-backed">Source-backed</span></p>
+        </div>
+        <div class="card">
+          <h3>Data Quality &amp; Provenance</h3>
+          <p>
+            Add a model concern for provenance, completeness and contract-specific field coverage. Condition, criticality, risk, WKT, chainage, scheduled dates and hazard fields vary materially by contract.
+          </p>
+          <p><span class="tag source-backed">Source-backed</span></p>
+        </div>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Change Register</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Type</th>
+            <th>Change</th>
+            <th>Reason</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="tag source-backed">Added</span></td>
+            <td>Capital Works / Forward Programme as a first-class domain.</td>
+            <td>Validated by live <code>capitalwork</code> and <code>vcapitalwork</code> source-table coverage.</td>
+          </tr>
+          <tr>
+            <td><span class="tag source-backed">Added</span></td>
+            <td>Contract-specific forms/extensions as a cross-cutting layer.</td>
+            <td>Source tables and form/module terms show much of the detail sits in contract-specific forms.</td>
+          </tr>
+          <tr>
+            <td><span class="tag source-backed">Added</span></td>
+            <td>Evidence/media as an explicit supporting domain.</td>
+            <td>Photo evidence has large source-table coverage across jobs, inspections, assets and capital work tasks.</td>
+          </tr>
+          <tr>
+            <td><span class="tag source-backed">Added</span></td>
+            <td>Data quality/provenance as a model concern.</td>
+            <td>Field completeness varies significantly by contract and source catalogue.</td>
+          </tr>
+          <tr>
+            <td><span class="tag not-backed">Removed / weakened</span></td>
+            <td>RetinaVision as validated source-table fact.</td>
+            <td>No useful RetinaVision/Retina evidence found in the precise source term validation.</td>
+          </tr>
+          <tr>
+            <td><span class="tag not-backed">Removed / weakened</span></td>
+            <td>AID camera incident detection as validated source-table fact.</td>
+            <td>Only one weak cleaned AID-related source result; not enough to confirm the flow.</td>
+          </tr>
+          <tr>
+            <td><span class="tag not-backed">Removed / weakened</span></td>
+            <td>Dashcam every 5-10m and RetinaVision every 3m.</td>
+            <td>Specific capture intervals are interview-led and not proven by the queried source tables.</td>
+          </tr>
+          <tr>
+            <td><span class="tag not-backed">Removed / weakened</span></td>
+            <td>GeoJSON handover as source-backed.</td>
+            <td>No useful GeoJSON evidence found in the source-table validation.</td>
+          </tr>
+          <tr>
+            <td><span class="tag partial">Reworded</span></td>
+            <td>OMCS, alarms and tunnel incidents.</td>
+            <td>OMCS and alarm terms appear in tunnel forms, but the full OMCS platform/feed is not proven by Asset Vision source tables alone.</td>
+          </tr>
+          <tr>
+            <td><span class="tag partial">Reworded</span></td>
+            <td>Auto-calculated SLA rules.</td>
+            <td>Due date and compliance fields are source-backed; the calculation formula/rule engine is not.</td>
+          </tr>
+          <tr>
+            <td><span class="tag partial">Reworded</span></td>
+            <td>Monthly reports and commercial model.</td>
+            <td>Useful business context, but not validated from the source tables in this run.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Live Databricks Findings Used</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Finding</th>
+            <th>Evidence from validation run</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Source catalogues have the expected Asset Vision core tables.</td>
+            <td>Validated catalogues contain tables/views such as <code>asset</code>, <code>inspection</code>, <code>job</code>, <code>capitalwork</code>, <code>photo</code>, <code>module</code>, <code>formfield</code>, <code>workflowstatus</code>, <code>vjob</code>, <code>vinspection</code> and <code>vcapitalwork</code>.</td>
+          </tr>
+          <tr>
+            <td>Contract is a real partitioning key.</td>
+            <td>Live counts show large contract populations: WRU, SRAP-C, TSRC, RAMC Gen2, Brisbane Airport, Port of Brisbane, SHT/WHT, Auckland West Transport and VentureSmart among others.</td>
+          </tr>
+          <tr>
+            <td>Jobs/defects/hazards are strongly supported.</td>
+            <td><code>vjob</code> contains contract, asset ID, hazard/defect code, due date, compliance, completion, made-safe and WKT fields with large row counts across multiple catalogues.</td>
+          </tr>
+          <tr>
+            <td>Inspections are separate from jobs.</td>
+            <td><code>vinspection</code> has scheduled/completed dates, asset links, job links, capital-work links and WKT, but field completeness differs by contract.</td>
+          </tr>
+          <tr>
+            <td>Capital works is real.</td>
+            <td><code>capitalwork</code> and <code>vcapitalwork</code> have rows across validated source catalogues, with asset links, planned start, actual finish and spatial fields where populated.</td>
+          </tr>
+          <tr>
+            <td>Evidence/photos are significant.</td>
+            <td>Photo tables include large volumes for Job Before, Job After, Job During, Inspection, Asset, CapitalWorkTask and form-field contexts.</td>
+          </tr>
+          <tr>
+            <td>OMCS/dTIMS/handover/as-built are partially validated.</td>
+            <td>Precise source term query found OMCS-related tunnel form fields, dTIMS treatment/model fields, handover/practical completion fields and as-built mismatch references.</td>
+          </tr>
+          <tr>
+            <td>RetinaVision, AID camera flow, GeoJSON and telematics are not validated enough.</td>
+            <td>Precise source term query found no useful RetinaVision or GeoJSON evidence, only weak AID evidence, and sparse telemetry/telematics evidence.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section class="panel">
+      <h2>Recommended Final Wording</h2>
+      <div class="callout">
+        The Transport data asset should be modelled around a contract-scoped Asset Vision operating core: contract/network context, asset register and hierarchy, inspections, defects/hazards, jobs/work orders, capital works, evidence/media, KPIs/reporting and tunnel event handling. The source tables strongly support the asset, inspection, job, hazard/defect, SLA outcome, photo and capital works domains. Sensing and telemetry should be written carefully: OMCS, camera/CCTV, alarms, fans and AI Defect ID appear in source forms, but RetinaVision, AID-camera incident flow, dashcam capture intervals, GeoJSON handover and fleet telematics were not proven by the source-table validation and should remain interview-led until separate evidence is provided.
+      </div>
+    </section>
+  </main>
+</body>
+</html>

@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transport Data Asset Domains - Redline</title>
+  <style>
+    body {
+      max-width: 980px;
+      margin: 32px auto;
+      padding: 0 24px 48px;
+      color: #1f2937;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin: 0 0 24px;
+    }
+
+    h2 {
+      font-size: 19px;
+      margin: 24px 0 8px;
+    }
+
+    h3 {
+      font-size: 16px;
+      margin: 22px 0 8px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    ul {
+      margin: 8px 0 18px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    .changed {
+      color: #b42318;
+      font-weight: 600;
+    }
+
+    .removed {
+      color: #b42318;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .note {
+      margin: 0 0 22px;
+      padding: 10px 12px;
+      border-left: 4px solid #b42318;
+      background: #fff1f0;
+      color: #7a271a;
+    }
+  </style>
+</head>
+<body>
+  <h1>High-level domains for the Transport data asset</h1>
+  <p class="note">Red text shows what changed or what needs to be challenged based on table documentation and Databricks source-table validation.</p>
+
+  <h2>1. Contract &amp; Network context (the spine everything hangs off)</h2>
+  <ul>
+    <li>
+      Contract (<span class="changed">WRU, SRAP-C, TSRC, RAMC Gen2, Brisbane Airport, Port of Brisbane, SHT/WHT, VentureSmart, etc.</span>
+      <span class="removed">SRAPC, VRMC, NEL, City Harbour as source-validated examples</span>), business unit, client,
+      <span class="changed">operational lifecycle/status where present</span>
+      <span class="removed">lifecycle stage (Bid -> Mobilise -> Plan -> Inspect -> Renew -> Report) as a source-table structure</span>,
+      contract type (roads vs tunnel), commercial model
+      <span class="changed">(useful interview context, but not source-table validated as the driver of item-level data)</span>.
+    </li>
+    <li>
+      Network / route / segment / linear referencing
+      <span class="changed">should be modelled through the available spatial fields: asset hierarchy, WKT/spatial information, chainage and contract-specific route/asset structures where populated</span>.
+    </li>
+  </ul>
+
+  <h2>2. Asset register &amp; hierarchy (your "hierarchy of assets and their properties")</h2>
+  <ul>
+    <li>
+      Parent asset:
+      <span class="changed">parent asset / network asset where populated</span>
+      <span class="removed">Road (or Tunnel) as the universal parent</span>.
+    </li>
+    <li>
+      Child asset categories: pavements, drainage (pits, lines), vehicle barriers/guardrails, signage, bridges, culverts, lighting, jet fans (tunnels), etc.
+      <span class="changed">Keep these as contract-specific examples, not a guaranteed global list.</span>
+    </li>
+    <li>
+      Per-asset attributes: ID, type, sub-type, location/geometry, dimensions, material, install date, status,
+      <span class="changed">parent asset, chainage/WKT where populated, source/provenance where captured</span>.
+      <span class="removed">Ownership (ours vs disputed vs client's) and AI-detected as asset provenance were not validated from the source tables.</span>
+    </li>
+    <li>
+      Asset condition:
+      <span class="changed">condition exists but is patchy by contract. Keep condition definitions contract-scoped; do not assume one global 1-5 scale works everywhere without mapping.</span>
+    </li>
+  </ul>
+
+  <h2>3. Inspections (separate from defects)</h2>
+  <ul>
+    <li>
+      Scheduled inspection runs
+      <span class="changed">are source-backed where scheduled dates are populated, but coverage varies by contract</span>.
+    </li>
+    <li>
+      Inspection record: who, when, what asset/route was covered, method
+      <span class="changed">(manual / field inspection / Asset Vision inspection forms / tunnel maintenance or event forms where present)</span>,
+      evidence (imagery, photos, video/GPS trail
+      <span class="changed">where populated</span>).
+      <span class="removed">RetinaVision, AID camera inspections and dash-cam capture intervals were not validated from source tables.</span>
+    </li>
+    <li>
+      Link to assets observed and condition assessments made
+      <span class="changed">where those fields are populated; some inspections are job-linked rather than asset-linked.</span>
+    </li>
+  </ul>
+
+  <h2>4. Defects &amp; Hazards (one model, severity-flagged)</h2>
+  <ul>
+    <li>
+      Raised from: inspection, public report, incidental observation
+      <span class="changed">where supported by source forms or interview evidence</span>.
+      <span class="removed">AID alert as a validated source-table trigger</span>.
+    </li>
+    <li>
+      Attributes: asset link, defect type / hazard-defect code, severity/hazard level
+      <span class="changed">where populated</span>, photo evidence, raised by, raised at, location/WKT.
+    </li>
+    <li>
+      SLA / response time:
+      <span class="changed">due date and compliance fields are source-backed. The exact auto-calculation rule based on severity + asset category is not proven from the source tables alone and should be contract-scoped.</span>
+    </li>
+  </ul>
+
+  <h2>5. Jobs / Work orders (the response side)</h2>
+  <ul>
+    <li>
+      Triggered by defect/hazard OR scheduled maintenance
+      <span class="changed">with capital work links where present</span>.
+      <span class="removed">Capital works proposal as a universal direct trigger was not validated.</span>
+    </li>
+    <li>
+      Crew/resource assignment, scheduled date, response SLA/due date, completion timestamp, before/after/during photos, completion status.
+    </li>
+    <li>
+      Routine maintenance vs Capital Works distinction
+      <span class="changed">is useful, but the rule "anything routine can't fix -> capital works" should be treated as interview-backed.</span>
+    </li>
+  </ul>
+
+  <h2>6. Sensing &amp; telemetry (your "sensing side")</h2>
+  <ul>
+    <li>
+      <span class="changed">Source forms contain camera/CCTV, GPS-like location fields, tunnel equipment alarm/check fields, OMCS references, fan-related maintenance fields and AI Defect ID.</span>
+    </li>
+    <li>
+      <span class="removed">Asset Vision dash cam every 5-10m, RetinaVision every 3m, AID cameras for tunnel incident detection, and fleet telematics were not validated from the source tables.</span>
+    </li>
+    <li>
+      Sensor -> event -> incident/work order flow
+      <span class="changed">should be written as interview-backed architecture, not as confirmed source-table lineage.</span>
+    </li>
+  </ul>
+
+  <h2>7. KPIs &amp; Reporting</h2>
+  <ul>
+    <li>
+      Contract KPI definitions vary by contract
+      <span class="changed">and should be modelled as contract-scoped. Source tables validate measurement inputs, not necessarily the full KPI rule library.</span>
+    </li>
+    <li>
+      KPI measurements: inspections scheduled vs completed, jobs raised vs closed within SLA/compliance, asset condition distribution
+      <span class="changed">where condition is populated</span>, pavement performance fields
+      <span class="changed">where present in contract-specific forms</span>.
+    </li>
+    <li>
+      Monthly contract report outputs
+      <span class="changed">remain interview/process evidence</span>.
+      <span class="removed">The 50+ page Word report claim was not validated from source tables.</span>
+    </li>
+  </ul>
+
+  <h2>8. Incidents (tunnel-specific, distinct from defects)</h2>
+  <ul>
+    <li>
+      <span class="changed">Tunnel event/incident handling appears in source forms and OMCS-related wording, but the source-table run did not validate a complete OMCS incident-management table/feed.</span>
+    </li>
+    <li>
+      <span class="changed">Keep incidents conceptually separate from defects/work orders, but label the OMCS incident-management detail as interview-backed unless a separate OMCS source is provided.</span>
+    </li>
+  </ul>
+
+  <h2>A few things I'd flag before locking this in</h2>
+  <ul>
+    <li>
+      Contract is the partitioning key.
+      <span class="changed">This is validated. The source data shows shared core tables plus contract-specific form/module extensions.</span>
+      <span class="removed">Do not claim mandatory-field standardisation solely from the source tables; keep Rui's point as interview evidence.</span>
+    </li>
+    <li>
+      Roads vs Tunnels diverge meaningfully in the sensing layer.
+      <span class="changed">This is directionally right, but only partially source-backed.</span>
+      <span class="removed">Always-on AID + OMCS alarms as a fully validated source-table flow is too strong.</span>
+    </li>
+    <li>
+      As-built / handover data is its own beast.
+      <span class="changed">Handover/practical completion and as-built mismatch references are source-backed.</span>
+      <span class="removed">PDFs + asset registers + GeoJSON at handover were not validated from the source tables.</span>
+    </li>
+    <li>
+      You're missing one I'd add: Capital Works / Forward Programme.
+      <span class="changed">Keep this. It is source-backed by capitalwork/vcapitalwork tables and should be a distinct domain alongside jobs.</span>
+      <span class="changed">dTIMS fields are source-backed in forms, but not a confirmed direct dTIMS system feed.</span>
+    </li>
+  </ul>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "06_vjob_coverage_ext_mssql_asset_vision_ven_rms_old",
+  "statement": "SELECT\n  'ext_mssql_asset_vision_ven_rms_old' AS catalog_name,\n  COUNT(*) AS rows_total,\n  SUM(CASE WHEN Contract IS NOT NULL AND Contract <> '' THEN 1 ELSE 0 END) AS rows_with_contract,\n  SUM(CASE WHEN AssetID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_asset_id,\n  SUM(CASE WHEN HazardDefectCode IS NOT NULL AND HazardDefectCode <> '' THEN 1 ELSE 0 END) AS rows_with_hazard_defect_code,\n  SUM(CASE WHEN HazardCode IS NOT NULL AND HazardCode <> '' THEN 1 ELSE 0 END) AS rows_with_hazard_code,\n  SUM(CASE WHEN DueDate IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_due_date,\n  SUM(CASE WHEN CompletedDate IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_completed_date,\n  SUM(CASE WHEN Compliant IS NOT NULL AND Compliant <> '' THEN 1 ELSE 0 END) AS rows_with_compliant,\n  SUM(CASE WHEN MadeSafe IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_made_safe,\n  SUM(CASE WHEN WKT IS NOT NULL AND WKT <> '' THEN 1 ELSE 0 END) AS rows_with_wkt,\n  MIN(CreatedDate) AS min_created_date,\n  MAX(CreatedDate) AS max_created_date\nFROM `ext_mssql_asset_vision_ven_rms_old`.dbo.vjob\nWHERE Deleted = false OR Deleted IS NULL",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[TABLE_OR_VIEW_NOT_FOUND] The table or view `ext_mssql_asset_vision_ven_rms_old`.`dbo`.`vjob` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 15 pos 5"
+    },
+    "sql_state": "42P01"
+  },
+  "manifest": null,
+  "result": null
+}

@@ -3,7 +3,7 @@ type: concept
 topic: Ventia
 sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-04
+date-updated: 2026-06-09
 tags: [databricks, azure, data-platform, power-bi, data-engineering, transport, asset-data]
 ---
 
@@ -22,6 +22,8 @@ The common batch pattern moves data through defined hops, with standards for nam
 Ventia has more than 60 source systems in production according to the walk-through. Some are staged into Databricks and processed through the platform layers; others use federated queries where Databricks passes queries through to an external database or already-modelled reporting layer.
 
 Federated queries are used where re-staging modelled provider data would add little value. For example, E-Roads IVMS data is already provided in a modelled Snowflake layer, so Databricks can query that layer instead of rebuilding the same model.
+
+The supplied [[Databricks Source Systems]] inventory adds a concrete extract of 10 external Databricks catalogs. It includes one WA electronic prisoner and electronic monitoring source, seven Asset Vision source catalogs with Transport work-management and asset-data context, and two Asset Vision Reporting catalogs where comments were not supplied.
 
 ## Orchestration And Metadata
 
@@ -62,6 +64,7 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 ## Related Pages
 
 - [[Databricks Walk-Through]]
+- [[Databricks Source Systems]]
 - [[Transport Executive Brief Damien]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]

@@ -1,0 +1,1282 @@
+{
+  "generated_at_utc": "2026-06-10T04:56:17+00:00",
+  "source_table": "staged.stg_api_venspark.ideas",
+  "profile": "ventia-transport",
+  "warehouse_id": "e736bc08efffb739",
+  "source_summary": {
+    "source_rows": "542",
+    "distinct_ideas": "542",
+    "deleted_rows": "0",
+    "comment_rows": "0",
+    "first_submitted_at": "2025-05-09T01:02:20",
+    "last_submitted_at": "2026-06-08T21:54:45",
+    "last_loaded_at": "2026-06-10 01:32:09.907871"
+  },
+  "counts": {
+    "ideas_loaded": 542,
+    "open_ideas": 489,
+    "closed_or_inactive": 53,
+    "quick_wins": 109,
+    "data_related": 162,
+    "stale_active": 316
+  },
+  "charts": {
+    "campaigns": [
+      {
+        "label": "Solving a key challenge together",
+        "count": 166,
+        "likes": 1901,
+        "comments": 596
+      },
+      {
+        "label": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "count": 141,
+        "likes": 1051,
+        "comments": 533
+      },
+      {
+        "label": "Solving a key Telco problem together",
+        "count": 52,
+        "likes": 354,
+        "comments": 94
+      },
+      {
+        "label": "Blueprint to One Billion",
+        "count": 33,
+        "likes": 29,
+        "comments": 21
+      },
+      {
+        "label": "Reimagining AI at Ventia",
+        "count": 26,
+        "likes": 56,
+        "comments": 12
+      },
+      {
+        "label": "Bring Safety Strategy to Life!",
+        "count": 25,
+        "likes": 36,
+        "comments": 4
+      },
+      {
+        "label": "Fresh perspectives, bold ideas to shape Ventia",
+        "count": 22,
+        "likes": 44,
+        "comments": 8
+      },
+      {
+        "label": "Enterprise Opportunity - WA Western Trade Coast Infrastructure",
+        "count": 19,
+        "likes": 125,
+        "comments": 1
+      },
+      {
+        "label": "Safety Leadership Governance – Keep / Stop / Start!",
+        "count": 18,
+        "likes": 26,
+        "comments": 4
+      },
+      {
+        "label": "Help us Improve - Share your lessons learnt!",
+        "count": 14,
+        "likes": 0,
+        "comments": 0
+      }
+    ],
+    "stage_status": [
+      {
+        "label": "New / Qualify",
+        "count": 308,
+        "likes": 1446,
+        "comments": 372
+      },
+      {
+        "label": "Active / Develop",
+        "count": 44,
+        "likes": 686,
+        "comments": 250
+      },
+      {
+        "label": "Active / Evaluate",
+        "count": 28,
+        "likes": 309,
+        "comments": 118
+      },
+      {
+        "label": "New / Evaluate",
+        "count": 17,
+        "likes": 118,
+        "comments": 32
+      },
+      {
+        "label": "New / Develop",
+        "count": 11,
+        "likes": 273,
+        "comments": 38
+      },
+      {
+        "label": "New / Referred - Alternate Pathway",
+        "count": 11,
+        "likes": 115,
+        "comments": 28
+      },
+      {
+        "label": "Referred pending review / Referred - Alternate Pathway",
+        "count": 9,
+        "likes": 71,
+        "comments": 22
+      },
+      {
+        "label": "Reviewing / Develop",
+        "count": 8,
+        "likes": 130,
+        "comments": 57
+      },
+      {
+        "label": "Waiting / Qualify",
+        "count": 8,
+        "likes": 60,
+        "comments": 32
+      },
+      {
+        "label": "New / Closed - Out of Scope",
+        "count": 8,
+        "likes": 72,
+        "comments": 18
+      },
+      {
+        "label": "Waiting / Evaluate",
+        "count": 7,
+        "likes": 119,
+        "comments": 92
+      },
+      {
+        "label": "Waiting / Develop",
+        "count": 7,
+        "likes": 79,
+        "comments": 62
+      }
+    ],
+    "themes": [
+      {
+        "label": "Data, reporting and insight",
+        "count": 112,
+        "likes": 882,
+        "comments": 399
+      },
+      {
+        "label": "Other operational improvement",
+        "count": 92,
+        "likes": 964,
+        "comments": 237
+      },
+      {
+        "label": "Communications and enablement",
+        "count": 68,
+        "likes": 508,
+        "comments": 166
+      },
+      {
+        "label": "Safety, risk and compliance",
+        "count": 66,
+        "likes": 399,
+        "comments": 147
+      },
+      {
+        "label": "Asset, field and operations",
+        "count": 63,
+        "likes": 511,
+        "comments": 196
+      },
+      {
+        "label": "Automation and integration",
+        "count": 57,
+        "likes": 371,
+        "comments": 118
+      },
+      {
+        "label": "Commercial and procurement",
+        "count": 41,
+        "likes": 259,
+        "comments": 77
+      },
+      {
+        "label": "Workforce and capability",
+        "count": 31,
+        "likes": 216,
+        "comments": 69
+      },
+      {
+        "label": "Sustainability and environment",
+        "count": 12,
+        "likes": 54,
+        "comments": 32
+      }
+    ],
+    "effort": [
+      {
+        "label": "Medium",
+        "count": 395,
+        "likes": 3038,
+        "comments": 946
+      },
+      {
+        "label": "Low",
+        "count": 130,
+        "likes": 969,
+        "comments": 421
+      },
+      {
+        "label": "High",
+        "count": 17,
+        "likes": 157,
+        "comments": 74
+      }
+    ]
+  },
+  "shortlists": {
+    "quick_wins": [
+      {
+        "idea_id": "81",
+        "title": "S&R People Counter",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Implement",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 180,
+        "likes": 23,
+        "comments": 26,
+        "votes": 0,
+        "evidence": "23 likes; 26 comments; Reviewing / Implement; Data, reporting and insight; low-effort candidate; data/reporting use case",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "241",
+        "title": "S&R People Counter",
+        "campaign_title": "ELT Bets",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 163,
+        "likes": 22,
+        "comments": 24,
+        "votes": 0,
+        "evidence": "22 likes; 24 comments; New / Qualify; Data, reporting and insight; low-effort candidate; data/reporting use case; 244 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "311",
+        "title": "Subcontractor Optimization & Performance Dashboard",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 143,
+        "likes": 23,
+        "comments": 13,
+        "votes": 0,
+        "evidence": "23 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 138 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "232",
+        "title": "Temporary Resource Marketplace",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Workforce and capability",
+        "effort": "Low",
+        "priority_score": 139,
+        "likes": 31,
+        "comments": 10,
+        "votes": 0,
+        "evidence": "31 likes; 10 comments; New / Qualify; Workforce and capability; low-effort candidate; data/reporting use case; 250 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "287",
+        "title": "INFRA (Innovation Frequency Rate)",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 129,
+        "likes": 16,
+        "comments": 13,
+        "votes": 0,
+        "evidence": "16 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 130 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "125",
+        "title": "Ventia ProofWorks",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "New",
+        "stage_title": "Evaluate",
+        "theme": "Asset, field and operations",
+        "effort": "Low",
+        "priority_score": 122,
+        "likes": 17,
+        "comments": 10,
+        "votes": 0,
+        "evidence": "17 likes; 10 comments; New / Evaluate; Asset, field and operations; low-effort candidate; data/reporting use case; 266 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "183",
+        "title": "Dashpivot system SRAPC has for forms and photographic evidence.",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "New",
+        "stage_title": "Develop",
+        "theme": "Asset, field and operations",
+        "effort": "Low",
+        "priority_score": 120,
+        "likes": 23,
+        "comments": 8,
+        "votes": 0,
+        "evidence": "23 likes; 8 comments; New / Develop; Asset, field and operations; low-effort candidate; 261 days since status update",
+        "recommended_next_step": "Validate the owner and expected workflow, then prototype the simplest usable version."
+      },
+      {
+        "idea_id": "365",
+        "title": "ProjectSight: One View of All PMO Projects for FAMs & Agencies",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Waiting",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 111,
+        "likes": 8,
+        "comments": 11,
+        "votes": 0,
+        "evidence": "8 likes; 11 comments; Waiting / Develop; Data, reporting and insight; low-effort candidate; data/reporting use case; 106 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "296",
+        "title": "VenProperty",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Communications and enablement",
+        "effort": "Low",
+        "priority_score": 108,
+        "likes": 17,
+        "comments": 8,
+        "votes": 0,
+        "evidence": "17 likes; 8 comments; Active / Develop; Communications and enablement; low-effort candidate; 180 days since status update",
+        "recommended_next_step": "Validate the owner and expected workflow, then prototype the simplest usable version."
+      },
+      {
+        "idea_id": "299",
+        "title": "ID APP - Digitalised ID",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "New",
+        "stage_title": "Develop",
+        "theme": "Asset, field and operations",
+        "effort": "Low",
+        "priority_score": 106,
+        "likes": 13,
+        "comments": 10,
+        "votes": 0,
+        "evidence": "13 likes; 10 comments; New / Develop; Asset, field and operations; low-effort candidate; 188 days since status update",
+        "recommended_next_step": "Validate the owner and expected workflow, then prototype the simplest usable version."
+      }
+    ],
+    "data_related": [
+      {
+        "idea_id": "81",
+        "title": "S&R People Counter",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Implement",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 180,
+        "likes": 23,
+        "comments": 26,
+        "votes": 0,
+        "evidence": "23 likes; 26 comments; Reviewing / Implement; Data, reporting and insight; low-effort candidate; data/reporting use case",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "94",
+        "title": "Integrated R&O System (no more excel)",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 179,
+        "likes": 36,
+        "comments": 21,
+        "votes": 0,
+        "evidence": "36 likes; 21 comments; Active / Develop; Data, reporting and insight; data/reporting use case; 272 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "241",
+        "title": "S&R People Counter",
+        "campaign_title": "ELT Bets",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 163,
+        "likes": 22,
+        "comments": 24,
+        "votes": 0,
+        "evidence": "22 likes; 24 comments; New / Qualify; Data, reporting and insight; low-effort candidate; data/reporting use case; 244 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "300",
+        "title": "ARIBA Integration into PM Systems",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Automation and integration",
+        "effort": "Medium",
+        "priority_score": 146,
+        "likes": 26,
+        "comments": 18,
+        "votes": 0,
+        "evidence": "26 likes; 18 comments; Active / Evaluate; Automation and integration; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "112",
+        "title": "AI assisted (Copilot) Contract Handbook from Day One? Yes Please!",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Communications and enablement",
+        "effort": "Medium",
+        "priority_score": 144,
+        "likes": 38,
+        "comments": 8,
+        "votes": 0,
+        "evidence": "38 likes; 8 comments; Active / Develop; Communications and enablement; data/reporting use case; 259 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "311",
+        "title": "Subcontractor Optimization & Performance Dashboard",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 143,
+        "likes": 23,
+        "comments": 13,
+        "votes": 0,
+        "evidence": "23 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 138 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "185",
+        "title": "Ventia Asset Management SME Portal",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Asset, field and operations",
+        "effort": "Medium",
+        "priority_score": 143,
+        "likes": 21,
+        "comments": 19,
+        "votes": 0,
+        "evidence": "21 likes; 19 comments; Active / Develop; Asset, field and operations; data/reporting use case; 258 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "309",
+        "title": "Shaping Tomorrow’s Asset Strategies Today",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Waiting",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 140,
+        "likes": 27,
+        "comments": 14,
+        "votes": 0,
+        "evidence": "27 likes; 14 comments; Waiting / Develop; Data, reporting and insight; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "232",
+        "title": "Temporary Resource Marketplace",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Workforce and capability",
+        "effort": "Low",
+        "priority_score": 139,
+        "likes": 31,
+        "comments": 10,
+        "votes": 0,
+        "evidence": "31 likes; 10 comments; New / Qualify; Workforce and capability; low-effort candidate; data/reporting use case; 250 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "123",
+        "title": "Automate Weather Triggered Inspections in Databricks",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Implement",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 132,
+        "likes": 23,
+        "comments": 16,
+        "votes": 0,
+        "evidence": "23 likes; 16 comments; Reviewing / Implement; Data, reporting and insight; data/reporting use case",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      }
+    ],
+    "stale": [
+      {
+        "idea_id": "294",
+        "title": "VenBay",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 181,
+        "likes": 54,
+        "comments": 15,
+        "votes": 0,
+        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 130 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "94",
+        "title": "Integrated R&O System (no more excel)",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 179,
+        "likes": 36,
+        "comments": 21,
+        "votes": 0,
+        "evidence": "36 likes; 21 comments; Active / Develop; Data, reporting and insight; data/reporting use case; 272 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "241",
+        "title": "S&R People Counter",
+        "campaign_title": "ELT Bets",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 163,
+        "likes": 22,
+        "comments": 24,
+        "votes": 0,
+        "evidence": "22 likes; 24 comments; New / Qualify; Data, reporting and insight; low-effort candidate; data/reporting use case; 244 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "226",
+        "title": "Team 2",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Evaluate",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 161,
+        "likes": 62,
+        "comments": 3,
+        "votes": 0,
+        "evidence": "62 likes; 3 comments; Reviewing / Evaluate; Other operational improvement; 243 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "69",
+        "title": "Knowledge Know How",
+        "campaign_title": "Reimagining our processes together",
+        "status_title": "New",
+        "stage_title": "Develop",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 157,
+        "likes": 61,
+        "comments": 1,
+        "votes": 0,
+        "evidence": "61 likes; 1 comments; New / Develop; Other operational improvement; 279 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "300",
+        "title": "ARIBA Integration into PM Systems",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Automation and integration",
+        "effort": "Medium",
+        "priority_score": 146,
+        "likes": 26,
+        "comments": 18,
+        "votes": 0,
+        "evidence": "26 likes; 18 comments; Active / Evaluate; Automation and integration; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "112",
+        "title": "AI assisted (Copilot) Contract Handbook from Day One? Yes Please!",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Communications and enablement",
+        "effort": "Medium",
+        "priority_score": 144,
+        "likes": 38,
+        "comments": 8,
+        "votes": 0,
+        "evidence": "38 likes; 8 comments; Active / Develop; Communications and enablement; data/reporting use case; 259 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "311",
+        "title": "Subcontractor Optimization & Performance Dashboard",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 143,
+        "likes": 23,
+        "comments": 13,
+        "votes": 0,
+        "evidence": "23 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 138 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "185",
+        "title": "Ventia Asset Management SME Portal",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Asset, field and operations",
+        "effort": "Medium",
+        "priority_score": 143,
+        "likes": 21,
+        "comments": 19,
+        "votes": 0,
+        "evidence": "21 likes; 19 comments; Active / Develop; Asset, field and operations; data/reporting use case; 258 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "309",
+        "title": "Shaping Tomorrow’s Asset Strategies Today",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Waiting",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 140,
+        "likes": 27,
+        "comments": 14,
+        "votes": 0,
+        "evidence": "27 likes; 14 comments; Waiting / Develop; Data, reporting and insight; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      }
+    ],
+    "top_priority": [
+      {
+        "idea_id": "294",
+        "title": "VenBay",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 181,
+        "likes": 54,
+        "comments": 15,
+        "votes": 0,
+        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 130 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "81",
+        "title": "S&R People Counter",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Implement",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 180,
+        "likes": 23,
+        "comments": 26,
+        "votes": 0,
+        "evidence": "23 likes; 26 comments; Reviewing / Implement; Data, reporting and insight; low-effort candidate; data/reporting use case",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "94",
+        "title": "Integrated R&O System (no more excel)",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 179,
+        "likes": 36,
+        "comments": 21,
+        "votes": 0,
+        "evidence": "36 likes; 21 comments; Active / Develop; Data, reporting and insight; data/reporting use case; 272 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "241",
+        "title": "S&R People Counter",
+        "campaign_title": "ELT Bets",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 163,
+        "likes": 22,
+        "comments": 24,
+        "votes": 0,
+        "evidence": "22 likes; 24 comments; New / Qualify; Data, reporting and insight; low-effort candidate; data/reporting use case; 244 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "226",
+        "title": "Team 2",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Reviewing",
+        "stage_title": "Evaluate",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 161,
+        "likes": 62,
+        "comments": 3,
+        "votes": 0,
+        "evidence": "62 likes; 3 comments; Reviewing / Evaluate; Other operational improvement; 243 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "69",
+        "title": "Knowledge Know How",
+        "campaign_title": "Reimagining our processes together",
+        "status_title": "New",
+        "stage_title": "Develop",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 157,
+        "likes": 61,
+        "comments": 1,
+        "votes": 0,
+        "evidence": "61 likes; 1 comments; New / Develop; Other operational improvement; 279 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "300",
+        "title": "ARIBA Integration into PM Systems",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Automation and integration",
+        "effort": "Medium",
+        "priority_score": 146,
+        "likes": 26,
+        "comments": 18,
+        "votes": 0,
+        "evidence": "26 likes; 18 comments; Active / Evaluate; Automation and integration; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "112",
+        "title": "AI assisted (Copilot) Contract Handbook from Day One? Yes Please!",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Communications and enablement",
+        "effort": "Medium",
+        "priority_score": 144,
+        "likes": 38,
+        "comments": 8,
+        "votes": 0,
+        "evidence": "38 likes; 8 comments; Active / Develop; Communications and enablement; data/reporting use case; 259 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "311",
+        "title": "Subcontractor Optimization & Performance Dashboard",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Active",
+        "stage_title": "Evaluate",
+        "theme": "Data, reporting and insight",
+        "effort": "Low",
+        "priority_score": 143,
+        "likes": 23,
+        "comments": 13,
+        "votes": 0,
+        "evidence": "23 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 138 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "185",
+        "title": "Ventia Asset Management SME Portal",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "Active",
+        "stage_title": "Develop",
+        "theme": "Asset, field and operations",
+        "effort": "Medium",
+        "priority_score": 143,
+        "likes": 21,
+        "comments": 19,
+        "votes": 0,
+        "evidence": "21 likes; 19 comments; Active / Develop; Asset, field and operations; data/reporting use case; 258 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "309",
+        "title": "Shaping Tomorrow’s Asset Strategies Today",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "Waiting",
+        "stage_title": "Develop",
+        "theme": "Data, reporting and insight",
+        "effort": "Medium",
+        "priority_score": 140,
+        "likes": 27,
+        "comments": 14,
+        "votes": 0,
+        "evidence": "27 likes; 14 comments; Waiting / Develop; Data, reporting and insight; data/reporting use case; 139 days since status update",
+        "recommended_next_step": "Confirm the source tables and refresh path before spending time on the interface."
+      },
+      {
+        "idea_id": "232",
+        "title": "Temporary Resource Marketplace",
+        "campaign_title": "Solving a key challenge together",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Workforce and capability",
+        "effort": "Low",
+        "priority_score": 139,
+        "likes": 31,
+        "comments": 10,
+        "votes": 0,
+        "evidence": "31 likes; 10 comments; New / Qualify; Workforce and capability; low-effort candidate; data/reporting use case; 250 days since status update",
+        "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
+      },
+      {
+        "idea_id": "77",
+        "title": "Team 6",
+        "campaign_title": "Reimagining our processes together",
+        "status_title": "New",
+        "stage_title": "Develop",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 133,
+        "likes": 43,
+        "comments": 5,
+        "votes": 0,
+        "evidence": "43 likes; 5 comments; New / Develop; Other operational improvement; 279 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "64",
+        "title": "Chantal, Julie, Mia, Laura, Amy and Dave (Team 1)",
+        "campaign_title": "Bringing Redefining Service Excellence to life for the frontline",
+        "status_title": "Waiting",
+        "stage_title": "Evaluate",
+        "theme": "Other operational improvement",
+        "effort": "Medium",
+        "priority_score": 133,
+        "likes": 24,
+        "comments": 19,
+        "votes": 0,
+        "evidence": "24 likes; 19 comments; Waiting / Evaluate; Other operational improvement; 279 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      },
+      {
+        "idea_id": "359",
+        "title": "VenPurchasing",
+        "campaign_title": "Your Idea, Our Future: Let's Redefine Service Excellence",
+        "status_title": "New",
+        "stage_title": "Qualify",
+        "theme": "Automation and integration",
+        "effort": "Medium",
+        "priority_score": 132,
+        "likes": 47,
+        "comments": 7,
+        "votes": 0,
+        "evidence": "47 likes; 7 comments; New / Qualify; Automation and integration; 128 days since status update",
+        "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
+      }
+    ]
+  },
+  "duplicate_clusters": [
+    {
+      "cluster": "Forms and workflow modernisation",
+      "count": 125,
+      "engagement": 1296,
+      "ideas": [
+        {
+          "idea_id": "94",
+          "title": "Integrated R&O System (no more excel)",
+          "stage_status": "Active / Develop",
+          "priority_score": 179
+        },
+        {
+          "idea_id": "300",
+          "title": "ARIBA Integration into PM Systems",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 146
+        },
+        {
+          "idea_id": "359",
+          "title": "VenPurchasing",
+          "stage_status": "New / Qualify",
+          "priority_score": 132
+        },
+        {
+          "idea_id": "98",
+          "title": "Integrated platform for managing obligations",
+          "stage_status": "Reviewing / Develop",
+          "priority_score": 130
+        },
+        {
+          "idea_id": "183",
+          "title": "Dashpivot system SRAPC has for forms and photographic evidence.",
+          "stage_status": "New / Develop",
+          "priority_score": 120
+        },
+        {
+          "idea_id": "113",
+          "title": "Modern, Scalable Forms Platform to Unlock Company-Wide Automation",
+          "stage_status": "Active / Develop",
+          "priority_score": 109
+        }
+      ]
+    },
+    {
+      "cluster": "Comms, directory and profile data",
+      "count": 72,
+      "engagement": 820,
+      "ideas": [
+        {
+          "idea_id": "112",
+          "title": "AI assisted (Copilot) Contract Handbook from Day One? Yes Please!",
+          "stage_status": "Active / Develop",
+          "priority_score": 144
+        },
+        {
+          "idea_id": "311",
+          "title": "Subcontractor Optimization & Performance Dashboard",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 143
+        },
+        {
+          "idea_id": "232",
+          "title": "Temporary Resource Marketplace",
+          "stage_status": "New / Qualify",
+          "priority_score": 139
+        },
+        {
+          "idea_id": "290",
+          "title": "Elevating our Teams with Cobots - Human Skill Meets Robotic Support",
+          "stage_status": "Active / Develop",
+          "priority_score": 126
+        },
+        {
+          "idea_id": "125",
+          "title": "Ventia ProofWorks",
+          "stage_status": "New / Evaluate",
+          "priority_score": 122
+        },
+        {
+          "idea_id": "154",
+          "title": "Cross-Sell like a pro with a Contract Database",
+          "stage_status": "Reviewing / Develop",
+          "priority_score": 116
+        }
+      ]
+    },
+    {
+      "cluster": "Safety and HSE improvements",
+      "count": 40,
+      "engagement": 297,
+      "ideas": [
+        {
+          "idea_id": "483",
+          "title": "From Drones to Decisions - Elevating Our Asset Intelligence Capability",
+          "stage_status": "Active / Develop",
+          "priority_score": 111
+        },
+        {
+          "idea_id": "326",
+          "title": "Portable CRP",
+          "stage_status": "Waiting / Develop",
+          "priority_score": 99
+        },
+        {
+          "idea_id": "331",
+          "title": "Project Sentinel- Arresta 100",
+          "stage_status": "New / Develop",
+          "priority_score": 81
+        },
+        {
+          "idea_id": "256",
+          "title": "Cut admin, bulk upload to Solv",
+          "stage_status": "Reviewing / Evaluate",
+          "priority_score": 80
+        },
+        {
+          "idea_id": "297",
+          "title": "Fatigue Calculator App.",
+          "stage_status": "New / Qualify",
+          "priority_score": 79
+        },
+        {
+          "idea_id": "320",
+          "title": "VOC journey management App",
+          "stage_status": "Waiting / Develop",
+          "priority_score": 78
+        }
+      ]
+    },
+    {
+      "cluster": "Training and onboarding",
+      "count": 20,
+      "engagement": 235,
+      "ideas": [
+        {
+          "idea_id": "182",
+          "title": "A lightweight, user-friendly Ventia app",
+          "stage_status": "Reviewing / Develop",
+          "priority_score": 104
+        },
+        {
+          "idea_id": "111",
+          "title": "Unified Work Permit and Training Management System",
+          "stage_status": "New / Referred - Alternate Pathway",
+          "priority_score": 100
+        },
+        {
+          "idea_id": "86",
+          "title": "Appropriate Training and Close Supervision to Contractors",
+          "stage_status": "Active / Develop",
+          "priority_score": 86
+        },
+        {
+          "idea_id": "9",
+          "title": "Image Recognition",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 86
+        },
+        {
+          "idea_id": "322",
+          "title": "Welcome To Your Ventia Journey Pack",
+          "stage_status": "New / Qualify",
+          "priority_score": 81
+        },
+        {
+          "idea_id": "213",
+          "title": "Streamlining HSE Evaluation for Subcontractor Onboarding",
+          "stage_status": "Active / Develop",
+          "priority_score": 68
+        }
+      ]
+    },
+    {
+      "cluster": "Field evidence and photo capture",
+      "count": 20,
+      "engagement": 217,
+      "ideas": [
+        {
+          "idea_id": "299",
+          "title": "ID APP - Digitalised ID",
+          "stage_status": "New / Develop",
+          "priority_score": 106
+        },
+        {
+          "idea_id": "25",
+          "title": "Novus Image validation & classifier",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 94
+        },
+        {
+          "idea_id": "83",
+          "title": "VenPack (eg work pack) - Automated work specification and verification",
+          "stage_status": "New / Qualify",
+          "priority_score": 83
+        },
+        {
+          "idea_id": "88",
+          "title": "Reconcile artefacts against scope/material",
+          "stage_status": "New / Evaluate",
+          "priority_score": 72
+        },
+        {
+          "idea_id": "16",
+          "title": "Uploading artefacts more efficiently to save time and space",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 64
+        },
+        {
+          "idea_id": "13",
+          "title": "QA photos direct to SharePoint folder",
+          "stage_status": "New / Evaluate",
+          "priority_score": 59
+        }
+      ]
+    },
+    {
+      "cluster": "Asset knowledge and standards",
+      "count": 12,
+      "engagement": 203,
+      "ideas": [
+        {
+          "idea_id": "185",
+          "title": "Ventia Asset Management SME Portal",
+          "stage_status": "Active / Develop",
+          "priority_score": 143
+        },
+        {
+          "idea_id": "309",
+          "title": "Shaping Tomorrow’s Asset Strategies Today",
+          "stage_status": "Waiting / Develop",
+          "priority_score": 140
+        },
+        {
+          "idea_id": "140",
+          "title": "Subcontractor systems integration",
+          "stage_status": "Active / Develop",
+          "priority_score": 98
+        },
+        {
+          "idea_id": "310",
+          "title": "Predict the Shift. Protect Your Assets and People",
+          "stage_status": "New / Qualify",
+          "priority_score": 79
+        },
+        {
+          "idea_id": "165",
+          "title": "Harmonised Enterprise Asset Naming Convention",
+          "stage_status": "Reviewing / Evaluate",
+          "priority_score": 76
+        },
+        {
+          "idea_id": "209",
+          "title": "Digital Asset Management System",
+          "stage_status": "New / Qualify",
+          "priority_score": 47
+        }
+      ]
+    },
+    {
+      "cluster": "Procurement and purchasing",
+      "count": 10,
+      "engagement": 169,
+      "ideas": [
+        {
+          "idea_id": "294",
+          "title": "VenBay",
+          "stage_status": "Active / Evaluate",
+          "priority_score": 181
+        },
+        {
+          "idea_id": "193",
+          "title": "Procurement database of supplier pricing",
+          "stage_status": "Active / Develop",
+          "priority_score": 127
+        },
+        {
+          "idea_id": "379",
+          "title": "Invoice Processing and Approval in ARIBA",
+          "stage_status": "Active / Develop",
+          "priority_score": 83
+        },
+        {
+          "idea_id": "372",
+          "title": "Parking at Cremorne to support working from office",
+          "stage_status": "New / Qualify",
+          "priority_score": 68
+        },
+        {
+          "idea_id": "550",
+          "title": "Reduce your concrete cutting risks",
+          "stage_status": "New / Qualify",
+          "priority_score": 27
+        },
+        {
+          "idea_id": "107",
+          "title": "Build a live ABN check into AP_AR system",
+          "stage_status": "New / Qualify",
+          "priority_score": 13
+        }
+      ]
+    },
+    {
+      "cluster": "People counter and attendance tracking",
+      "count": 6,
+      "engagement": 134,
+      "ideas": [
+        {
+          "idea_id": "81",
+          "title": "S&R People Counter",
+          "stage_status": "Reviewing / Implement",
+          "priority_score": 180
+        },
+        {
+          "idea_id": "241",
+          "title": "S&R People Counter",
+          "stage_status": "New / Qualify",
+          "priority_score": 163
+        },
+        {
+          "idea_id": "244",
+          "title": "Introduce geotracking of the tradesperson against the location of work",
+          "stage_status": "New / Qualify",
+          "priority_score": 76
+        },
+        {
+          "idea_id": "229",
+          "title": "Roster and Personal Logistics Program",
+          "stage_status": "Active / Develop",
+          "priority_score": 62
+        },
+        {
+          "idea_id": "89",
+          "title": "Improve Client Reporting ON Boot Fittings",
+          "stage_status": "New / Qualify",
+          "priority_score": 47
+        },
+        {
+          "idea_id": "521",
+          "title": "More toolbox attendance from leadership",
+          "stage_status": "New / Qualify",
+          "priority_score": 9
+        }
+      ]
+    }
+  ],
+  "scoring_rubric": [
+    "2 points per like, 3 points per comment and 1 point per token vote.",
+    "Stage/status weight favours ideas already in Evaluate, Develop or Implement.",
+    "Low-effort ideas get a quick-win uplift.",
+    "Data/reporting ideas get a small uplift because the requested demo is data-related.",
+    "Closed, duplicate or high-effort ideas are penalised.",
+    "The score is a triage heuristic, not a formal business case."
+  ],
+  "data_quality_notes": [
+    "The current table has 542 rows, not the earlier 523 figure, based on the latest Databricks count.",
+    "The output excludes submitter and owner fields to avoid exposing personal data in the demo.",
+    "customFields and keyPhrases are not used for scoring because prior inspection showed sparse or weak evidence.",
+    "Feasibility is inferred from title and description keywords. It needs owner validation before delivery funding."
+  ]
+}

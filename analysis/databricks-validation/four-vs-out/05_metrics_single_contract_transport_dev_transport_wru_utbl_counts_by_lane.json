@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_wru_utbl_counts_by_lane",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_wru' AS schema_name,\n  'utbl_counts_by_lane' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  MAX(CASE WHEN try_cast(`Date_` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Date_` AS TIMESTAMP) END) AS latest_observed_ts,\n  MIN(CASE WHEN try_cast(`Date_` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Date_` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Date_` AS TIMESTAMP) END) AS earliest_observed_ts,\n  'Date_' AS freshness_columns\nFROM `transport_dev`.`transport_wru`.`utbl_counts_by_lane`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_wru",
+        "utbl_counts_by_lane",
+        "MANAGED",
+        "73877",
+        "true",
+        "2024-08-04T00:00:00Z",
+        "2021-07-01T00:00:00Z",
+        "Date_"
+      ]
+    ]
+  }
+}

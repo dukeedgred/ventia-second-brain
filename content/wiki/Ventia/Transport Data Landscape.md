@@ -3,7 +3,7 @@ type: concept
 topic: Ventia
 sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-04
+date-updated: 2026-06-09
 tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections]
 ---
 
@@ -26,6 +26,8 @@ The same source warns that Transport finance report filters are not an authorita
 Transport work order, work management, and asset data are not primarily held in SAP. [[Asset Vision]] was identified as the main operational source system for Transport asset and work management reporting.
 
 The platform accesses Asset Vision reporting data through federated queries to Azure SQL databases. Production reporting was still tied to existing Asset Vision-hosted reporting structures, while Ventia was migrating toward hosting the reporting data in its own Azure SQL environment.
+
+The supplied [[Databricks Source Systems]] inventory maps several Asset Vision source catalogs to Transport contract contexts: `ext_mssql_asset_vision_ven_gen7` to RAMC, BAC, PoB, and TSRC; `ext_mssql_asset_vision_ven_rms_old` to SRAPC; `ext_mssql_asset_vision_ven_vicroads` to WRU; `ext_mssql_asset_vision_vns_gen7` to SHT/WHT; `ext_mssql_asset_vision_vnz_gen7` to Auckland West; and `ext_mssql_asset_vision_vsm_gen7` to VentureSmart. No comment was supplied for `ext_mssql_asset_vision_ven_rms`.
 
 The Transport Data and AI Working Group source adds concrete roads-asset capture requirements for VRMC, RAMC, and most roads contracts. The defect list spans pavement, signs, vegetation, drainage, litter, barriers, line marking, roadkill, graffiti, guideposts, and possible future tunnel assets. Those inputs need to become geolocated outputs with defect data, duplicate capture detection, patterns, and work order details.
 
@@ -88,6 +90,7 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 ## Related Pages
 
 - [[Databricks Walk-Through]]
+- [[Databricks Source Systems]]
 - [[Transport Data and AI Working Group]]
 - [[Transport Executive Brief Damien]]
 - [[Transport First Two Week Plan]]

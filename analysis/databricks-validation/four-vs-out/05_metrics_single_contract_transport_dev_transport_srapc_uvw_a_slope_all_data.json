@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_srapc_uvw_a_slope_all_data",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_srapc' AS schema_name,\n  'uvw_a_slope_all_data' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Last Modified` AS TIMESTAMP)), MAX(try_cast(`Last Modified User` AS TIMESTAMP)), MAX(try_cast(`Construction Date` AS TIMESTAMP)), MAX(try_cast(`Condition Date` AS TIMESTAMP)), MAX(try_cast(`Latest Valuation Date` AS TIMESTAMP)), MAX(try_cast(`start_link` AS TIMESTAMP)), MAX(try_cast(`start_offs` AS TIMESTAMP)), MAX(try_cast(`start_cway` AS TIMESTAMP)), MAX(try_cast(`start_cw_1` AS TIMESTAMP)), MAX(try_cast(`Asset Identification Date` AS TIMESTAMP)), MAX(try_cast(`Slope Inspection - Next Scheduled` AS TIMESTAMP)), MAX(try_cast(`Slope Inspection - Last Inspection` AS TIMESTAMP)), MAX(try_cast(`Scheduled Slope Inspection - Next Scheduled` AS TIMESTAMP)), MAX(try_cast(`Scheduled Slope Inspection - Last Inspection` AS TIMESTAMP)), MAX(try_cast(`Scheduled Slope Inspection - Last Comment` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Last Modified` AS TIMESTAMP)), MIN(try_cast(`Last Modified User` AS TIMESTAMP)), MIN(try_cast(`Construction Date` AS TIMESTAMP)), MIN(try_cast(`Condition Date` AS TIMESTAMP)), MIN(try_cast(`Latest Valuation Date` AS TIMESTAMP)), MIN(try_cast(`start_link` AS TIMESTAMP)), MIN(try_cast(`start_offs` AS TIMESTAMP)), MIN(try_cast(`start_cway` AS TIMESTAMP)), MIN(try_cast(`start_cw_1` AS TIMESTAMP)), MIN(try_cast(`Asset Identification Date` AS TIMESTAMP)), MIN(try_cast(`Slope Inspection - Next Scheduled` AS TIMESTAMP)), MIN(try_cast(`Slope Inspection - Last Inspection` AS TIMESTAMP)), MIN(try_cast(`Scheduled Slope Inspection - Next Scheduled` AS TIMESTAMP)), MIN(try_cast(`Scheduled Slope Inspection - Last Inspection` AS TIMESTAMP)), MIN(try_cast(`Scheduled Slope Inspection - Last Comment` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Last Modified|Last Modified User|Construction Date|Condition Date|Latest Valuation Date|start_link|start_offs|start_cway|start_cw_1|Asset Identification Date|Slope Inspection - Next Scheduled|Slope Inspection - Last Inspection|Scheduled Slope Inspection - Next Scheduled|Scheduled Slope Inspection - Last Inspection|Scheduled Slope Inspection - Last Comment' AS freshness_columns\nFROM `transport_dev`.`transport_srapc`.`uvw_a_slope_all_data`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_srapc",
+        "uvw_a_slope_all_data",
+        "VIEW",
+        "923",
+        "true",
+        "2026-05-14T13:04:17.71Z",
+        "2022-04-26T14:00:00Z",
+        "Last Modified|Last Modified User|Construction Date|Condition Date|Latest Valuation Date|start_link|start_offs|start_cway|start_cw_1|Asset Identification Date|Slope Inspection - Next Scheduled|Slope Inspection - Last Inspection|Scheduled Slope Inspection - Next Scheduled|Scheduled Slope Inspection - Last Inspection|Scheduled Slope Inspection - Last Comment"
+      ]
+    ]
+  }
+}

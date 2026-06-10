@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_sht_uvw_nps04_nb_segmented",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_sht' AS schema_name,\n  'uvw_nps04_nb_segmented' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  MAX(try_cast(`interval_start` AS TIMESTAMP)) AS latest_observed_ts,\n  MIN(try_cast(`interval_start` AS TIMESTAMP)) AS earliest_observed_ts,\n  'interval_start' AS freshness_columns\nFROM `transport_dev`.`transport_sht`.`uvw_nps04_nb_segmented`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[UNRESOLVED_COLUMN.WITH_SUGGESTION] A column, variable, or function parameter with name `Date_Time` cannot be resolved. Did you mean one of the following? [`value`]. SQLSTATE: 42703; line 2 pos 21"
+    },
+    "sql_state": "42703"
+  },
+  "manifest": null,
+  "result": null
+}

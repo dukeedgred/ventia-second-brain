@@ -1,0 +1,14 @@
+{
+  "name": "03_contracts_asset_ext_mssql_asset_vision_ven_rms_old",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_rms_old' AS catalog_name, 'asset' AS table_name, Contract, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_rms_old`.dbo.asset\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY Contract\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[TABLE_OR_VIEW_NOT_FOUND] The table or view `ext_mssql_asset_vision_ven_rms_old`.`dbo`.`asset` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 2 pos 5"
+    },
+    "sql_state": "42P01"
+  },
+  "manifest": null,
+  "result": null
+}

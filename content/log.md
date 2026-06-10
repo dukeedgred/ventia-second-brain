@@ -129,3 +129,24 @@ Created the `asset_vision_ven_rms` source context catalog and 40 table schema pa
 ## [2026-06-05] table-docs | Expanded Asset Vision VEN VicRoads source tables
 
 Updated the `asset_vision_ven_vicroads` source context from 10 to 40 complete `ext_mssql_asset_vision_ven_vicroads.dbo` table schemas. Added source table pages for the previously missing Asset Vision job, lane-access, inspection, capital work task, resource, timesheet, photo, SQL Server version, summary check, and WKT view-style source tables. Removed the obsolete `capitalworktask` truncation note for this context because the new payload supplied a complete schema. Preserved `dbo` only as the SQL Server source schema, not a client or contract.
+
+## [2026-06-09] table-docs | Databricks source-system inventory
+
+Added [[Databricks Source Systems]] with 10 supplied external Databricks catalogs, including Asset Vision Transport contract mappings and null/blank schema or comment gaps. Updated [[Transport Data Tables]], seven Asset Vision source-context catalogs, [[Ventia Databricks Platform]], and [[Transport Data Landscape]] to link the inventory and preserve `dbo` as SQL Server source schema metadata.
+
+## [2026-06-09] table-docs | Databricks full-access Transport table refresh
+
+Queried Databricks with the `ventia-transport` OAuth profile and refreshed Transport table documentation coverage from `system.information_schema`. Added missing table pages across Asset Vision RMS New, `formitize_srapc`, `stg_enterprise_reporting`, `transport_vsm`, and newly visible views/tables in existing `transport_dev` schemas. Refreshed the Transport sector catalog and context catalog pages while preserving existing historical `asset_vision_ven_rms_old` documentation. Maximo was visible in Databricks but intentionally deferred from this Transport table documentation pass for now. EWG MEXDB and Urbanise Plaza catalogues were visible but not added to Transport table docs because no current source-backed Transport mapping was available.
+
+## [2026-06-09] report | Transport contractor data maturity HTML
+
+Created [[Transport Contractor Data Maturity Report]] with an interactive HTML dashboard comparing documented Transport contract/schema contexts by data maturity, analytics sophistication, evidence-backed strengths, risks, and recommendations. The report uses current Transport table documentation and curated wiki notes, excludes Maximo from the scored comparison for now, and states the metadata-based evidence boundary.
+
+## [2026-06-10] report | Contractor table-use inference layer
+
+Added a per-table inferred-use layer to [[Transport Contractor Data Maturity Report]] for 289 documented contractor/schema tables. The layer uses documented domains, table descriptions, column names, and view SQL where available, and keeps inferred use separate from source-backed table-page business-purpose fields by showing confidence and evidence basis in the HTML report.
+
+Updated the same report with common-analysis coverage rows that show which contractor/schema contexts are present and missing for analysis categories appearing in at least half of the documented contractor set.
+
+Expanded the report evidence ledger and contractor detail panel with explicit score-rationale and missing-evidence notes, including the caveat that KPI presence is scored by documented depth and reuse readiness rather than as a simple yes/no flag.
+

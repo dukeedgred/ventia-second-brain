@@ -1,0 +1,284 @@
+{
+  "name": "01_tables_ext_mssql_asset_vision_ven_rms",
+  "statement": "SELECT table_catalog, table_schema, table_name, table_type\nFROM `ext_mssql_asset_vision_ven_rms`.information_schema.tables\nWHERE table_schema = 'dbo'\nORDER BY table_name",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "table_catalog",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "table_schema",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 38
+      }
+    ],
+    "total_row_count": 38,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 38,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "asset",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "assetarea",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "assetattribute",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "assetaudit",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "assetclassification",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "assetlocation",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "capitalwork",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "capitalworktask",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "contractreference",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "custommoduleitem",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "exportdate",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "exportdatelog",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "formfield",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "inspection",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "inspectionrelationship",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "inspectionstatus",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "job",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "jobasset",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "jobcomment",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "log",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "module",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "photo",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "plannedresourceitem",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "resource",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "resourceattribute",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "resourceaudit",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "summarycheck",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "timesheetitem",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vassetaudit",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vassetlocation",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vcapitalwork",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vcapitalworktask",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vinspection",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vinspectionstatus",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vjob",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vmodule",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "vworkflowstatus",
+        "FOREIGN"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dbo",
+        "workflowstatus",
+        "FOREIGN"
+      ]
+    ]
+  }
+}

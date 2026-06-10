@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_ramc_uvw_stripmap_jobs",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_ramc' AS schema_name,\n  'uvw_stripmap_jobs' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Survey Date` AS TIMESTAMP)), MAX(try_cast(`completedstatus` AS TIMESTAMP)), MAX(try_cast(`completeduser` AS TIMESTAMP)), MAX(try_cast(`createddate` AS TIMESTAMP)), MAX(try_cast(`Created_Date_FY` AS TIMESTAMP)), MAX(try_cast(`duedate` AS TIMESTAMP)), MAX(try_cast(`completeddate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Survey Date` AS TIMESTAMP)), MIN(try_cast(`completedstatus` AS TIMESTAMP)), MIN(try_cast(`completeduser` AS TIMESTAMP)), MIN(try_cast(`createddate` AS TIMESTAMP)), MIN(try_cast(`Created_Date_FY` AS TIMESTAMP)), MIN(try_cast(`duedate` AS TIMESTAMP)), MIN(try_cast(`completeddate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Survey Date|completedstatus|completeduser|createddate|Created_Date_FY|duedate|completeddate' AS freshness_columns\nFROM `transport_dev`.`transport_ramc`.`uvw_stripmap_jobs`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_stripmap_jobs' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

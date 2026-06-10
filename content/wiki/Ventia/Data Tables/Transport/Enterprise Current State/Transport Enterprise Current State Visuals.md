@@ -15,6 +15,8 @@ This folder contains an interactive current-state visual for Transport enterpris
 
 [Open the interactive current-state visual](transport-enterprise-current-state.html)
 
+For the contractor-by-contractor maturity and analytics comparison, see [[Transport Contractor Data Maturity Report]].
+
 The visual has five views:
 
 | View | Purpose |

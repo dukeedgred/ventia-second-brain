@@ -1,0 +1,14 @@
+{
+  "name": "01_tables_ext_mssql_assetvisionreporting_av_ven_vicroads",
+  "statement": "SELECT table_catalog, table_schema, table_name, table_type\nFROM `ext_mssql_assetvisionreporting_av_ven_vicroads`.information_schema.tables\nWHERE table_schema = 'dbo'\nORDER BY table_name",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nUser does not have USE CATALOG on Catalog 'ext_mssql_assetvisionreporting_av_ven_vicroads'. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

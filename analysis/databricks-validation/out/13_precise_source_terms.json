@@ -1,0 +1,6243 @@
+{
+  "name": "13_precise_source_terms",
+  "statement": "WITH source_text AS (\nSELECT 'ext_mssql_asset_vision_ven_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_ven_gen7`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_ven_gen7`.dbo.formfield\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_rms' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_rms' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.formfield\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_vicroads' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_ven_vicroads`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_vicroads' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_ven_vicroads`.dbo.formfield\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vns_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_vns_gen7`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vns_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_vns_gen7`.dbo.formfield\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vnz_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_vnz_gen7`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vnz_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_vnz_gen7`.dbo.formfield\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vsm_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value,\n       lower(concat_ws(' ', ModuleName, Name, Comments)) AS text_value\nFROM `ext_mssql_asset_vision_vsm_gen7`.dbo.module\nWHERE Deleted = false\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vsm_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value,\n       lower(concat_ws(' ', Name, Value)) AS text_value\nFROM `ext_mssql_asset_vision_vsm_gen7`.dbo.formfield\nWHERE Deleted = false\n), matched AS (\n  SELECT catalog_name, source_table, matched_value, 'OMCS' AS term FROM source_text WHERE text_value RLIKE '(^|[^a-z])omcs([^a-z]|$)'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'RetinaVision/Retina' FROM source_text WHERE text_value RLIKE 'retina'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'AID / automatic incident detection' FROM source_text WHERE text_value RLIKE 'aid camera|aid alert|automatic incident detection|tunnel incident detection|incident detection camera|incident detection system'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'dashcam' FROM source_text WHERE text_value RLIKE 'dash.?cam|dash camera'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'camera/CCTV' FROM source_text WHERE text_value RLIKE 'camera|cctv'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'GPS' FROM source_text WHERE text_value RLIKE '(^|[^a-z])gps([^a-z]|$)'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'jet/fan' FROM source_text WHERE text_value RLIKE 'jet fan|(^|[^a-z])fan([^a-z]|$)'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'telemetry/telematics' FROM source_text WHERE text_value RLIKE 'telemetry|telematics'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'vehicle stopped/location' FROM source_text WHERE text_value RLIKE 'vehicle location|vehicle stopped'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'alarm' FROM source_text WHERE text_value RLIKE '(^|[^a-z])alarm|alarms|abnormalities'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'dTIMS' FROM source_text WHERE text_value RLIKE 'dtims'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'as-built' FROM source_text WHERE text_value RLIKE 'as-built|as built'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'handover' FROM source_text WHERE text_value RLIKE 'handover'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'GeoJSON' FROM source_text WHERE text_value RLIKE 'geojson'\n  UNION ALL SELECT catalog_name, source_table, matched_value, 'AI defect' FROM source_text WHERE text_value RLIKE '(^|[^a-z])ai defect([^a-z]|$)|ai-detected|ai detected|artificial intelligence'\n)\nSELECT catalog_name, term, source_table, matched_value, COUNT(*) AS row_count\nFROM matched\nGROUP BY catalog_name, term, source_table, matched_value\nORDER BY term, row_count DESC\nLIMIT 1000",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "term",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "source_table",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "matched_value",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 4
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 883
+      }
+    ],
+    "total_row_count": 883,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 883,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "AI defect",
+        "formfield",
+        "External System Details|AI Defect ID",
+        "35197"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "AID / automatic incident detection",
+        "formfield",
+        "Asset Details|Asset Name",
+        "15"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (5)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (2)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (9)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (8)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (1)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (7)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (6)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (3)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (4)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (10)|GPS Coordinates (if not already recorded in SPARKS)",
+        "2391"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|Strat GPS",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GIS Location|GPS End (Lat)",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GIS Location|GPS Start (Long)",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GIS Location|GPS End (Long)",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|End GPS",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GIS Location|GPS Start (Lat)",
+        "1464"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Asset Validation|Asset in correction location according to GPS",
+        "468"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 2 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 13 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 14 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 8 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 2 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 3 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 1 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 5 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 7 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 1 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 9 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 10 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 4 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 1 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 4 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 9 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 4 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 15 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 1 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 11 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 3 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 11 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 6 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 6 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 8 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 3 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 13 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 6 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 5 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 7 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 7 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 8 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 4 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 6 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 5 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 12 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 3 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 5 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 2 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 14 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 15 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 7 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 2 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 10 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Treatment 8 - Start GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch 12 - End GPS Point",
+        "114"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "105"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Inspection Report - Minor Culverts|GPS Location",
+        "82"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "65"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "56"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Comments",
+        "41"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data|Describe the Works Performed",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Event|Description",
+        "22"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "17"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GPS Start",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Feature Details|GPS Finish",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "WRU - Enquiries and Complaints|Issue GPS (e.g -37.814632, 144.794750)",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Asset Works Daily Report|Shift Timeline",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Asset Works Daily Report|Activity Summary",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|End GPS Point",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Treatment Configurations|Start GPS Point",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Asset Works Daily Report|Ventia Management Notes",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data - ITS|Describe why this is a 2 person activity",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Work Order Information|Description",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch Start GPS Point",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Asset Works Daily Report|Notes",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Patching|Patch End GPS Point",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "GPS",
+        "formfield",
+        "DISPATCH DETAILS|Notes",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data|If not, describe why you cannot complete the activity",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Follow-Up Work Details|Intervention",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Hand Over Form|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Inspection - Barrel/Crown|Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data - ITS|Does this require further works, material, subcontractors, permits?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "module",
+        "Customer Request (VEN)",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Maintenance Action|What works were undertaken to fix this issue",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Additional Risk Factors|Concluding summary and comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "Client Details|Details",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Structure Details|GPS Coordinate",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Job Data|Job Location",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Job Data - ITS|Are there any risks onsite that prevented resolving the issue?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "GPS",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "GPS",
+        "formfield",
+        "Work Details|Additional Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "GPS",
+        "formfield",
+        "Event|UID",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "GPS",
+        "formfield",
+        "Info|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "GPS",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "PM Inspection Details|Maintenance Actions",
+        "367"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the pH sensor for a healthy communication between the unit and OMCS.",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the flowmeter for a healthy communication between the unit and OMCS.",
+        "58"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the switchboard for a healthy communication between the unit and OMCS. Verify current voltage/current readings from AMT5 align with values indicated on the CB Display",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "module",
+        "Service Orders",
+        "17"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|15. EXAMINE the generator for a healthy communication between the unit and OMCS.",
+        "16"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE UPS relay alarms and shunt trip relay, ensure a healthy communication between the unit and OMCS.",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Motorway Event Log|Recorded By",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Asset Details|Asset Comments",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Hazard Assessment|What are the key tasks job steps?",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Asset Details|Asset Name",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Service Order Form|Nature of Fault",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Service Order Form|Investigation Actions Taken",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|11. EXAMINE the generator for a healthy communication between the unit and OMCS.",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Service Order Form|Work Title",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Service Order Form|Persons Notified",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the pH sensor for a healthy  communication between the unit and OMCS.",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Service Order Form|Work Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Work Requirements & Planning Details|Work Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "OMCS",
+        "formfield",
+        "Work Order Information|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "OMCS",
+        "formfield",
+        "Maintenance Actions|14. EXAMINE UPS relay alarms and shunt trip relay, ensure a healthy communication between the unit and OMCS.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "OMCS",
+        "formfield",
+        "Info|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Follow Up Activities|4. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "14629"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Follow Up Activities|5. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "11653"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "PM Inspection Details|Maintenance Actions",
+        "3066"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. EXAMINE NVR for: a) general condition, excessive noise, signs of overheating and deterioration. b) outstanding alarms or abnormalities, abnormal LED indicators.",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "596"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE visible concrete surfaces, hangers and concrete lining in the air ducts for abnormalities,  signs of delamination, water penetration, leaks, cracks, spalling and drummy concrete.",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the HVAC system, chillers and  FCU units for any outstanding alarms or abnormalities, and abnormal LED indicators",
+        "385"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. SECURE all valves and alarm clocks in the open position or the closed position as labelled",
+        "383"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the control panel HMI in stand-by mode for general condition, any outstanding alarms, abnormal LED indicators.",
+        "353"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. CHECK OPERATION of the OHVD detectors together with the warning signs by verifying OHVD's have triggered within the last two weeks, and verify alarms with Control Room. Ensure that all detectors are aligned by checking RED LED on receiver.",
+        "337"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. CHECK the door switch operation and verify the alarm in the control room",
+        "329"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. CHECK the door switch operation and verify the alarm in the control room",
+        "329"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. Isolate Alarm Signalling Equipment before carrying out any maintenance or testing procedures",
+        "304"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|11. Where CIE is a sub- indicator panel confirm that the alarm condition is indicated at the FIP. is activated. Where the system is monitored ENSURE the alarm has activated the alarm signalling equipment",
+        "304"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. INSPECT the external alarm (bell or strobe light) to ensure it clearly indicates the designated building entry point",
+        "304"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|13. Where the system is monitored, ENSURE the isolate is received by the monitoring service provider alarm signalling equipment",
+        "304"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. Inspect to ensure the external alarm label is legible with the word FIRE in characters not less than 25 mm in height",
+        "290"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. INSPECT the external alarm to ensure it clearly indicates the designated building entry point. Inspect to ensure the external alarm label is legible with the word FREE in characters not less than 25mm in height",
+        "273"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. SIMULATE an alarm condition and confirm that all required common or general visual and audible indications operate and the external alarm is activated. Where the system is monitored ensure the alarm has activated the alarm signalling equipment. Where CIE is a sub-indicator panel, confirm that the alarm condition is indicated at the FIP",
+        "273"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. SIMULATE an alarm and confirm the alarm initiates the occupant warning system including any visual warning devices (VWD)",
+        "273"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. INITIATE an isolate/disable condition at the fire indicator panel and confirm that all required common or general visual and audible indications operate. Where the system is monitored, ensure the isolate is received by the monitoring service provider alarm signalling equipment. Where the panel is an SIP, confirm that the isolate/disable condition is indicated at the FIP as either a fault or isolate/disable",
+        "273"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|19. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "262"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|17. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "262"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9.. SIMULATE an alarm condition and confirm that all required common or general visual and audible indications operate and the external alarm is activated",
+        "259"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10.. Where the system is monitored ENSURE the alarm has activated the alarm signalling equipment",
+        "259"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. Where an isolation valve has not been fitted above the alarm valve, the min stop valve should be closed, enabling a partial test of the alarm valve",
+        "240"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "207"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Inspection Details|Inspect field cabinet UPS unit for system alarms (if applicable)",
+        "190"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Inspection Details|Check micro door switch operates cabinet lighting and alarms correctly back to the control room (if applicable)",
+        "190"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the distribution board for general condition, any outstanding alarms or abnormalities",
+        "188"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the distribution board for general condition, any outstanding alarms or abnormalities.",
+        "185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7 Where an isolation valve has not been fitted above the alarm valve, the min stop valve should be closed, enabling a partial test of the alarm valve",
+        "182"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. Review abnormal alarms raised. CLEAR all alarms if required and raise appropriate action to conduct a fault finding exercise. Raise a CM Work Order as required",
+        "180"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. OBSERVE correct operation of the fire brigade alarm from each deluge and water spray valves. Where the system is monitored, ensure the alarm has activated the alarm signalling equipment",
+        "159"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. VERIFY low air pressure alarm operates at predetermined levels Low pressure alarms visual indicator and sounders are optional",
+        "159"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. Generate a test of the alarm signalling equipment and local alarm in accordance with the manufacturer's operating manual",
+        "159"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. Where an isolation valve has not been fitted above the alarm valve, the min stop valve should be closed, enabling a partial test of the alarm valve",
+        "157"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. VERIFY correct operation of the fire brigade alarms from each deluge valve or group of deluge assemblies, where the system is monitored, ensure the alarm has activated the alarm signalling equipment",
+        "156"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. SECURE all valves and alarm cocks in the open position or the closed position as labelled",
+        "156"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. CHECK for correct operation of alarm",
+        "156"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. RECORD times to operation of alarms and verify that these do not exceed 30 s",
+        "156"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Heading 2|4. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "137"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. CHECK OPERATION of the OHVD detectors together with the warning signs, and verify alarms with Control Room. Ensure that all detectors are aligned by checking RED LED on receiver.  USING the BEAM BREAK ATTACHMENT for SHT012, simulate an overheight vehicle by breaking the detector beam. Confirm by radio that an alarm is received at the tunnel control room.",
+        "129"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the WTP associated assets for any alarms, leaks, signs of damage and abnormality.",
+        "128"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. TEST heat detector function with a suitable heat source or simulate an alarm if detectors are not resettable",
+        "123"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the HVAC system for any outstanding  alarms or abnormalities,  and abnormal LED indicators",
+        "102"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. Group PLC functioning normally – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. RCU function properly – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. PLC functioning normally – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. Fans run in forward & reverse direction for not less than 20 min of time – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. SBTVS01 Power supply unit function properly – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. NPS & SPS Power supply unit function properly – Record if any alarm/ faults observed",
+        "98"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. CHECK the door switch operation and verify the alarm in the control room",
+        "82"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. CHECK the door switch operation and verify the alarm in the control room",
+        "82"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. SIMULATE an alarm and confirm the alarm initiates the occupant warning system including any visual warning devices (VWD)",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. INSPECT the external alarm to ensure it clearly indicates the designated building entry point. Inspect to ensure the external alarm label is legible with the word FREE in characters not less than 25mm in height",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. INITIATE an isolate/disable condition at the fire indicator panel and confirm that all required common or general visual and audible indications operate. Where the system is monitored, ensure the isolate is received by the monitoring service provider alarm signalling equipment. Where the panel is an SIP, confirm that the isolate/disable condition is indicated at the FIP as either a fault or isolate/disable",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. SIMULATE an alarm condition and confirm that all required common or general visual and audible indications operate and the external alarm is activated. Where the system is monitored ensure the alarm has activated the alarm signalling equipment. Where CIE is a sub-indicator panel, confirm that the alarm condition is indicated at the FIP",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Inspection details|Check STREAMS monitoring system for defective loop alarms",
+        "73"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|18. CHECK OPERATION of all torque switches  Open the gearbox, and manually trip the torque switch. Alarm should pop up in control room. Also once tripped, if damper cannot be operated to open in the direction you've tripped, the switch is working.",
+        "73"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Motorway Event Log|Description",
+        "69"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|19. VERIFY: (a) Gauge glass indicates the correct water level. (b) Tank pressure gauge reads within the range nominated. (c) Air pressure switch operates at specified compressor cut-in and cut-out pressures. (d) Low tank pressure alarm operates at specified pressure. (e) Air compressor or gas cylinder supply is operational.",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the DOL for general condition,  any outstanding alarms or abnormalities, abnormal LED indicators, excessive noise, signs of overheating and deterioration.",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "module",
+        "Motorway Event Log",
+        "59"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "module",
+        "Service Orders",
+        "57"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. Isolate Alarm Signalling Equipment before carrying out any maintenance or testing procedures",
+        "48"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Work Order Information|Description",
+        "48"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|14. TEST the operation of the manual initiate switch and confirm normal system discharge sequence, including fire and evacuation alarms, time delays equipment shutdowns, and that it overrides the LCS discharge inhibit switch",
+        "45"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. INSPECT all visual warning devices, including: DO NOT ENTER, EVACUATE, FIRE ALARM and SYSTEM INOPERATIVE for any condition or damage that is likely to adversely affect their function",
+        "45"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|16. TEST the system logic (e.g. dual detector operation or dependency on more than one alarm) and confirm the operation of— VWDs, audible alarms, directional valve signal/output, equipment fire mode signal/output, HVAC fire mode signal/output, system discharge actuator, door and damper release and ancillary controls",
+        "45"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. Where the system is monitored ENSURE the alarm has activated the alarm signalling equipment",
+        "45"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. SIMULATE an alarm condition and confirm that all required common or general visual and audible indications operate and the external alarm is activated",
+        "45"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|30. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|23. TEST the system logic (eg dual detector operation or dependency on more than one alarm) and confirm the operation of VWDs, audible alarms, directional valve signal/output, equipment fire mode signal/output, HVAC fire mode signal/output, system discharge actuator, door and damper release, and ancillary controls",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|21. TEST the operation of the manual switch and confirm normal system discharge sequence, including fire and evacuation alarms time delays equipment shutdowns and that it overrides the LCS discharge inhibit switch",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|19. INSPECT all visual warning devices, including: DO NOT ENTER, EVACUATE, FIRE ALARM, SYSTEM INOPERATIVE, for any condition or damage likely to adversely affect their function",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|28.  Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "41"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Service Order Form|Nature of Fault",
+        "40"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. SECURE all valves and alarm cocks in the open position or the closed position as labelled",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Crane (SHT 007 only)|Note any abnormalities",
+        "37"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. Where the system is monitored ENSURE the alarm has activated the alarm signalling equipment",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. CHECK that the audible alarm continues for a period of four minutes following the starting of the fan and that the strobe remains activated whilst the fan is running",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. SIMULATE an alarm condition and confirm that all required common or general visual and audible indications operate and the external alarm is activated",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|16. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|18. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. Where CIE is a sub- indicator panel confirm that the alarm condition is indicated at the FIP. is activated. Where the system is monitored ENSURE the alarm has activated the alarm signalling equipment",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Asset Details|Asset Comments",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. Where the system is monitored, ENSURE the isolate is received by the monitoring service provider alarm signalling equipment",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. Inspect to ensure the external alarm label is legible with the word FIRE in characters not less than 25 mm in height",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. INSPECT the external alarm (bell or strobe light) to ensure it clearly indicates the designated building entry point",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. In-Tunnel AQM: EXAMINE the AQM system for any outstanding alarms or abnormalities.",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the equipment within the cabinet for any abnormalities, power failure, damage, signs of overheating and deterioration.",
+        "31"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|15. CHECK OPERATION of all torque switches Open the gearbox, and manually trip the torque switch.  Alarm should pop up in control room. Also once tripped, if damper cannot be operated to open in the direction you've tripped, the switch is working.",
+        "31"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|21. Where other warning devices are used as the alarm-indicating devices, INSPECT all devices to ensure that they are in place",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|24. TEST detectors and confirm correct alarm zone indication",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|28. TEST the alarm investigation facility if enabled and check it functions as required",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|32. Simulate alarms to verify that each interface transmission path initiates the corresponding interfaced system as required",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|27. TEST not less than 20% of installed alarm acknowledgement facilities in such a manner that over a 5 year period, al facilities are tested. CHECK the alarm acknowledgement facility functions as required",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|31. Survey all areas of building from floor level and check: (a) that the fire detection and alarm system has not been altered, damaged or compromised. (b) detection device and remote indicators are appropriate for the current use (c) for any condition that may cause a nuisance alarm or the unintentional operation of a suppression system. (d) all exposed cabling, conduits, junction boxes and the like for nay condition that may impact on the performance of the system and are labelled correctly, and all CIE to ensure all components are appropriately mounted and secure.",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the switchboard main circuit breaker displays for general condition, any outstanding alarms or abnormalities, abnormal LED indicators. Take reading of the voltage from the CB Display",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|23. MEASURE system quiescent maximum alarm currents. Calculate the required battery capacity and CHECK the nominal capacity of the installed batteries is not less than the calculated capacity",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Ventia Vehicle Pre-Start Checklist|General (Operational / Functional checks)|Reversing / Travel alarm",
+        "29"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|38. TEST detectors and confirm correct alarm zone indication",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|48. CHECK for any condition that may cause a nuisance alarm or the unintentional operation of a suppression system",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|33. Where other warning devices are used as the alarm-indicating devices, INSPECT all devices to ensure that they are in place",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|46. CHECK that the fire detection and alarm system has not been altered, damaged or compromised",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|41. CHECK the alarm acknowledgement facility functions as required",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|36. MEASURE system quiescent and maximum alarm currents. Calculate the required battery capacity",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Add a Log|Log",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|51. SIMULATE alarm(s) to VERIFY that each interface transmission path initiates the corresponding interfaced system(s) as required",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|40. TEST not less than 20% of installed alarm acknowledgement facilities in such a manner that over a 5-year period",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Follow Up Conditions|4. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|42. TEST the alarm investigation facility if enabled and CHECK it functions as required",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the asset for general condition, power failure, comms failure, any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "27"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. EXAMINE the control panel HMI for general condition,  any outstanding alarms or abnormalities,  abnormal LED indicators.",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance action - TIRTL Sensor Checks|g)\tCheck for any alarms in the ‘Status’ page of the TIRTL software",
+        "25"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the equipment within the cabinet for any  abnormalities, power failure, damage, signs of  overheating and deterioration.",
+        "25"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance action - TIRTL Sensor Checks|h)\tRectify and report any alarms",
+        "25"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Overview|Detection Method",
+        "25"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Service Order Form|Work Title",
+        "24"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Info|Description",
+        "23"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Service Order Form|Work Description",
+        "22"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the equipment within the cabinet for any abnormalities, power failure, damage, signs of overheating and deterioration.",
+        "21"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Management Information|Work Control Procedure",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. EXAMINE system equipment racks, ventilation fans and filters for cleanliness,  deterioration, damage, warning lights, audible alarm tones or alarm panels, loose connections. CLEAN as required.",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. NPS & SPS Power supply unit function properly – Record if any alarm/ faults observed",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Management Information|Work Plan Derived",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|5. Fans run in both forward and reverse direction for not less than 20 min of time – No alarms",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. RCU function properly – Record if any alarm/ faults observed",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. SBPVS01 and SBPVS02 Power supply unit function properly – Record if any alarm/ faults observed",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. PLC functioning normally – Record if any alarm/ faults observed",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Management Information|Work Plan",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. Group PLC functioning normally – Record if any alarm/ faults observed",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. EXAMINE devices in the Control Rooms for deterioration, damage,  warning lights, audible alarm tones or alarm panels, loose connections and cleanliness. CLEAN as required.",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. If atmospheric: EXAMINE the water tank is full and the water level reading is correct. If pressure: EXAMINE the gauge indicates correct water level, the pressure is in acceptable range, the air pressure switch operates at correct pressure, the low tank alarm operates at correct pressure and compressor supply is operational",
+        "19"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Work Requirements & Planning Details|Work Title",
+        "18"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. EXAMINE the control panel HMI for general condition,  any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "18"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Motorway Event Log|Comments",
+        "17"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Work Requirements & Planning Details|Work Description",
+        "16"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data|Describe the Works Performed",
+        "16"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Comments",
+        "15"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "module",
+        "Operators Log",
+        "14"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6 Inspect to ensure the external alarm label is legible with the word FIRE in characters not less than 25 mm in height",
+        "14"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Pre Start|8. EXAMINE system equipment racks, ventilation fans and filters for cleanliness,  deterioration, damage, warning lights, audible alarm tones or alarm panels, loose connections. CLEAN as required.",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Pre Start|7. EXAMINE devices in the Control Rooms for deterioration, damage,  warning lights, audible alarm tones or alarm panels, loose connections and cleanliness. CLEAN as required.",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. TEST the operation of the manual initiate switch and confirm normal system discharge sequence, including fire and evacuation alarms, time delays equipment shutdowns, and that it overrides the LCS discharge inhibit switch",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. TEST detectors and confirm correct alarm zone indication",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. TEST not less than 20% of installed alarm acknowledgement facilities in such a manner that over a 5-year period",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. MEASURE system quiescent and maximum alarm currents. Calculate the required battery capacity",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|4. INSPECT all visual warning devices, including: DO NOT ENTER, EVACUATE, FIRE ALARM and SYSTEM INOPERATIVE for any condition or damage that is likely to adversely affect their function",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|16. CHECK that the fire detection and alarm system has not been altered, damaged or compromised",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. TEST the operation of the manual switch and confirm normal system discharge sequence, including fire and evacuation alarms time delays equipment shutdowns and that it overrides the LCS discharge inhibit switch",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|15. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|10. TEST the system logic (eg dual detector operation or dependency on more than one alarm) and confirm the operation of VWDs, audible alarms, directional valve signal/output, equipment fire mode signal/output, HVAC fire mode signal/output, system discharge actuator, door and damper release, and ancillary controls",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|17. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|18. CHECK for any condition that may cause a nuisance alarm or the unintentional operation of a suppression system",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. Where other warning devices are used as the alarm-indicating devices, INSPECT all devices to ensure that they are in place",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. TEST the system logic (e.g. dual detector operation or dependency on more than one alarm) and confirm the operation of— VWDs, audible alarms, directional valve signal/output, equipment fire mode signal/output, HVAC fire mode signal/output, system discharge actuator, door and damper release and ancillary controls",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|25. TEST operation of mechanical detection systems and confirm the alarm activates the warning system and is capable of initiating system discharge",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|21. SIMULATE alarm(s) to VERIFY that each interface transmission path initiates the corresponding interfaced system(s) as required",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the system and associated components for any alarm,  abnormalities, damage, corrosion, loose components,  leaks, adequate water flow and temperature",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|6. INSPECT all visual warning devices, including: DO NOT ENTER, EVACUATE, FIRE ALARM, SYSTEM INOPERATIVE, for any condition or damage likely to adversely affect their function",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|11. CHECK the alarm acknowledgement facility functions as required",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. TEST the alarm investigation facility if enabled and CHECK it functions as required",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the UPS and control panel HMI for general condition, any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Initiation|Initiation (2)|Detection Reference",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE UPS relay alarms and shunt trip relay, ensure a healthy communication between the unit and OMCS.",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Initiation|Initiation (1)|Detection Reference",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the system and associated components for any alarm, abnormalities, damage, corrosion, loose components, leaks, adequate water flow and temperature.",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Initiation|Initiation (1)|Detection Method",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Motorway Event Log|Location",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. CHECK stop, alarm, open and  close buttons for operation",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data - ITS|Describe why this is a 2 person activity",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Activities|9 . Inspect stabilizer legs, Check legs alarm when in down position.",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "alarm",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "module",
+        "Incident",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "alarm",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance action - FUNCTIONAL CHECK|Comments",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Activities|Note any abnormalities",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Event|Description",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|Comments",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Service Order Form|Investigation Actions Taken",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "module",
+        "Events",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the asset for general condition, power failure,  comms failure, any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE consoles, workstations, servers, switches, racks and associated components for general condition,  power failure, comms failure, any outstanding alarms or abnormalities, abnormal LED indicators, excessive noise, signs of overheating and deterioration.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Work Order Details|Work Order Details (1)|Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|15 Where an isolation valve has not been fitted above the alarm valve, the min stop valve should be closed, enabling a partial test of the alarm valve",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|13. RECORD times to operation of alarms and verify that these do not exceed 30 s",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the asset for general condition,  power failure, comms failure,  any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|36. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|21. SECURE all valves and alarm cocks in the open position or the closed position as labelled",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|20. Isolate Alarm Signalling Equipment before carrying out any maintenance or testing procedures",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. CHECK for correct operation of alarm",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|29. TEST the system logic (eg dual detector operation or dependency on more than one alarm) and confirm the operation of VWDs, audible alarms, directional valve signal/output, equipment fire mode signal/output, HVAC fire mode signal/output, system discharge actuator, door and damper release, and ancillary controls",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Job Details|Additional Repair Details",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|19. VERIFY: (a) Gauge glass indicates the correct water level. (b) Tank pressure gauge reads within the range nominated. (c) Air pressure switch operates at specified compressor cut-in and cut-out pressures. (d) Low tank pressure alarm operates at specified pressure. (e) Air compressor or gas cylinder supply is operational.\"",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE inverter, panels, and cabinet equipment for general condition, damage, corrosion, any outstanding alarms, abnormal readings",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|25 INSPECT all visual warning devices, including: DO NOT ENTER, EVACUATE, FIRE ALARM, SYSTEM INOPERATIVE, for any condition or damage likely to adversely affect their function",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|34.  Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|27. TEST the operation of the manual switch and confirm normal system discharge sequence, including fire and evacuation alarms time delays equipment shutdowns and that it overrides the LCS discharge inhibit switch",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. TEST operation of mechanical detection systems and confirm the alarm activates and is capable of initiating system discharge",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|14. VERIFY correct operation of the fire brigade alarms from each deluge valve or group of deluge assemblies, where the system is monitored, ensure the alarm has activated the alarm signalling equipment",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|16. EXAMINE visible concrete surfaces (roof, walls, infill joints, drainage sump) for abnormalities, leaks, cracks, spalling and drummy concrete",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|20. EXAMINE shear keys and immersion joints, by removing fireboards, for general condition, abnormalities, damage, leaks and corrosion.",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE the Building Security System for any  warning lights, alarms, audible alarm tones or alarm panels.",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Event|Resolution Commentary",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Start Card|Activity",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE Building Management System  for any alarms or errors.",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|57. SIMULATE alarm(s) to VERIFY that each interface transmission path initiates the corresponding interfaced system(s) as required",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|39. Where other warning devices are used as the alarm-indicating devices, INSPECT all devices to ensure that they are in place",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|34. SIMULTE a circuit fault condition at the FIP and confirm that all required common or general visual and audible indications operate. Where such faults are monitored, ensure the fault has activated the alarm signalling equipment. Where the panel is an SIP confirm that the fault condition is indicated at the FIP",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|46. TEST not less than 20% of installed alarm acknowledgement facilities in such a manner that over a 5-year period",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE the distribution board for general condition, any outstanding alarms or abnormalities.",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Hazard Assessment|What are the key tasks job steps?",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|42. MEASURE system quiescent and maximum alarm currents. Calculate the required battery capacity",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|47. CHECK the alarm acknowledgement facility functions as required",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|23. SECURE all valves and alarm cocks in the open position or the closed position as labelled (5)",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|44. TEST detectors and confirm correct alarm zone indication",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|48. TEST the alarm investigation facility if enabled and CHECK it functions as required",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Job Details|Additional Defect Details",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Start Card|1",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Sign-In|Comment",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|54. CHECK for any condition that may cause a nuisance alarm or the unintentional operation of a suppression system",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "alarm",
+        "formfield",
+        "Onsite Risk Assessment|TASK/HAZARD/CONTROL MEASURES (1)|Control Measures Introduced",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Service Request Details|Service Request Details (1)|Service",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|41. TEST one detector of each type per circuit with alarm verification facility enabled to check that it functions as required",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|52. CHECK that the fire detection and alarm system has not been altered, damaged or compromised",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Maintenance Action|What works were undertaken to fix this issue",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data|If not, describe why you cannot complete the activity",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|65. TEST operation of mechanical detection systems and confirm the alarm activates the warning system and is capable of initiating system discharge",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data - ITS|Does this Fault require support team investigation?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|19. \"VERIFY: (a) Gauge glass indicates the correct water level. (b) Tank pressure gauge reads within the range nominated. (c) Air pressure switch operates at specified compressor cut-in and cut-out pressures. (d) Low tank pressure alarm operates at specified pressure. (e) Air compressor or gas cylinder supply is operational.\"",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|78. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|11. SECURE all valves and alarm cocks in the open position or the closed position as labelled",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. EXAMINE the UPS and control panel HMI for general condition, any outstanding alarms or abnormalities, abnormal LED indicators.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|11. EXAMINE devices in the Control Rooms for deterioration, damage,  warning lights, audible alarm tones or alarm panels, loose connections and cleanliness. CLEAN as required.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|14. EXAMINE UPS relay alarms and shunt trip relay, ensure a healthy communication between the unit and OMCS.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. EXAMINE system equipment racks, ventilation fans and filters for cleanliness,  deterioration, damage, warning lights, audible alarm tones or alarm panels, loose connections. CLEAN as required.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|81. TEST one detector of each type per circuit with alarm verification facility enabled to CHECK that it functions as required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Follow-Up Work Details|Intervention",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|73. ENSURE the fault has activated the alarm signalling equipment. Where the panel is an SIP confirm that the fault condition is indicated at the FIP",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|84. De-Isolate Alarm Signalling Equipment to restore system to operational status",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|9. EXAMINE the cast in components of the ceiling hangers  for general condition, abnormalities, damage, leaks, cracks and corrosion.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|76. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|82. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|8. EXAMINE concrete surfaces and hangers in the air ducts and  carriageway for general condition, abnormalities, damage, cracks, leaks and corrosion.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|75. TEST one detector of each type per circuit with alarm verification facility enabled to CHECK that it functions as required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "alarm",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|SPARKS Reference",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Shift Start Details|Handover Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|7. EXAMINE concrete surfaces and hangers within touching distance for general  condition, abnormalities, damage, cracks, leaks and corrosion.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Routine Daily Report|Downtime",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "alarm",
+        "formfield",
+        "Client Details|SPARKS ID",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Asset Works Daily Report|Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Asset Works Daily Report|Community Card Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|28. Reset all alarms, faults and isolations that are applicable and confirm none have returned",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Shift End Details|Handover Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "alarm",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|Communications on site:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "alarm",
+        "formfield",
+        "Job Data - ITS|Actual fault code",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Jobs Information|Additional Repair Details",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "alarm",
+        "formfield",
+        "Initiation|Incident Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|67. ENSURE the fault has activated the alarm signalling equipment. Where the panel is an SIP confirm that the fault condition is indicated at the FIP",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Maintenance Actions|12. EXAMINE the distribution board for general condition,  any outstanding alarms or abnormalities.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "alarm",
+        "formfield",
+        "Asset Details|Asset Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 7 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 1",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 1 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 1 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 3 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 8 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 7",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 4 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 4",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 10 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 9",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 5",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 4 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 5 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 3",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 8 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 5 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 2",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 2 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 10",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 9 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 9 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 2 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 3 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 8",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 10 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 7 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 6 Coordinate",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|If Observation 6 is identified?",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "as-built",
+        "formfield",
+        "Observations (Mismatch between as built drawing and actual construction) Identified|Observation 6",
+        "39"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "as-built",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "21"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "as-built",
+        "formfield",
+        "Work Order Information|Description",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "as-built",
+        "formfield",
+        "Client Details|Details",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "as-built",
+        "formfield",
+        "Info|Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.01|Condition Rating",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.02|Condition Rating",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.03|Condition Rating",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "as-built",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "as-built",
+        "formfield",
+        "DISPATCH DETAILS|Notes",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.09|Condition Rating",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Additional Comments|Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Job Data|Describe the Works Performed",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "as-built",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.08|Condition Rating",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Event|Resolution Commentary",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Event|Record_Detail",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Overall|Condition Rating",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Overall|Overall inspector comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.04|Condition Rating",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.06|Condition Rating",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "as-built",
+        "formfield",
+        "Condition Rating - Element SE.07|Condition Rating",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "as-built",
+        "formfield",
+        "Permit Details|Summary of Work Activities",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "as-built",
+        "formfield",
+        "Event|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "as-built",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (2)|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "as-built",
+        "formfield",
+        "Add a Log|Log",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|2.\tCheck that TOC have full control of the camera before leaving site.",
+        "2884"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.1.\tCheck Camera for loose bolts and clean lens/dome. Maintain and restore if required.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3\tCAMERA",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.2.\tCheck Camera is correctly labelled and replace label if required.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.3.\tCheck Camera housing for any sign of corrosion, misalignment.",
+        "2562"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|1.3.\tCheck for the supply of power to other electrical assets such as Signals, CCTV, VMS, VDS, LUMS and Ramp Metering. Prepare red line mark ups as required.",
+        "2342"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Client Details|Details",
+        "1528"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Inspection - Barrel/Crown|CCTV inspection required",
+        "1477"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Overview|Detection Method",
+        "1064"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Condition Rating - Element SE.08|Attachments - This element includes Sign panels, Variable Message Sign (VMS), Traffic Control Signals and cameras",
+        "1054"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|1. CHECK power supply warnings for core switches  (Use CCTV PC in TACF server room).",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Order Information|Description",
+        "732"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PM Inspection Details|Maintenance Actions",
+        "596"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Add a Log|Log",
+        "581"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|2. CHECK OPERATION of the cameras for picture quality, and the control features of the camera.",
+        "578"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the cameras, and mountings for deterioration, damage, corrosion, vermin/water ingress, vandalism, and loose connection.",
+        "578"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Add a Log|Log Type",
+        "577"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "module",
+        "Motorway Event Log",
+        "560"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Management Information|Work Plan",
+        "549"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Management Information|Work Plan Derived",
+        "549"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Management Information|Work Control Procedure",
+        "549"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Initiation|Initiation (1)|Detection Method",
+        "538"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Initiation|Initiation (2)|Detection Reference",
+        "516"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PM Inspection Details|TMP Number",
+        "504"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "501"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorway Event Log|Description",
+        "467"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Initiation|Initiation (1)|Detection Reference",
+        "427"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PM Inspection Details|Location",
+        "356"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspector Daily Pre-Start|When utilizing Auto Pilot, ensure that you attach the camera securely and in a safe location, away from traffic and other potential hazards",
+        "350"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|1. CHECK power supply warnings for core switches  (Use CCTV PC in TACF server room)",
+        "344"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorway Event Log|Location",
+        "341"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Operators Log",
+        "324"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.3.\tCheck Camera housing for any sign of corrosion, misalignment.",
+        "323"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2\tCAMERA",
+        "323"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.1.\tCheck Camera for loose bolts and clean lens/dome. Maintain and restore if required.",
+        "323"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|2.2.\tCheck Camera is correctly labelled and replace label if required.",
+        "323"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|1. PERFORM the CCTV inspection and jetting of drainage pipes (20% a year, 100% over 5 years).",
+        "264"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Action|Inspect the internal condition of the culvert (recommend using CCTV methodology);",
+        "247"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "220"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspection details|Check camera operation and quality of images and record all observations",
+        "188"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Event|Description",
+        "187"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Info|Description",
+        "164"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|2. CHECK OPERATION of the cameras for picture quality, and the control features (Pan, Tilt, Zoom) of the camera",
+        "160"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the camera pan & tilt heads, mounting brackets and support structure for deterioration, corrosion, damage,vandalism, and loose or unsecured components..",
+        "160"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|3.3.\tEnsure that any CCTV present is undamaged and providing surveillance as intended.",
+        "149"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|3. RECORD evidence of the functional test (Camera number, fans run, time, printout of ventilation page from AMT5)",
+        "144"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "136"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Initiation|Initiation (2)|Detection Method",
+        "97"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Reseal Scoping - Drainage|CCTV Notes",
+        "91"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Reseal Scoping - Drainage|CCTV",
+        "91"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Order Details|Work Order Details (1)|Description",
+        "90"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PM Inspection Details|Location (CI Attribute)",
+        "88"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspection details|Check pan, tilt, and zoom for PTZ cameras",
+        "80"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspection details|Check camera connections",
+        "80"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspection details|Check and clean the camera housing",
+        "80"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "76"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Incident",
+        "70"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Event|Event",
+        "67"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "67"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "65"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "module",
+        "Service Orders",
+        "59"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Requirements & Planning Details|Work Description",
+        "58"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Requirements & Planning Details|Work Title",
+        "57"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "camera/CCTV",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "56"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data - Civil|Describe activity you are undertaking",
+        "56"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Events",
+        "52"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorway Event Log|Recorded By",
+        "47"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorway Event Log|Comments",
+        "44"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Culvert|Material Defects in Cell Displacement|Repair Description",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Data|Job Location",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Details|Asset Comments",
+        "41"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Closures",
+        "37"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Initiation|Incident Description",
+        "37"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Closure Audit|Audit Comment",
+        "37"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Service Order Form|Work Title",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset|Inspection comments",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Order Details|Work Order Details (3)|WorkControlProcedure",
+        "34"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Order Details|Work Order Details (3)|WorkPlan",
+        "34"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Post Shift|Was CCTV completed today?",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Culvert|Material Defects in Roof|Repair Description",
+        "27"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Service Order Form|Nature of Fault",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Culvert|Material Defects in Walls|Repair Description",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Check Sheet|1.\tVISIT OF PURPOSE:",
+        "25"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Service Order Form|Work Description",
+        "24"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|Description",
+        "24"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Works Daily Report|Shift Timeline",
+        "23"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Details|Asset Name",
+        "22"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Works Daily Report|Activity Summary",
+        "21"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Rectification|Rectification (1)|Action Taken",
+        "21"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Service Request Details|Service Request Details (1)|Service",
+        "17"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Incident Category",
+        "15"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Assessments|Impacts",
+        "14"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Overview|Impact",
+        "14"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Finish Work On Site|Describe the works performed",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "module",
+        "Customer Request (VEN)",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Jobs Information|Additional Defect Details",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "camera/CCTV",
+        "formfield",
+        "DISPATCH DETAILS|Notes",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Print Name",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Details|Additional Defect Details",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Sign-In|Location",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Service Order Form|Investigation Actions Taken",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data - Civil|If not, describe why you cannot complete the activity",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Event/Inspection",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Incident Closure",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data - ITS|Describe why this is a 2 person activity",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Onsite Risk Assessment|1|Location",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Shift Start Details|Handover Comments",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Finish Work On Site|Describe why you cannot complete the activity?",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Job Data|Safety Info, Precautions, Hazards",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Works Daily Report|Ventia Management Notes",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Resolution Commentary",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Ongoing_Sp_Actions",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Hold Points|Comment",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Details|Additional Location Details",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Details Of Vehicles Involved|Registration Number",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|Comments",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Inspection - Barrel/Crown|Comment",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Permit Details|Permit Title",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Works Daily Report|Asset Works Daily Report (1)|Crew Name",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data|Describe the Works Performed",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Jobs Information|Additional Repair Details",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Requirements & Planning Details|Location",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "FORM|Risk Assessment Notes",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Permit Details|Summary of Work Activities",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|6. EXAMINE base/foundation for excessive  vegetation around Camera pole. CLEAN as required.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE Camera poles, foundation/base, footings, nuts and bolts,  access points and support structures for integrity, damage, corrosion, cracks, loose or unsecured components, and graffiti.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Defect Details|Defect Description (Please use the Camera icon to attach photos)",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Sign-In|Comment",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|8. EXAMINE the camera for dirt build up,  water and dust ingress affecting Camera functions. CLEAN as required.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Work Permits",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (3)|Controls",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (2)|Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Client Details|SPARKS ID",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE Camera poles for signs of accidental damage and EXAMINE the surrounding protective assets (e.g. concrete barriers)",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|5. EXAMINE Camera poles for signs  of deflection, leaning or bent components.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Hazard Assessment|What are the key tasks job steps?",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE Camera poles for  signs of deteriorated protective coating/paint and corrosion.",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Request Information|KPI Information: Project Co must make available within 2 Business Days of a request by the State CCTV data collected over the 21 day period immediately preceding the relevant request.",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Verification|Comments",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Record_Detail",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Jobs Information|Additional Location Details",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Start Card|Activity",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Permit Details|Work Location",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Information|Job Location",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Action|What works were undertaken to fix this issue",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Shift End Details|Handover Comments",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Sign-in Sign-out",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Subtopic",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Incident|If applicable, details of asset damage",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Inspection - Inlet|Comment",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Inspection - Outlet|Comment",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "RAMC-RM Pack",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Action|Comments",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Incident|TMC Number",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Event|Contact_Name",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Hazard Review|We will implement these controls",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Routine Job Pack - Supervisor|Job Details|Work Type",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Additional Project Information|Site Observation",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|Camera Number",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PM Inspection Details|Asset Hierarchy Level 1",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Level 2 Report Comments|Inspection Comments",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Sign Details|Sign Type",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Onsite Risk Assessment|1|Task",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Actions|RECORD evidence of the functional test (Camera number, fans run, time, printout of ventilation page from AMT5)",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Job Data|Permit",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 1 – CHECK AND REPAIR|Communications on site:",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Culvert|Road Surface - Settlement/Depressions|Repair Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Details|Additional Repair Details",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Follow-Up Work Details|Intervention",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Job Data - ITS|Does this require further works, material, subcontractors, permits?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Start Card|3",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Verification|If so, add comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Defect Details|Defect description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Signs required|Any other additional equipment required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance action - FUNCTIONAL CHECK|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Routine Daily Report|Routine Daily Report (1)|Subcontractor 3",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "Toolbox Talks",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Work Details|Notify Assets Team and Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Treatment Configurations|Description - Treatment 3",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Shift Report|Details of Materials Used|Type x Qty",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Asset Attribute Details|Alert Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Start Work On Site|Hazards Identified and Managed",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Reseal Scoping - Drainage|Jet Rodding Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "RM611/RM615 Sign Repair/Replacement|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (3)|Risks",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Culvert|Serviceability Defect - Cell Blockage|Repair Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Lane Access Form|If No, Provide Reasons why Traffic Management was not required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Start Card|1",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Sign-In|Contact Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Rectification|Rectification (3)|Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "TMR Request|Request Reference",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "START Card|Relevant SWMS for the task",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Sign-Out|Contact Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Inspector Prestart|Other",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Motorist Details|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (1)|How can we make it safer? (Controls) – e.g., Set up exclusion zone, trained and competent, spotter in place and standing in safe place, potholing, eyeballing service, permits, plans, dust suppression, silt fences)",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Toolbox Tuesday|Notes/Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "LIGHTING DATA TABLES|Circuit No.4|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Permit Details|Summary of Work Activities",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Defect Details|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Routine Daily Report|Crew Details|Crew Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "camera/CCTV",
+        "formfield",
+        "Follow-Up Work Details|Quantity required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Work Permit Details|Permit Title",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Job Details|DESCRIPTION",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "LIGHTING DATA TABLES|Circuit No.1|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (2)|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (4)|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "camera/CCTV",
+        "formfield",
+        "Asset Condition Score|Additional Comments/Photo",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Details Of Vehicles Involved|Colour",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Onsite Risk Assessment|TASK/HAZARD/CONTROL MEASURES (1)|Task/Job Steps",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Data|TGS Used",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "module",
+        "RAMC-RM Patching",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "LIGHTING DATA TABLES|LIGHTING DATA TABLES (4)|Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (3)|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Asset Works Daily Report|Asset Works Daily Report (3)|Subcontractor 3",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Job Compliance|KPI Compliance Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "camera/CCTV",
+        "formfield",
+        "Maintenance Check Sheet|2.\tWORKS CARRIED OUT:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dTIMS",
+        "formfield",
+        "Asset Information|dTIMS Treatment Year",
+        "173"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dTIMS",
+        "formfield",
+        "Asset Information|dTims Model",
+        "173"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dTIMS",
+        "formfield",
+        "Asset Information|dTIMS Model Treatment",
+        "173"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dTIMS",
+        "formfield",
+        "Project Treatment Specifications|Treatment (dTIMS)",
+        "119"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dTIMS",
+        "formfield",
+        "Treatment Specifications|Treatment (dTIMS)",
+        "48"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dashcam",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dashcam",
+        "formfield",
+        "Work Order Information|Description",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "dashcam",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dashcam",
+        "formfield",
+        "Info|Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dashcam",
+        "formfield",
+        "Event|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dashcam",
+        "formfield",
+        "Asset Works Daily Report|Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "dashcam",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "dashcam",
+        "module",
+        "Events",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Comment",
+        "16203"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "handover",
+        "formfield",
+        "Motorway Event Log|Incident Response handover (IR leaves site)",
+        "1919"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Shift End Details|Handover Comments",
+        "1772"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Shift End Details|Handover to",
+        "1772"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Shift Start Details|Handover Comments",
+        "1772"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Shift Start Details|Handover Received From",
+        "1772"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Add a Log|Log Type",
+        "552"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Earth stake installed and of good condition and report of test result",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|No graffiti or posters on equipment",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|NCR’s all closed out",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Post mounted Loop detector removed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Are any direct buried cables onsite after works (reason)",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Conduit entries in TCS housing sealed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Road re-instated to Service provider or council specification",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Site inventory list completed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Concrete tops level with no trip hazards",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Do any cables have less than three available cores (new TCS construction)",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Traffic signal supply tags fitted and conduit insulated through pits",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Are all loops numbered correctly",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|TSC/4 compliant Controller installed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|WAE markups provided (3 drawings)",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Regulatory signs installed as per plan",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Pavement permanent re-instatement completed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Defect report completed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Correct offsets of all posts",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Abandoned cables that cannot be removed are cutoff and sealed with an end cap",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Rope installed in every conduit",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Is there 1m of cable in each pit",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Existing Type 1 removed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Detail any items removed that will not be returned and reason",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Are all abandon conduits sealed of at entry to pit both ends",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Copy of completed and signed ITP/NOEW",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Pits cleaned, rendered & level",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Any damage to intersection equipment found onsite not identified in kick-off",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Existing porcelain Terminal Blocks Removed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|List of Removed equipment returned to Ventia",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Are abandon cables removed",
+        "493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Concrete pavement Permanent reinstatement completed",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Reflective tape installed and in good condition",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Asset handover form completed and TFNSW notified",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Add a Log|Log",
+        "438"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "handover",
+        "formfield",
+        "Motorway Event Log|Incident Response handover",
+        "266"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "module",
+        "Operators Log",
+        "247"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Comments",
+        "64"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Verification|Final Inspection/Handover",
+        "58"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "34"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Management Information|Work Plan Derived",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Work Order Information|Description",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Management Information|Work Control Procedure",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Management Information|Work Plan",
+        "26"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Event|Ongoing_Sp_Actions",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Asset Works Daily Report|Shift Timeline",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "handover",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Event|Description",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "module",
+        "Events",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Work Order Details|Work Order Details (1)|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Event|Resolution Commentary",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|Concrete pavement Permanent re-instatement completed",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Verification|Final Inspection/ Handover",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|String Comments",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|\tReflective tape installed and in good condition",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Work Order Details|Work Order Details (3)|WorkPlan",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Work Order Details|Work Order Details (3)|WorkControlProcedure",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "handover",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Handover/practical completion|\tAsset handover form completed and TFNSW notified",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Asset Works Daily Report|Ventia Management Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "formfield",
+        "Prestart Meeting|Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Closure Audit|Audit Comment",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "handover",
+        "formfield",
+        "Asset Details|Asset Comments",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "handover",
+        "formfield",
+        "DISPATCH DETAILS|Notes",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "handover",
+        "module",
+        "Customer Request (VEN)",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "module",
+        "Shifts",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "module",
+        "Event/Inspection",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "handover",
+        "formfield",
+        "Initiation|Initiation (1)|Detection Reference",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|2. FAN OPERATING CHECK - CHECK the Case Vibration level is within limits",
+        "900"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. INSPECT fire indicator panel (FIP), sub-indicator panel (SIP),repeater panel, fire brigade panel(FBP), mimic panel, fire fan control panel (FFCP) and (a). Ensure that they are clearly visible, readily accessible and free from dust and contaminants, and (b) where a panel is obscured by a door, check that the door is correctly labelled",
+        "273"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "PM Inspection Details|Maintenance Actions",
+        "186"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "PM Inspection Details|Location",
+        "94"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. Assess bearing lubrication requirements. Raise a CM and LUBRICATE if fans have operated 4000 hours since last lubrication for Exhaust fans and 8000 hours since last lubrication for Supply Fans  Inspect the lubrication plate on each fan and apply lubrication using a 475mL grease gun.  For Supply fans apply - 59mL at NDE and DE For Exhaust fans apply - 123.9mL at NDE and 88.5mL at DE  Total volume of grease to use is calculated by 1.18mL x no. of Strokes indicated on the plate.",
+        "90"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|2. INSPECT fire indicator panel (FIP), sub-indicator panel (SIP),repeater panel, fire brigade panel(FBP), mimic panel, fire fan control panel (FFCP) and (a). Ensure that they are clearly visible, readily accessible and free from dust and contaminants, and (b) where a panel is obscured by a door, check that the door is correctly labelled",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE all external components without access restrictions for damage or corrosion (Fan Case, Inlet/Outlet Guard, Motor Housing, External Support Structures and Mounts)",
+        "62"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|27. EXAMINE Axial fan Flexible Connectors for Deposit build up / Ingress of foreign material",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|17. EXAMINE Axial fan & Motor Support Structure for signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|24. EXAMINE Axial fan Flexible Connectors for Signs of physical deterioration (dent, Chip, Scoring etc)",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|18. EXAMINE Axial fan & Motor Support Structure for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|15. EXAMINE Fan Motor Housing & mounts for Deposit build up / Ingress of foreign material",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|12. EXAMINE Fan Motor Housing & mounts for signs of physical deterioration (dent, Chip, Scoring etc).",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|9. EXAMINE both Internal & external Axial Fan Casing, front guard & flanges for signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|20. EXAMINE Axial fan AVM (all 3 Anti Vibration Mountings of each fan) for signs of physical deterioration (dent, Chip, Scoring etc)",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|23. EXAMINE Axial fan AVM (all 3 Anti Vibration Mountings of each fan) for Deposit build up / Ingress of foreign material",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|35. EXAMINE the fan blades & Nose cone for deposit build up / Ingress of foreign materials",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|31. EXAMINE Axial fan Electrical Conduits, Electrical boxes & VA box for signs of overheating",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|30. EXAMINE Axial fan Electrical Conduits, Electrical boxes & VA box for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|8. EXAMINE both Internal & external Axial Fan Casing, front guard & flanges for signs of physical deterioration (Pitting, Scoring, dent, Chip, etc)",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|11. EXAMINE both Internal & external Axial Fan Casing, front guard & flanges for Deposit build up / Ingress of foreign material",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|14. EXAMINE Fan Motor Housing & mounts for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|21. EXAMINE Axial fan AVM (all 3 Anti Vibration Mountings of each fan) for signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|26. EXAMINE Axial fan Flexible Connectors for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|19. EXAMINE Axial fan & Motor Support Structure for Deposit build up / Ingress of foreign material",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|22. EXAMINE Axial fan AVM (all 3 Anti Vibration Mountings of each fan) for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|34. EXAMINE the fan blades & Nose cone for unsecured or loose component. EXAMINE the blade pitch angle and correct the same as required",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|29. EXAMINE Axial fan Electrical Conduits, Electrical boxes & VA box for Signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|25. EXAMINE Axial fan Flexible Connectors for Signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|32. EXAMINE Axial fan blades & Nose cone for Signs of physical deterioration",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|10. EXAMINE both Internal & external Axial Fan Casing, front guard & flanges for unsecured or loose component",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|13. EXAMINE Fan Motor Housing & mounts for signs of corrosion",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|16. EXAMINE Axial fan & Motor Support Structure for signs of physical deterioration (dent, Chip, Scoring etc)",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|28. EXAMINE Axial fan Electrical Conduits, Electrical boxes & VA box for Signs of physical deterioration",
+        "61"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|2. CHECK OPERATION of the DOL.  Start the fan in both remote and manual mode, and check if it is working. SMP: Run groups per MCC group per night (Night 1, group of 7 TVS01, then TVS02, then 4 sets of 4 over 4 nights for PVS)  Run in forward direction at fast speed in one year and revserse the next year",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE all external components without access restrictions for damage or corrosion (Fan Case, Inlet/Outlet Guard, Motor Housing, External Support Structures and Mounts)",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|33. EXAMINE the Fan blades & Nose cone for corrosion",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|5. EXAMINE all external components without access restrictions for damage or corrosion (Fan Case, Inlet/Outlet Guard, Motor Housing, External Support Structures and Mounts)",
+        "60"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Safety Note|Always remove keys or shut down isolator switches when checking fan and fan drive components. This also applies to brooms and other moving parts.",
+        "46"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|6. CHECK OPERATION of the fans and heaters by visually observing them.  Operate the fan through facility override and test its operation.",
+        "38"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|4. CHECK that the audible alarm continues for a period of four minutes following the starting of the fan and that the strobe remains activated whilst the fan is running",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. TEST that the nominated fan starts up following forty seconds warning. Continously monitor the fan’s fault indication and stop the fan immediately if the fault lamp should become illuminated",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|5. CHECK the fan and confirm that the warning also stops",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|2. CHECK the strobes and Sirens in the fan corresponding room and attenuator chambers are initiated",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|1. CHECK OPERATION of fault indication lamps and ensure that no fault exists for that fan",
+        "36"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Hazard Assessment|What are the key tasks job steps?",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check cooling fan operation. Repair or replace as necessary",
+        "30"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|58. CHECK the operation of the fan-running indicator",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|60. CHECK the operation of the fan-fault indicator",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|59. CHECK the operation of the fan-stopped indicator",
+        "28"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "PM Inspection Details|Location (CI Attribute)",
+        "22"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Work Requirements & Planning Details|Work Description",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. Upon running the test, once the seventh fan comes online and runs for 1 minute, turn all fans off. The whole test should be no more than 20 minutes.",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Work Requirements & Planning Details|Work Title",
+        "19"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|10. REPLACE fan belts  with a new belt.",
+        "18"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|Comments",
+        "17"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check cooling fan operation. Repair or replace as necessary",
+        "14"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Event|Description",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Asset Details|Asset Name",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|30. CHECK the operation of the fan-fault indicator",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|28. CHECK the operation of the fan-running indicator",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|29. CHECK the operation of the fan-stopped indicator",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "12"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "module",
+        "Service Orders",
+        "10"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Asset Details|Asset Comments",
+        "9"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Activities|6. Fan/head condition, Aux engine & hopper cleaning.",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Maintenance Action|Composting toilet - Use approved contractor to service the following: -Cleaning the inside of the pedestal use the diluted Nature Flush Enzymes and toilet brush - DO NOT USE CHEMICALS -Cleaning the seat and the outside of the pedestal use a mild detergent or diluted white vinegar -For CM LP; CM HP units rotate the mixer arm each week other systems please consult your manual. -Spray your fan with WD 40 and check connections. -Check ventilation stack for blockage.",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "module",
+        "Events",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Service Order Form|Work Title",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Service Order Form|Nature of Fault",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Rectification|Rectification (1)|Action Taken",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Follow-Up Work Details|Quantity required",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Service Order Form|Work Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Work Requirements & Planning Details|Location",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "module",
+        "Closures",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "jet/fan",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|Comments",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Motorist Details|Comments",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Job Data - ITS|Actual fault code",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "module",
+        "Incident",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Info|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|65. CHECK the operation of the fan-stopped indicator",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|66. CHECK the operation of the fan-fault indicator",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|64. CHECK the operation of the fan-running indicator",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "jet/fan",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "jet/fan",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Work Order Information|Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Job Data - ITS|Is this a 2-person activity?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Follow-Up Work Details|Intervention",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Initiation|Incident Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE the exhaust fan for abnormal noise",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|336. EXAMINE the Fan blades & Nose cone for corrosion",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Service Order Form|Investigation Actions Taken",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE all external components without access restrictions for damage or corrosion (Fan Case, Inlet/Outlet Guard, Motor Housing, External Support Structures and Mounts)",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "jet/fan",
+        "formfield",
+        "Routine Daily Report|Downtime",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "jet/fan",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (2)|Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Hazard Assessment|What do I/we need to do to keep safe?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|1. CHECK OPERATION and EXAMINE the exhaust fan for general condition",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "jet/fan",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the exhaust fan for damage",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "jet/fan",
+        "formfield",
+        "DISPATCH DETAILS|First Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "jet/fan",
+        "formfield",
+        "PART 2 – RECORD OF ASSET CONDITION AND REPAIRS|PART 2 – RECORD OF ASSET CONDITION AND REPAIRS (1)|SPARKS Reference",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "jet/fan",
+        "formfield",
+        "Job Data|Describe the Works Performed",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "telemetry/telematics",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "telemetry/telematics",
+        "formfield",
+        "Follow-Up Work Details|Quantity required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "103"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Motorway Event Log|Description",
+        "16"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "vehicle stopped/location",
+        "module",
+        "Motorway Event Log",
+        "13"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Event|Description",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Motorway Event Log|Comments",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "vehicle stopped/location",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "module",
+        "Events",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Initiation|Incident Description",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Motorway Event Log|Location",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "module",
+        "Operators Log",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "module",
+        "Incident",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Rectification|Rectification (1)|Action Taken",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "vehicle stopped/location",
+        "formfield",
+        "Add a Log|Log",
+        "1"
+      ]
+    ]
+  }
+}

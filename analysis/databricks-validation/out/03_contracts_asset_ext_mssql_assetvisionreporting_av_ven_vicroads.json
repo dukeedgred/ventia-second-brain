@@ -1,0 +1,14 @@
+{
+  "name": "03_contracts_asset_ext_mssql_assetvisionreporting_av_ven_vicroads",
+  "statement": "SELECT 'ext_mssql_assetvisionreporting_av_ven_vicroads' AS catalog_name, 'asset' AS table_name, Contract, COUNT(*) AS row_count\nFROM `ext_mssql_assetvisionreporting_av_ven_vicroads`.dbo.asset\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY Contract\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nUser does not have USE CATALOG on Catalog 'ext_mssql_assetvisionreporting_av_ven_vicroads'. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

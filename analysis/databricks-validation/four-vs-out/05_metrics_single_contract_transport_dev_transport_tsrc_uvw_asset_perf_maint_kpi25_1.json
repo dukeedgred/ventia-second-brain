@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_asset_perf_maint_kpi25_1",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_asset_perf_maint_kpi25_1' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`constructiondate` AS TIMESTAMP)), MAX(try_cast(`disposaldate` AS TIMESTAMP)), MAX(try_cast(`EarliestStartDate` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP)), MAX(try_cast(`scheduleddate` AS TIMESTAMP)), MAX(try_cast(`CompletedInspId` AS TIMESTAMP)), MAX(try_cast(`Completeddate` AS TIMESTAMP)), MAX(try_cast(`NonCompliantDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledStatus` AS TIMESTAMP)), MAX(try_cast(`AssessmentDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`constructiondate` AS TIMESTAMP)), MIN(try_cast(`disposaldate` AS TIMESTAMP)), MIN(try_cast(`EarliestStartDate` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP)), MIN(try_cast(`scheduleddate` AS TIMESTAMP)), MIN(try_cast(`CompletedInspId` AS TIMESTAMP)), MIN(try_cast(`Completeddate` AS TIMESTAMP)), MIN(try_cast(`NonCompliantDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledStatus` AS TIMESTAMP)), MIN(try_cast(`AssessmentDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'constructiondate|disposaldate|EarliestStartDate|DueDate|scheduleddate|CompletedInspId|Completeddate|NonCompliantDate|ScheduledStatus|AssessmentDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_asset_perf_maint_kpi25_1`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[UNRESOLVED_COLUMN.WITH_SUGGESTION] A column, variable, or function parameter with name `a`.`ElectricalAssetType` cannot be resolved. Did you mean one of the following? [`i`.`Asset Type`, `a`.`assettype`, `a`.`spatialtype`, `a`.`AssetSubType`, `a`.`assetname`]. SQLSTATE: 42703; line 240 pos 20"
+    },
+    "sql_state": "42703"
+  },
+  "manifest": null,
+  "result": null
+}

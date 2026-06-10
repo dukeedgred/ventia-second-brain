@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi456_incidents",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi456_incidents' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DateKey` AS TIMESTAMP)), MAX(try_cast(`OccurrenceDateandTime` AS TIMESTAMP)), MAX(try_cast(`DetectedDateTime` AS TIMESTAMP)), MAX(try_cast(`InitiatedDateTime` AS TIMESTAMP)), MAX(try_cast(`ArrivalOnSiteDateTime` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DateKey` AS TIMESTAMP)), MIN(try_cast(`OccurrenceDateandTime` AS TIMESTAMP)), MIN(try_cast(`DetectedDateTime` AS TIMESTAMP)), MIN(try_cast(`InitiatedDateTime` AS TIMESTAMP)), MIN(try_cast(`ArrivalOnSiteDateTime` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DateKey|OccurrenceDateandTime|DetectedDateTime|InitiatedDateTime|ArrivalOnSiteDateTime' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi456_incidents`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi456_incidents' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

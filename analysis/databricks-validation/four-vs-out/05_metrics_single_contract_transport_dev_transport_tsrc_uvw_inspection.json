@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_inspection",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_inspection' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`StartReferencePointName` AS TIMESTAMP)), MAX(try_cast(`StartDistancePast` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`ScheduledDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP)), MAX(try_cast(`EarlyStartDate` AS TIMESTAMP)), MAX(try_cast(`PlannedScheduledDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`StartReferencePointName` AS TIMESTAMP)), MIN(try_cast(`StartDistancePast` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`ScheduledDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP)), MIN(try_cast(`EarlyStartDate` AS TIMESTAMP)), MIN(try_cast(`PlannedScheduledDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser|DueDate|EarlyStartDate|PlannedScheduledDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_inspection`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "uvw_inspection",
+        "VIEW",
+        "158557",
+        "true",
+        "2026-01-15T01:00:00Z",
+        "1970-01-01T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser|DueDate|EarlyStartDate|PlannedScheduledDate"
+      ]
+    ]
+  }
+}

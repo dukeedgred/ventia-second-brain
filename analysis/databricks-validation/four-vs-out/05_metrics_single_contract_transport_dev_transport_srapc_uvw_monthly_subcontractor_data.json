@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_srapc_uvw_monthly_subcontractor_data",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_srapc' AS schema_name,\n  'uvw_monthly_subcontractor_data' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Submission Date` AS TIMESTAMP)), MAX(try_cast(`Date of special waste removal from site` AS TIMESTAMP)), MAX(try_cast(`formDate_2` AS TIMESTAMP)), MAX(try_cast(`Date of special waste disposal at licensed facility` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Submission Date` AS TIMESTAMP)), MIN(try_cast(`Date of special waste removal from site` AS TIMESTAMP)), MIN(try_cast(`formDate_2` AS TIMESTAMP)), MIN(try_cast(`Date of special waste disposal at licensed facility` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Submission Date|Date of special waste removal from site|formDate_2|Date of special waste disposal at licensed facility' AS freshness_columns\nFROM `transport_dev`.`transport_srapc`.`uvw_monthly_subcontractor_data`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[UC_DEPENDENCY_DOES_NOT_EXIST] Dependency does not exist in Unity Catalog:\n Table 'transport_dev.transport_srapc.uvw_monthly_subcontractor_data' is invalid because one of the underlying resources does not exist. SQLSTATE: 42P01"
+    },
+    "sql_state": "42P01"
+  },
+  "manifest": null,
+  "result": null
+}

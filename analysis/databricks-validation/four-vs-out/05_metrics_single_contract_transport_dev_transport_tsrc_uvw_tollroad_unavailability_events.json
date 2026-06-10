@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_tollroad_unavailability_events",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_tollroad_unavailability_events' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`datekey` AS TIMESTAMP)), MAX(try_cast(`Occurrence` AS TIMESTAMP)), MAX(try_cast(`End Time - Rectification` AS TIMESTAMP)), MAX(try_cast(`Total Time Factor (TFe)` AS TIMESTAMP)), MAX(try_cast(`Financial_Join_date` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`datekey` AS TIMESTAMP)), MIN(try_cast(`Occurrence` AS TIMESTAMP)), MIN(try_cast(`End Time - Rectification` AS TIMESTAMP)), MIN(try_cast(`Total Time Factor (TFe)` AS TIMESTAMP)), MIN(try_cast(`Financial_Join_date` AS TIMESTAMP))) AS earliest_observed_ts,\n  'datekey|Occurrence|End Time - Rectification|Total Time Factor (TFe)|Financial_Join_date' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_tollroad_unavailability_events`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_tollroad_unavailability_events' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

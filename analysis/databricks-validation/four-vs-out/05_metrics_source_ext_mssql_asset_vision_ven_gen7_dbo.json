@@ -1,0 +1,548 @@
+{
+  "name": "05_metrics_source_ext_mssql_asset_vision_ven_gen7_dbo",
+  "statement": "SELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'asset' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ConstructionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConstructionDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DisposalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DisposalDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ConditionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConditionDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ConstructionDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ConstructionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConstructionDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DisposalDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DisposalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DisposalDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ConditionDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ConditionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConditionDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`asset`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'assetarea' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`assetarea`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'assetattribute' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`assetattribute`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'assetaudit' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Modified` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`assetaudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'assetclassification' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`assetclassification`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'assetlocation' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`assetlocation`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'capitalwork' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`capitalwork`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'capitalworktask' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`capitalworktask`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'contractreference' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`contractreference`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'custommoduleitem' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`custommoduleitem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'exportdate' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`LastExported` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LastExported` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`LastExported` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`LastExported` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LastExported` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|LastExported' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`exportdate`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'exportdatelog' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`ExportDateID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateID` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`LastExported` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LastExported` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`ExportDateID` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ExportDateID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateID` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`LastExported` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`LastExported` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LastExported` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'ExportDateID|DeltaUTC|LastExported' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`exportdatelog`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'formfield' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`formfield`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'inspection' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDateTo` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateTo` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDateFrom` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDateTo` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDateTo` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateTo` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`inspection`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'inspectionrelationship' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`inspectionrelationship`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'inspectionstatus' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StatusDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDateUTC` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StatusDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDateUTC` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`inspectionstatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'job' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`job`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'jobasset' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`jobasset`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'jobcomment' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`jobcomment`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'log' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  MAX(CASE WHEN try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END) AS latest_observed_ts,\n  MIN(CASE WHEN try_cast(`Modified` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END) AS earliest_observed_ts,\n  'Modified' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`log`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'module' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartPointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartPointName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartPointName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartPointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartPointName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`module`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'photo' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|CreatedDate|CreatedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`photo`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'plannedresourceitem' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedResourceCreatedDate|PlannedResourceCreatedUser|StartDate|EndDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`plannedresourceitem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'resource' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`resource`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'resourceattribute' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`resourceattribute`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'resourceaudit' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Modified` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`resourceaudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'summarycheck' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CheckDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CheckDateUTC` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CheckDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CheckDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CheckDateUTC` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|CheckDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`summarycheck`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'timesheetitem' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetTypeName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetTypeName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetTypeName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetTypeName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetTypeName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`timesheetitem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vassetaudit' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Modified` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Modified` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Modified` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vassetaudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vassetlocation' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vassetlocation`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vcapitalwork' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vcapitalwork`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vcapitalworktask' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vcapitalworktask`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vinspection' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDateTo` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateTo` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDateFrom` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateFrom` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDateTo` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDateTo` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDateTo` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vinspection`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vinspectionstatus' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StatusDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDateUTC` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StatusDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDateUTC` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vinspectionstatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vjob' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vjob`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vmodule' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartPointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartPointName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartPointName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartPointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartPointName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vmodule`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'vworkflowstatus' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`vworkflowstatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_gen7' AS catalog_name,\n  'dbo' AS schema_name,\n  'workflowstatus' AS table_name,\n  'FOREIGN' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_gen7`.`dbo`.`workflowstatus`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 38
+      }
+    ],
+    "total_row_count": 38,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 38,
+    "data_array": [
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "asset",
+        "FOREIGN",
+        "107789",
+        "true",
+        "2026-06-03T02:17:52.33Z",
+        "1984-06-02T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "assetarea",
+        "FOREIGN",
+        "38715",
+        "true",
+        "2026-04-27T01:32:27.98Z",
+        "2021-01-19T21:48:26.97Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "assetattribute",
+        "FOREIGN",
+        "3850456",
+        "true",
+        "2026-06-03T02:17:52.437Z",
+        "2021-02-24T05:31:08.977Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "assetaudit",
+        "FOREIGN",
+        "1751152",
+        "true",
+        "2026-06-03T12:10:15.2Z",
+        "2020-06-10T17:01:03.377Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "assetclassification",
+        "FOREIGN",
+        "50484",
+        "true",
+        "2026-06-01T02:17:04.09Z",
+        "2020-06-30T04:54:40.317Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "assetlocation",
+        "FOREIGN",
+        "111686",
+        "true",
+        "2026-06-03T02:17:52.593Z",
+        "2020-10-03T06:05:14.573Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "capitalwork",
+        "FOREIGN",
+        "787",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "2020-08-09T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "capitalworktask",
+        "FOREIGN",
+        "1899",
+        "true",
+        "2026-06-08T10:39:56.267Z",
+        "2020-11-19T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "contractreference",
+        "FOREIGN",
+        "73549",
+        "true",
+        "2024-10-21T02:41:02.53Z",
+        "2020-11-08T22:52:37Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "custommoduleitem",
+        "FOREIGN",
+        "149276",
+        "true",
+        "2026-06-09T04:50:16.69Z",
+        "2022-10-20T22:31:12.827Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "exportdate",
+        "FOREIGN",
+        "20",
+        "true",
+        "2026-06-09T05:20:22.647Z",
+        "2026-06-09T05:20:00.04Z",
+        "DeltaUTC|LastExported"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "exportdatelog",
+        "FOREIGN",
+        "1285997",
+        "true",
+        "2026-06-09T05:20:22.647Z",
+        "1970-01-01T00:00:01Z",
+        "ExportDateID|DeltaUTC|LastExported"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "formfield",
+        "FOREIGN",
+        "7552918",
+        "true",
+        "2026-06-09T05:20:19.753Z",
+        "2020-07-01T01:26:10.753Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "inspection",
+        "FOREIGN",
+        "278178",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "1969-12-31T16:32:34Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "inspectionrelationship",
+        "FOREIGN",
+        "0",
+        "false",
+        null,
+        null,
+        "DeltaUTC|ModifiedUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "inspectionstatus",
+        "FOREIGN",
+        "1796379",
+        "true",
+        "2026-06-09T05:20:13.363Z",
+        "2018-06-30T14:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "job",
+        "FOREIGN",
+        "84807",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "2013-12-02T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "jobasset",
+        "FOREIGN",
+        "168930",
+        "true",
+        "2026-06-09T05:20:21.24Z",
+        "2020-06-29T01:40:06.273Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "jobcomment",
+        "FOREIGN",
+        "140649",
+        "true",
+        "2026-06-09T05:20:22.38Z",
+        "2020-06-29T02:01:48.383Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "log",
+        "FOREIGN",
+        "1074995",
+        "true",
+        "2026-06-09T05:20:20.45Z",
+        "2022-03-06T10:13:17.367Z",
+        "Modified"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "module",
+        "FOREIGN",
+        "56536",
+        "true",
+        "2026-06-09T14:35:18.03Z",
+        "1969-12-31T23:15:30Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "photo",
+        "FOREIGN",
+        "516916",
+        "true",
+        "2026-06-09T15:15:37.757Z",
+        "1970-01-01T11:21:42Z",
+        "DeltaUTC|ModifiedUTC|CreatedDate|CreatedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "plannedresourceitem",
+        "FOREIGN",
+        "986",
+        "true",
+        "2024-12-22T22:42:15.37Z",
+        "2021-07-06T05:13:52.193Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedResourceCreatedDate|PlannedResourceCreatedUser|StartDate|EndDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "resource",
+        "FOREIGN",
+        "4875",
+        "true",
+        "2026-05-29T03:15:50.33Z",
+        "2021-02-23T01:30:20.407Z",
+        "DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "resourceattribute",
+        "FOREIGN",
+        "30058",
+        "true",
+        "2026-05-29T03:15:50.36Z",
+        "2022-04-02T23:16:45.063Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "resourceaudit",
+        "FOREIGN",
+        "14380",
+        "true",
+        "2026-05-29T12:51:05.403Z",
+        "2020-07-01T14:10:56.95Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "summarycheck",
+        "FOREIGN",
+        "36",
+        "true",
+        "2024-12-12T23:55:18.477Z",
+        "2024-12-12T23:23:07.787Z",
+        "DeltaUTC|CheckDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "timesheetitem",
+        "FOREIGN",
+        "457547",
+        "true",
+        "2026-06-09T13:56:55.247Z",
+        "1970-01-01T00:00:01Z",
+        "TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vassetaudit",
+        "FOREIGN",
+        "1751152",
+        "true",
+        "2026-06-03T12:10:15.2Z",
+        "2020-06-10T17:01:03.377Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vassetlocation",
+        "FOREIGN",
+        "111686",
+        "true",
+        "2026-06-03T02:17:52.593Z",
+        "2020-10-03T06:05:14.573Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vcapitalwork",
+        "FOREIGN",
+        "787",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "2020-08-09T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vcapitalworktask",
+        "FOREIGN",
+        "1899",
+        "true",
+        "2026-06-08T10:39:56.267Z",
+        "2020-11-19T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vinspection",
+        "FOREIGN",
+        "278178",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "1969-12-31T16:32:34Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vinspectionstatus",
+        "FOREIGN",
+        "1796379",
+        "true",
+        "2026-06-09T05:20:13.363Z",
+        "2018-06-30T14:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vjob",
+        "FOREIGN",
+        "84807",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "2013-12-02T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vmodule",
+        "FOREIGN",
+        "56536",
+        "true",
+        "2026-06-09T14:35:18.03Z",
+        "1969-12-31T23:15:30Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "vworkflowstatus",
+        "FOREIGN",
+        "185006",
+        "true",
+        "2026-06-09T15:13:42.217Z",
+        "2019-07-17T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_gen7",
+        "dbo",
+        "workflowstatus",
+        "FOREIGN",
+        "185006",
+        "true",
+        "2026-06-09T15:13:42.217Z",
+        "2019-07-17T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate"
+      ]
+    ]
+  }
+}

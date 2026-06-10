@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_pcas_stripmap_ele_feature_singlelane",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_pcas_stripmap_ele_feature_singlelane' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Start Chng` AS TIMESTAMP)), MAX(try_cast(`Survey Date` AS TIMESTAMP)), MAX(try_cast(`deltautc` AS TIMESTAMP)), MAX(try_cast(`modifiedutc` AS TIMESTAMP)), MAX(try_cast(`modifieduser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Start Chng` AS TIMESTAMP)), MIN(try_cast(`Survey Date` AS TIMESTAMP)), MIN(try_cast(`deltautc` AS TIMESTAMP)), MIN(try_cast(`modifiedutc` AS TIMESTAMP)), MIN(try_cast(`modifieduser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Start Chng|Survey Date|deltautc|modifiedutc|modifieduser' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_pcas_stripmap_ele_feature_singlelane`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_pcas_stripmap_ele_feature_singlelane' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

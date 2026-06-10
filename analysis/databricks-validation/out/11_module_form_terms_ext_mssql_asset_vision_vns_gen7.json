@@ -1,0 +1,1256 @@
+{
+  "name": "11_module_form_terms_ext_mssql_asset_vision_vns_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_vns_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vns_gen7`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vns_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vns_gen7`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "source_table",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "matched_value",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 200
+      }
+    ],
+    "total_row_count": 200,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 200,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Early Start Date",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Site",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Closure Requirement",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Safety Constraints",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Plant Requirement",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Due Date",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Maintenance Personnel",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Delivered By",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Required Work Shift",
+        "40019"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Latitude",
+        "39553"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|TMP Number",
+        "35197"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Location",
+        "28867"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Asset Hierarchy Level 2",
+        "28383"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Asset Hierarchy Level 1",
+        "28330"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Pre Start|5. All SDS are read, understood and available for all chemicals.",
+        "26889"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Pre Start|3. Applicable permits for this work task have been obtained.(e.g. Working at Heights, Confined Space etc)",
+        "26889"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|The defects are evaluated and defect rating was determined",
+        "14706"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|All Defects found are identified and examined",
+        "14706"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|All the task was performed in accordance with the TMP requirements mentioned in Work Description",
+        "14706"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|All the defects are recorded in the following Comments field.",
+        "14706"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|4. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "14629"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|7. Obtain reports and action defects",
+        "14629"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Maintenance Actions",
+        "14050"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|Please provide details if you have answered \"No\" in previous question.",
+        "13944"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|10. Rate Overall Condition of the Asset (1-Excellent, 2-Very Good, 3-Good, 4-Fair, 5-Poor)",
+        "12260"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|8. Obtain reports and action defects",
+        "11653"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|5. Photographic evidence of work undertaken and/or any raised defects/abnormalities/hazards has been attached.",
+        "11653"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Colour",
+        "10925"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Registration Number",
+        "10925"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Model",
+        "10925"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Make",
+        "10925"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Registration State",
+        "10925"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|Corrosion Reading",
+        "8856"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Location",
+        "6351"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Asset Reading|Corrosion Reading",
+        "6160"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Asset Hierarchy Level 1 - Discipline",
+        "4660"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Asset Hierarchy Level 2 - Class",
+        "4660"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|11. Asset Corrosion Reading",
+        "4440"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|TMP Ref. No. (CI Attribute)",
+        "4393"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. COMPLETE all tasks below and ensure all requirements of AS 1851 have been met. Notify Ventia of any discrepancies between the tasks below and the AS 1851 requirements for this asset",
+        "4226"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|Location (CI Attribute)",
+        "4177"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Lane(s) opened at",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Vehicle 5",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Vehicle 3",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Closure Category",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Speed After Speed Reduction",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Closure Type",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Lane(s) Closed",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Vehicle 2",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Lane closed",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Vehicle 4",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Details Of Vehicles Involved|Vehicle 1",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Lane(s) closed at",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Speed Reduced",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Lane Availability|Speed Before Speed Reduction",
+        "2185"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Site Attendance|Other Resources Details",
+        "2184"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Motorway Event Log|Incident Response handover (IR leaves site)",
+        "1919"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Emergency Response|Name of First Aider",
+        "1514"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Emergency Response|First Aid Kit Location",
+        "1514"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Emergency Response|Spill Kit Available?",
+        "1514"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Personal Protective Equipment (PPE) - to be worn on site|Personal Protective Equipment (PPE) - to be worn on site (3)|Fall Arrest/Restraints",
+        "1514"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE Fire Panels for AC power supply",
+        "1500"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Motorway Event Log|TCRO Log",
+        "1460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the sign for cleanliness,  deposit and dirt build up. CLEAN as required.",
+        "1450"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. CHECK OPERATION of the sign and ensure a  healthy communication between the unit and control system.",
+        "1450"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Pre-Commencement Checks|Obtain applicable permits for this task",
+        "1329"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Pre-Commencement Checks|Verify the details of scope, method of the work, and tasks have been read and understood and have been discussed with the work group, as per Supervisor's instruction",
+        "1329"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Pre-Commencement Checks|Notify the Motorway Control Centre of the details of the task",
+        "1329"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the light for dirt build up,  water and dust ingress affecting sign functions. CLEAN as required.",
+        "1036"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE the light housing and support structure for unsecured or loose components,  corrosion, damage, water seepage, fixing failure, and damaged latches and gaskets.",
+        "1036"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. CHECK operation of directional exit lighting by turning on the  directional exit lights from control room and cross passage lights  ( strobe lights, down lights and exit lighting).",
+        "1036"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the light and associated control system for inoperable led lights, power failure,  loose connections, comms and control system failure.  REPLACE inoperable led lights.",
+        "1036"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|Comments",
+        "1033"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the sign for general condition,  damage, corrosion, unsecured or loose components.",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the sign housing, support structure  and access points for general condition, damage, corrosion, compromised seals and gaskets, damaged door locks and latches, moisture and vermin ingress, unsecured or loose components.",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. EXAMINE LED  globesboards for damage",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|8. EXAMINE the sign for displaying  legible and clear signage  or instructions",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|7. EXAMINE the sign view and  ensure visibility from the road surface",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3.  EXAMINE exposed cables and connections  for damage, deterioration and loose connections.",
+        "990"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Motorway Event Log|Incident Type",
+        "985"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. Sweep and CLEAN hard floors.",
+        "953"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. CLEAN any solvent or oil spills.",
+        "953"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. CLEAN and remove all waste and dispose appropriately.",
+        "953"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. CLEAN carpeted floors with a vacuum.",
+        "953"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. EXAMINE bathrooms and CLEAN as required.",
+        "953"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "module",
+        "Motorway Event Log",
+        "914"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|Record vibration here (numeric)",
+        "900"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. CHECK, record and trend vibration readings (mm/sec). PERFORM a Vibration Analysis",
+        "900"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. FAN OPERATING CHECK - CHECK the Case Vibration level is within limits",
+        "900"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Follow Up Activities|Corossion Reading",
+        "868"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Motorway Event Log|Description",
+        "865"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Site Attendance|Site Attendance (1)|1st Resource Attending",
+        "806"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Manufacturer/ Vendor/ Constructor",
+        "790"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Asset Description",
+        "790"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Site",
+        "790"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Model",
+        "790"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Legacy Asset ID",
+        "790"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Asset Hierarchy Level 1 - Discipline",
+        "788"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Asset Hierarchy Level 2 - Class",
+        "788"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. PERFORM office and Motorway Control Centre cleaning.",
+        "767"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. CHECK, record and trend  Bearing Temperature.",
+        "750"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the lighting system for inoperable luminaries, flickering lights and power failure. REPLACE inoperable luminaries.",
+        "739"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. EXAMINE NVR for: a) general condition, excessive noise, signs of overheating and deterioration. b) outstanding alarms or abnormalities, abnormal LED indicators.",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. CHECK for the availability of new update on the firmware version and raise a firmware change request if applicable",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE lenses for cleanliness and picture quality. CLEAN as required.",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. CHECK power supply warnings for core switches  (Use CCTV PC in TACF server room).",
+        "738"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. TEST Solenoid valves for correct operations",
+        "735"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Traffic Management Required",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Work Description",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Work Title",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|Please provide details if the you have answered \"No\" to above question.",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Safety Constraints",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Defect Rating",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Work Requirements & Planning Details|Timing Constraints",
+        "724"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Activities|Complete the prestart on Plant Assessor",
+        "720"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Vehicle Details|Service Provider Asset ID",
+        "709"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. CHECK OPERATION of the exit lighting system and associated strobe lights  and soundersby turning on the directional exit lights and cross passage lights from control room..",
+        "686"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE the exit lighting housing and support structure for unsecured or loose components,  corrosion, damage, water seepage, fixing failure, and damaged latches and gaskets.",
+        "686"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the lighting for dirt build up,  water and dust ingress affecting lighting functions. CLEAN as required.",
+        "686"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2.  EXAMINE the exit lighting system and associated strobe lights and sounders for inoperable led lights and sounders, . EXAMINE the exit lighting system and associated strobe lights and sounders for inoperable led lights and sounders, power failure, loose connections, comms and control system failure. REPLACE inoperable led lights.",
+        "686"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. PERFORM a Daily Drive Through (DDT) inspection throughout the motorway during daytime",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|16. Landscaping: Any obvious fallen trees or vegetation impeding signs visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|18. Landscaping: broken limbs and branches, or tree limbs encroaching in the freeway or shared user path clear zone.",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE assets visible to motorists, cyclists, pedestrians and general public for anything that can be a potential hazard to road users visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|7. Pavement: Water ponding and hazardous debris",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE assets visible to motorists, cyclists, pedestrians and general public for the following.",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|9. Pits: Flooded drainage and service pits, and pit lid/grate missing",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|17. Landscaping: Trees and branches weakened/overhanging to or from adjacent property blocking visibility",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|11. Metal Barriers: Any obvious damaged/missing metal barriers visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. Debris: debris, litter, animal that poses or could pose a hazard. CLEAN and remove as required.",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. Pavement: Large cracks likely to cause damage to tyres or cause accidents",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. Pavement: Potholes likely to cause damage to tyres or cause accidents (>150 mm)",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|15. Tunnel: Any obvious loose components, cable tray, any other assets hanging from roof visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|10. Graffiti: Any obvious graffiti and unauthorised signs/posters visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|8. Linemarking & RPM: missing, worn, non-reflective, consecutive RPM missing",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|12. Concrete Barriers and Kerbs: Dislodged/damaged kerb or concrete barrier",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|14. Signs and Traffic Devices: Any obvious damaged, misaligned, missing or illegible roadside static signs and traffic devices visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|13. Noise Walls/Architectural Panels: Any obvious damaged or loose noise walls, acoustic and architectural panels visible at operating speed",
+        "642"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE drainage pits and sumps for signs of structural failure",
+        "638"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. PERFORM flushing and cleaning (50% every 6-months, 100% over a year)",
+        "638"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE drainage pits and sumps for blockage or sedimentation/detritus build up. CLEAN as required",
+        "638"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE drainage pits and sumps for general condition",
+        "638"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. CHECK regulator is locked and set in the correct position",
+        "616"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. INSPECT and TEST Electrical detection systems",
+        "615"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE the cameras, and mountings for deterioration, damage, corrosion, vermin/water ingress, vandalism, and loose connection.",
+        "578"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. CHECK OPERATION of the cameras for picture quality, and the control features of the camera.",
+        "578"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|21. CHECK that the extinguisher moves readily on its wheels by rolling it for a distance of at least 5m",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. CHECK that the anti-tamper device is intact",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|10. WEIGH the extinguisher to determine that it is fully charged",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|18. DETERMINE that the internal discharge tube and strainer provide clear passage and are securely attached",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|20. LUBRICATE wheel bearings (where applicable)",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|16. DETERMINE that the compressed gas container is the correct size and type, in good condition, fully charged, and subjected to service as per AS 2030.5",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|9. Where fitted, CHECK that the pressure indicator is legible, and registering within the operable range",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. CHECK the extinguisher is conspicuous, readily accessible and in its assigned location",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|19. DETERMINE that pneumatic tyres, where fitted, are pressurized to the recommended pressure",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. CHECK that the extinguisher, including any attachments, is not damaged",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|7. CHECK that the exterior of the extinguisher is not pitted or otherwise damaged by corrosion",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|17. DETERMINE, where possible and without discharging any contents, that the actuating device is free of corrosion, moves freely and is undamaged",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|15. (Dry Powder Type) INVERT the extinguisher and ensure that the powder remains free flowing",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|13. CHECK that the appropriate discharge nozzle is fitted and is not blocked or damaged, and the control valve is functional",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|14. CHECK that the carriage assembly is functional and free from corrosion",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|8. CHECK that the hose is securely fitted, the nozzle is securely attached, the assembly is free from obstruction, and the hose shows no cracking or other signs of damage or deterioration",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. CHECK that the service tag or label is firmly attached to the extinguisher",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|12. CHECK that the appropriate support bracket is securely attached to wall or other suitable feature",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. CHECK that the extinguisher is clean and the operating instructions are legible",
+        "571"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|11. CHECK that the location sign is visible",
+        "570"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Motorway Event Log|Location",
+        "568"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Asset Reading|Corossion Reading",
+        "556"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|Record run hours (numeric)",
+        "543"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. CHECK and record run hours via the MCC display panel.",
+        "540"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. EXAMINE the sign housing, support structure and access points for general condition, damage, corrosion,  compromised seals and gaskets, damaged door locks and latches, moisture and vermin ingress, unsecured or loose components.",
+        "498"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE the sign for general condition, damage,  corrosion, unsecured or loose components.",
+        "498"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|14. CHECK all branch pipes, nozzles and hose couplings are in good condition, compatable with the hydrant valves and properly stowed",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|16. CHECK that all hydrant and booster cabinets or enclosers are accessible, clear of extraneous materials, clearly and correctly marked and in good condition",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|12. CHECK all booster assemblies: For legibility of hydrant system block plan where fitted",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|13. CHECK that all hydrant and booster connections points are compatible with logic brigade requirements",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. OPERATE (two full turns) all water supply stop valves. (including backflow prevention stop valves and underground key-operated valves except where owned by the water supply authority)",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. Verify valves are fully open, secure in the open position (relaxed turn if appropriate) and are correctly labelled as indicated on the valve list",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|15. CHECK: (a) Equipment provided in the cabinet is in accordance with the cabinet contents list. (b) Equipment items are compatible and in good condition. (c) Foam concentrate containers are in good condition, seals are intact and the labels are legible. (d) Signage for legibility",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|18. CHECK for legibility and appropriate location",
+        "495"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. EXAMINE leaking cracks above the hangers, and leaking cracks  where risk of saline water ingress has been identified and signs of corrosion or any other damage surrounding the cast-in hanger anchorages.",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. PERFORM tap-testing at areas with signs of delamination or water penetration to  identify potential concrete spalling. REMOVE damaged concrete as required.",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|2. PERFORM touch up of coatings  on hangers as required.",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|1. EXAMINE visible concrete surfaces, hangers and concrete lining in the air ducts for abnormalities,  signs of delamination, water penetration, leaks, cracks, spalling and drummy concrete.",
+        "491"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. CHECK Blanking caps, where fitted, are in good condition",
+        "482"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. CHECK Hand-wheels are securely fitted",
+        "482"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|4. CHECK all hydrant valves Are accessible",
+        "482"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "PM Inspection Details|TMP Ref. No.",
+        "474"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Type of Traffic management required",
+        "466"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Works Requirements & Planning Details|Timing Constraints",
+        "466"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. Structural Steel: EXAMINE structural steel for corrosion and evidence of fatigue",
+        "464"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. Structural Steel: EXAMINE protective coating systems and replace as required",
+        "464"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|8. EXAMINE the sign view and ensure  visibility from the road surface",
+        "460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. PERFORM a facility   switch test (if applicable)",
+        "460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|9. EXAMINE the sign for displaying  legible and clear signage or instructions",
+        "460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|3. EXAMINE exposed cables and connections  for damage, deterioration and loose connections.",
+        "460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|7. EXAMINE LED globesboards /lanterns for damaged pixels",
+        "460"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|5. where fitted, CLOSE isolation valve located above deluge valve",
+        "422"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|6. OPERATE each deluge valve by releasing the system via each installed means",
+        "422"
+      ],
+      [
+        "ext_mssql_asset_vision_vns_gen7",
+        "formfield",
+        "Maintenance Actions|8. RECORD readings from each pressure gauge",
+        "422"
+      ]
+    ]
+  }
+}

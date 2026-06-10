@@ -1,0 +1,884 @@
+{
+  "name": "11_module_form_terms_ext_mssql_asset_vision_vnz_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_vnz_gen7' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vnz_gen7`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_asset_vision_vnz_gen7' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vnz_gen7`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "source_table",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "matched_value",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 138
+      }
+    ],
+    "total_row_count": 138,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 138,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Parent Dispatch",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|External Ref.",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|General Description",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Programme Category",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Site Details",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Notes",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Call Type",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Child Dispatches",
+        "49686"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Programme",
+        "49685"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Call Status",
+        "49685"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Offset",
+        "49584"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Side",
+        "49584"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Programmed Date",
+        "48662"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Dispatch ID",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Length",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "GENERAL DETAILS|Dockets",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Progress Added",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Rework",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Phone Number",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Depth",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Linked as Parent",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Mobile Number",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Surname",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Reference",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|House Number",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Width",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Event Number",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|First Name",
+        "48530"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH DETAILS|Programmed By",
+        "47225"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "GENERAL DETAILS|SWO Number",
+        "38379"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Inspection Details|Due Date",
+        "4385"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Inspection Details|Earliest Start Date",
+        "4385"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "GENERAL DETAILS|Environmental Suitability",
+        "2329"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 3 – Permits & Checks Required (Circle accordingly)|Instruction 3 – Permits & Checks Required (Circle accordingly) (6)|Kiwi Rail Permit",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (1)|How can we make it safer? (Controls) – e.g., Set up exclusion zone, trained and competent, spotter in place and standing in safe place, potholing, eyeballing service, permits, plans, dust suppression, silt fences)",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Date",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|First Aiders on site",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|First Aid Kit/Fire Ext./Spill Kit",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Nearest medical facility",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Contact Number",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Evacuation Signal e.g., 3 blasts of horn",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.)|Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.) (4)|Details",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Supervisor",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 7 – Complete Sketch of worksite – this should include, access, egress, vehicle movements, evacuation, site parking and sign in areas|Comments",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.)|Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.) (3)|Details",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.)|Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.) (5)|Details",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|TMP Plan/RT Channel",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.)|Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.) (2)|Details",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|STMS / TC",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Job Location",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.)|Instruction 5 – State & Review Safe Work Method Statement (SWMS) that are required for the job (e.g., Excavation, Traffic Management Plan, etc.) (1)|Details",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Evacuation Point (apply to sketch)",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Scope of works (e.g., drainage, concrete, excavations, stripping topsoil)",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 4 - Go / No Go|All equipment is fit for purpose, well maintained and in good working order",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 1 – State the Job Details|Job Number",
+        "275"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (1)|Risks What can hurt me? e.g., struck by bucket, electrocution, death, slurry run off, disturbing archaeological or heritage sites, hazardous substances, dust",
+        "170"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (2)|Risks",
+        "166"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Record_Detail",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Raised Date",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Contact_Email",
+        "79"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (3)|Risks",
+        "42"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Job Details|Travel Time",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Shift Report - Leading Hand|First aid and emergency response arrangements have been identified and communicated",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Job Details|Start Date/Time",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Vehicle Management Plan (VMP)|VMP Required",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Job Details|Work Type",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Vehicle Management Plan (VMP)|VMP Attached",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Shift Report - Leading Hand|All electrical equipment contains up to date test tags and is plugged into an RCD protected outlet",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Permits|Community Liaison Notified",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Shift Report - Leading Hand|I am authorised to perform the job and operate machinery (trained, licenced & competent)",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Job Details|Job Location",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Shift Report - Leading Hand|I have read/signed off the SHEWMS for the job and its is available at the job",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Shift Report - Leading Hand|I am physically able to do the task and not impaired in any way",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Routine Job Pack - Supervisor|Drainage Plant",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Resolution Commentary",
+        "35"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Contact Type",
+        "33"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Record Type",
+        "33"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (4)|Risks",
+        "20"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (3)|Controls",
+        "16"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "module",
+        "Auck RM Pack",
+        "11"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Topic Category",
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (2)|Controls",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Contact_Address",
+        "5"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (1)|Hazard (what can go wrong? (e.g., mobile plant, services, environmental issues)",
+        "4"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Contact_Name",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "module",
+        "Customer Request",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "DISPATCH|Programmed By",
+        "3"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe|Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe (2)|NAME",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe|Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe (4)|NAME",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe|Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe (1)|NAME",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (5)|Controls",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|Services have been identified by service locators as per DBYD / beforeUdig and marked out using paint, markers, etc.",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Local Board",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (5)|Risks",
+        "2"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (2)|Permit End Date:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (2)|Permit Start Date:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (1)|DBYD / B4UDIG #",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART D: Permit Acceptance|I understand and accept the conditions and precautions detailed above. I am satisfied that all precautions and risk control measures are in place and effective at reducing the risk to an acceptable level in accordance with this permit. I will hold this permit on site for the duration of the work until permit closure.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Groundmat",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (4)|Environmental constraints/contamination",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (6)|Mobile plant operators are fit for duty and hold correct/current licence/competency   Locators and Inspectors are qualified   Permits issuer & receiver are trained in CRP -Excavation Process",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Drill Rig",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Ground Support method (select applicable)|Not Required",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Ground Support method (select applicable)|Shoring",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Saw",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Excavator",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (2)|Drainage pits & manhole covers",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|Services have been identified by service locators as per DBYD/beforeUdig and marked out using paint, markers, etc.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep) (1)|Other",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|High Risk Services - Electrical Underground – Low Voltage, Medium/Low Pressure Gas Service, Water Transmission Line/Mains",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Post Borer",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (4)|Controls",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep) (1)|Other: Description",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (1)|Company Name",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Define Scope of Excavation:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Ground Support method (select applicable)|Benching",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Event_Street_Address",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Method of Excavation (Permit not required for Excavations<200mm deep)|Chain Trencher",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 1|Permit Approver",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (5)|Design drawings, Dial Before You Dig (DBYD)/ beforeUdig plans available and attached to permit?",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Ground Support method (select applicable)|Battering",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|Services have been identified by service locators as per DBYD / beforeUdig and marked using paint, markers etc.",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe|Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe (5)|NAME",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (3)|Supervisor Name:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (1)|Service pits for gas, water, electricity, communications, sewage and drainage",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question)|Instruction 6 – Risk Assessment (Where a SWMS is referenced this risk assessment covers job specific items for the day in question) (3)|Hazard",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person (4)|Road repairs",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe|Instruction 8 – By signing this form I have a clear understanding of the site hazards/risks and implementation of controls required to keep me safe (3)|NAME",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Location of excavation/ground-breaking/drilling:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Part A – General Details|Part A – General Details (3)|Supervisor Phone No:",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 2|Role",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "Event|Ongoing_Sp_Actions",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART B: Pre-Excavation Controls (Tick )\t                               Completed by Competent Person|Prior to potholing, verification must take place to ensure services have been identified by service locators as per DBYD / D4YD and marked out using paint, markers, etc. only once this has been completed should potholing or non-destructive digging commence",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 1|Date/Time",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 1|Role",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 2|Permit Approver",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_vnz_gen7",
+        "formfield",
+        "PART C: Excavation Permit Approval - Completed by Permit Approver (Supervisor)|Approval Details 2|Date/Time",
+        "1"
+      ]
+    ]
+  }
+}

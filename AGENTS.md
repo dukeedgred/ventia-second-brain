@@ -86,6 +86,8 @@ content/
   resources.md      external links table
   raw/              immutable source notes
   wiki/Ventia/      curated knowledge pages
+  wiki/Ventia/Data Tables/
+                    table documentation organized by sector and contract/schema
   tickets/          markdown-backed action items
   decisions/        markdown-backed ADRs
   docs/             generated living documents
@@ -94,10 +96,24 @@ content/
 Wikilinks `[[Basename]]` drive navigation and graph edges. Prefer updating an
 existing page over creating a near-duplicate. Never delete unique content.
 
+Table documentation should live in the wiki, not in a root `tables.md`. For
+Transport sector table metadata, use
+`content/wiki/Ventia/Data Tables/Transport/`, with a sector catalog,
+contract/schema catalog pages, and one unique table page per table. Different
+Transport schemas represent different contract or contract-group contexts unless
+source material says otherwise. When a Transport table is a view and source
+material includes the view SQL/query, preserve that SQL in the table wiki page
+as a fenced `sql` block.
+
 ## Rules
 
 - Ask is read-only. Do not let Ask edit files.
 - Ingest and Lint fix may write only under `content/`.
+- For any workflow that needs to fetch data from Databricks, do not request,
+  store, or use personal access tokens or `DATABRICKS_TOKEN`. Use an interactive
+  OAuth/user-to-machine flow that redirects the user to a browser link, such as
+  Databricks CLI `auth login` or the Databricks SQL connector with
+  `auth_type="databricks-oauth"`.
 - Keep markdown pages source-backed and connected with wikilinks.
 - HeroUI is v2 with Tailwind v3; do not upgrade casually.
 - Prefer HeroUI semantic tokens over hardcoded hex in app UI.

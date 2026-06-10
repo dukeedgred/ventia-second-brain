@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_srapc_uvw_srapc_special_projects",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_srapc' AS schema_name,\n  'uvw_srapc_special_projects' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`created` AS TIMESTAMP)), MAX(try_cast(`updated` AS TIMESTAMP)), MAX(try_cast(`Date Received` AS TIMESTAMP)), MAX(try_cast(`Date Submitted` AS TIMESTAMP)), MAX(try_cast(`Date Approved/Rejected` AS TIMESTAMP)), MAX(try_cast(`Proposed Due Date` AS TIMESTAMP)), MAX(try_cast(`Finalisation Handover completed?` AS TIMESTAMP)), MAX(try_cast(`Estimates - HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - SD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - SD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 50% CD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 50% CD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 100% CD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 100% CD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 20% DD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 20% DD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 50% DD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 50% DD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 80% DD HLCE Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 80% DD HLCE Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 100% DD Construction Proposal Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - 100% DD Construction Proposal Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - AFC Construction Proposal Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - AFC Construction Proposal Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - Construction Proposal Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - Construction Proposal Submission Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - Variation Due Date` AS TIMESTAMP)), MAX(try_cast(`Estimates - Variation Submission Date` AS TIMESTAMP)), MAX(try_cast(`Planning - % Completed To Date` AS TIMESTAMP)), MAX(try_cast(`Planning - Estimated Timeframe` AS TIMESTAMP)), MAX(try_cast(`Practical Completion - PC Notification Date` AS TIMESTAMP)), MAX(try_cast(`Practical Completion - Handover Date` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`created` AS TIMESTAMP)), MIN(try_cast(`updated` AS TIMESTAMP)), MIN(try_cast(`Date Received` AS TIMESTAMP)), MIN(try_cast(`Date Submitted` AS TIMESTAMP)), MIN(try_cast(`Date Approved/Rejected` AS TIMESTAMP)), MIN(try_cast(`Proposed Due Date` AS TIMESTAMP)), MIN(try_cast(`Finalisation Handover completed?` AS TIMESTAMP)), MIN(try_cast(`Estimates - HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - SD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - SD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 50% CD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 50% CD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 100% CD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 100% CD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 20% DD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 20% DD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 50% DD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 50% DD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 80% DD HLCE Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 80% DD HLCE Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 100% DD Construction Proposal Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - 100% DD Construction Proposal Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - AFC Construction Proposal Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - AFC Construction Proposal Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - Construction Proposal Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - Construction Proposal Submission Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - Variation Due Date` AS TIMESTAMP)), MIN(try_cast(`Estimates - Variation Submission Date` AS TIMESTAMP)), MIN(try_cast(`Planning - % Completed To Date` AS TIMESTAMP)), MIN(try_cast(`Planning - Estimated Timeframe` AS TIMESTAMP)), MIN(try_cast(`Practical Completion - PC Notification Date` AS TIMESTAMP)), MIN(try_cast(`Practical Completion - Handover Date` AS TIMESTAMP))) AS earliest_observed_ts,\n  'created|updated|Date Received|Date Submitted|Date Approved/Rejected|Proposed Due Date|Finalisation Handover completed?|Estimates - HLCE Due Date|Estimates - HLCE Submission Date|Estimates - SD HLCE Due Date|Estimates - SD HLCE Submission Date|Estimates - 50% CD HLCE Due Date|Estimates - 50% CD HLCE Submission Date|Estimates - 100% CD HLCE Due Date|Estimates - 100% CD HLCE Submission Date|Estimates - 20% DD HLCE Due Date|Estimates - 20% DD HLCE Submission Date|Estimates - 50% DD HLCE Due Date|Estimates - 50% DD HLCE Submission Date|Estimates - 80% DD HLCE Due Date|Estimates - 80% DD HLCE Submission Date|Estimates - 100% DD Construction Proposal Due Date|Estimates - 100% DD Construction Proposal Submission Date|Estimates - AFC Construction Proposal Due Date|Estimates - AFC Construction Proposal Submission Date|Estimates - Construction Proposal Due Date|Estimates - Construction Proposal Submission Date|Estimates - Variation Due Date|Estimates - Variation Submission Date|Planning - % Completed To Date|Planning - Estimated Timeframe|Practical Completion - PC Notification Date|Practical Completion - Handover Date' AS freshness_columns\nFROM `transport_dev`.`transport_srapc`.`uvw_srapc_special_projects`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_srapc",
+        "uvw_srapc_special_projects",
+        "VIEW",
+        "1149",
+        "true",
+        "2026-09-17T00:00:00Z",
+        "2021-11-24T00:00:00Z",
+        "created|updated|Date Received|Date Submitted|Date Approved/Rejected|Proposed Due Date|Finalisation Handover completed?|Estimates - HLCE Due Date|Estimates - HLCE Submission Date|Estimates - SD HLCE Due Date|Estimates - SD HLCE Submission Date|Estimates - 50% CD HLCE Due Date|Estimates - 50% CD HLCE Submission Date|Estimates - 100% CD HLCE Due Date|Estimates - 100% CD HLCE Submission Date|Estimates - 20% DD HLCE Due Date|Estimates - 20% DD HLCE Submission Date|Estimates - 50% DD HLCE Due Date|Estimates - 50% DD HLCE Submission Date|Estimates - 80% DD HLCE Due Date|Estimates - 80% DD HLCE Submission Date|Estimates - 100% DD Construction Proposal Due Date|Estimates - 100% DD Construction Proposal Submission Date|Estimates - AFC Construction Proposal Due Date|Estimates - AFC Construction Proposal Submission Date|Estimates - Construction Proposal Due Date|Estimates - Construction Proposal Submission Date|Estimates - Variation Due Date|Estimates - Variation Submission Date|Planning - % Completed To Date|Planning - Estimated Timeframe|Practical Completion - PC Notification Date|Practical Completion - Handover Date"
+      ]
+    ]
+  }
+}

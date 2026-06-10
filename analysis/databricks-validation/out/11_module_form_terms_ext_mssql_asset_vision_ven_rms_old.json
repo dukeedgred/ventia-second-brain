@@ -1,0 +1,14 @@
+{
+  "name": "11_module_form_terms_ext_mssql_asset_vision_ven_rms_old",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_rms_old' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_rms_old`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_rms_old' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_rms_old`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[TABLE_OR_VIEW_NOT_FOUND] The table or view `ext_mssql_asset_vision_ven_rms_old`.`dbo`.`module` cannot be found. Verify the spelling and correctness of the schema and catalog.\nIf you did not qualify the name with a schema, verify the current_schema() output, or qualify the name with the correct schema and catalog.\nTo tolerate the error on drop use DROP VIEW IF EXISTS or DROP TABLE IF EXISTS. SQLSTATE: 42P01; line 2 pos 5"
+    },
+    "sql_state": "42P01"
+  },
+  "manifest": null,
+  "result": null
+}

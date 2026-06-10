@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_wru_uvw_asset_audit",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_wru' AS schema_name,\n  'uvw_asset_audit' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Modified` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`datekey` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Modified` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`datekey` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Modified|ModifiedUser|DeltaUTC|datekey' AS freshness_columns\nFROM `transport_dev`.`transport_wru`.`uvw_asset_audit`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_asset_audit' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

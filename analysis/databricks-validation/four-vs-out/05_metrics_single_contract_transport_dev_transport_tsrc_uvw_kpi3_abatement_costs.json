@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi3_abatement_costs",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi3_abatement_costs' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`capital works planned start` AS TIMESTAMP)), MAX(try_cast(`capital works planned finish` AS TIMESTAMP)), MAX(try_cast(`capital works actual start` AS TIMESTAMP)), MAX(try_cast(`capital works actual finish` AS TIMESTAMP)), MAX(try_cast(`task planned start` AS TIMESTAMP)), MAX(try_cast(`task planned finish` AS TIMESTAMP)), MAX(try_cast(`task actual start` AS TIMESTAMP)), MAX(try_cast(`task actual finish` AS TIMESTAMP)), MAX(try_cast(`Contractual Due Date` AS TIMESTAMP)), MAX(try_cast(`due date` AS TIMESTAMP)), MAX(try_cast(`IncompleteDaysOverdue` AS TIMESTAMP)), MAX(try_cast(`DaysUntilOverdue` AS TIMESTAMP)), MAX(try_cast(`CompletedDaysOverdue` AS TIMESTAMP)), MAX(try_cast(`TodaysDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`capital works planned start` AS TIMESTAMP)), MIN(try_cast(`capital works planned finish` AS TIMESTAMP)), MIN(try_cast(`capital works actual start` AS TIMESTAMP)), MIN(try_cast(`capital works actual finish` AS TIMESTAMP)), MIN(try_cast(`task planned start` AS TIMESTAMP)), MIN(try_cast(`task planned finish` AS TIMESTAMP)), MIN(try_cast(`task actual start` AS TIMESTAMP)), MIN(try_cast(`task actual finish` AS TIMESTAMP)), MIN(try_cast(`Contractual Due Date` AS TIMESTAMP)), MIN(try_cast(`due date` AS TIMESTAMP)), MIN(try_cast(`IncompleteDaysOverdue` AS TIMESTAMP)), MIN(try_cast(`DaysUntilOverdue` AS TIMESTAMP)), MIN(try_cast(`CompletedDaysOverdue` AS TIMESTAMP)), MIN(try_cast(`TodaysDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'capital works planned start|capital works planned finish|capital works actual start|capital works actual finish|task planned start|task planned finish|task actual start|task actual finish|Contractual Due Date|due date|IncompleteDaysOverdue|DaysUntilOverdue|CompletedDaysOverdue|TodaysDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi3_abatement_costs`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi3_abatement_costs' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

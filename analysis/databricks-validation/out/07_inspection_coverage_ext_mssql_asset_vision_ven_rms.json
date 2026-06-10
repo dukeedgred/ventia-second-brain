@@ -1,0 +1,111 @@
+{
+  "name": "07_inspection_coverage_ext_mssql_asset_vision_ven_rms",
+  "statement": "SELECT\n  'ext_mssql_asset_vision_ven_rms' AS catalog_name,\n  COUNT(*) AS rows_total,\n  SUM(CASE WHEN Contract IS NOT NULL AND Contract <> '' THEN 1 ELSE 0 END) AS rows_with_contract,\n  SUM(CASE WHEN AssetID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_asset_id,\n  SUM(CASE WHEN ScheduledDate IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_scheduled_date,\n  SUM(CASE WHEN CompletedDate IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_completed_date,\n  SUM(CASE WHEN JobID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_job_id,\n  SUM(CASE WHEN CapitalWorkID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_capital_work_id,\n  SUM(CASE WHEN WKT IS NOT NULL AND WKT <> '' THEN 1 ELSE 0 END) AS rows_with_wkt,\n  MIN(CreatedDate) AS min_created_date,\n  MAX(CreatedDate) AS max_created_date\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.vinspection\nWHERE Deleted = false OR Deleted IS NULL",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 11,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "rows_total",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 1
+        },
+        {
+          "name": "rows_with_contract",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 2
+        },
+        {
+          "name": "rows_with_asset_id",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        },
+        {
+          "name": "rows_with_scheduled_date",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 4
+        },
+        {
+          "name": "rows_with_completed_date",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "rows_with_job_id",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 6
+        },
+        {
+          "name": "rows_with_capital_work_id",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 7
+        },
+        {
+          "name": "rows_with_wkt",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 8
+        },
+        {
+          "name": "min_created_date",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 9
+        },
+        {
+          "name": "max_created_date",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 10
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "43730",
+        "43730",
+        "35226",
+        "32989",
+        "33882",
+        "8463",
+        "0",
+        "34791",
+        "2020-02-03T00:00:00Z",
+        "2026-06-09T11:26:36.683Z"
+      ]
+    ]
+  }
+}

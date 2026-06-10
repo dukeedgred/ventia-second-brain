@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_utbl_aed_incidents_closures",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'utbl_aed_incidents_closures' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ChainageStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ChainageStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualEndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualEndDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TrafficFlowStopped` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TrafficFlowStopped` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TGS_SetupStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_SetupStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TGS_SetupEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_SetupEnd` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TGS_PackupStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_PackupStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TGS_PackupEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_PackupEnd` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TrafficFlowResumed` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TrafficFlowResumed` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ChainageStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ChainageStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ChainageStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualEndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualEndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualEndDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TrafficFlowStopped` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TrafficFlowStopped` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TrafficFlowStopped` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TGS_SetupStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TGS_SetupStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_SetupStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TGS_SetupEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TGS_SetupEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_SetupEnd` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TGS_PackupStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TGS_PackupStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_PackupStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TGS_PackupEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TGS_PackupEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TGS_PackupEnd` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TrafficFlowResumed` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TrafficFlowResumed` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TrafficFlowResumed` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'StatusDate|ChainageStart|ActualStartDate|ActualEndDate|TrafficFlowStopped|TGS_SetupStart|TGS_SetupEnd|TGS_PackupStart|TGS_PackupEnd|TrafficFlowResumed|CompletedDate|CreatedDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`utbl_aed_incidents_closures`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "utbl_aed_incidents_closures",
+        "MANAGED",
+        "7293",
+        "true",
+        "2023-09-30T19:41:00Z",
+        "1970-01-01T00:00:01Z",
+        "StatusDate|ChainageStart|ActualStartDate|ActualEndDate|TrafficFlowStopped|TGS_SetupStart|TGS_SetupEnd|TGS_PackupStart|TGS_PackupEnd|TrafficFlowResumed|CompletedDate|CreatedDate"
+      ]
+    ]
+  }
+}

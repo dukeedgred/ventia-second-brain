@@ -6,23 +6,21 @@ source-context: asset_vision_ven_rms_old
 source-catalog: ext_mssql_asset_vision_ven_rms_old
 source-schema: dbo
 date-created: 2026-06-05
-date-updated: 2026-06-05
-tags: [transport, data-tables, source-table, asset-vision, asset-vision-ven-rms-old]
+date-updated: 2026-06-09
+tags: [transport, data-tables, source-context, asset-vision-ven-rms-old]
 ---
 
 # Transport Source Tables - asset_vision_ven_rms_old
 
-This page catalogs source table documentation for the supplied `ext_mssql_asset_vision_ven_rms_old` Asset Vision source catalog. The `dbo` component is the SQL Server source schema, not a Transport contractor or client name.
+This page catalogs table documentation for the `asset_vision_ven_rms_old` Transport source context. Generic source schemas such as `dbo` are source metadata and are not treated as client or contract names.
 
 ## Source Context
 
 | Field | Value |
 |---|---|
-| Source context | `asset_vision_ven_rms_old` |
+| Source system | Asset Vision |
 | Source catalog | `ext_mssql_asset_vision_ven_rms_old` |
 | Source schema | `dbo` |
-| Source system | Asset Vision |
-| Client/contract mapping | Catalog name includes `ven_rms_old`, which may be a legacy RMS context. Confirm from source notes, view filters, `Contract` values, or validated naming conventions; do not infer it from `dbo`. |
 
 ## Table Index
 
@@ -39,11 +37,6 @@ This page catalogs source table documentation for the supplied `ext_mssql_asset_
 | [[Transport Source Table - asset_vision_ven_rms_old - vworkflowstatus]] | `ext_mssql_asset_vision_ven_rms_old.dbo.vworkflowstatus` | FOREIGN | 15 | workflow status |  |
 | [[Transport Source Table - asset_vision_ven_rms_old - workflowstatus]] | `ext_mssql_asset_vision_ven_rms_old.dbo.workflowstatus` | FOREIGN | 14 | workflow status |  |
 
-## Skipped Or Incomplete Inputs
-
-- `capitalworktask` was visible in the pasted source-table payload but the object was truncated before complete columns could be verified, so it has not been documented yet.
-- At least one intervening source-table object between `capitalworktask` and `vmodule` was hidden or visible only as a truncated tail, so it has not been documented yet.
-
 ## Related Pages
 
 - [[Transport Data Tables]]
@@ -51,6 +44,3 @@ This page catalogs source table documentation for the supplied `ext_mssql_asset_
 - [[Transport Data Landscape]]
 - [[Ventia Databricks Platform]]
 - [[Transport Contract Portfolio]]
-
-
-

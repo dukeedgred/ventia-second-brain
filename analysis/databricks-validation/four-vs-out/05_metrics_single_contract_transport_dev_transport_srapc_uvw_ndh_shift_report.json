@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_srapc_uvw_ndh_shift_report",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_srapc' AS schema_name,\n  'uvw_ndh_shift_report' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`CompletedJobType` AS TIMESTAMP)), MAX(try_cast(`completedstatus` AS TIMESTAMP)), MAX(try_cast(`createddate` AS TIMESTAMP)), MAX(try_cast(`createddate_date` AS TIMESTAMP)), MAX(try_cast(`createddate_time` AS TIMESTAMP)), MAX(try_cast(`createddate_shift` AS TIMESTAMP)), MAX(try_cast(`completeddate` AS TIMESTAMP)), MAX(try_cast(`completeddate_date` AS TIMESTAMP)), MAX(try_cast(`completeddate_time` AS TIMESTAMP)), MAX(try_cast(`completeddate_shift` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`CompletedJobType` AS TIMESTAMP)), MIN(try_cast(`completedstatus` AS TIMESTAMP)), MIN(try_cast(`createddate` AS TIMESTAMP)), MIN(try_cast(`createddate_date` AS TIMESTAMP)), MIN(try_cast(`createddate_time` AS TIMESTAMP)), MIN(try_cast(`createddate_shift` AS TIMESTAMP)), MIN(try_cast(`completeddate` AS TIMESTAMP)), MIN(try_cast(`completeddate_date` AS TIMESTAMP)), MIN(try_cast(`completeddate_time` AS TIMESTAMP)), MIN(try_cast(`completeddate_shift` AS TIMESTAMP))) AS earliest_observed_ts,\n  'CompletedJobType|completedstatus|createddate|createddate_date|createddate_time|createddate_shift|completeddate|completeddate_date|completeddate_time|completeddate_shift' AS freshness_columns\nFROM `transport_dev`.`transport_srapc`.`uvw_ndh_shift_report`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_srapc",
+        "uvw_ndh_shift_report",
+        "VIEW",
+        "113677",
+        "true",
+        "2026-06-09T23:59:00Z",
+        "2020-07-27T00:00:00Z",
+        "CompletedJobType|completedstatus|createddate|createddate_date|createddate_time|createddate_shift|completeddate|completeddate_date|completeddate_time|completeddate_shift"
+      ]
+    ]
+  }
+}

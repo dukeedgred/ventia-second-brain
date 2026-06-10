@@ -1,0 +1,128 @@
+{
+  "name": "03_contracts_asset_ext_mssql_asset_vision_ven_vicroads",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_vicroads' AS catalog_name, 'asset' AS table_name, Contract, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_vicroads`.dbo.asset\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY Contract\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "Contract",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 12
+      }
+    ],
+    "total_row_count": 12,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 12,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Western Roads Upgrade (WRU)",
+        "254656"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Rehabilitation Works (IRW), Proposed Work Applications (PWA), Western Roads Upgrade (WRU)",
+        "22533"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "WRU - DTP Reporting",
+        "7919"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Rehabilitation Works (IRW), Western Roads Upgrade (WRU)",
+        "2453"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Proposed Work Applications (PWA), Western Roads Upgrade (WRU)",
+        "1937"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Rehabilitation Works (IRW), Proposed Work Applications (PWA)",
+        "50"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Rehabilitation Works (IRW), Proposed Work Applications (PWA), Western Roads Upgrade (WRU), WRU - DTP Reporting",
+        "43"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Proposed Work Applications (PWA)",
+        "23"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Capital Projects (ICP), Initial Rehabilitation Works (IRW), Proposed Work Applications (PWA), Western Roads Upgrade (WRU), WRU - DTP Reporting",
+        "6"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Melton City Council",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Initial Rehabilitation Works (IRW)",
+        "1"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "asset",
+        "Ventia - Custom Asset Registers",
+        "1"
+      ]
+    ]
+  }
+}
