@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-04
-tags: [transport, asset-data, ai, predictive-maintenance, digital-twin, telemetry, condition-inspections]
+date-updated: 2026-06-14
+tags: [transport, asset-data, ai, predictive-maintenance, digital-twin, telemetry, condition-inspections, forward-works]
 ---
 
 # Transport Asset Intelligence Roadmap
@@ -45,6 +45,8 @@ Vehicle telemetry was also raised as a possible internal Ventia opportunity. The
 
 Toby added a capital-works angle for road pavement. Annual pavement testing helps predict which sections are likely to fail and supports targeted capital works proposals instead of broad road replacement.
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds the Queensland forward-works planning view. For RAMCSC, the asset manager develops a forward works plan with the client using DTIMS reports, field repair history, and local knowledge, with the plan iterated and amended as required. For BAC and Port of Brisbane, Anna said recommendations are driven more directly from inspections of the network.
+
 ## Sensing And Telemetry Inputs
 
 The [[Transport First Two Week Plan]] turns sensing and telemetry into a named week-2 deep-dive area. Candidate inputs include Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets.
@@ -55,6 +57,7 @@ These inputs should support the initial operational decision use case and the de
 
 - [[Transport Data and AI Working Group]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport First Two Week Plan]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-04
+date-updated: 2026-06-14
 tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset, kpis]
 ---
 
@@ -25,6 +25,8 @@ The Rui Luan interview adds a practical precondition for bid support and benchma
 
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds a contract KPI reporting opportunity. Condition inspection schedules, completion counts, asset classes, incidents, defect and hazard jobs, response due dates, and audit evidence are already reported to clients, but the definitions and ownership appear contract-specific rather than enterprise-standard.
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a Queensland reporting example. RAMCSC has a broad KPI appendix spanning routine maintenance, stakeholder relations, projects, lane openings, hazards, safety, jobs, and work orders, while BAC and Port of Brisbane are more focused on corrective and planned maintenance completion within the month. This suggests enterprise reporting should distinguish backlog status, monthly completion obligations, and formal contract KPI schedules rather than treating them as one KPI category.
+
 ## Standardisation Challenges
 
 Earlier sector-level reporting efforts struggled because costs came from SAP while operational activity was structured differently across contracts. Even within [[Asset Vision]], job and activity specifications use three levels: activity category, activity, and intervention. Each contract configured those levels to suit local needs, which makes cross-contract comparison difficult.
@@ -38,6 +40,8 @@ For activity-based costing, Bhupesh Balani said the missing piece is a cross-sys
 Rui added that the capture process itself needs to be easy and validated for crews entering timesheets, materials, equipment, and job details. That makes field adoption and data quality part of the reporting opportunity, not just a downstream modelling issue.
 
 Toby added that open-road contracts may share asset categories such as roads, pits, guardrails, signage, and line marking, while KPI measurement and condition definitions still differ by project. Reporting needs to preserve that project-level context instead of forcing all KPIs into one flattened sector metric.
+
+Anna's interview also shows why some reporting standardisation is operationally valuable even when contractual measures differ. RAMCSC, BAC, and Port of Brisbane share resources and field-capture practice, so changes to RAMCSC reporting or work coding should be tested against the other two contracts before being treated as isolated contract work.
 
 ## Predictive Maintenance And Failure Codes
 
@@ -63,6 +67,8 @@ The SAP walkthrough also adds a practical access constraint for finance reportin
 
 For asset-condition reporting, the nearest live-use-case question is whether Databricks exposes enough Asset Vision fields to rebuild inspection KPI status, urgency levels, SLA due dates, completion evidence, and asset-validation status without manual report assembly.
 
+Anna identified RAMCSC backlog status as a practical candidate to trace first because Pranav Kumar has already built Power BI reporting over Databricks for that purpose. The next check is whether that report is only an operational backlog view or can also support formal KPI reporting.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
@@ -71,6 +77,7 @@ For asset-condition reporting, the nearest live-use-case question is whether Dat
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Condition Inspections]]
 - [[Transport Asset Inventory Validation]]

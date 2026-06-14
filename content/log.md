@@ -150,3 +150,7 @@ Updated the same report with common-analysis coverage rows that show which contr
 
 Expanded the report evidence ledger and contractor detail panel with explicit score-rationale and missing-evidence notes, including the caveat that KPI presence is scored by documented depth and reuse readiness rather than as a simple yes/no flag.
 
+## [2026-06-14] ingest | Transport data asset stakeholder interview Anna Covell
+
+Created [[Transport Data Asset Stakeholder Interview Anna Covell]] and updated related Asset Vision, Transport contract portfolio, data landscape, condition-inspection, reporting, roadmap, data asset, and stakeholder pages.
+

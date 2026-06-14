@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-06-04
-date-updated: 2026-06-04
-tags: [transport, condition-inspections, defects, hazards, kpis, asset-vision]
+date-updated: 2026-06-14
+tags: [transport, condition-inspections, defects, hazards, kpis, asset-vision, intervention-levels]
 ---
 
 # Transport Asset Condition Inspections
@@ -23,6 +23,8 @@ Condition ratings run from 1 to 5, from very good to very poor. The definitions 
 
 The operational goal is to avoid poor or very poor assets in the register. Toby said open-road contracts usually share similar asset categories, but the condition standards, KPI standards, and measurement rules differ by project.
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] confirms the same principle from RAMCSC, BAC, and Port of Brisbane. Anna said the underlying condition-rating principle is similar across the contracts, but the contract wording differs: the TMR/RAMCSC context uses terms such as notification, safety, and hazard, while Port of Brisbane and BAC use 1-to-5 ratings with different wording attached.
+
 ## Inspection Scheduling And Routing
 
 The Asset team schedules condition inspections to satisfy inspection KPIs. Toby gave guardrails as an example: about 688 active guardrails must each be inspected annually, and about 2,000 pits also need inspection across the contract.
@@ -35,11 +37,17 @@ When an inspector identifies an issue, Asset Vision can raise a job against the 
 
 Response times are automatically calculated from the selected asset category, issue category, urgency level, and contractual rules. Once an Asset team inspection raises a job, the maintenance team owns the rectification KPI, although inspectors may fix simple issues on the spot when practical.
 
+Anna added that response timing is driven by contract intervention levels. In her pothole example, Asset Vision constrains the user to relevant repair options, captures a measure such as pothole depth, links that to road classification and repair type, and then calculates the response time. This makes the configured contract rules part of the inspection and defect data model.
+
+Anna also described the day-to-day handoff between asset management and routine maintenance. Inspectors usually inspect, log, and issue work rather than repairing during inspections, because they normally do not have traffic control with them. Crews can log and repair on the spot, inspectors can issue urgent jobs directly to crews, and non-immediate work can be backlogged in Asset Vision.
+
 ## KPI Reporting And Audit
 
 Condition inspection KPIs are client-facing contract requirements. Toby referenced KPI 3.1 as one reporting area where monthly reporting shows scheduled and completed inspections, incidents, and inspection counts by asset type.
 
 The monthly KPI report is assembled as a long Word document with tables contributed by different owners. Annual client audits can inspect job records, completion evidence, response timing, and whether rectification work was performed properly.
+
+Anna added that RAMCSC has an entire contract appendix of KPIs across routine maintenance, stakeholder relations, projects, lane openings, hazards, safety, jobs, and work orders. BAC and Port of Brisbane appear more focused on corrective and planned maintenance completion within the expected month. The contracts are therefore the source of truth for KPI lists, with commercial management likely needed for access.
 
 ## Capital Works Boundary
 
@@ -48,6 +56,7 @@ Routine maintenance handles smaller rectification jobs, while work that routine 
 ## Related Pages
 
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Asset Inventory Validation]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]

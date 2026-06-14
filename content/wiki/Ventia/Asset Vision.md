@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-04
-tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections]
+date-updated: 2026-06-14
+tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, autopilot]
 ---
 
 # Asset Vision
@@ -29,6 +29,10 @@ The Toby Lin stakeholder interview adds a field-level view of how Asset Vision i
 
 Toby also described the operating hierarchy inside Asset Vision: roads contain asset categories such as drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can then have defects or hazards attached. The scheduled inspection and response workflow is captured on [[Transport Asset Condition Inspections]].
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds the Queensland shared-resource view. Anna supports Asset Vision and reporting across RAMCSC, BAC / Brisbane Airport, and Port of Brisbane, and said these contracts record work in the field in a broadly standard way while downstream billing and contractual reporting differ by contract. She also confirmed that these contracts use Asset Vision Autopilot rather than Retina Vision.
+
+Anna described how Asset Vision configuration reduces contract-rule burden for field users. Defect codes, activity codes or SOR-style repair options, intervention levels, road classification, repair type, and measurements such as pothole depth are configured so the system can calculate response time after the user selects the relevant defect and repair context.
+
 ## Databricks Access Pattern
 
 Ventia has an Azure SQL Server in its cloud environment with elastic compute and seven databases associated with the Asset Vision reporting data. Asset Vision synchronizes data from its cloud into this Azure SQL Server.
@@ -38,6 +42,8 @@ Databricks uses federated queries against those Azure SQL databases, so queries 
 Rui described the open-road Asset Vision reporting path as a direct integration that pulls raw data into Ventia data services, hosts reporting data in Azure Databricks, and runs Power BI over the collated tables. He described the standard open-road modules as inspections, defects, and jobs.
 
 Toby indicated that defect and hazard data is available through Transport Databricks views aligned to the Asset Vision hierarchy, but he had limited access and could not confirm whether SLA or response-time fields can be extracted directly. He uses Databricks mainly for KPI tracker and dashboard purposes.
+
+Anna said she does not personally use Databricks much, but Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status. That points to RAMCSC backlog reporting as a concrete lineage candidate for validating Asset Vision-to-Databricks-to-Power BI flow.
 
 ## Data Product Implications
 
@@ -72,6 +78,7 @@ Toby's interview adds an asset-register constraint. Asset Vision data is only us
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Financial Reporting]]

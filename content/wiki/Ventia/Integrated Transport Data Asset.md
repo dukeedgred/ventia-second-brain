@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-06-02
-date-updated: 2026-06-04
-tags: [transport, data-asset, databricks, telematics, fleet, asset-data]
+date-updated: 2026-06-14
+tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis]
 ---
 
 # Integrated Transport Data Asset
@@ -42,6 +42,8 @@ The Rui Luan interview adds two immediate foundation inputs: open-road [[Asset V
 
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds two more foundation inputs for open-road contracts: [[Transport Asset Inventory Validation]] and [[Transport Asset Condition Inspections]]. These define how asset locations, attributes, ownership status, condition ratings, hazards, defects, response levels, and inspection KPIs become reliable enough for downstream reporting or optimisation.
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-contract design constraint. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane share resources and field-capture practice, but contract-specific billing, KPI, intervention, and reporting rules diverge. The integrated data asset should therefore model both reusable Asset Vision capture patterns and contract-specific rule layers.
+
 ## Six-Week Outcomes
 
 The expected outcomes after six weeks are:
@@ -78,6 +80,8 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - Which Asset Vision fields expose condition ratings, urgency levels, SLA due dates, completion evidence, and inspection KPI status in Databricks?
 - Which asset-validation status and ownership-status fields are needed to distinguish client handover data from field-validated records?
 - Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
+- Can the programme obtain Katerina's earlier contract-office software inventory and use it as a baseline for Transport system mapping?
+- Which RAMCSC backlog reporting assets in Databricks and Power BI can be reused as a low-friction lineage proof point?
 
 ## Related Pages
 
@@ -86,6 +90,7 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

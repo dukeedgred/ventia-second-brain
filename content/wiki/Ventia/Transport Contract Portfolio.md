@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-04
-tags: [transport, contracts, portfolio, data-landscape, asset-data]
+date-updated: 2026-06-14
+tags: [transport, contracts, portfolio, data-landscape, asset-data, queensland]
 ---
 
 # Transport Contract Portfolio
@@ -16,6 +16,8 @@ The Transport contract portfolio is the set of Australian and New Zealand roads,
 In Australia, Transport operates across New South Wales, Queensland, Victoria, Western Australia, and South Australia. New South Wales includes SRAPC, Sydney Harbour Tunnel, Western Harbour Tunnel, and a group of city motorway and tunnel contracts such as CCT, Western Distributor, M5 East, and LCT.
 
 Queensland includes RAMC, also discussed as QSTC, plus Port of Brisbane and Brisbane Airport road maintenance. Victoria includes WRU and VRMC, with Grampians and Metro East being mobilized for a 2026-07-01 go-live. South Australia includes T2D, which is still under construction, and Western Australia includes Venture Smart, a joint venture where Ventia receives outputs rather than being deeply involved in the operating company.
+
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds current-state detail for the Queensland cluster. Anna supports RAMCSC, BAC / Brisbane Airport, and Port of Brisbane as shared contracts. Port of Brisbane started around 2020, BAC around 2022 or 2023, and RAMCSC was still BAU while the Gen 3 bid or renewal process continued.
 
 New Zealand includes Auckland West, Transmission Gully, and several smaller Transport projects. A New Zealand business engagement manager was described as working on reporting across contracts, but the source did not capture her name.
 
@@ -35,6 +37,8 @@ The portfolio does not yet have a single centralized report that lists all contr
 
 Large contracts often have their own data people, while smaller contracts usually ask the shared Transport data team for help. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature in technology practices and delivery approach. RAMC reporting uses Power BI dashboards as inputs to monthly PDF reports.
 
+Anna's interview shows a different shared-resource pattern inside the Queensland cluster: she and other resources work across RAMCSC, BAC, and Port of Brisbane. That shared operating model creates an incentive to keep RAMCSC Gen 3 changes aligned with BAC and Port of Brisbane, even though each contract has different billing and KPI requirements.
+
 The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Power BI filters are not a reliable source of truth for this portfolio. The report is filtered by whether cost appears in the selected month, so a contract may be visible one month and absent the next. Bhupesh Balani said separate Databricks or BW datasets should be used to list all contracts within a sector.
 
 ## Related Pages
@@ -43,6 +47,7 @@ The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Powe
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]
 - [[Transport Financial Reporting]]

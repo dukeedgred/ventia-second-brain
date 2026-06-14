@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-09
-tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections]
+date-updated: 2026-06-14
+tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections, kpis]
 ---
 
 # Transport Data Landscape
@@ -39,6 +39,8 @@ For open-road Asset Vision reporting, Rui described a relatively standard module
 
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds the asset-team operating detail behind those modules. Open-road roads assets include drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can carry defects or hazards, inspection records, condition ratings, and job history. The Asset team actively reconciles client handover data with site reality through [[Transport Asset Inventory Validation]].
 
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared Queensland contract pattern. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane use shared resources and broadly standard field recording in [[Asset Vision]], but contractual billing, KPI treatment, condition terminology, and monthly reporting diverge after the field-capture step.
+
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
@@ -63,6 +65,8 @@ The later working group source reinforces this gap by naming several tools that 
 
 The Pranav walkthrough adds a more specific standardisation barrier: even when contracts use [[Asset Vision]], each contract can configure activity category, activity, and intervention structures differently. KPIs and SLAs also vary by contract, so cross-contract reporting needs a clear senior-management question before detailed KPI harmonisation.
 
+Anna's interview adds a concrete example of that barrier. The three Queensland contracts can share field resources because Asset Vision restricts users to contract-configured defect codes, activity codes, repair options, and intervention levels, but the contracts still use different condition wording and reporting obligations. Any RAMCSC Gen 3 changes need to account for BAC and Port of Brisbane alignment because the operating team is shared.
+
 The SAP finance walkthrough adds the operational-system side of the same gap. Activity-based costing requires a translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems so equivalent fields can be mapped before costs and activities are combined.
 
 Rui's interview adds the field-capture side of the same issue: SAP job-cost linkage is only useful if crews capture time, materials, equipment, and job details accurately, and if those entries are validated in a way that is practical for field teams.
@@ -81,9 +85,13 @@ The Damien brief adds the expected foundation scope for the integrated asset: as
 
 Toby's interview shows one concrete contract-reporting shape for this scope. Monthly client KPI reporting can include scheduled and completed condition inspections, inspection incidents, and counts by asset class, while annual audits may test job evidence and response compliance. The full KPI list is likely owned by commercial or project leadership rather than a single data table.
 
+Anna's interview identifies RAMCSC backlog reporting as an immediate Databricks/Power BI lineage to validate: Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status, while KPI reporting remains tied to contract-specific monthly reporting requirements.
+
 ## Adjacent Data Domains
 
 Ventia has enterprise safety and compliance data in Databricks, which may apply to Transport analysis. ESRI/GIS data is managed by a separate team, and Databricks can connect to the Postgres database behind ESRI for bespoke use cases. Whether Transport uses Ventia-managed GIS data or provider-managed GIS data still needs validation.
+
+Anna said the Queensland contracts predominantly use QGIS, with ArcGIS also used. That confirms both desktop GIS tooling and ESRI-adjacent tooling should be included in Transport source-system mapping rather than treating GIS as a single platform.
 
 The first-two-week plan also names sensing and telemetry inputs that sit adjacent to the existing operational landscape: Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets. These inputs connect the data landscape to [[Transport Asset Intelligence Roadmap]] and may require different owners, access paths, and integration patterns from existing Databricks-backed reporting sources.
 
@@ -97,6 +105,7 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Maximo]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]
