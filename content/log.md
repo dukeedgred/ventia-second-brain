@@ -154,3 +154,7 @@ Expanded the report evidence ledger and contractor detail panel with explicit sc
 
 Created [[Transport Data Asset Stakeholder Interview Anna Covell]] and updated related Asset Vision, Transport contract portfolio, data landscape, condition-inspection, reporting, roadmap, data asset, and stakeholder pages.
 
+## [2026-06-14] ingest | Transport data asset stakeholder interview Huy Nguyen
+
+Created [[Transport Data Asset Stakeholder Interview Huy Nguyen]] and updated related Maximo, Databricks, asset handover, condition inspection, reporting, portfolio, data asset, and stakeholder pages.
+

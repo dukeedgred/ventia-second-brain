@@ -1,9 +1,9 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-09
+date-updated: 2026-06-14
 tags: [databricks, azure, data-platform, power-bi, data-engineering, transport, asset-data]
 ---
 
@@ -57,6 +57,8 @@ The Rui Luan interview adds a business-facing description of the open-road [[Ass
 
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds a user-facing constraint on that catalog pattern. Toby uses Databricks views for KPI tracking and dashboards, and believes defect and hazard data aligns to the Asset Vision hierarchy there, but his access was limited and did not confirm whether SLA, response-time, or completion-evidence columns can be extracted directly.
 
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North East Link Maximo constraint. Huy uses Databricks to develop KPI logic, but current data is synthetic or manually uploaded because the Maximo instance is not live yet. He also said many tunnel Maximo instances were historically client-hosted, meaning Ventia did not always have a connection to ingest tunnel data into Databricks.
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -69,6 +71,7 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

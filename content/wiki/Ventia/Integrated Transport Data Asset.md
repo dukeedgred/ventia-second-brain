@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-06-02
 date-updated: 2026-06-14
 tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis]
@@ -44,6 +44,8 @@ The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds two more founda
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-contract design constraint. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane share resources and field-capture practice, but contract-specific billing, KPI, intervention, and reporting rules diverge. The integrated data asset should therefore model both reusable Asset Vision capture patterns and contract-specific rule layers.
 
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the tunnel mobilisation pattern. North East Link / Spark is designing KPI logic and asset-management processes before Maximo is live, using synthetic datasets, manual uploads, agreed as-built metadata, and future handover assets. The integrated data asset therefore needs to distinguish draft mobilisation data from trusted handover records, and it needs a tunnel path for [[Maximo]], OMCS, AID alerts, work orders, incident records, and spatial handover data.
+
 ## Six-Week Outcomes
 
 The expected outcomes after six weeks are:
@@ -82,6 +84,8 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
 - Can the programme obtain Katerina's earlier contract-office software inventory and use it as a baseline for Transport system mapping?
 - Which RAMCSC backlog reporting assets in Databricks and Power BI can be reused as a low-friction lineage proof point?
+- Which North East Link Databricks assets are synthetic or manually uploaded placeholders, and when will source-system Maximo data replace or validate them?
+- Which OMCS, AID, alarm, work-order, incident, and spatial handover fields are required for a reusable tunnel data model?
 
 ## Related Pages
 
@@ -91,6 +95,7 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

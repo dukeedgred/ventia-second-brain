@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-14
 tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, autopilot]
@@ -20,6 +20,8 @@ The data supports contract-level operational reporting, including work managemen
 The Pranav walkthrough positions Asset Vision mainly in open-road contracts. Western Roads Upgrade was one of the first Transport contracts to adopt Asset Vision, followed by SRAPC. Queensland contracts such as RAMC, Port of Brisbane, and Brisbane Airport have data coming into Databricks, while VRMC Grampians and Metro East were being mobilized for a 2026-07-01 go-live.
 
 Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses [[Maximo]], and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] reinforces that boundary from North East Link. Huy said Asset Vision was proposed during the bid but the client rejected it as not sufficient for tunnel asset management, leading North East Link to adopt [[Maximo]].
 
 The SAP finance walkthrough adds that Asset Vision is deployed across about five Australian roads contracts, but each contract has a different configuration. This reinforces that Asset Vision is not one uniform activity model even when the same product name is used across contracts.
 
@@ -79,6 +81,7 @@ Toby's interview adds an asset-register constraint. Asset Vision data is only us
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Financial Reporting]]

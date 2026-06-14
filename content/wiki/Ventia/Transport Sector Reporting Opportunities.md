@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-06-01
 date-updated: 2026-06-14
 tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset, kpis]
@@ -27,6 +27,8 @@ The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds a contract KPI 
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a Queensland reporting example. RAMCSC has a broad KPI appendix spanning routine maintenance, stakeholder relations, projects, lane openings, hazards, safety, jobs, and work orders, while BAC and Port of Brisbane are more focused on corrective and planned maintenance completion within the month. This suggests enterprise reporting should distinguish backlog status, monthly completion obligations, and formal contract KPI schedules rather than treating them as one KPI category.
 
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds a tunnel bid-intelligence and benchmarking view. Huy wants cross-project visibility of asset registers, maintenance data, unit rates for maintenance activities, SLA/KPI setup, and consistent naming conventions so bid teams can reuse evidence rather than manually reconciling terms such as jet fan versus fan.
+
 ## Standardisation Challenges
 
 Earlier sector-level reporting efforts struggled because costs came from SAP while operational activity was structured differently across contracts. Even within [[Asset Vision]], job and activity specifications use three levels: activity category, activity, and intervention. Each contract configured those levels to suit local needs, which makes cross-contract comparison difficult.
@@ -42,6 +44,8 @@ Rui added that the capture process itself needs to be easy and validated for cre
 Toby added that open-road contracts may share asset categories such as roads, pits, guardrails, signage, and line marking, while KPI measurement and condition definitions still differ by project. Reporting needs to preserve that project-level context instead of forcing all KPIs into one flattened sector metric.
 
 Anna's interview also shows why some reporting standardisation is operationally valuable even when contractual measures differ. RAMCSC, BAC, and Port of Brisbane share resources and field-capture practice, so changes to RAMCSC reporting or work coding should be tested against the other two contracts before being treated as isolated contract work.
+
+Huy's interview adds that Maximo may have a broadly standard tunnel schema, but custom attributes, custom modules, reporting requirements, and KPI logic still vary by contract. A standard tunnel data product therefore needs a common core plus controlled project-specific extensions.
 
 ## Predictive Maintenance And Failure Codes
 
@@ -69,6 +73,8 @@ For asset-condition reporting, the nearest live-use-case question is whether Dat
 
 Anna identified RAMCSC backlog status as a practical candidate to trace first because Pranav Kumar has already built Power BI reporting over Databricks for that purpose. The next check is whether that report is only an operational backlog view or can also support formal KPI reporting.
 
+For tunnel reporting, Huy identified North East Link as a candidate to trace carefully but not as a mature source feed yet. Current Databricks KPI work uses synthetic or manual data because Maximo is not live, so any live use case should clearly mark whether it is validating the future KPI model, a manual upload, or a real source-system integration.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
@@ -78,6 +84,7 @@ Anna identified RAMCSC backlog status as a practical candidate to trace first be
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Condition Inspections]]
 - [[Transport Asset Inventory Validation]]

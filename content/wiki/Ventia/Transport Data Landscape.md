@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-14
 tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections, kpis]
@@ -41,6 +41,8 @@ The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds the asset-team 
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared Queensland contract pattern. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane use shared resources and broadly standard field recording in [[Asset Vision]], but contractual billing, KPI treatment, condition terminology, and monthly reporting diverge after the field-capture step.
 
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North East Link tunnel pattern. During mobilisation, the asset team works with D&C as-built asset registers, spatial files, agreed metadata, hierarchy, and coordinate requirements before Maximo has real operational data. The target operating landscape includes [[Maximo]], Databricks, Power BI, QGIS, OMCS, AID camera alerts, work orders, incident records, and future maintenance or inspection data.
+
 The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
@@ -72,6 +74,8 @@ The SAP finance walkthrough adds the operational-system side of the same gap. Ac
 Rui's interview adds the field-capture side of the same issue: SAP job-cost linkage is only useful if crews capture time, materials, equipment, and job details accurately, and if those entries are validated in a way that is practical for field teams.
 
 Toby's interview adds that open-road contracts may share broad asset categories, but condition definitions, KPI standards, response rules, and reporting measures remain contract-specific. That makes [[Transport Asset Condition Inspections]] a data-standardisation problem as much as an operational workflow.
+
+Huy's interview adds the tunnel version of the same issue. Maximo may provide a broadly standard schema for tunnel projects, but contract-specific reporting requirements, custom attributes, custom modules, and naming differences still need to be modelled explicitly. He also called out the practical need for common names across projects, such as resolving jet fan versus fan terminology for bid support and benchmarking.
 
 ## Reporting And Opportunity Areas
 
@@ -106,6 +110,7 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Maximo]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

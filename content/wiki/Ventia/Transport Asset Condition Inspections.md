@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-06-04
 date-updated: 2026-06-14
 tags: [transport, condition-inspections, defects, hazards, kpis, asset-vision, intervention-levels]
@@ -24,6 +24,8 @@ Condition ratings run from 1 to 5, from very good to very poor. The definitions 
 The operational goal is to avoid poor or very poor assets in the register. Toby said open-road contracts usually share similar asset categories, but the condition standards, KPI standards, and measurement rules differ by project.
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] confirms the same principle from RAMCSC, BAC, and Port of Brisbane. Anna said the underlying condition-rating principle is similar across the contracts, but the contract wording differs: the TMR/RAMCSC context uses terms such as notification, safety, and hazard, while Port of Brisbane and BAC use 1-to-5 ratings with different wording attached.
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds a tunnel handover nuance. North East Link assets should mostly be in good condition because they are new at handover, but pavement may require measured condition evidence such as roughness, rutting, and cracking before handover. For other assets, initial default condition values may have limited operational meaning until inspections are performed.
 
 ## Inspection Scheduling And Routing
 
@@ -53,10 +55,15 @@ Anna added that RAMCSC has an entire contract appendix of KPIs across routine ma
 
 Routine maintenance handles smaller rectification jobs, while work that routine maintenance cannot fix moves toward capital works. Pavement was described as the most important asset class for capital works, with annual pavement testing used to predict likely failure areas and target critical sections rather than repairing whole roads unnecessarily.
 
+## Tunnel Operational Transition
+
+Huy described North East Link condition and maintenance inspection obligations as largely operational-phase work. Once operations begin, the team expects to validate inspection data, maintenance data, and work order data for completeness, build operational reports and dashboards, and use the Asset Management Manual to guide inspection frequency and condition-assessment practice.
+
 ## Related Pages
 
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Asset Inventory Validation]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]

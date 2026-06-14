@@ -1,15 +1,15 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
 date-created: 2026-06-04
-date-updated: 2026-06-04
-tags: [transport, asset-data, data-quality, asset-vision, gis]
+date-updated: 2026-06-14
+tags: [transport, asset-data, data-quality, asset-vision, maximo, gis]
 ---
 
 # Transport Asset Inventory Validation
 
-Transport asset inventory validation is the workflow for reconciling client-supplied road asset data with the physical asset register used in [[Asset Vision]]. Toby Lin's interview frames it as a core open-road operating process because asset counts, locations, types, and ownership statuses determine whether work can be assigned and audited correctly.
+Transport asset inventory validation is the workflow for reconciling client-supplied or construction-supplied asset data with the physical asset register used in operational systems such as [[Asset Vision]] or [[Maximo]]. Toby Lin's interview frames it as a core open-road operating process because asset counts, locations, types, and ownership statuses determine whether work can be assigned and audited correctly.
 
 ## Why It Matters
 
@@ -22,6 +22,14 @@ Incorrect asset locations can have immediate operational cost. If a pit or sign 
 The workflow combines field validation and desktop GIS work. Crews or inspectors flag missing or incorrectly located assets, then the asset team checks imagery through Nearmap or Google Street View and uses QGIS to map locations before updating the Asset Vision inventory.
 
 Asset attributes are corrected at the same time as locations. Examples from the interview included guardrail length and type, pit material, lid type, inlet details, drainage lines, vehicle barriers, kerb and channel, line marking, and signage.
+
+## Tunnel Mobilisation Variation
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds a tunnel as-built handover variant from North East Link / Spark. Because the asset is still being constructed, validation is currently about whether the D&C asset register is complete, submitted in the agreed format, mapped to the agreed asset hierarchy, and aligned to the supplied spatial file and coordinate reference expectations.
+
+Huy said North East Link has an as-built management plan and has spent two to three years agreeing asset register format, metadata, asset attributes, hierarchy, and spatial handover expectations. The D&C arm provides an asset register, often spreadsheet-based, plus spatial data such as GeoJSON, spatial files, or shapefiles, and the asset team maps the two together.
+
+The live D&C asset register is not yet trusted. Huy described it as changing constantly, with duplication, missing data, incomplete records, and placeholder values. Final XYZ coordinates are not populated until later, so the team relies on location descriptions and its involvement in location-hierarchy development during mobilisation.
 
 ## Ongoing Change Drivers
 
@@ -42,6 +50,7 @@ For the [[Integrated Transport Data Asset]], this means the asset register needs
 ## Related Pages
 
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]
 - [[Integrated Transport Data Asset]]
