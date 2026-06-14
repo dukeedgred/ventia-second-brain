@@ -158,3 +158,7 @@ Created [[Transport Data Asset Stakeholder Interview Anna Covell]] and updated r
 
 Created [[Transport Data Asset Stakeholder Interview Huy Nguyen]] and updated related Maximo, Databricks, asset handover, condition inspection, reporting, portfolio, data asset, and stakeholder pages.
 
+## [2026-06-14] ingest | Transport data asset stakeholder interview Rui Luan part 2
+
+Created [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] and [[Western Roads Upgrade]], then updated related Asset Vision, data landscape, inspections, reporting, roadmap, portfolio, Databricks, data asset, and stakeholder pages.
+

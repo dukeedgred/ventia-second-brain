@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-14
 tags: [databricks, azure, data-platform, power-bi, data-engineering, transport, asset-data]
@@ -55,6 +55,8 @@ The SAP walkthrough adds two finance-specific centralised assets to map: enterpr
 
 The Rui Luan interview adds a business-facing description of the open-road [[Asset Vision]] reporting path: raw Asset Vision data is pulled into Ventia data services, hosted in Azure Databricks, and surfaced through Power BI. Rui described the core open-road reporting modules as inspections, defects, and jobs, which gives the discovery team a concrete starting point for validating Transport operational tables.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds a WRU contract-level lineage candidate. Rui described local views and dashboards over [[Western Roads Upgrade]] Asset Vision data, including inspection KPI dashboards, response or job dashboards, photo records linked to inspection and job metadata, timesheet/material capture, and capital works planning. These should be traced through the documented [[Transport Contract Tables - transport_wru]] context.
+
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds a user-facing constraint on that catalog pattern. Toby uses Databricks views for KPI tracking and dashboards, and believes defect and hazard data aligns to the Asset Vision hierarchy there, but his access was limited and did not confirm whether SLA, response-time, or completion-evidence columns can be extracted directly.
 
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North East Link Maximo constraint. Huy uses Databricks to develop KPI logic, but current data is synthetic or manually uploaded because the Maximo instance is not live yet. He also said many tunnel Maximo instances were historically client-hosted, meaning Ventia did not always have a connection to ingest tunnel data into Databricks.
@@ -70,8 +72,10 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 - [[Transport Executive Brief Damien]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

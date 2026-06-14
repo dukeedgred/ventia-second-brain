@@ -1,7 +1,7 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-14
 tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, autopilot]
@@ -27,6 +27,8 @@ The SAP finance walkthrough adds that Asset Vision is deployed across about five
 
 The Rui Luan stakeholder interview reinforced this operating split from a Western Roads Upgrade perspective. Open-road maintenance needs rapid geolocated issue capture, while tunnel work needs componentised asset hierarchies. Rui described Asset Vision as the open-road system and [[Maximo]] as the tunnel system.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds the detailed [[Western Roads Upgrade]] view. Rui said the core Asset Vision tables and mandatory fields are broadly standard across contract databases, with inspections, defects, and jobs as the common modules; the contract-specific variation sits in custom fields, custom forms, workflow configuration, local views, and dashboards.
+
 The Toby Lin stakeholder interview adds a field-level view of how Asset Vision is maintained by the open-road Asset team. Client handover data can be inaccurate at mobilisation, so crews and inspectors validate missing or wrongly located assets, then the asset team uses Nearmap, Google Street View, QGIS, and Asset Vision updates to keep the inventory aligned with site reality. This workflow is captured on [[Transport Asset Inventory Validation]].
 
 Toby also described the operating hierarchy inside Asset Vision: roads contain asset categories such as drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can then have defects or hazards attached. The scheduled inspection and response workflow is captured on [[Transport Asset Condition Inspections]].
@@ -35,6 +37,8 @@ The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds the Queensla
 
 Anna described how Asset Vision configuration reduces contract-rule burden for field users. Defect codes, activity codes or SOR-style repair options, intervention levels, road classification, repair type, and measurements such as pothole depth are configured so the system can calculate response time after the user selects the relevant defect and repair context.
 
+Rui's WRU walkthrough adds that Asset Vision inspection imaging can capture road images every few metres, store photo records with links back to inspections, defects, jobs, and image URLs, and expose those records through data services and Databricks. The image file itself is not the structured data record; the metadata and relational context sit in the Asset Vision reporting tables.
+
 ## Databricks Access Pattern
 
 Ventia has an Azure SQL Server in its cloud environment with elastic compute and seven databases associated with the Asset Vision reporting data. Asset Vision synchronizes data from its cloud into this Azure SQL Server.
@@ -42,6 +46,8 @@ Ventia has an Azure SQL Server in its cloud environment with elastic compute and
 Databricks uses federated queries against those Azure SQL databases, so queries pass through rather than staging all Asset Vision reporting data through the full Databricks medallion pattern. The walk-through also described a migration from Asset Vision-hosted reporting data toward Ventia-hosted reporting data.
 
 Rui described the open-road Asset Vision reporting path as a direct integration that pulls raw data into Ventia data services, hosts reporting data in Azure Databricks, and runs Power BI over the collated tables. He described the standard open-road modules as inspections, defects, and jobs.
+
+In Part 2, Rui showed the same pattern at WRU contract level: local views over the Asset Vision data feed support inspection KPI dashboards and response or job dashboards. This makes WRU's inspection, job, photo, timesheet, and capital works views important candidates for validating the reusable open-road Asset Vision core.
 
 Toby indicated that defect and hazard data is available through Transport Databricks views aligned to the Asset Vision hierarchy, but he had limited access and could not confirm whether SLA or response-time fields can be extracted directly. He uses Databricks mainly for KPI tracker and dashboard purposes.
 
@@ -67,6 +73,8 @@ Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo d
 
 The Rui Luan interview adds a field-capture constraint for this costing path. Asset Vision job records only become useful for bid intelligence and benchmarking when crews capture timesheets, materials, equipment, and job details accurately and those entries are easy to validate.
 
+The second Rui interview adds a workflow constraint to the automation roadmap. Asset Vision Autopilot and Regional Vision can detect defects and, in some cases, support job creation, but Rui cautioned that automatic generation would create noisy or irrelevant jobs unless a human cleanses and validates detections against contract scope and intervention rules.
+
 Toby's interview adds an asset-register constraint. Asset Vision data is only useful for routing, inspections, defects, hazards, and capital planning when location, asset type, condition, ownership status, and third-party works updates are actively maintained.
 
 ## Related Pages
@@ -79,9 +87,11 @@ Toby's interview adds an asset-register constraint. Asset Vision data is only us
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Western Roads Upgrade]]
 - [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Financial Reporting]]

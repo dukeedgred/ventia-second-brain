@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-06-04
 date-updated: 2026-06-14
 tags: [transport, asset-data, data-quality, asset-vision, maximo, gis]
@@ -35,6 +35,8 @@ The live D&C asset register is not yet trusted. Huy described it as changing con
 
 Inventory quality is not a one-off mobilisation task. Third-party works can create or alter driveways, pits, kerbs, and other road assets without timely notification to Ventia. Inspectors may discover these changes during normal work and then escalate to DTP for confirmation.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] confirms the same ongoing-change pattern at [[Western Roads Upgrade]]. Rui described a third-party works function and a dedicated asset engineer who capture developer-driven network changes and update the inventory so modified assets remain current.
+
 Some assets remain difficult to validate remotely. Assets under bridges may not be visible in aerial imagery, so the team needs site photos and field inspection, and the exact location can still be less precise than directly mapped assets.
 
 ## Ownership And Status Decisions
@@ -50,7 +52,9 @@ For the [[Integrated Transport Data Asset]], this means the asset register needs
 ## Related Pages
 
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Western Roads Upgrade]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]
 - [[Integrated Transport Data Asset]]

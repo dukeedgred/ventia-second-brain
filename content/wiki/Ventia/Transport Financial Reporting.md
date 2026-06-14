@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md"]
+sources: ["raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-06-03
-date-updated: 2026-06-03
-tags: [transport, finance, sap, power-bi, reporting]
+date-updated: 2026-06-14
+tags: [transport, finance, sap, power-bi, reporting, activity-based-costing]
 ---
 
 # Transport Financial Reporting
@@ -45,6 +45,10 @@ Bhupesh said the team needs a translation guide that maps equivalent fields acro
 
 The Rui Luan stakeholder interview adds the job-level operating requirement behind that gap. Rui said each job should ideally have a direct SAP linkage so actual costs can be captured for winning bids and benchmarking, but that linkage is not consistently present. Accurate costing also depends on crews capturing timesheets, materials, equipment, and job details in a way that can be validated.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds the contract-incentive nuance from [[Western Roads Upgrade]]. Rui described WRU as a flat-payment or drawdown-style contract where the client cares about KPI, response-time, capital works, and pavement-performance outcomes rather than item-by-item payment. That weakens the contractual driver for detailed job-level SAP linkage, even though it remains valuable for Ventia forecasting, budgeting, bid intelligence, and activity-level margin analysis.
+
+Rui also described the field-capture friction behind the costing gap. Crew timesheets may need materials, quantities, equipment, vehicles, people, and job details, but on open-road contracts a crew may complete many small jobs in one day. If data entry takes longer than the work itself, adoption and data quality become the limiting factors for activity-based costing.
+
 ## Access And Follow-Up
 
 Dashboard access is constrained by report security. Bhupesh can provide access to one project for logic review, but full-sector dashboard access requires approval from Damien. He also noted a pending request for read-only access to the Transport Databricks schema.
@@ -55,6 +59,8 @@ Relevant follow-up contacts include Bhupesh Balani for SAP and Transport finance
 
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
+- [[Western Roads Upgrade]]
 - [[Transport Data Landscape]]
 - [[Transport Sector Reporting Opportunities]]
 - [[Transport Contract Portfolio]]

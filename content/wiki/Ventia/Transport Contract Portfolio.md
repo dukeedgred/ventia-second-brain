@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-06-01
 date-updated: 2026-06-14
 tags: [transport, contracts, portfolio, data-landscape, asset-data, queensland]
@@ -17,6 +17,8 @@ In Australia, Transport operates across New South Wales, Queensland, Victoria, W
 
 Queensland includes RAMC, also discussed as QSTC, plus Port of Brisbane and Brisbane Airport road maintenance. Victoria includes WRU and VRMC, with Grampians and Metro East being mobilized for a 2026-07-01 go-live. South Australia includes T2D, which is still under construction, and Western Australia includes Venture Smart, a joint venture where Ventia receives outputs rather than being deeply involved in the operating company.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds detail for [[Western Roads Upgrade]] in Victoria. Rui Luan works on WRU and described it as a mature open-road Asset Vision context with project-owned asset management, local views and dashboards, pavement condition survey processing, capital works planning, and strict KPI or response-time obligations.
+
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds current detail for North East Link in Victoria. Huy works within the Spark consortium during design and mobilisation, with operational phase expected around 2028 and a 25-year operating period from about 2029.
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds current-state detail for the Queensland cluster. Anna supports RAMCSC, BAC / Brisbane Airport, and Port of Brisbane as shared contracts. Port of Brisbane started around 2020, BAC around 2022 or 2023, and RAMCSC was still BAU while the Gen 3 bid or renewal process continued.
@@ -31,6 +33,8 @@ This distinction matters for systems choices. [[Asset Vision]] is the lower-cost
 
 The Rui Luan interview confirmed the same split from the Western Roads Upgrade perspective. Rui described Western Roads Upgrade as an open-road contract using Asset Vision, with open-road work centred on rapid geolocated response, and tunnel work centred on componentised asset hierarchies.
 
+The second Rui interview adds that WRU's commercial model differs from job-rate contracts. WRU was described as a flat-payment or drawdown-style contract, while other open-road contracts may require job-by-job approval and standard-rate payment. This affects how strongly each contract is incentivised to maintain item-level costing between Asset Vision and SAP.
+
 The Toby Lin interview adds that open-road contracts likely share similar road asset categories, including roads, kerb and channel, pits, line marking, and signage, even where the detailed KPI and condition standards differ by contract. This supports reuse of asset-category mapping while keeping [[Transport Asset Condition Inspections]] contract-specific.
 
 The Huy Nguyen interview adds the brand-new tunnel lifecycle. Unlike a short takeover mobilisation where systems and processes already exist, North East Link has spent years defining business processes, management plans, as-built handover formats, metadata, hierarchy, and KPI logic before operations begin.
@@ -40,6 +44,8 @@ The Huy Nguyen interview adds the brand-new tunnel lifecycle. Unlike a short tak
 The portfolio does not yet have a single centralized report that lists all contracts, dates, data feeds, and reporting status. Pranav recalled an older cross-contract report that included Transport data, but he was unsure whether it remains active.
 
 Large contracts often have their own data people, while smaller contracts usually ask the shared Transport data team for help. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature in technology practices and delivery approach. RAMC reporting uses Power BI dashboards as inputs to monthly PDF reports.
+
+Rui's Part 2 walkthrough supports the WRU maturity signal. WRU uses local Asset Vision views for inspection KPI dashboards and response or job dashboards, and its `transport_wru` Databricks context includes inspection, job, timesheet, photo, and capital works views that can support lineage validation.
 
 Anna's interview shows a different shared-resource pattern inside the Queensland cluster: she and other resources work across RAMCSC, BAC, and Port of Brisbane. That shared operating model creates an incentive to keep RAMCSC Gen 3 changes aligned with BAC and Port of Brisbane, even though each contract has different billing and KPI requirements.
 
@@ -52,9 +58,11 @@ The SAP finance walkthrough adds that the [[Transport Financial Reporting]] Powe
 - [[DB Walkthrough With Pranav Kumar]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Western Roads Upgrade]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]
 - [[Transport Financial Reporting]]

@@ -1,7 +1,7 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
 date-created: 2026-06-02
 date-updated: 2026-06-14
 tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis]
@@ -40,6 +40,8 @@ The [[SAP Data Walk-Through Transport Sector]] adds a current-state finance anch
 
 The Rui Luan interview adds two immediate foundation inputs: open-road [[Asset Vision]] modules for inspections, defects, and jobs, and job-level SAP cost linkage across both open-road and [[Maximo]] tunnel contexts. These are necessary if the live use case is bid intelligence, activity costing, or benchmark reporting.
 
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] turns [[Western Roads Upgrade]] into a concrete open-road proof point. WRU exposes the reusable Asset Vision core of inspections, defects, jobs, photos, timesheets, and capital works, while also showing the local variation in custom fields, workflow rules, dashboard views, pavement-performance targets, and commercial incentives.
+
 The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds two more foundation inputs for open-road contracts: [[Transport Asset Inventory Validation]] and [[Transport Asset Condition Inspections]]. These define how asset locations, attributes, ownership status, condition ratings, hazards, defects, response levels, and inspection KPIs become reliable enough for downstream reporting or optimisation.
 
 The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-contract design constraint. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane share resources and field-capture practice, but contract-specific billing, KPI, intervention, and reporting rules diverge. The integrated data asset should therefore model both reusable Asset Vision capture patterns and contract-specific rule layers.
@@ -70,6 +72,8 @@ The right use case should prove near-term value while leaving reusable foundatio
 
 Activity-based costing is attractive but dependent on source alignment. The SAP walkthrough indicates that a credible proof point would need field mapping across [[Asset Vision]], Maximo, and client AWM/AVM systems, plus agreement on how SAP costs should join to operational activity records.
 
+The WRU walkthrough suggests a second practical use-case family: inspection and crew optimisation. Rui described opportunities to reduce travel, align inspections with likely work locations and crew dispatch, shift suitable work from reactive to cyclical maintenance, and analyse inspector capacity by road or route segment.
+
 ## Open Questions
 
 - Which live use case will be selected for the six-week programme?
@@ -86,6 +90,8 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - Which RAMCSC backlog reporting assets in Databricks and Power BI can be reused as a low-friction lineage proof point?
 - Which North East Link Databricks assets are synthetic or manually uploaded placeholders, and when will source-system Maximo data replace or validate them?
 - Which OMCS, AID, alarm, work-order, incident, and spatial handover fields are required for a reusable tunnel data model?
+- Which WRU Asset Vision views should anchor the open-road proof point for inspection KPIs, job response dashboards, photo evidence, timesheets, and capital works?
+- Can WRU's pavement modelling and inspection-routing optimisation be reused beyond WRU without flattening contract-specific intervention levels and response-time rules?
 
 ## Related Pages
 
@@ -93,9 +99,11 @@ Activity-based costing is attractive but dependent on source alignment. The SAP 
 - [[Transport First Two Week Plan]]
 - [[SAP Data Walk-Through Transport Sector]]
 - [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]
