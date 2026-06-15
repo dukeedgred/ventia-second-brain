@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-14
-tags: [stakeholders, transport, databricks, spend-cube, data-asset, asset-vision]
+date-updated: 2026-06-15
+tags: [stakeholders, transport, databricks, spend-cube, data-asset, asset-vision, maximo]
 ---
 
 # Engagement Team
@@ -30,7 +30,7 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 - Toby Lin can explain open-road Asset team workflows for [[Transport Asset Inventory Validation]], [[Transport Asset Condition Inspections]], Asset Vision hierarchy, defect and hazard response levels, and KPI tracker use in Databricks.
 - Anna Covell supports RAMCSC, BAC / Brisbane Airport, and Port of Brisbane as the shared [[Asset Vision]] and data contact. She can explain Asset Vision setup, field work capture, contract-specific intervention levels, monthly reporting, RAMCSC backlog reporting context, QGIS/ArcGIS use, and how shared resources operate across the three Queensland contracts.
 - Huy Nguyen is the Asset Information Analyst for North East Link / Spark. He can explain tunnel mobilisation, as-built asset handover, [[Maximo]] selection, synthetic KPI datasets, OMCS/AID incident flow, QGIS use, and cross-project asset naming or benchmarking requirements.
-- Umar was mentioned by Huy as another North East Link contact involved in manual uploads while Maximo data is not yet available.
+- Syed Umar Anis is an Asset Management Specialist on North East Link. He can explain operational systems setup, D&C-to-operations data transition, [[Transport Hand-Back Systems]], Maximo procurement and novation, SAP/Databricks/Power BI corporate-system boundaries, and cross-project systems learning.
 - Jason Yu was suggested by Huy as a remaining Centre of Excellence / Transport asset-management contact who may understand earlier standardisation work.
 - Adam Taylor and Barat were suggested by Rui as follow-up contacts for [[Maximo]] setup on tunnel projects; Barat's exact spelling should be validated.
 - Conor Murphy remains a useful follow-up for Transport cost and benchmarking context; Rui offered to help with an introduction if needed.
@@ -99,6 +99,8 @@ The [[SAP Data Walk-Through Transport Sector]] adds two concrete access paths: B
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Transport Asset Inventory Validation]]
 - [[Transport Asset Condition Inspections]]

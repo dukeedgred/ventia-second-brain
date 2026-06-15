@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
 date-created: 2026-06-03
-date-updated: 2026-06-14
-tags: [maximo, transport, tunnel, work-management, asset-data]
+date-updated: 2026-06-15
+tags: [maximo, transport, tunnel, work-management, asset-data, hand-back]
 ---
 
 # Maximo
@@ -19,6 +19,8 @@ For the [[Transport Contract Portfolio]], this makes Maximo a key system whereve
 
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North East Link / Spark view. Huy said [[Asset Vision]] was proposed during the bid but rejected because the client considered it insufficient for tunnel management, so North East Link is adopting Maximo as its asset information management system.
 
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the systems-governance view. For North East Link, Maximo is a [[Transport Hand-Back Systems|hand-back system]]: it will contain tunnel asset data and operational processes, Ventia is responsible for choosing and configuring it, and at contract end the hosting and licensing arrangements can be novated to the client while Ventia severs corporate-system integrations.
+
 ## Relationship To SAP And Benchmarking
 
 Maximo records still need to connect to SAP job costs if the [[Integrated Transport Data Asset]] is going to support bid intelligence, benchmark costing, or cross-contract activity reporting. Rui framed this as a general requirement across project types: every job should have a direct SAP linkage so actual costs can be captured consistently.
@@ -27,16 +29,22 @@ The interview did not capture Maximo's current integration path into Databricks 
 
 Huy added that North East Link does not yet have a live Maximo instance, so current KPI development uses synthetic data and manual uploads in Databricks. He also said many existing tunnel Maximo instances have historically been client-hosted, with no direct Ventia Databricks ingestion path, making Maximo integration a concrete discovery gap rather than just a source-system label.
 
+Syed added that Maximo data may still need to flow into corporate systems for analysis, purchasing, and financial control. Inventory and procurement are likely overlap areas: demand may originate in Maximo or another tunnel system, but SAP remains the corporate process for purchasing and finance. Lean integration may be enough in some cases, while deep integration can be costly, rigid, and difficult to maintain.
+
 ## Tunnel Data Model Considerations
 
 Huy expects most Maximo tunnel data to share a broad default schema, but cautioned that contracts may add custom fields, custom modules, and different KPI logic. For the [[Integrated Transport Data Asset]], this means Maximo should be modelled as a reusable system pattern with contract-specific extensions rather than a single uniform tunnel schema.
 
 North East Link also needs to connect Maximo with tunnel-adjacent operational sources. Huy named OMCS data, AID camera alerts, alarms, work orders, incident records, asset registers, spatial handover files, QGIS analysis, and Power BI reporting as part of the future operating landscape.
 
+Syed described the D&C-to-operations data load feeding that landscape. Design and construction partners provide asset data, asset attributes, manufacturer information, maintenance data, spare parts, and consumables through spreadsheets, APIs, or downloads; the operations team then transforms and uploads those records into Maximo or another operational asset-management system.
+
 ## Related Pages
 
 - [[Transport Data Asset Stakeholder Interview]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Hand-Back Systems]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]
 - [[Transport Contract Portfolio]]

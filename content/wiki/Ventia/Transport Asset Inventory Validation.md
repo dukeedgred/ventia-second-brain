@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
+sources: ["raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
 date-created: 2026-06-04
-date-updated: 2026-06-14
-tags: [transport, asset-data, data-quality, asset-vision, maximo, gis]
+date-updated: 2026-06-15
+tags: [transport, asset-data, data-quality, asset-vision, maximo, gis, hand-back]
 ---
 
 # Transport Asset Inventory Validation
@@ -28,6 +28,8 @@ Asset attributes are corrected at the same time as locations. Examples from the 
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds a tunnel as-built handover variant from North East Link / Spark. Because the asset is still being constructed, validation is currently about whether the D&C asset register is complete, submitted in the agreed format, mapped to the agreed asset hierarchy, and aligned to the supplied spatial file and coordinate reference expectations.
 
 Huy said North East Link has an as-built management plan and has spent two to three years agreeing asset register format, metadata, asset attributes, hierarchy, and spatial handover expectations. The D&C arm provides an asset register, often spreadsheet-based, plus spatial data such as GeoJSON, spatial files, or shapefiles, and the asset team maps the two together.
+
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the systems transition step after the D&C data is received. D&C partners may provide asset data, asset attributes, manufacturer information, maintenance data, spare parts, and consumables through spreadsheets, APIs, or downloads; the operations team then transforms that data and uploads it into [[Maximo]] or another operational asset-management system.
 
 The live D&C asset register is not yet trusted. Huy described it as changing constantly, with duplication, missing data, incomplete records, and placeholder values. Final XYZ coordinates are not populated until later, so the team relies on location descriptions and its involvement in location-hierarchy development during mobilisation.
 
@@ -54,6 +56,7 @@ For the [[Integrated Transport Data Asset]], this means the asset register needs
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
 - [[Western Roads Upgrade]]
 - [[Asset Vision]]
 - [[Transport Data Landscape]]

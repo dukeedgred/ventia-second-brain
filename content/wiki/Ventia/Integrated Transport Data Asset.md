@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
 date-created: 2026-06-02
-date-updated: 2026-06-14
-tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis]
+date-updated: 2026-06-15
+tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis, hand-back]
 ---
 
 # Integrated Transport Data Asset
@@ -48,6 +48,8 @@ The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-con
 
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the tunnel mobilisation pattern. North East Link / Spark is designing KPI logic and asset-management processes before Maximo is live, using synthetic datasets, manual uploads, agreed as-built metadata, and future handover assets. The integrated data asset therefore needs to distinguish draft mobilisation data from trusted handover records, and it needs a tunnel path for [[Maximo]], OMCS, AID alerts, work orders, incident records, and spatial handover data.
 
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds a hand-back and corporate-system classification requirement. North East Link may use Ventia corporate systems for SAP purchasing, Databricks analysis, Power BI reporting, Excel, and SharePoint collaboration, but [[Maximo]] is the operational [[Transport Hand-Back Systems|hand-back system]] that must remain transferable to the client. The integrated data asset should therefore capture not only source-system name and data domain, but also contract ownership, administrative control, extraction rights, and exit-state obligations.
+
 ## Six-Week Outcomes
 
 The expected outcomes after six weeks are:
@@ -90,6 +92,7 @@ The WRU walkthrough suggests a second practical use-case family: inspection and 
 - Which RAMCSC backlog reporting assets in Databricks and Power BI can be reused as a low-friction lineage proof point?
 - Which North East Link Databricks assets are synthetic or manually uploaded placeholders, and when will source-system Maximo data replace or validate them?
 - Which OMCS, AID, alarm, work-order, incident, and spatial handover fields are required for a reusable tunnel data model?
+- Which Transport systems are hand-back, client-controlled, tunnel-local, or Ventia corporate systems, and how does that affect integration depth?
 - Which WRU Asset Vision views should anchor the open-road proof point for inspection KPIs, job response dashboards, photo evidence, timesheets, and capital works?
 - Can WRU's pavement modelling and inspection-routing optimisation be reused beyond WRU without flattening contract-specific intervention levels and response-time rules?
 
@@ -103,6 +106,8 @@ The WRU walkthrough suggests a second practical use-case family: inspection and 
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Inventory Validation]]

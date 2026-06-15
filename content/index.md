@@ -383,3 +383,5 @@ All curated wiki pages. Consult this first before creating a new page.
 | [[Transport Contract Tables - formitize_srapc]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.formitize_srapc` |
 | [[Transport Contract Tables - stg_enterprise_reporting]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.stg_enterprise_reporting` |
 | [[Transport Contract Tables - transport_vsm]] | contract-table-catalog | Contract/schema catalog for Transport tables in `transport_dev.transport_vsm` |
+| [[Transport Data Asset Stakeholder Interview Syed Umar]] | source-summary | Source summary of Syed Umar Anis's stakeholder interview covering North East Link systems mobilisation, Maximo hand-back, D&C asset-data handover, corporate-system integration, and cross-project learning needs |
+| [[Transport Hand-Back Systems]] | concept | Contract-governed Transport systems that must remain with or transfer to the client or asset, contrasted with Ventia corporate systems and lean integration patterns |

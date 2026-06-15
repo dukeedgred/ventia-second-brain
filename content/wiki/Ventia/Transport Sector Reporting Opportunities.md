@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
+sources: ["raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
 date-created: 2026-06-01
-date-updated: 2026-06-14
-tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset, kpis]
+date-updated: 2026-06-15
+tags: [transport, reporting, benchmarks, predictive-maintenance, bids, data-asset, kpis, hand-back]
 ---
 
 # Transport Sector Reporting Opportunities
@@ -29,6 +29,8 @@ The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a Queensland
 
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds a tunnel bid-intelligence and benchmarking view. Huy wants cross-project visibility of asset registers, maintenance data, unit rates for maintenance activities, SLA/KPI setup, and consistent naming conventions so bid teams can reuse evidence rather than manually reconciling terms such as jet fan versus fan.
 
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the systems-mobilization version of the same opportunity. From a systems perspective, reusable evidence would show how other tunnels move an alarm from operational technology into IT work management, assign it to maintenance, close the loop, capture data, and report to engineers. From an engineering perspective, reusable evidence includes failure modes, design life, inspection sheets, failure-code hierarchies, and asset-type-specific maintenance patterns.
+
 [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds a delivery-optimisation opportunity from [[Western Roads Upgrade]]. Rui described using inspection timing, road classes, expected work density, route travel time, and inspector capacity to reduce wasted travel, align inspections with likely crew dispatch, and decide when recurring reactive work should become cyclical or capital work.
 
 ## Standardisation Challenges
@@ -50,6 +52,8 @@ Toby added that open-road contracts may share asset categories such as roads, pi
 Anna's interview also shows why some reporting standardisation is operationally valuable even when contractual measures differ. RAMCSC, BAC, and Port of Brisbane share resources and field-capture practice, so changes to RAMCSC reporting or work coding should be tested against the other two contracts before being treated as isolated contract work.
 
 Huy's interview adds that Maximo may have a broadly standard tunnel schema, but custom attributes, custom modules, reporting requirements, and KPI logic still vary by contract. A standard tunnel data product therefore needs a common core plus controlled project-specific extensions.
+
+Syed's interview adds that a single shared document-management system is unlikely to solve this because folder structures, systems, and documentation requirements can be agreed contract-by-contract with clients. A more practical pattern may be central guidance and reusable key artefacts, such as asset management plans or comparable system process examples, while leaving contract document structures local.
 
 ## Predictive Maintenance And Failure Codes
 
@@ -81,6 +85,8 @@ Anna identified RAMCSC backlog status as a practical candidate to trace first be
 
 For tunnel reporting, Huy identified North East Link as a candidate to trace carefully but not as a mature source feed yet. Current Databricks KPI work uses synthetic or manual data because Maximo is not live, so any live use case should clearly mark whether it is validating the future KPI model, a manual upload, or a real source-system integration.
 
+Syed adds that tunnel reporting proof points should also state whether source systems are corporate systems, [[Transport Hand-Back Systems]], client-controlled systems, or tunnel-local systems. That classification affects whether Databricks reporting can become a durable enterprise feed or only a project-specific extract.
+
 ## Related Pages
 
 - [[DB Walkthrough With Pranav Kumar]]
@@ -92,6 +98,8 @@ For tunnel reporting, Huy identified North East Link as a candidate to trace car
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]
 - [[Transport Asset Condition Inspections]]
