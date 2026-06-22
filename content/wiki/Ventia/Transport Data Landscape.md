@@ -53,7 +53,9 @@ The executive brief for Damien turns this discovery into a six-week [[Integrated
 
 The [[Transport First Two Week Plan]] makes the first pass more explicit: the enterprise Transport data product should map core and adjacent data domains, source systems, ownership, access paths, and reusable asset patterns before week 3 starts. This raises access and ownership mapping to first-week deliverables, not later documentation tasks.
 
-The [[Transport Data Product Meeting Recording]] adds a concise current-state framing for the same landscape problem. Donguk Kang said Ventia lacks a standardised data asset and that enterprise-level reporting or AI is difficult because data sources are not in one place. The meeting also confirms active data-quality checking in Databricks for Transport [[Asset Vision]] data, but the available transcript does not preserve the dashboard details shown during the screen share.
+The [[Transport Data Product Meeting Recording]] adds a concise current-state framing for the same landscape problem. Donguk Kang said Ventia lacks a standardised data asset and that enterprise-level reporting or AI is difficult because data sources are not in one place. The meeting confirms active data-quality and completeness checking in Databricks for Transport [[Asset Vision]] data, including a dashboard over contract dimensions, metric completeness, contract locations, overdue work, defects, hazards, criticality, and asset-level analysis.
+
+The same meeting keeps the evidence boundary clear: the current Databricks work only covers Asset Vision data available for certain Transport contracts, while the project is also looking for data that is missing from Databricks. Sydney Harbour was named as an example where operational data sits in [[Maximo]] rather than Asset Vision, so all-contract Transport coverage cannot be solved by Asset Vision alone.
 
 ## Contract-Level Schemas
 
@@ -72,6 +74,8 @@ Any shared Transport asset model would need SME agreement on what counts as an a
 The later working group source reinforces this gap by naming several tools that may need to interoperate: SAP, Retina Vision, Nextspace, [[Asset Vision]], SAP S/4HANA, SAP SAC, Maximo, and SAP Asset Performance Management. It explicitly notes uncertainty about how those pieces are intended to fit together.
 
 The Pranav walkthrough adds a more specific standardisation barrier: even when contracts use [[Asset Vision]], each contract can configure activity category, activity, and intervention structures differently. KPIs and SLAs also vary by contract, so cross-contract reporting needs a clear senior-management question before detailed KPI harmonisation.
+
+The 2026-06-22 Transport data product meeting shows that the senior-management question is still forming. The team has heard that Transport lacks consolidated enterprise-level KPIs, but the first data-product scope has not yet landed on a stable KPI set. Examples discussed include job or work-order volume, completion, on-time or overdue work, defects and hazards, incident or safety reporting, and contract-specific KPI reporting.
 
 Anna's interview adds a concrete example of that barrier. The three Queensland contracts can share field resources because Asset Vision restricts users to contract-configured defect codes, activity codes, repair options, and intervention levels, but the contracts still use different condition wording and reporting obligations. Any RAMCSC Gen 3 changes need to account for BAC and Port of Brisbane alignment because the operating team is shared.
 

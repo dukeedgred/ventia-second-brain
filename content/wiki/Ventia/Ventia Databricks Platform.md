@@ -63,11 +63,13 @@ The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North Eas
 
 The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the corporate-system boundary. Syed described Databricks and Power BI as preferred Ventia building blocks for analysis and reporting, but contrasted them with operational [[Transport Hand-Back Systems]] such as North East Link Maximo. Data can be extracted for analysis where allowed, but the platform map needs to preserve whether a source is corporate, client-controlled, tunnel-local, or transferable at contract end.
 
-The [[Transport Data Product Meeting Recording]] adds an active data-product usage signal for Databricks. Donguk Kang said the team had been checking Transport [[Asset Vision]] data quality in Databricks and had built a Databricks dashboard for discussion. The transcript confirms the dashboard exists but skips the screen-share detail, so specific data-quality measures still need validation from the dashboard or meeting actions.
+The [[Transport Data Product Meeting Recording]] adds an active data-product usage signal for Databricks. Donguk Kang said the team had been checking Transport [[Asset Vision]] data quality and completeness in Databricks by aggregating available source tables without transformation logic. The dashboard examples discussed include standardised contract dimensions, metric completeness, contract map views, average days overdue, defects and hazards, criticality, and asset-level analysis. The measures still need validation against source lineage, transformation logic, and business criticality before they should be treated as governed quality rules.
 
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
+
+The Transport data product meeting adds a practical integration question. Alation is expected to ingest Databricks metadata and hold curated business context, definitions, critical data elements, ownership, lineage, and quality rules. If a future reporting or AI experience runs inside Databricks, the project still needs to decide how that curated Alation context will be exposed back to the consuming Databricks-based workflow.
 
 ## Related Pages
 

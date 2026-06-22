@@ -4,7 +4,7 @@ topic: Ventia
 sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
 date-updated: 2026-06-22
-tags: [stakeholders, transport, databricks, spend-cube, data-asset, data-product, asset-vision, maximo]
+tags: [stakeholders, transport, databricks, spend-cube, data-asset, data-product, asset-vision, maximo, data-governance]
 ---
 
 # Engagement Team
@@ -63,7 +63,11 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 
 - Damien was the recipient of the executive briefing on the [[Integrated Transport Data Asset]]; the source does not capture his role or approval authority.
 - Omnia Collective / EdgeRed are named as the delivery partners for the six-week Transport data asset programme.
-- The [[Transport Data Product Meeting Recording]] adds Shachi Shastry as a meeting participant who started and stopped the transcription, and who asked for a Monday follow-up so both teams can stay aligned and integrate later. Donguk Kang presented the EdgeRed / consultant framing, while Osaka Tillakaratne and Tanya Pita de Abreu were present at the close.
+- The [[Transport Data Product Meeting Recording]] adds Shachi Shastry as Ventia's data governance owner. She is operationalising the data governance framework, embedding governance and controls by design into data products, and using Alation as the metadata-management and governance catalogue.
+- Osaka Tillakaratne is part of Shachi's data governance team and is from Intelligen, an external partner supporting framework operationalisation. Osaka raised the practical question of how Alation-curated context will be available to Databricks-based reporting or AI if there is no two-way sync.
+- Another Intelligen team member, not named in the transcript, is supporting Alation configuration.
+- Donguk Kang presented the EdgeRed / consultant framing and current Transport Asset Vision data-quality work in Databricks. Tanya Pita de Abreu described stakeholder interviews so far as broad, with a focus on what users see in Asset Vision, Databricks, and day-to-day work rather than deep data-specific interviews.
+- Howard was referenced as the contact who had indicated the data governance team could provide a template or checklist for metadata required to catalogue the Transport data asset.
 
 ## Transport First Two-Week Plan Stakeholders
 

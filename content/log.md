@@ -188,3 +188,7 @@ Created [[Transport Contractor KPI Inventory]] to consolidate contractor KPI and
 
 Created [[Transport Data Product Meeting Recording]] and updated related Transport data asset, data landscape, Databricks, Asset Vision, and stakeholder pages with the standardised data asset rationale and data-quality dashboard context.
 
+## [2026-06-22] ingest | Transport data product governance alignment
+
+Refreshed the full Transport data product meeting summary and related governance, Databricks, Asset Vision, landscape, safety KPI, and stakeholder pages with Alation metadata and data-quality follow-up context.
+

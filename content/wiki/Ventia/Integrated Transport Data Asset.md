@@ -52,7 +52,9 @@ The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the tunnel mo
 
 The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds a hand-back and corporate-system classification requirement. North East Link may use Ventia corporate systems for SAP purchasing, Databricks analysis, Power BI reporting, Excel, and SharePoint collaboration, but [[Maximo]] is the operational [[Transport Hand-Back Systems|hand-back system]] that must remain transferable to the client. The integrated data asset should therefore capture not only source-system name and data domain, but also contract ownership, administrative control, extraction rights, and exit-state obligations.
 
-The [[Transport Data Product Meeting Recording]] adds a current delivery signal: the team is already checking [[Asset Vision]] data quality in Databricks and has built a Databricks dashboard for discussion. The available transcript does not preserve the dashboard metrics, so the dashboard should be treated as a lead for validation rather than a documented data-quality result.
+The [[Transport Data Product Meeting Recording]] adds a current delivery signal and a scope clarification. The team is already checking [[Asset Vision]] data quality and completeness in Databricks, using aggregated source tables with no transformation logic, and has built dashboard views over contract dimensions, metric completeness, locations, overdue work, defects, hazards, criticality, and asset-level analysis. The early completeness picture appears sparse, but the result still needs business validation and source-lineage review before it becomes a governed quality finding.
+
+The same meeting clarifies that Asset Vision is only the starting point. The target data asset is intended to cover all Transport contracts, compare what is already in Databricks with what is missing, and eventually bring in other operational sources such as [[Maximo]]. The governance dependency is also explicit: the team needs to settle the focus tables, schemas, and attributes so the [[Ventia Data Governance Framework|data governance]] team can curate metadata, critical data elements, agreed definitions, and data-quality rules in Alation.
 
 ## Six-Week Outcomes
 
@@ -90,7 +92,9 @@ The WRU walkthrough suggests a second practical use-case family: inspection and 
 - Who owns the translation guide across Asset Vision, Maximo, and client AWM/AVM activity fields?
 - Which open-road inspections, defects, and jobs fields are standard enough to reuse across contracts?
 - Which Asset Vision fields expose condition ratings, urgency levels, SLA due dates, completion evidence, and inspection KPI status in Databricks?
-- Which Asset Vision data-quality checks and Databricks dashboard measures were shown in the Transport data product meeting?
+- Which Asset Vision table-level completeness gaps are expected source sparsity versus ingestion, modelling, or business-definition gaps?
+- Which governance metadata template fields need to be completed before the Transport data product can be catalogued in Alation?
+- How will Alation definitions and CDE context be made available to Databricks-based reporting or AI experiences?
 - Which asset-validation status and ownership-status fields are needed to distinguish client handover data from field-validated records?
 - Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
 - Can the programme obtain Katerina's earlier contract-office software inventory and use it as a baseline for Transport system mapping?

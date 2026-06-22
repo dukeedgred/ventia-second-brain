@@ -53,11 +53,13 @@ Toby indicated that defect and hazard data is available through Transport Databr
 
 Anna said she does not personally use Databricks much, but Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status. That points to RAMCSC backlog reporting as a concrete lineage candidate for validating Asset Vision-to-Databricks-to-Power BI flow.
 
-The [[Transport Data Product Meeting Recording]] confirms that current data-product work includes checking Asset Vision data quality in Databricks and discussing a Databricks dashboard. The transcript does not preserve the dashboard contents, so it should not yet be treated as evidence for specific Asset Vision quality findings.
+The [[Transport Data Product Meeting Recording]] confirms that current data-product work includes checking Asset Vision data quality and completeness in Databricks. Donguk Kang said the team aggregated available Asset Vision source tables without transformation logic and reviewed metric completeness across the Transport contract dimension. The early view appeared sparse across multiple metrics, but Shachi Shastry cautioned that the team first needs to understand the end product, key data touchpoints, transformation logic, and which data points are critical before defining data-quality rules.
 
 ## Data Product Implications
 
 Asset Vision does not by itself solve the wider Transport asset-standardisation problem. The source noted that Transport contracts may define assets differently, use different systems, and need different metadata, so any centralized Transport asset product would require SME agreement beyond the technical Databricks connection.
+
+The 2026-06-22 data product meeting reinforces that boundary. Asset Vision is the current starting source because it is the data available to the team, but the intended Transport data product covers all contracts and must also account for what is missing from Databricks, including Maximo-based contexts such as Sydney Harbour.
 
 ## Tender And Transition Context
 
