@@ -184,3 +184,7 @@ Created [[Transport Data Beyond Asset Vision]] as a per-table matrix of document
 
 Created [[Transport Contractor KPI Inventory]] to consolidate contractor KPI and KPI-adjacent reporting areas found in stakeholder notes and Databricks table documentation. The inventory separates stakeholder-confirmed KPI areas from KPI-numbered or KPI-labelled table/view evidence, covering RAMCSC, BAC, Port of Brisbane, WRU, SRAPC, TSRC, SHT/WHT, NEL, FNDC, Auckland West, and VentureSmart with validation gaps for contract KPI appendices and acronym meanings.
 
+## [2026-06-22] ingest | Transport data product meeting recording
+
+Created [[Transport Data Product Meeting Recording]] and updated related Transport data asset, data landscape, Databricks, Asset Vision, and stakeholder pages with the standardised data asset rationale and data-quality dashboard context.
+

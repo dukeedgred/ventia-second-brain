@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-15
-tags: [databricks, azure, data-platform, power-bi, data-engineering, transport, asset-data, hand-back]
+date-updated: 2026-06-22
+tags: [databricks, azure, data-platform, power-bi, data-engineering, transport, asset-data, data-quality, hand-back]
 ---
 
 # Ventia Databricks Platform
@@ -63,6 +63,8 @@ The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North Eas
 
 The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the corporate-system boundary. Syed described Databricks and Power BI as preferred Ventia building blocks for analysis and reporting, but contrasted them with operational [[Transport Hand-Back Systems]] such as North East Link Maximo. Data can be extracted for analysis where allowed, but the platform map needs to preserve whether a source is corporate, client-controlled, tunnel-local, or transferable at contract end.
 
+The [[Transport Data Product Meeting Recording]] adds an active data-product usage signal for Databricks. Donguk Kang said the team had been checking Transport [[Asset Vision]] data quality in Databricks and had built a Databricks dashboard for discussion. The transcript confirms the dashboard exists but skips the screen-share detail, so specific data-quality measures still need validation from the dashboard or meeting actions.
+
 ## Governance Context
 
 The platform has a Databricks data dictionary dashboard to help users discover source systems, tables, schemas, and data steward or SME ownership. Alation is being implemented as the broader catalogue and governance tool, connecting this operating model to [[Ventia Data Governance Framework]].
@@ -78,6 +80,7 @@ The platform has a Databricks data dictionary dashboard to help users discover s
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
 - [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]

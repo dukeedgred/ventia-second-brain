@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-06-02
-date-updated: 2026-06-15
-tags: [transport, data-asset, databricks, telematics, fleet, asset-data, kpis, hand-back]
+date-updated: 2026-06-22
+tags: [transport, data-asset, data-product, databricks, telematics, fleet, asset-data, kpis, hand-back]
 ---
 
 # Integrated Transport Data Asset
@@ -16,6 +16,8 @@ The Integrated Transport Data Asset is the six-week programme with Omnia Collect
 Ventia Transport mobilises people, vehicles, and equipment across hundreds of sites every day. The core problem is that relevant data currently sits in contract-specific silos, which limits portfolio-level analysis and reuse.
 
 The programme aims to connect GPS, telematics, fleet, and job scheduling data into a single usable foundation. This links the concept directly to the broader [[Transport Data Landscape]], the [[Transport Contract Portfolio]], and the central platform patterns on [[Ventia Databricks Platform]].
+
+The [[Transport Data Product Meeting Recording]] restates the same enterprise rationale in operational terms: without a standardised data asset, Ventia struggles to build enterprise-level reporting and AI capability because source data is distributed across many systems and locations. It also confirms that the Transport sector is being used as the starting point for the standard data asset.
 
 The Rui Luan stakeholder interview reinforces that the engagement is starting as a current-state discovery before any intelligence platform is defined. It also makes Transport a practical pilot for standardising data usage across isolated contract systems.
 
@@ -49,6 +51,8 @@ The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-con
 The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the tunnel mobilisation pattern. North East Link / Spark is designing KPI logic and asset-management processes before Maximo is live, using synthetic datasets, manual uploads, agreed as-built metadata, and future handover assets. The integrated data asset therefore needs to distinguish draft mobilisation data from trusted handover records, and it needs a tunnel path for [[Maximo]], OMCS, AID alerts, work orders, incident records, and spatial handover data.
 
 The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds a hand-back and corporate-system classification requirement. North East Link may use Ventia corporate systems for SAP purchasing, Databricks analysis, Power BI reporting, Excel, and SharePoint collaboration, but [[Maximo]] is the operational [[Transport Hand-Back Systems|hand-back system]] that must remain transferable to the client. The integrated data asset should therefore capture not only source-system name and data domain, but also contract ownership, administrative control, extraction rights, and exit-state obligations.
+
+The [[Transport Data Product Meeting Recording]] adds a current delivery signal: the team is already checking [[Asset Vision]] data quality in Databricks and has built a Databricks dashboard for discussion. The available transcript does not preserve the dashboard metrics, so the dashboard should be treated as a lead for validation rather than a documented data-quality result.
 
 ## Six-Week Outcomes
 
@@ -86,6 +90,7 @@ The WRU walkthrough suggests a second practical use-case family: inspection and 
 - Who owns the translation guide across Asset Vision, Maximo, and client AWM/AVM activity fields?
 - Which open-road inspections, defects, and jobs fields are standard enough to reuse across contracts?
 - Which Asset Vision fields expose condition ratings, urgency levels, SLA due dates, completion evidence, and inspection KPI status in Databricks?
+- Which Asset Vision data-quality checks and Databricks dashboard measures were shown in the Transport data product meeting?
 - Which asset-validation status and ownership-status fields are needed to distinguish client handover data from field-validated records?
 - Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
 - Can the programme obtain Katerina's earlier contract-office software inventory and use it as a baseline for Transport system mapping?
@@ -107,6 +112,7 @@ The WRU walkthrough suggests a second practical use-case family: inspection and 
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
 - [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Transport Financial Reporting]]

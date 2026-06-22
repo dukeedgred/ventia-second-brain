@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-15
-tags: [transport, data-landscape, asset-data, sap, gis, data-asset, condition-inspections, kpis, hand-back]
+date-updated: 2026-06-22
+tags: [transport, data-landscape, data-product, asset-data, sap, gis, data-asset, condition-inspections, kpis, hand-back]
 ---
 
 # Transport Data Landscape
@@ -52,6 +52,8 @@ The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 
 The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
 
 The [[Transport First Two Week Plan]] makes the first pass more explicit: the enterprise Transport data product should map core and adjacent data domains, source systems, ownership, access paths, and reusable asset patterns before week 3 starts. This raises access and ownership mapping to first-week deliverables, not later documentation tasks.
+
+The [[Transport Data Product Meeting Recording]] adds a concise current-state framing for the same landscape problem. Donguk Kang said Ventia lacks a standardised data asset and that enterprise-level reporting or AI is difficult because data sources are not in one place. The meeting also confirms active data-quality checking in Databricks for Transport [[Asset Vision]] data, but the available transcript does not preserve the dashboard details shown during the screen share.
 
 ## Contract-Level Schemas
 
@@ -123,6 +125,7 @@ The first-two-week plan also names sensing and telemetry inputs that sit adjacen
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
 - [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
 - [[Transport Hand-Back Systems]]
 - [[Western Roads Upgrade]]
 - [[Maximo]]

@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-06-14
-tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, autopilot]
+date-updated: 2026-06-22
+tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, data-quality, autopilot]
 ---
 
 # Asset Vision
@@ -53,6 +53,8 @@ Toby indicated that defect and hazard data is available through Transport Databr
 
 Anna said she does not personally use Databricks much, but Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status. That points to RAMCSC backlog reporting as a concrete lineage candidate for validating Asset Vision-to-Databricks-to-Power BI flow.
 
+The [[Transport Data Product Meeting Recording]] confirms that current data-product work includes checking Asset Vision data quality in Databricks and discussing a Databricks dashboard. The transcript does not preserve the dashboard contents, so it should not yet be treated as evidence for specific Asset Vision quality findings.
+
 ## Data Product Implications
 
 Asset Vision does not by itself solve the wider Transport asset-standardisation problem. The source noted that Transport contracts may define assets differently, use different systems, and need different metadata, so any centralized Transport asset product would require SME agreement beyond the technical Databricks connection.
@@ -91,6 +93,7 @@ Toby's interview adds an asset-register constraint. Asset Vision data is only us
 - [[Transport Data Asset Stakeholder Interview Toby Lin]]
 - [[Transport Data Asset Stakeholder Interview Anna Covell]]
 - [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Product Meeting Recording]]
 - [[Western Roads Upgrade]]
 - [[Maximo]]
 - [[SAP Data Walk-Through Transport Sector]]
