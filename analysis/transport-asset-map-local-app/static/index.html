@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transport Asset Map Drill-Down</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+  <header>
+    <div>
+      <div class="eyebrow">Local interactive prototype</div>
+      <h1>Transport Asset Map Drill-Down</h1>
+      <p>The overview layer is a Databricks-aggregated national grid. Use it to pick a context, project and asset class, then load exact WKT geometry from Databricks for the selected slice.</p>
+    </div>
+  </header>
+
+  <main>
+    <section class="kpis" id="kpis"></section>
+
+    <section class="layout">
+      <div class="map-panel">
+        <div class="toolbar">
+          <div class="field">
+            <label for="sourceContext">Source context</label>
+            <select id="sourceContext"></select>
+          </div>
+          <div class="field">
+            <label for="projectFilter">Project / contract</label>
+            <select id="projectFilter"></select>
+          </div>
+          <div class="field">
+            <label for="assetTypeFilter">Asset class</label>
+            <select id="assetTypeFilter"></select>
+          </div>
+          <div class="field">
+            <label for="spatialFilter">Spatial type</label>
+            <select id="spatialFilter">
+              <option value="">All spatial types</option>
+              <option value="line">Line</option>
+              <option value="polygon">Polygon</option>
+              <option value="point">Point</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="mapMode">Map layer</label>
+            <select id="mapMode">
+              <option value="overview">Overview aggregate only</option>
+              <option value="exact">Exact geometry only</option>
+              <option value="both">Both layers</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="conditionFilter">Condition contains</label>
+            <input id="conditionFilter" type="search" placeholder="e.g. poor">
+          </div>
+          <div class="field">
+            <label for="riskFilter">Risk contains</label>
+            <input id="riskFilter" type="search" placeholder="e.g. high">
+          </div>
+          <div class="field small">
+            <label for="limitInput">Row cap</label>
+            <input id="limitInput" type="number" min="50" max="8000" step="50" value="1200">
+          </div>
+          <div class="field small">
+            <label for="strideInput">Simplify</label>
+            <input id="strideInput" type="number" min="1" max="50" step="1" value="3">
+          </div>
+          <div class="actions">
+            <button id="loadGeometry" type="button">Load exact geometry from Databricks</button>
+            <button id="refreshOverview" type="button" class="secondary">Refresh overview from Databricks</button>
+            <button id="clearGeometry" type="button" class="secondary">Clear detail</button>
+          </div>
+        </div>
+
+        <div class="map-wrap">
+          <div id="map"></div>
+          <div class="layer-badge" id="layerBadge">Overview aggregate layer</div>
+          <div class="map-status" id="mapStatus">Loading overview...</div>
+        </div>
+      </div>
+
+      <aside>
+        <section class="panel">
+          <div class="panel-head">
+            <h2>What You Are Seeing</h2>
+          </div>
+          <div class="panel-body notes">
+            <p><strong>Overview dots</strong> are not exact assets. They are 0.05-degree grid cells aggregated in Databricks and cached locally for speed.</p>
+            <p><strong>Exact detail</strong> queries Databricks on demand and draws the selected WKT lines, polygons or points. After loading detail, the app switches to exact-only mode.</p>
+            <p>Use row cap and simplify controls when the layer is heavy. Higher simplify values draw fewer coordinate points.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Detail Load</h2>
+          </div>
+          <div class="panel-body" id="detailMeta">
+            <p class="muted">No exact geometry loaded yet.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Asset Class Comparison</h2>
+          </div>
+          <div class="panel-body">
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Project</th>
+                    <th>Asset class</th>
+                    <th>Assets</th>
+                    <th>Geo rows</th>
+                  </tr>
+                </thead>
+                <tbody id="classRows"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h2>Skipped Sources</h2>
+          </div>
+          <div class="panel-body" id="skippedSources"></div>
+        </section>
+      </aside>
+    </section>
+  </main>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="/static/app.js"></script>
+</body>
+</html>

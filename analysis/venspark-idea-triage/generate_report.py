@@ -691,7 +691,50 @@ def json_for_html(value: Any) -> str:
     return html.escape(json.dumps(value, ensure_ascii=False), quote=False)
 
 
+def html_text(value: Any) -> str:
+    if value is None or value == "":
+        return "Not supplied"
+    return html.escape(str(value))
+
+
+def idea_detail_id(idea: dict[str, Any]) -> str:
+    return f"idea-detail-{html.escape(str(idea['idea_id']))}"
+
+
+def static_pill(text: str, kind: str = "") -> str:
+    return f'<span class="pill {kind}">{html.escape(text)}</span>'
+
+
+def static_detail_card(idea: dict[str, Any], is_default: bool = False) -> str:
+    classes = "idea-detail-card is-default" if is_default else "idea-detail-card"
+    flags = [
+        static_pill(f"Score {idea['priority_score']}", "green"),
+        static_pill("Quick win", "teal") if idea.get("quick_win") else "",
+        static_pill("Data-related") if idea.get("data_related") else "",
+        static_pill("Needs follow-up", "amber") if idea.get("stale") else "",
+        static_pill("Closed/inactive", "red") if idea.get("closed") else "",
+    ]
+    return f"""
+      <section class="{classes}" id="{idea_detail_id(idea)}">
+        <h3>{html_text(idea.get("title"))}</h3>
+        <div>{"".join(flags)}</div>
+        <dl>
+          <dt>Campaign</dt><dd>{html_text(idea.get("campaign_title"))}</dd>
+          <dt>Stage/status</dt><dd>{html_text(idea.get("stage_title"))} / {html_text(idea.get("status_title"))}</dd>
+          <dt>Theme</dt><dd>{html_text(idea.get("theme"))}</dd>
+          <dt>Effort</dt><dd>{html_text(idea.get("effort"))}</dd>
+          <dt>Engagement</dt><dd>{html_text(idea.get("likes"))} likes, {html_text(idea.get("comments"))} comments, {html_text(idea.get("votes"))} votes</dd>
+          <dt>Submitted</dt><dd>{html_text(idea.get("submitted_at"))}</dd>
+          <dt>Evidence</dt><dd>{html_text(idea.get("evidence"))}</dd>
+          <dt>Next step</dt><dd>{html_text(idea.get("recommended_next_step"))}</dd>
+        </dl>
+      </section>"""
+
+
 def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
+    static_details = "\n".join(
+        static_detail_card(idea, index == 0) for index, idea in enumerate(ideas)
+    )
     return f"""<!doctype html>
 <html lang="en-AU">
 <head>
@@ -939,6 +982,17 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
       background: #f7fbff;
     }}
 
+    .idea-link {{
+      color: inherit;
+      display: block;
+      text-decoration: none;
+    }}
+
+    .idea-link:hover .idea-link-title {{
+      color: var(--blue);
+      text-decoration: underline;
+    }}
+
     .table-wrap {{
       max-height: 520px;
       overflow: auto;
@@ -987,7 +1041,10 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
       border-radius: 8px;
       padding: 12px;
       background: #ffffff;
+      color: inherit;
       cursor: pointer;
+      display: block;
+      text-decoration: none;
     }}
 
     .idea-card:hover {{
@@ -1016,6 +1073,27 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     .detail h3 {{
       font-size: 17px;
       margin-bottom: 8px;
+    }}
+
+    .idea-detail-card {{
+      display: none;
+      scroll-margin-top: 18px;
+    }}
+
+    .idea-detail-card.is-default {{
+      display: block;
+    }}
+
+    #ideaDetail:has(.idea-detail-card:target) .idea-detail-card {{
+      display: none;
+    }}
+
+    #ideaDetail:has(.idea-detail-card:target) .idea-detail-card:target {{
+      display: block;
+    }}
+
+    #ideaDetail .idea-detail-card:target {{
+      display: block;
     }}
 
     .detail dl {{
@@ -1171,7 +1249,9 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
 
       <aside>
         <section class="panel detail">
-          <div class="panel-body" id="ideaDetail"></div>
+          <div class="panel-body" id="ideaDetail">
+            {static_details}
+          </div>
         </section>
 
         <section class="panel">
@@ -1293,11 +1373,11 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
         idea.stale ? pill('Stale', 'amber') : '',
       ].join('');
       return `
-        <article class="idea-card" data-id="${{idea.idea_id}}">
+        <a class="idea-card" href="#idea-detail-${{idea.idea_id}}" data-id="${{idea.idea_id}}">
           <div class="idea-title">${{idea.title}}</div>
           <div>${{flags}}</div>
           <div class="idea-meta">${{idea.stage_title}} / ${{idea.status_title}} - ${{idea.likes}} likes, ${{idea.comments}} comments</div>
-        </article>`;
+        </a>`;
     }}
 
     function filteredIdeas() {{
@@ -1317,15 +1397,12 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
       document.getElementById('ideaRows').innerHTML = rows.map((idea) => `
         <tr data-id="${{idea.idea_id}}">
           <td><span class="score">${{idea.priority_score}}</span></td>
-          <td><strong>${{idea.title}}</strong><br><span class="hint">${{idea.campaign_title}}</span></td>
+          <td><a class="idea-link" href="#idea-detail-${{idea.idea_id}}"><strong class="idea-link-title">${{idea.title}}</strong><br><span class="hint">${{idea.campaign_title}}</span></a></td>
           <td>${{idea.theme}}<br>${{pill(idea.effort + ' effort', idea.effort === 'High' ? 'amber' : idea.effort === 'Low' ? 'teal' : '')}}</td>
           <td>${{idea.stage_title}}<br><span class="hint">${{idea.status_title}}</span></td>
           <td>${{fmt.format(idea.likes)}} likes<br>${{fmt.format(idea.comments)}} comments</td>
           <td>${{idea.evidence}}</td>
         </tr>`).join('');
-      document.querySelectorAll('[data-id]').forEach((element) => {{
-        element.addEventListener('click', () => selectIdea(element.dataset.id));
-      }});
     }}
 
     function selectIdea(id) {{
@@ -1387,6 +1464,17 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
       }});
     }}
 
+    function bindIdeaSelection() {{
+      document.body.addEventListener('click', (event) => {{
+        const element = event.target.closest('[data-id]');
+        if (!element || !document.body.contains(element)) return;
+        const id = element.dataset.id;
+        if (!byId.has(String(id))) return;
+        event.preventDefault();
+        selectIdea(id);
+      }});
+    }}
+
     function renderShortlists() {{
       document.getElementById('quickWins').innerHTML = summary.shortlists.quick_wins.slice(0, 7).map(ideaCard).join('');
       document.getElementById('dataIdeas').innerHTML = summary.shortlists.data_related.slice(0, 7).map(ideaCard).join('');
@@ -1418,12 +1506,12 @@ def report_html(ideas: list[dict[str, Any]], summary: dict[str, Any]) -> str:
     renderBars('stageChart', summary.charts.stage_status);
     renderBars('themeChart', summary.charts.themes);
     renderBars('effortChart', summary.charts.effort);
+    bindIdeaSelection();
     populateFilters();
     renderRows();
     renderShortlists();
     renderClusters();
     renderNotes();
-    selectIdea(state.selectedId);
   </script>
 </body>
 </html>

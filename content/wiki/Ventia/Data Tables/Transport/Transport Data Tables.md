@@ -3,13 +3,26 @@ type: table-catalog
 topic: Ventia
 sector: Transport
 date-created: 2026-06-05
-date-updated: 2026-06-09
+date-updated: 2026-06-19
 tags: [transport, data-tables, databricks]
 ---
 
 # Transport Data Tables
 
 This page catalogs known Transport sector table documentation. Contract-specific Transport schemas are treated as contract or contract-group contexts when supported by source evidence; raw source schemas such as SQL Server `dbo` are tracked as source contexts instead.
+
+## Asset-Type Analysis
+
+| Page | Scope | Notes |
+|---|---|---|
+| [[Transport Asset Type Metrics and Attributes]] | Asset Vision source asset types validated from live Databricks on 2026-06-17 | Standardises raw `asset.AssetType` values and lists WKT, attribute, job, inspection, capital work, photo, and generated metric coverage at standardised asset type level |
+
+## Cross-Source Analysis
+
+| Page | Scope | Notes |
+|---|---|---|
+| [[Transport Data Beyond Asset Vision]] | Per-table matrix of documented Transport tables and views that appear to represent non-Asset-Vision or adjacent-source data | Covers Formitize, SAP/procurement, weather, traffic, incident, KPI, Maximo/tunnel, pavement, lane-access, cross-contract, and managed/uploaded contract data with conservative evidence caveats |
+| [[Transport Contractor KPI Inventory]] | Contractor KPI and KPI-adjacent reporting areas found in stakeholder notes and Databricks table documentation | Separates stakeholder-confirmed KPI areas from KPI-numbered or KPI-labelled table/view evidence and flags validation gaps |
 
 ## Context Index
 

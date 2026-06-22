@@ -1,5 +1,5 @@
 {
-  "generated_at_utc": "2026-06-10T04:56:17+00:00",
+  "generated_at_utc": "2026-06-10T05:52:17+00:00",
   "source_table": "staged.stg_api_venspark.ideas",
   "profile": "ventia-transport",
   "warehouse_id": "e736bc08efffb739",
@@ -10,7 +10,7 @@
     "comment_rows": "0",
     "first_submitted_at": "2025-05-09T01:02:20",
     "last_submitted_at": "2026-06-08T21:54:45",
-    "last_loaded_at": "2026-06-10 01:32:09.907871"
+    "last_loaded_at": "2026-06-10 05:31:33.347556"
   },
   "counts": {
     "ideas_loaded": 542,
@@ -308,7 +308,7 @@
         "likes": 16,
         "comments": 13,
         "votes": 0,
-        "evidence": "16 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 130 days since status update",
+        "evidence": "16 likes; 13 comments; Active / Evaluate; Data, reporting and insight; low-effort candidate; data/reporting use case; 131 days since status update",
         "recommended_next_step": "Build a 1 to 2 week dashboard or register prototype using available source data."
       },
       {
@@ -383,7 +383,7 @@
         "likes": 13,
         "comments": 10,
         "votes": 0,
-        "evidence": "13 likes; 10 comments; New / Develop; Asset, field and operations; low-effort candidate; 188 days since status update",
+        "evidence": "13 likes; 10 comments; New / Develop; Asset, field and operations; low-effort candidate; 189 days since status update",
         "recommended_next_step": "Validate the owner and expected workflow, then prototype the simplest usable version."
       }
     ],
@@ -552,7 +552,7 @@
         "likes": 54,
         "comments": 15,
         "votes": 0,
-        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 130 days since status update",
+        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 131 days since status update",
         "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
       },
       {
@@ -704,7 +704,7 @@
         "likes": 54,
         "comments": 15,
         "votes": 0,
-        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 130 days since status update",
+        "evidence": "54 likes; 15 comments; Active / Evaluate; Other operational improvement; 131 days since status update",
         "recommended_next_step": "Clarify business owner, user group and minimum decision this idea should support."
       },
       {

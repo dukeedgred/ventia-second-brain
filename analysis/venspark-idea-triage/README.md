@@ -17,8 +17,8 @@ Open `index.html` in a browser. No local server is required.
 
 - Source rows: 542
 - Ideas analysed: 542
-- Last loaded: 2026-06-10 01:32:09.907871
-- Generated: 2026-06-10T04:56:17+00:00
+- Last loaded: 2026-06-10 05:31:33.347556
+- Generated: 2026-06-10T05:52:17+00:00
 
 ## Files
 

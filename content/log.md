@@ -166,3 +166,21 @@ Created [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] and [[Wes
 
 Created [[Transport Data Asset Stakeholder Interview Syed Umar]] and [[Transport Hand-Back Systems]], then updated related Maximo, Transport data landscape, integrated data asset, portfolio, reporting, inventory-validation, Databricks, and stakeholder pages.
 
+## [2026-06-17] analysis | Transport asset-type metrics and attributes
+
+Created [[Transport Asset Type Metrics and Attributes]] from a live Databricks OAuth validation run across seven active Asset Vision source catalogues. Standardised 245 raw `asset.AssetType` values into 227 asset-type rows using the existing manual mapping, summarized 645,806 non-deleted assets, and documented WKT/geospatial coverage, core asset attributes, custom attributes, job, inspection, capital work, photo/evidence metrics, and generated metric formulas. Wrote repeatable supporting outputs under `analysis/asset-type-metrics/output/` and published six `atm_` Delta tables in `transport_dev.integ_transport_assets` for dashboard/tableau-style consumption: summary, detail, source-contract breakdown, mapping, metric dictionary, and run status. `ext_mssql_asset_vision_ven_rms_old` was skipped because the catalog was not visible in Databricks during the run.
+
+## [2026-06-17] analysis | Transport asset-type metrics SQL workflow
+
+Added `analysis/asset-type-metrics/create_atm_dashboard_tables.sql` as a shorter Databricks SQL-first workflow for recreating the dashboard/helper `atm_` tables from `atm_asset_type_metrics_detail`, so dashboard iteration does not require reading or running the full Python refresh script.
+
+Added `analysis/asset-type-metrics/create_atm_detail_table_from_sources.sql` to document and reproduce the `atm_asset_type_metrics_detail` build directly in Databricks SQL: active Asset Vision source catalogues are unioned, rolled up by source context, contract, and raw asset type, then joined to `asset_vision_asset_type_category_map` to add the standardised taxonomy and coverage metrics.
+
+## [2026-06-18] analysis | Transport data beyond Asset Vision
+
+Created [[Transport Data Beyond Asset Vision]] as a per-table matrix of documented Transport tables and views that appear to represent data beyond raw Asset Vision source tables. The matrix covers Formitize, SAP/procurement, weather, traffic, incident, KPI, Maximo/tunnel, pavement, lane-access, cross-contract, and managed/uploaded contract data, while noting evidence boundaries for rows inferred from table names or documented domains rather than confirmed end-to-end lineage.
+
+## [2026-06-19] analysis | Transport contractor KPI inventory
+
+Created [[Transport Contractor KPI Inventory]] to consolidate contractor KPI and KPI-adjacent reporting areas found in stakeholder notes and Databricks table documentation. The inventory separates stakeholder-confirmed KPI areas from KPI-numbered or KPI-labelled table/view evidence, covering RAMCSC, BAC, Port of Brisbane, WRU, SRAPC, TSRC, SHT/WHT, NEL, FNDC, Auckland West, and VentureSmart with validation gaps for contract KPI appendices and acronym meanings.
+

@@ -1,0 +1,62 @@
+{
+  "generated_at_utc": "2026-06-17T07:45:45+00:00",
+  "target_catalog": "transport_dev",
+  "target_schema": "integ_transport_assets",
+  "table_prefix": "atm_",
+  "published_tables": [
+    {
+      "key": "summary",
+      "table": "atm_asset_type_metrics_summary",
+      "full_name": "transport_dev.integ_transport_assets.atm_asset_type_metrics_summary",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_asset_type_metrics_summary`",
+      "row_count": 227,
+      "grain": "standardised asset type",
+      "purpose": "Primary dashboard table with numeric coverage rates."
+    },
+    {
+      "key": "detail",
+      "table": "atm_asset_type_metrics_detail",
+      "full_name": "transport_dev.integ_transport_assets.atm_asset_type_metrics_detail",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_asset_type_metrics_detail`",
+      "row_count": 421,
+      "grain": "source context + contract + raw asset type",
+      "purpose": "Drill-down table for raw Asset Vision type/source/contract slices."
+    },
+    {
+      "key": "source_contract",
+      "table": "atm_asset_type_source_contract_breakdown",
+      "full_name": "transport_dev.integ_transport_assets.atm_asset_type_source_contract_breakdown",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_asset_type_source_contract_breakdown`",
+      "row_count": 421,
+      "grain": "standardised asset type + source + contract",
+      "purpose": "Source/contract coverage matrix."
+    },
+    {
+      "key": "mapping",
+      "table": "atm_asset_type_mapping",
+      "full_name": "transport_dev.integ_transport_assets.atm_asset_type_mapping",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_asset_type_mapping`",
+      "row_count": 245,
+      "grain": "raw asset type",
+      "purpose": "Raw-to-standardised naming audit."
+    },
+    {
+      "key": "metric_dictionary",
+      "table": "atm_metric_dictionary",
+      "full_name": "transport_dev.integ_transport_assets.atm_metric_dictionary",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_metric_dictionary`",
+      "row_count": 20,
+      "grain": "metric definition",
+      "purpose": "Definitions and caveats for dashboard tooltips or documentation."
+    },
+    {
+      "key": "run_status",
+      "table": "atm_run_status",
+      "full_name": "transport_dev.integ_transport_assets.atm_run_status",
+      "qualified_name": "`transport_dev`.`integ_transport_assets`.`atm_run_status`",
+      "row_count": 8,
+      "grain": "source context refresh status",
+      "purpose": "Refresh status, skipped contexts, and loaded asset counts."
+    }
+  ]
+}
