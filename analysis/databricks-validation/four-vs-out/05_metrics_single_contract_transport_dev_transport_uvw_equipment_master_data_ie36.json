@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_uvw_equipment_master_data_ie36",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport' AS schema_name,\n  'uvw_equipment_master_data_ie36' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`valid_from_date` AS TIMESTAMP)), MAX(try_cast(`valid_to_date` AS TIMESTAMP)), MAX(try_cast(`expiry_date` AS TIMESTAMP)), MAX(try_cast(`created_on` AS TIMESTAMP)), MAX(try_cast(`created_by` AS TIMESTAMP)), MAX(try_cast(`modified_on` AS TIMESTAMP)), MAX(try_cast(`modified_by` AS TIMESTAMP)), MAX(try_cast(`Annual Inspection date` AS TIMESTAMP)), MAX(try_cast(`Compliance Date` AS TIMESTAMP)), MAX(try_cast(`Major Structural Insp Date` AS TIMESTAMP)), MAX(try_cast(`Modified FBT` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`valid_from_date` AS TIMESTAMP)), MIN(try_cast(`valid_to_date` AS TIMESTAMP)), MIN(try_cast(`expiry_date` AS TIMESTAMP)), MIN(try_cast(`created_on` AS TIMESTAMP)), MIN(try_cast(`created_by` AS TIMESTAMP)), MIN(try_cast(`modified_on` AS TIMESTAMP)), MIN(try_cast(`modified_by` AS TIMESTAMP)), MIN(try_cast(`Annual Inspection date` AS TIMESTAMP)), MIN(try_cast(`Compliance Date` AS TIMESTAMP)), MIN(try_cast(`Major Structural Insp Date` AS TIMESTAMP)), MIN(try_cast(`Modified FBT` AS TIMESTAMP))) AS earliest_observed_ts,\n  'valid_from_date|valid_to_date|expiry_date|created_on|created_by|modified_on|modified_by|Annual Inspection date|Compliance Date|Major Structural Insp Date|Modified FBT' AS freshness_columns\nFROM `transport_dev`.`transport`.`uvw_equipment_master_data_ie36`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport",
+        "uvw_equipment_master_data_ie36",
+        "VIEW",
+        "26007",
+        "true",
+        "9999-12-31T00:00:00Z",
+        "1900-01-01T00:00:00Z",
+        "valid_from_date|valid_to_date|expiry_date|created_on|created_by|modified_on|modified_by|Annual Inspection date|Compliance Date|Major Structural Insp Date|Modified FBT"
+      ]
+    ]
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "name": "10_photo_coverage_ext_mssql_asset_vision_vsm_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_vsm_gen7' AS catalog_name, SourceTable, Stage, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_vsm_gen7`.dbo.photo\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY SourceTable, Stage\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "SourceTable",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "Stage",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 6
+      }
+    ],
+    "total_row_count": 6,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 6,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "Inspection",
+        null,
+        "72178"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "FormField_Inspection",
+        null,
+        "18241"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "Job",
+        "Job During",
+        "7519"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "Job",
+        "Job After",
+        "7259"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "Job",
+        "Job Before",
+        "4630"
+      ],
+      [
+        "ext_mssql_asset_vision_vsm_gen7",
+        "Asset",
+        null,
+        "11"
+      ]
+    ]
+  }
+}

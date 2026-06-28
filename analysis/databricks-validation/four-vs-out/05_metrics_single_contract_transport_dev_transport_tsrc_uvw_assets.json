@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_assets",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_assets' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`deltautc` AS TIMESTAMP)), MAX(try_cast(`modifiedutc` AS TIMESTAMP)), MAX(try_cast(`modifieduser` AS TIMESTAMP)), MAX(try_cast(`constructiondate` AS TIMESTAMP)), MAX(try_cast(`disposaldate` AS TIMESTAMP)), MAX(try_cast(`conditiondate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`deltautc` AS TIMESTAMP)), MIN(try_cast(`modifiedutc` AS TIMESTAMP)), MIN(try_cast(`modifieduser` AS TIMESTAMP)), MIN(try_cast(`constructiondate` AS TIMESTAMP)), MIN(try_cast(`disposaldate` AS TIMESTAMP)), MIN(try_cast(`conditiondate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'deltautc|modifiedutc|modifieduser|constructiondate|disposaldate|conditiondate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_assets`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "uvw_assets",
+        "VIEW",
+        "59799",
+        "true",
+        "2025-02-05T23:03:32.44Z",
+        "2018-01-01T00:00:00Z",
+        "deltautc|modifiedutc|modifieduser|constructiondate|disposaldate|conditiondate"
+      ]
+    ]
+  }
+}

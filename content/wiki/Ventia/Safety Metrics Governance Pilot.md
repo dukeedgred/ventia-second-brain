@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/DAII Monthly Meeting Transcript.md"]
+sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [safety, data-governance, metrics, cde, alation]
+date-updated: 2026-06-22
+tags: [safety, data-governance, metrics, cde, alation, transport, kpis]
 ---
 
 # Safety Metrics Governance Pilot
@@ -13,7 +13,9 @@ The safety metrics pilot is the first priority execution area for [[Ventia Data 
 
 ## Metrics In Scope
 
-The transcript names TRIFA as a total injury rate and refers to SIFA/seriousness-of-injury measures, but the exact top three metrics need confirmation because the transcript repeats or garbles the metric names. The broader intent is to govern the injury-rate and seriousness metrics used for operational safety reporting.
+The DAII transcript names injury-rate and seriousness measures, but the exact acronyms were garbled. The [[Transport Data Product Meeting Recording]] gives a clearer list from Shachi Shastry's description of the safety pilot: TRIFR, SIFR, and SAIFR. These should still be validated against the official safety glossary before being treated as final enterprise definitions.
+
+The same Transport meeting shows why the safety pilot matters to Transport. If the [[Integrated Transport Data Asset]] includes incident KPIs or safety-related jobs, those fields may overlap with enterprise safety metrics and should reuse governed definitions rather than create Transport-only interpretations.
 
 ## Governance Work
 
@@ -28,3 +30,4 @@ The pilot is expected to reduce data risk and improve reporting efficiency by ma
 - [[Ventia Data Governance Framework]]
 - [[Ventia Data Platform Modernisation]]
 - [[DAII Monthly Meeting Transcript]]
+- [[Transport Data Product Meeting Recording]]

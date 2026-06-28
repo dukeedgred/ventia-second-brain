@@ -1,0 +1,296 @@
+{
+  "name": "01_tables_ext_mssql_asset_vision_ven_vicroads",
+  "statement": "SELECT table_catalog, table_schema, table_name, table_type\nFROM `ext_mssql_asset_vision_ven_vicroads`.information_schema.tables\nWHERE table_schema = 'dbo'\nORDER BY table_name",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "table_catalog",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "table_schema",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 40
+      }
+    ],
+    "total_row_count": 40,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 40,
+    "data_array": [
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Asset",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "AssetArea",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "AssetAttribute",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "AssetAudit",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "AssetClassification",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "AssetLocation",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "CapitalWork",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "CapitalWorkTask",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "ContractReference",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "CustomModuleItem",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "ExportDate",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "ExportDateLog",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "FormField",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Inspection",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "InspectionRelationship",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "InspectionStatus",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Job",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "JobAsset",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "JobComment",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "LaneAccess",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Log",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Module",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Photo",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "PlannedResourceItem",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "Resource",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "ResourceAttribute",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "ResourceAudit",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "SqlServerVersions",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "SummaryCheck",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "TimesheetItem",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "WorkflowStatus",
+        "BASE TABLE"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vAssetAudit",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vAssetLocation",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vCapitalWork",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vCapitalWorkTask",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vInspection",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vInspectionStatus",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vJob",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vModule",
+        "VIEW"
+      ],
+      [
+        "DataServices_VEN_VicRoads",
+        "dbo",
+        "vWorkFlowStatus",
+        "VIEW"
+      ]
+    ]
+  }
+}

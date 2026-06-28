@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_utbl_kpi2_road_safety",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'utbl_kpi2_road_safety' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`completeddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`completeddate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`createddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createddate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`createduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createduser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`startpointname` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startpointname` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`startdistancepast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdistancepast` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Travel-ArrivalOnSiteTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-ArrivalOnSiteTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Initiation-DetectedTime2` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-DetectedTime2` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Initiation-DetectedTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-DetectedTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Rectification-EndTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Rectification-EndTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Initiation-InitiatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-InitiatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Initiation-InitiatedDate2` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-InitiatedDate2` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Occurrence-OccurrenceDateandTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Occurrence-OccurrenceDateandTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Details-PoliceReferenceDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Details-PoliceReferenceDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Details-PoliceReferenceRecievedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Details-PoliceReferenceRecievedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Travel-StartLocation` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-StartLocation` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Travel-StartTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-StartTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Travel-TrafficConditionReportedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-TrafficConditionReportedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DetectedDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DetectedDateTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`InitiatedDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`InitiatedDateTime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`OccurrenceDateandTimeDerived` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`OccurrenceDateandTimeDerived` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`OccurrenceDateandTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`OccurrenceDateandTime` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`completeddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`completeddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`completeddate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`createddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`createddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createddate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`createduser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`createduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`createduser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`startpointname` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`startpointname` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startpointname` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`startdistancepast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`startdistancepast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdistancepast` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Travel-ArrivalOnSiteTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Travel-ArrivalOnSiteTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-ArrivalOnSiteTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Initiation-DetectedTime2` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Initiation-DetectedTime2` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-DetectedTime2` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Initiation-DetectedTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Initiation-DetectedTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-DetectedTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Rectification-EndTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Rectification-EndTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Rectification-EndTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Initiation-InitiatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Initiation-InitiatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-InitiatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Initiation-InitiatedDate2` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Initiation-InitiatedDate2` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Initiation-InitiatedDate2` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Occurrence-OccurrenceDateandTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Occurrence-OccurrenceDateandTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Occurrence-OccurrenceDateandTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Details-PoliceReferenceDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Details-PoliceReferenceDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Details-PoliceReferenceDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Details-PoliceReferenceRecievedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Details-PoliceReferenceRecievedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Details-PoliceReferenceRecievedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Travel-StartLocation` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Travel-StartLocation` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-StartLocation` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Travel-StartTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Travel-StartTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-StartTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Travel-TrafficConditionReportedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Travel-TrafficConditionReportedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Travel-TrafficConditionReportedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DetectedDateTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DetectedDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DetectedDateTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`InitiatedDateTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`InitiatedDateTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`InitiatedDateTime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`OccurrenceDateandTimeDerived` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`OccurrenceDateandTimeDerived` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`OccurrenceDateandTimeDerived` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`OccurrenceDateandTime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`OccurrenceDateandTime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`OccurrenceDateandTime` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|Travel-ArrivalOnSiteTime|Initiation-DetectedTime2|Initiation-DetectedTime|Rectification-EndTime|Initiation-InitiatedDate|Initiation-InitiatedDate2|Occurrence-OccurrenceDateandTime|Details-PoliceReferenceDate|Details-PoliceReferenceRecievedDate|Travel-StartLocation|Travel-StartTime|Travel-TrafficConditionReportedDate|DetectedDateTime|InitiatedDateTime|OccurrenceDateandTimeDerived|OccurrenceDateandTime' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`utbl_kpi2_road_safety`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_tsrc",
+        "utbl_kpi2_road_safety",
+        "MANAGED",
+        "3328",
+        "true",
+        "2024-08-28T11:52:55.31Z",
+        "1970-01-01T00:00:00Z",
+        "deltautc|modifiedutc|completeddate|createddate|createduser|startpointname|startdistancepast|Travel-ArrivalOnSiteTime|Initiation-DetectedTime2|Initiation-DetectedTime|Rectification-EndTime|Initiation-InitiatedDate|Initiation-InitiatedDate2|Occurrence-OccurrenceDateandTime|Details-PoliceReferenceDate|Details-PoliceReferenceRecievedDate|Travel-StartLocation|Travel-StartTime|Travel-TrafficConditionReportedDate|DetectedDateTime|InitiatedDateTime|OccurrenceDateandTimeDerived|OccurrenceDateandTime"
+      ]
+    ]
+  }
+}

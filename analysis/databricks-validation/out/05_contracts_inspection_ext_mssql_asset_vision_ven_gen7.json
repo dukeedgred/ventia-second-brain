@@ -1,0 +1,86 @@
+{
+  "name": "05_contracts_inspection_ext_mssql_asset_vision_ven_gen7",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_gen7' AS catalog_name, 'inspection' AS table_name, Contract, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_gen7`.dbo.inspection\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY Contract\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "Contract",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 5
+      }
+    ],
+    "total_row_count": 5,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 5,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "inspection",
+        "Toowoomba Second Range Crossing",
+        "158557"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "inspection",
+        "RAMC - Gen 2 - 2019-2024",
+        "50591"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "inspection",
+        "Port of Brisbane",
+        "8829"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "inspection",
+        "RAMC - Gen 2 - North",
+        "4183"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_gen7",
+        "inspection",
+        "Brisbane Airport",
+        "3469"
+      ]
+    ]
+  }
+}

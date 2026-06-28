@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [stakeholders, transport, databricks, spend-cube]
+date-updated: 2026-06-22
+tags: [stakeholders, transport, databricks, spend-cube, data-asset, data-product, asset-vision, maximo, data-governance]
 ---
 
 # Engagement Team
@@ -22,9 +22,22 @@ This page tracks people and stakeholder roles relevant to the Spend Cube engagem
 
 - Kale Skinner can explain [[Ventia Databricks Platform]] processing patterns, source onboarding, federated queries, production promotion, and Databricks access prerequisites.
 - Pranav Kumar was identified as the key Transport contact for operational data, work management data, asset data, Transport contract usage, and how Transport consumes Databricks assets.
-- Bhupesh was identified as the Transport reporting sector lead for financial and SAP-related Transport data.
+- Bhupesh Balani was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He was previously business process improvement manager in Transport finance under Matt Fuller, is now seconded into Ben's enterprise reporting team, and remains the key contact for [[Transport Financial Reporting]].
 - Jade was referenced as helping with access or Confluence context and as having started a Transport working group with relevant SMEs.
 - An ESRI/GIS SME exists outside the immediate walkthrough group; Kale said he could provide the relevant name for GIS questions.
+- Pranav Kumar can validate the [[Transport Contract Portfolio]], Transport Databricks schema pattern, contract reporting maturity, Maximo versus [[Asset Vision]] boundaries, and realistic [[Transport Sector Reporting Opportunities]].
+- Rui Luan works on [[Western Roads Upgrade]] and can explain open-road [[Asset Vision]] usage, the inspections/defects/jobs dataset, WRU inspection and response dashboards, photo metadata, pavement and capital works planning, the Databricks and Power BI reporting path, and practical requirements for SAP job-cost linkage.
+- Toby Lin can explain open-road Asset team workflows for [[Transport Asset Inventory Validation]], [[Transport Asset Condition Inspections]], Asset Vision hierarchy, defect and hazard response levels, and KPI tracker use in Databricks.
+- Anna Covell supports RAMCSC, BAC / Brisbane Airport, and Port of Brisbane as the shared [[Asset Vision]] and data contact. She can explain Asset Vision setup, field work capture, contract-specific intervention levels, monthly reporting, RAMCSC backlog reporting context, QGIS/ArcGIS use, and how shared resources operate across the three Queensland contracts.
+- Huy Nguyen is the Asset Information Analyst for North East Link / Spark. He can explain tunnel mobilisation, as-built asset handover, [[Maximo]] selection, synthetic KPI datasets, OMCS/AID incident flow, QGIS use, and cross-project asset naming or benchmarking requirements.
+- Syed Umar Anis is an Asset Management Specialist on North East Link. He can explain operational systems setup, D&C-to-operations data transition, [[Transport Hand-Back Systems]], Maximo procurement and novation, SAP/Databricks/Power BI corporate-system boundaries, and cross-project systems learning.
+- Jason Yu was suggested by Huy as a remaining Centre of Excellence / Transport asset-management contact who may understand earlier standardisation work.
+- Adam Taylor and Barat were suggested by Rui as follow-up contacts for [[Maximo]] setup on tunnel projects; Barat's exact spelling should be validated.
+- Conor Murphy remains a useful follow-up for Transport cost and benchmarking context; Rui offered to help with an introduction if needed.
+- Josie Wilson, Business Performance Manager, was suggested by Toby as a likely follow-up for contractual KPI and reporting requirements; Ray was also named as someone likely to understand the requirements and abatement context.
+- Corrine, the commercial manager named by Anna, is a likely route for RAMCSC, BAC, and Port of Brisbane contract or KPI-schedule access, subject to sensitivity constraints.
+- Katerina was named by Anna as a likely holder of prior Transport system-mapping artefacts. Anna said Katerina previously had a graduate visit contract offices and capture a detailed software inventory across asset management, operations, and capital projects.
+- A central Asset Vision contact transcribed as "Dalla" was suggested by Rui as a better cross-contract source for Asset Vision tables across open roads and tunnels; the name and role need validation.
 
 ## Transport Data And AI Stakeholders
 
@@ -41,10 +54,39 @@ The Transport Data and AI Working Group source expands the stakeholder map for t
 - Brigette Lo should be optional on stakeholder meetings, with meetings recorded in Teams and transcripts retained.
 - Sanja is working on Nextspace and SAP in the Transport space through Evolve, with IBM recommending Nextspace.
 - Claire, Rhys, Wayne, Barry, Katrina, Chris, Edmond, and Anna appear in the Evolve/RAMC discussion around demo development, data provision, SAP/Nextspace comparison, tender positioning, and implementation planning.
+- Conor Murphy, Rui Luan, Toby Lin, Anna Coville, and Hui Yinlun were named across the Pranav walkthrough and Toby interview as known data contacts for larger Transport contracts. Toby's name was previously transcribed as Toby Lynn.
+- A New Zealand business engagement manager is working on reporting across New Zealand contracts, but her name was not captured in the transcript.
+- The SAP data walkthrough added that Liz Jessop is working with Adam on an activity-based costing or dashboard solution for Damien and is a strong contact for [[Asset Vision]], Maximo, and client AWM/AVM integration questions alongside Pranav Kumar.
+- Anna's interview separately reinforces Liz Jessop as a Digital Services contact for system mapping and detailed Transport tooling context.
+
+## Transport Data Asset Briefing
+
+- Damien was the recipient of the executive briefing on the [[Integrated Transport Data Asset]]; the source does not capture his role or approval authority.
+- Omnia Collective / EdgeRed are named as the delivery partners for the six-week Transport data asset programme.
+- The [[Transport Data Product Meeting Recording]] adds Shachi Shastry as Ventia's data governance owner. She is operationalising the data governance framework, embedding governance and controls by design into data products, and using Alation as the metadata-management and governance catalogue.
+- Osaka Tillakaratne is part of Shachi's data governance team and is from Intelligen, an external partner supporting framework operationalisation. Osaka raised the practical question of how Alation-curated context will be available to Databricks-based reporting or AI if there is no two-way sync.
+- Another Intelligen team member, not named in the transcript, is supporting Alation configuration.
+- Donguk Kang presented the EdgeRed / consultant framing and current Transport Asset Vision data-quality work in Databricks. Tanya Pita de Abreu described stakeholder interviews so far as broad, with a focus on what users see in Asset Vision, Databricks, and day-to-day work rather than deep data-specific interviews.
+- Howard was referenced as the contact who had indicated the data governance team could provide a template or checklist for metadata required to catalogue the Transport data asset.
+
+## Transport First Two-Week Plan Stakeholders
+
+The [[Transport First Two Week Plan]] groups stakeholders by the first two weeks of programme work:
+
+- Sponsor: Jade Clarke.
+- Digital Transport and bid: Liz Jessop and John Parisella.
+- Pre-contract and strategy: David Teller and Jacinta Milner. This appears to be the same stakeholder earlier captured as David Tellar, but the spelling differs by source.
+- Operational proof point: Conor Murphy, Claire Wells, and Portia Pitt.
+- Data and engineering: Osaka Tillakaratne and Kale Skinner.
+- Innovation and external data: Gary Dring and Angus McDonald.
+
+The plan sequences interviews into four waves: sponsor/bid stakeholders, operational proof-point stakeholders, data/governance/access stakeholders, and validation or external-data stakeholders.
 
 ## Follow-Up Paths
 
-The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh should be consulted before assuming that platform-level data structures match contract-level business definitions.
+The Spend Cube team needs Databricks access, VPN/FortiClient setup through a service ticket if not already installed, relevant Confluence pages, and possibly Databricks training. For Transport analysis, Pranav Kumar and Bhupesh Balani should be consulted before assuming that platform-level data structures match contract-level business definitions.
+
+The [[SAP Data Walk-Through Transport Sector]] adds two concrete access paths: Bhupesh can help with read-only access to the Transport Databricks schema, and access to the full Transport finance dashboard needs Damien's approval because the Power BI report is security-trimmed by contract.
 
 ## Related Pages
 
@@ -52,6 +94,25 @@ The Spend Cube team needs Databricks access, VPN/FortiClient setup through a ser
 - [[Transport Data and AI Working Group]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Contract Portfolio]]
+- [[Transport Sector Reporting Opportunities]]
+- [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
+- [[Transport Hand-Back Systems]]
+- [[Western Roads Upgrade]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
+- [[Transport Financial Reporting]]
+- [[Integrated Transport Data Asset]]
 - [[Ventia Databricks Platform]]
 - [[Transport Data Landscape]]
 - [[Asset Vision]]
+- [[Maximo]]

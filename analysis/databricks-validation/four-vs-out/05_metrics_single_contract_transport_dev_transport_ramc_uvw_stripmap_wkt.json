@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_ramc_uvw_stripmap_wkt",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_ramc' AS schema_name,\n  'uvw_stripmap_wkt' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  CAST(NULL AS TIMESTAMP) AS latest_observed_ts,\n  CAST(NULL AS TIMESTAMP) AS earliest_observed_ts,\n  '' AS freshness_columns\nFROM `transport_dev`.`transport_ramc`.`uvw_stripmap_wkt`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_stripmap_wkt' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

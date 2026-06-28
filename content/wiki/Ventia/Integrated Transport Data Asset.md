@@ -1,0 +1,131 @@
+---
+type: concept
+topic: Ventia
+sources: ["raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
+date-created: 2026-06-02
+date-updated: 2026-06-22
+tags: [transport, data-asset, data-product, databricks, telematics, fleet, asset-data, kpis, hand-back]
+---
+
+# Integrated Transport Data Asset
+
+The Integrated Transport Data Asset is the six-week programme with Omnia Collective / EdgeRed to build a usable Transport data foundation across contract-by-contract silos. The executive brief for Damien frames the work as a foundation for future investment decisions, not a final-state platform build.
+
+## Engagement Purpose
+
+Ventia Transport mobilises people, vehicles, and equipment across hundreds of sites every day. The core problem is that relevant data currently sits in contract-specific silos, which limits portfolio-level analysis and reuse.
+
+The programme aims to connect GPS, telematics, fleet, and job scheduling data into a single usable foundation. This links the concept directly to the broader [[Transport Data Landscape]], the [[Transport Contract Portfolio]], and the central platform patterns on [[Ventia Databricks Platform]].
+
+The [[Transport Data Product Meeting Recording]] restates the same enterprise rationale in operational terms: without a standardised data asset, Ventia struggles to build enterprise-level reporting and AI capability because source data is distributed across many systems and locations. It also confirms that the Transport sector is being used as the starting point for the standard data asset.
+
+The Rui Luan stakeholder interview reinforces that the engagement is starting as a current-state discovery before any intelligence platform is defined. It also makes Transport a practical pilot for standardising data usage across isolated contract systems.
+
+## North Star
+
+The brief defines the north star as a clear view of how integrated Transport data can add value in four areas:
+
+- Winning bids.
+- Mobilising workforce and equipment.
+- Supporting delivery optimisation.
+- Creating additional value through data and insights, including cost benchmarking.
+
+These value areas overlap with [[Transport Sector Reporting Opportunities]], especially bid support, mobilisation readiness, delivery reporting, and benchmarking.
+
+## Foundation Scope
+
+The working data foundation should expand centralised Transport data assets, including asset management, GPS, telematics, fleet management, job scheduling, vehicle and service locations, contract KPIs, and service provision information.
+
+This scope depends on resolving the same standardisation issues already captured on [[Transport Data Landscape]]: which sources exist across contracts, which data has been centralised into Databricks, what remains decentralised, and why.
+
+The [[SAP Data Walk-Through Transport Sector]] adds a current-state finance anchor for this map. [[Transport Financial Reporting]] is already centralised enough for SAP-derived management reporting and open commitments, but it still relies on BW for detailed line items and does not solve operational activity classification.
+
+The Rui Luan interview adds two immediate foundation inputs: open-road [[Asset Vision]] modules for inspections, defects, and jobs, and job-level SAP cost linkage across both open-road and [[Maximo]] tunnel contexts. These are necessary if the live use case is bid intelligence, activity costing, or benchmark reporting.
+
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] turns [[Western Roads Upgrade]] into a concrete open-road proof point. WRU exposes the reusable Asset Vision core of inspections, defects, jobs, photos, timesheets, and capital works, while also showing the local variation in custom fields, workflow rules, dashboard views, pavement-performance targets, and commercial incentives.
+
+The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds two more foundation inputs for open-road contracts: [[Transport Asset Inventory Validation]] and [[Transport Asset Condition Inspections]]. These define how asset locations, attributes, ownership status, condition ratings, hazards, defects, response levels, and inspection KPIs become reliable enough for downstream reporting or optimisation.
+
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared-contract design constraint. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane share resources and field-capture practice, but contract-specific billing, KPI, intervention, and reporting rules diverge. The integrated data asset should therefore model both reusable Asset Vision capture patterns and contract-specific rule layers.
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the tunnel mobilisation pattern. North East Link / Spark is designing KPI logic and asset-management processes before Maximo is live, using synthetic datasets, manual uploads, agreed as-built metadata, and future handover assets. The integrated data asset therefore needs to distinguish draft mobilisation data from trusted handover records, and it needs a tunnel path for [[Maximo]], OMCS, AID alerts, work orders, incident records, and spatial handover data.
+
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds a hand-back and corporate-system classification requirement. North East Link may use Ventia corporate systems for SAP purchasing, Databricks analysis, Power BI reporting, Excel, and SharePoint collaboration, but [[Maximo]] is the operational [[Transport Hand-Back Systems|hand-back system]] that must remain transferable to the client. The integrated data asset should therefore capture not only source-system name and data domain, but also contract ownership, administrative control, extraction rights, and exit-state obligations.
+
+The [[Transport Data Product Meeting Recording]] adds a current delivery signal and a scope clarification. The team is already checking [[Asset Vision]] data quality and completeness in Databricks, using aggregated source tables with no transformation logic, and has built dashboard views over contract dimensions, metric completeness, locations, overdue work, defects, hazards, criticality, and asset-level analysis. The early completeness picture appears sparse, but the result still needs business validation and source-lineage review before it becomes a governed quality finding.
+
+The same meeting clarifies that Asset Vision is only the starting point. The target data asset is intended to cover all Transport contracts, compare what is already in Databricks with what is missing, and eventually bring in other operational sources such as [[Maximo]]. The governance dependency is also explicit: the team needs to settle the focus tables, schemas, and attributes so the [[Ventia Data Governance Framework|data governance]] team can curate metadata, critical data elements, agreed definitions, and data-quality rules in Alation.
+
+## Six-Week Outcomes
+
+The expected outcomes after six weeks are:
+
+- A north star for the Transport data asset.
+- A status and progress map showing available data, centralised data, decentralised data, and current usage patterns.
+- A working data foundation with expanded centralised Transport data assets.
+- A live use case tested by the business.
+- A delivery roadmap covering priorities, timeline, effort, operational changes, and investment recommendations.
+
+## First Two-Week Mobilisation Plan
+
+The [[Transport First Two Week Plan]] details how the programme should move from initial alignment into the week 3 delivery phase. Week 1 focuses on sponsor alignment, stakeholder interviews, and current-state systems and data mapping. Week 2 moves into sensing and RAMC deep dives, validation, access-blocker resolution, proof-of-concept selection, and roadmap definition.
+
+The decision gate before week 3 needs explicit agreement on the proof point, owner, data access, and commencement conditions. This makes the first two weeks a mobilisation and de-risking phase for the broader six-week asset programme, rather than a standalone discovery exercise.
+
+## Live Use Case Options
+
+The brief leaves the live use case open but names the likely value zones: bid support, service mobilisation and readiness, contract operations and reporting, and benchmarking or insights.
+
+The right use case should prove near-term value while leaving reusable foundations for the longer roadmap. That makes it a practical bridge between [[Transport Sector Reporting Opportunities]] and the longer-term [[Transport Asset Intelligence Roadmap]].
+
+Activity-based costing is attractive but dependent on source alignment. The SAP walkthrough indicates that a credible proof point would need field mapping across [[Asset Vision]], Maximo, and client AWM/AVM systems, plus agreement on how SAP costs should join to operational activity records.
+
+The WRU walkthrough suggests a second practical use-case family: inspection and crew optimisation. Rui described opportunities to reduce travel, align inspections with likely work locations and crew dispatch, shift suitable work from reactive to cyclical maintenance, and analyse inspector capacity by road or route segment.
+
+## Open Questions
+
+- Which live use case will be selected for the six-week programme?
+- Which Transport datasets are already centralised into Databricks, and which remain decentralised?
+- What business reasons explain the decentralised datasets?
+- Which operational changes and investment recommendations will be required beyond the initial six weeks?
+- Will S/4HANA ACDOCA provide enough detail to move Transport finance reporting from BW into Databricks?
+- Who owns the translation guide across Asset Vision, Maximo, and client AWM/AVM activity fields?
+- Which open-road inspections, defects, and jobs fields are standard enough to reuse across contracts?
+- Which Asset Vision fields expose condition ratings, urgency levels, SLA due dates, completion evidence, and inspection KPI status in Databricks?
+- Which Asset Vision table-level completeness gaps are expected source sparsity versus ingestion, modelling, or business-definition gaps?
+- Which governance metadata template fields need to be completed before the Transport data product can be catalogued in Alation?
+- How will Alation definitions and CDE context be made available to Databricks-based reporting or AI experiences?
+- Which asset-validation status and ownership-status fields are needed to distinguish client handover data from field-validated records?
+- Which tunnel stakeholders can validate Maximo data structures and SAP linkage?
+- Can the programme obtain Katerina's earlier contract-office software inventory and use it as a baseline for Transport system mapping?
+- Which RAMCSC backlog reporting assets in Databricks and Power BI can be reused as a low-friction lineage proof point?
+- Which North East Link Databricks assets are synthetic or manually uploaded placeholders, and when will source-system Maximo data replace or validate them?
+- Which OMCS, AID, alarm, work-order, incident, and spatial handover fields are required for a reusable tunnel data model?
+- Which Transport systems are hand-back, client-controlled, tunnel-local, or Ventia corporate systems, and how does that affect integration depth?
+- Which WRU Asset Vision views should anchor the open-road proof point for inspection KPIs, job response dashboards, photo evidence, timesheets, and capital works?
+- Can WRU's pavement modelling and inspection-routing optimisation be reused beyond WRU without flattening contract-specific intervention levels and response-time rules?
+
+## Related Pages
+
+- [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
+- [[Transport Hand-Back Systems]]
+- [[Western Roads Upgrade]]
+- [[Transport Financial Reporting]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
+- [[Transport Data Landscape]]
+- [[Transport Sector Reporting Opportunities]]
+- [[Transport Contract Portfolio]]
+- [[Transport Asset Intelligence Roadmap]]
+- [[Ventia Databricks Platform]]
+- [[Maximo]]
+- [[Engagement Team]]

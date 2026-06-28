@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import {
   Button,
   Checkbox,
@@ -14,7 +14,8 @@ import { api } from '../api'
 type Kind = 'tickets' | 'decisions'
 
 type Props = {
-  path: string
+  path?: string
+  paths?: string[]
   kind: Kind
   isOpen: boolean
   onOpenChange: (open: boolean) => void
@@ -24,21 +25,27 @@ type Props = {
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Proposal = Record<string, any>
 
-export function ExtractModal({ path, kind, isOpen, onOpenChange, onDone }: Props) {
+export function ExtractModal({ path, paths, kind, isOpen, onOpenChange, onDone }: Props) {
   const [loading, setLoading] = useState(false)
   const [items, setItems] = useState<Proposal[]>([])
   const [picked, setPicked] = useState<Set<number>>(new Set())
   const [creating, setCreating] = useState(false)
   const [error, setError] = useState('')
+  const sourcePaths = useMemo(() => (paths?.length ? paths : path ? [path] : []), [path, paths])
+  const multiSource = sourcePaths.length > 1
 
   useEffect(() => {
     if (!isOpen) return
+    if (sourcePaths.length === 0) return
     setLoading(true)
     setItems([])
     setPicked(new Set())
     setError('')
-    api
-      .extract(path, kind)
+    const request =
+      kind === 'tickets' && sourcePaths.length > 1
+        ? api.extractTodos(sourcePaths)
+        : api.extract(sourcePaths[0]!, kind)
+    request
       .then((r) => {
         const list = (r.items as Proposal[]) ?? []
         setItems(list)
@@ -46,7 +53,7 @@ export function ExtractModal({ path, kind, isOpen, onOpenChange, onDone }: Props
       })
       .catch((e) => setError(e.message))
       .finally(() => setLoading(false))
-  }, [isOpen, path, kind])
+  }, [isOpen, sourcePaths, kind])
 
   const toggle = (i: number) =>
     setPicked((s) => {
@@ -61,8 +68,13 @@ export function ExtractModal({ path, kind, isOpen, onOpenChange, onDone }: Props
     try {
       const chosen = items.filter((_, i) => picked.has(i))
       for (const it of chosen) {
-        if (kind === 'tickets') await api.createTicket({ ...it, sources: [path] })
-        else await api.createDecision({ ...it, sources: [path] })
+        const itemSources = Array.isArray(it.sources) && it.sources.length > 0 ? it.sources : sourcePaths
+        const description =
+          kind === 'tickets' && it.evidence
+            ? `${it.description || ''}\n\nEvidence: ${it.evidence}`.trim()
+            : it.description
+        if (kind === 'tickets') await api.createTicket({ ...it, description, sources: itemSources })
+        else await api.createDecision({ ...it, sources: itemSources })
       }
       onDone()
     } catch (e) {
@@ -82,7 +94,11 @@ export function ExtractModal({ path, kind, isOpen, onOpenChange, onDone }: Props
             <ModalHeader className="flex-col items-start gap-1">
               <span className="flex items-center gap-2">
                 <span className="text-primary-400">✦</span>{' '}
-                {kind === 'tickets' ? 'Summarise action items' : `Extract ${label}`}
+                {kind === 'tickets'
+                  ? multiSource
+                    ? 'Generate ranked to-dos'
+                    : 'Summarise action items'
+                  : `Extract ${label}`}
               </span>
               <span className="text-xs font-normal text-default-400">
                 Proposed by your local Codex from this note — pick the ones to create.
@@ -118,6 +134,9 @@ export function ExtractModal({ path, kind, isOpen, onOpenChange, onDone }: Props
                         <div className="text-xs text-default-500">
                           {kind === 'tickets' ? it.description : it.decision}
                         </div>
+                        {kind === 'tickets' && it.evidence && (
+                          <div className="mt-2 text-xs text-default-400">Evidence: {it.evidence}</div>
+                        )}
                       </div>
                     </div>
                   </button>

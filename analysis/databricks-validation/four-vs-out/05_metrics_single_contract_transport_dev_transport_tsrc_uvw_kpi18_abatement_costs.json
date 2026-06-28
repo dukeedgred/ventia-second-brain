@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi18_abatement_costs",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi18_abatement_costs' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`createddate` AS TIMESTAMP)), MAX(try_cast(`EventType-DateReceived` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-DateEventOccured` AS TIMESTAMP)), MAX(try_cast(`CustInfoEnqDetails-ResponseDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-AgreedRectDueDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-MediaReqRespDueDate` AS TIMESTAMP)), MAX(try_cast(`CloseOutDetails-CloseOut/ResolutionDate` AS TIMESTAMP)), MAX(try_cast(`Current Date` AS TIMESTAMP)), MAX(try_cast(`KPI18_NoiseAssessment_DueDate` AS TIMESTAMP)), MAX(try_cast(`KPI18_Rectification_DueDate` AS TIMESTAMP)), MAX(try_cast(`KPI_18_DueDate` AS TIMESTAMP)), MAX(try_cast(`KPI_18_Assessment_Date` AS TIMESTAMP)), MAX(try_cast(`Date` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`createddate` AS TIMESTAMP)), MIN(try_cast(`EventType-DateReceived` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-DateEventOccured` AS TIMESTAMP)), MIN(try_cast(`CustInfoEnqDetails-ResponseDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-NoiseLevelAssessmentDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-AgreedRectDueDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-MediaReqRespDueDate` AS TIMESTAMP)), MIN(try_cast(`CloseOutDetails-CloseOut/ResolutionDate` AS TIMESTAMP)), MIN(try_cast(`Current Date` AS TIMESTAMP)), MIN(try_cast(`KPI18_NoiseAssessment_DueDate` AS TIMESTAMP)), MIN(try_cast(`KPI18_Rectification_DueDate` AS TIMESTAMP)), MIN(try_cast(`KPI_18_DueDate` AS TIMESTAMP)), MIN(try_cast(`KPI_18_Assessment_Date` AS TIMESTAMP)), MIN(try_cast(`Date` AS TIMESTAMP))) AS earliest_observed_ts,\n  'createddate|EventType-DateReceived|CustInfoEnqDetails-DateEventOccured|CustInfoEnqDetails-ResponseDate|CloseOutDetails-NoiseLevelAssessmentDate|CloseOutDetails-AgreedRectDueDate|CloseOutDetails-MediaReqRespDueDate|CloseOutDetails-CloseOut/ResolutionDate|Current Date|KPI18_NoiseAssessment_DueDate|KPI18_Rectification_DueDate|KPI_18_DueDate|KPI_18_Assessment_Date|Date' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi18_abatement_costs`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi18_abatement_costs' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

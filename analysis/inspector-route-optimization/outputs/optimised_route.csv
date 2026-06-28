@@ -1,0 +1,21 @@
+sequence,stop_id,stop_name,road,arrival_time,inspection_start,inspection_end,travel_from_previous_min,inspection_duration_min,cumulative_min,priority,traffic_volume,latitude,longitude
+1,I-001,Gateway Mwy drainage run,Gateway Mwy,07:41,07:41,08:09,11.3,28,39.3,2,55000,-27.3922,153.1084
+2,I-002,Port of Brisbane Rd signage check,Port of Brisbane Rd,08:32,08:32,08:50,23.6,18,80.8,1,47000,-27.3848,153.1658
+3,I-015,Wynnum Rd guardrail inspection,Wynnum Rd,09:06,09:06,09:26,15.5,20,116.3,1,45500,-27.4687,153.1452
+4,I-008,Old Cleveland Rd barrier,Old Cleveland Rd,09:35,09:35,10:01,9.5,26,151.8,2,44000,-27.5019,153.1622
+5,I-007,Cleveland Redland Bay Rd pits,Cleveland Redland Bay Rd,10:16,10:16,10:46,15.1,30,196.8,2,33500,-27.5415,153.2508
+6,I-020,Redland Bay Rd pavement edge,Redland Bay Rd,10:59,10:59,11:31,12.3,32,241.1,2,36500,-27.613,153.301
+7,I-004,Pacific Mwy pavement review,Pacific Mwy,12:00,12:00,12:35,28.9,35,305.0,3,76000,-27.5357,153.1018
+8,I-005,Logan Rd night hazard,Logan Rd,12:44,12:44,13:04,9.7,20,334.7,1,51000,-27.5687,153.081
+9,I-019,Logan Motorway sign face,Logan Motorway,13:25,13:25,13:49,20.4,24,379.1,3,70000,-27.6686,153.0832
+10,I-006,Mt Lindesay Hwy line marking,Mt Lindesay Hwy,14:03,14:03,14:27,14.5,24,417.6,2,36000,-27.6329,153.0284
+11,I-011,Beaudesert Rd culvert,Beaudesert Rd,14:37,14:37,15:01,10.4,24,451.9,2,48500,-27.589,153.025
+12,I-003,Ipswich Rd guardrail,Ipswich Rd,15:12,15:12,15:34,10.6,22,484.5,2,42000,-27.5302,153.0105
+13,I-013,Centenary Hwy barrier end terminal,Centenary Hwy,15:49,15:49,16:15,14.7,26,525.1,2,64000,-27.5538,152.9289
+14,I-012,Moggill Rd shoulder scouring,Moggill Rd,16:26,16:26,16:48,11.5,22,558.6,3,31000,-27.5004,152.9399
+15,I-016,Samford Rd line marking,Samford Rd,17:09,17:09,17:27,20.6,18,597.2,3,39000,-27.4176,152.987
+16,I-018,Anzac Ave hazard patrol,Anzac Ave,17:54,17:54,18:14,26.8,20,644.0,2,61000,-27.2298,153.0376
+17,I-010,Bruce Hwy signs,Bruce Hwy,18:18,18:18,18:42,4.0,24,672.0,2,72000,-27.2525,153.0504
+18,I-014,Sandgate Rd inlet check,Sandgate Rd,18:59,18:59,19:23,17.5,24,713.5,2,52000,-27.334,153.0618
+19,I-009,Gympie Rd debris patrol,Gympie Rd,19:33,19:33,19:49,9.8,16,739.3,3,60000,-27.3607,153.0339
+20,I-017,Lutwyche Rd signal asset check,Lutwyche Rd,20:00,20:00,20:18,10.8,18,768.1,2,58500,-27.4189,153.0326

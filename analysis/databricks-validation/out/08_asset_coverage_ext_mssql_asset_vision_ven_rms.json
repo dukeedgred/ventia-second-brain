@@ -1,0 +1,97 @@
+{
+  "name": "08_asset_coverage_ext_mssql_asset_vision_ven_rms",
+  "statement": "SELECT\n  'ext_mssql_asset_vision_ven_rms' AS catalog_name,\n  COUNT(*) AS rows_total,\n  SUM(CASE WHEN Contract IS NOT NULL AND Contract <> '' THEN 1 ELSE 0 END) AS rows_with_contract,\n  SUM(CASE WHEN ParentAssetID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_parent_asset,\n  SUM(CASE WHEN AssetCondition IS NOT NULL AND AssetCondition <> '' THEN 1 ELSE 0 END) AS rows_with_condition,\n  SUM(CASE WHEN AssetCriticality IS NOT NULL AND AssetCriticality <> '' THEN 1 ELSE 0 END) AS rows_with_criticality,\n  SUM(CASE WHEN AssetRisk IS NOT NULL AND AssetRisk <> '' THEN 1 ELSE 0 END) AS rows_with_risk,\n  SUM(CASE WHEN ChainageFrom IS NOT NULL OR ChainageTo IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_chainage,\n  SUM(CASE WHEN Stage IS NOT NULL AND Stage <> '' THEN 1 ELSE 0 END) AS rows_with_stage\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.asset\nWHERE Deleted = false OR Deleted IS NULL",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 9,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "rows_total",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 1
+        },
+        {
+          "name": "rows_with_contract",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 2
+        },
+        {
+          "name": "rows_with_parent_asset",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        },
+        {
+          "name": "rows_with_condition",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 4
+        },
+        {
+          "name": "rows_with_criticality",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "rows_with_risk",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 6
+        },
+        {
+          "name": "rows_with_chainage",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 7
+        },
+        {
+          "name": "rows_with_stage",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 8
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "55734",
+        "55734",
+        "40795",
+        "4",
+        "4",
+        "0",
+        "26347",
+        "55734"
+      ]
+    ]
+  }
+}

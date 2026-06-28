@@ -1,0 +1,14 @@
+{
+  "name": "09_capitalwork_coverage_ext_mssql_assetvisionreporting_av_ven_vicroads",
+  "statement": "SELECT\n  'ext_mssql_assetvisionreporting_av_ven_vicroads' AS catalog_name,\n  COUNT(*) AS rows_total,\n  SUM(CASE WHEN Contract IS NOT NULL AND Contract <> '' THEN 1 ELSE 0 END) AS rows_with_contract,\n  SUM(CASE WHEN AssetID IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_asset_id,\n  SUM(CASE WHEN PlannedStart IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_planned_start,\n  SUM(CASE WHEN ActualFinish IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_actual_finish,\n  SUM(CASE WHEN ChainageFrom IS NOT NULL OR ChainageTo IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_chainage,\n  SUM(CASE WHEN SpatialInfo IS NOT NULL THEN 1 ELSE 0 END) AS rows_with_spatial_info\nFROM `ext_mssql_assetvisionreporting_av_ven_vicroads`.dbo.capitalwork\nWHERE Deleted = false OR Deleted IS NULL",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nUser does not have USE CATALOG on Catalog 'ext_mssql_assetvisionreporting_av_ven_vicroads'. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

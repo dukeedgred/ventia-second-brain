@@ -1,0 +1,401 @@
+<!doctype html>
+  <html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <title>Corrected High-Level Domains for the Transport Data Asset</title>
+    <style>
+      body { font-family: Arial, sans-serif; line-height: 1.5; color: #17202a; max-width: 1120px; margin: 32px auto; padding: 0 24px; }
+      h1, h2, h3 { color: #102a43; }
+      ins { background: #dff6e5; text-decoration: none; padding: 0 3px; }
+      del { background: #ffd9d9; color: #7a1d1d; padding: 0 3px; }
+      .note { background: #eef6ff; border-left: 4px solid #2f80ed; padding: 12px 16px; margin: 16px 0; }
+      .warn { background: #fff4df; border-left: 4px solid #f2994a; padding: 12px 16px; margin: 16px 0; }
+      table { border-collapse: collapse; width: 100%; margin-top: 16px; font-size: 14px; }
+      th, td { border: 1px solid #d8dee9; padding: 8px 10px; vertical-align: top; }
+      th { background: #f2f5f8; text-align: left; }
+    </style>
+  </head>
+  <body>
+
+  <h1>High-Level Domains for the Transport Data Asset</h1>
+
+  <div class="note">
+    <strong>Correction basis:</strong> updated against current Transport table documentation. Green text is added or corrected. Red text is removed or
+  downgraded because the table docs do not validate it.
+  </div>
+
+  <h2>1. Contract &amp; Network Context</h2>
+
+  <p>
+    <del>(the spine everything hangs off)</del>
+    <ins>(one of the core partitioning and governance contexts; not the only spine)</ins>
+  </p>
+
+  <ul>
+    <li>
+      Contract:
+      <del>WRU, SRAPC, VRMC, NEL, City Harbour, etc.</del>
+      <ins>WRU, SRAPC, NEL, RAMC, TSRC, SHT/WHT, VentureSmart, Auckland West, and other contract/schema contexts where the source-system or table
+  documentation supports the mapping.</ins>
+    </li>
+    <li>
+      Business unit, client, contract type:
+      <ins>keep these as required reference attributes, but do not assume they are all present in current tables.</ins>
+    </li>
+    <li>
+      Lifecycle stage:
+      <del>Bid → Mobilise → Plan → Inspect → Renew → Report</del>
+      <ins>useful operating framework, but not currently validated as a table-backed domain.</ins>
+    </li>
+    <li>
+      Commercial model:
+      <del>lump sum drawdown vs scheduled rates — Rui called this out as a key driver of why item-level data exists or doesn't</del>
+      <ins>commercial model should be captured if available, but current table docs validate SAP/WBS/job-costing links rather than this specific
+  commercial-model explanation.</ins>
+    </li>
+    <li>
+      Network / route / segment / linear referencing:
+      <ins>confirmed as a separate spatial spine. Use route, section, road ID, asset ID, direction, chainage, WKT, latitude/longitude, and reference-point
+  fields where available.</ins>
+    </li>
+  </ul>
+
+  <h2>2. Asset Register &amp; Hierarchy</h2>
+
+  <p>
+    <ins>This domain is validated, but it is not yet proven as a complete enterprise asset master across all contracts.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Parent asset:
+      <ins>Road, tunnel, bridge, segment, counter location, or other parent asset depending on contract/source.</ins>
+    </li>
+    <li>
+      Child asset categories:
+      pavements, drainage, pits, lines, vehicle barriers/guardrails, signage, bridges, culverts, lighting,
+      <del>jet fans</del>
+      <ins>and tunnel/building assets where a contract source actually documents them.</ins>
+    </li>
+    <li>
+      Per-asset attributes:
+      ID, code, name, type, asset type, parent asset, direction, chainage, location/geometry, dimensions, material, construction/install date, status/
+  stage, disposal date, criticality, condition, risk, classification, notes, alert notes, WKT/lat-long where available.
+    </li>
+    <li>
+      Ownership and provenance:
+      <del>ours vs disputed vs client's, source/provenance as-built handover, field-validated, AI-detected</del>
+      <ins>model this as a required capability, but current table docs only partially support it through fields such as information source, data
+  confidence, verification notes, audit/export metadata, upload-source notes, and asset status/stage. Do not claim a mature as-built/AI-detected
+  provenance model yet.</ins>
+    </li>
+    <li>
+      Asset condition:
+      <del>scored 1–5 very good → very poor, with definitions agreed in contract</del>
+      <ins>condition fields exist, but scales vary by source: Asset Vision condition/risk fields, NEL condition rating, TSRC bridge condition/grade, WRU
+  counter condition/risk, RAMC roughness/rutting/ride quality classes. Treat condition as contract-scoped until a common scale is formally mapped.</ins>
+    </li>
+  </ul>
+
+  <h2>3. Inspections</h2>
+
+  <p>
+    <ins>Keep separate from defects/jobs. This is table-supported.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Scheduled inspection runs:
+      <ins>validated through inspection tables and SHT inspection compliance logic with scheduled date, due date, completed date, assigned user, route/
+  type, and compliance flag.</ins>
+    </li>
+    <li>
+      Inspection record:
+      who, when, route/asset covered, inspection type, status, scheduled date, completed date, completed user, comments, WKT/chainage where available.
+    </li>
+    <li>
+      Method:
+      <del>drive-by with Asset Vision dash cam / RetinaVision / manual / AID camera in tunnels</del>
+      <ins>do not state these as table-validated methods unless backed by source-specific fields. Current table docs validate inspection records, not
+  every capture method.</ins>
+    </li>
+    <li>
+      Evidence:
+      <ins>photos/URLs and form/module fields are table-supported; video/GPS trail should be treated as a requirement or interview claim unless separately
+  evidenced.</ins>
+    </li>
+    <li>
+      Link to assets observed and condition assessments:
+      <ins>supported via asset IDs, asset codes, inspection IDs, job IDs, capital work IDs, and WKT/chainage fields.</ins>
+    </li>
+  </ul>
+
+  <h2>4. Defects &amp; Hazards</h2>
+
+  <p>
+    <del>(one model, severity-flagged)</del>
+    <ins>(shared operational issue/job pattern where fields support it, with hazards kept explicit because they carry safety semantics)</ins>
+  </p>
+
+  <ul>
+    <li>
+      Raised from:
+      inspection,
+      <del>AID alert (tunnels), public report, incidental observation</del>
+      <ins>CRM/public report fields and operational modules where documented. AID alert should not be claimed from current table docs.</ins>
+    </li>
+    <li>
+      Attributes:
+      asset link, hazard code, hazard/defect code, activity type/category/code, priority, created date, due date, completed date, completed status,
+  compliance flag, made-safe flag/date, comments, photo evidence, location/WKT/chainage.
+    </li>
+    <li>
+      SLA / response time:
+      <del>Auto-calculated SLA / response time based on severity + asset category</del>
+      <ins>table docs validate due dates, compliance flags, compliance calculation dates, and contract-specific compliance logic. They do not prove a
+  universal severity + asset-category SLA engine.</ins>
+    </li>
+  </ul>
+
+  <h2>5. Jobs / Work Orders</h2>
+
+  <p>
+    <ins>This domain is strongly table-supported.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Triggered by:
+      defect/hazard, inspection, scheduled maintenance, CRM/public report,
+      <del>OR capital works proposal</del>
+      <ins>or linked capital works where the data actually connects the records.</ins>
+    </li>
+    <li>
+      Core attributes:
+      job/work-order ID, asset ID/code/name, contract, region, activity/intervention fields, priority, assigned user, scheduled start/end, due date,
+  completion timestamp, completion status, compliance, workflow status, comments, photos, quantity, cost estimates, WKT/chainage.
+    </li>
+    <li>
+      Crew/resource/cost capture:
+      <ins>add resources, planned resource items, timesheet items, labour/resource cost, SAP work order, WBS, and job-costing fields.</ins>
+    </li>
+    <li>
+      Routine maintenance vs capital works:
+      <ins>keep the distinction. Capital works has separate Asset Vision tables and should not be collapsed into ordinary jobs.</ins>
+    </li>
+  </ul>
+
+  <h2>6. Capital Works / Forward Programme</h2>
+
+  <p>
+    <ins>Added as its own domain because the table docs support separate capital work and capital work task structures.</ins>
+  </p>
+
+  <ul>
+    <li>Capital work ID, name, description, type, asset type, asset ID/code/name, contract, section, direction, chainage, planned start/finish, actual
+  start/finish, supervisor, area, spatial info.</li>
+    <li>Capital work task ID, capital work ID, task name/description, planned/actual dates, estimated/actual quantity, estimated/actual cost, unit,
+  comments, linked job ID.</li>
+    <li>
+      <del>pavement modelling in dTIMS, multi-year capex proposals to client</del>
+      <ins>keep as interview/future-state context unless table evidence is added. Current table docs prove capital works records, not the full dTIMS/
+  proposal workflow.</ins>
+    </li>
+  </ul>
+
+  <h2>7. Evidence, Forms, Photos &amp; Workflow Extensions</h2>
+
+  <p>
+    <ins>Added because this is not a side detail; Asset Vision tables make it part of the operational model.</ins>
+  </p>
+
+  <ul>
+    <li>Photos: source table, source record ID, URL, thumbnail URL, stage, created date/user.</li>
+    <li>Form fields: source table, source record ID, field name, value, data type, sort order.</li>
+    <li>Workflow status: source table, source record ID, workflow code/name, status date, comment, reason.</li>
+    <li>Modules/custom module items: contract-specific registers and operational forms.</li>
+  </ul>
+
+  <h2>8. Resources, Timesheets &amp; Job Costing</h2>
+
+  <p>
+    <ins>Added because the current table docs validate resource, timesheet, utilisation, and job-costing data.</ins>
+  </p>
+
+  <ul>
+    <li>Resource code/name/type, company rate, hours, minutes, quantity, multiplier, cost, start/end dates.</li>
+    <li>Timesheet source table/source ID, timesheet type, created user/date, resource cost.</li>
+    <li>All-contract job-costing context: contract, Asset Vision database, activity, record ID, job status, asset type/code/name, WBS number, SAP work
+  order, SAP record existence.</li>
+  </ul>
+
+  <h2>9. SAP / WBS / Finance Context</h2>
+
+  <p>
+    <ins>Added as a first-class domain. It is table-supported and missing from the original structure.</ins>
+  </p>
+
+  <ul>
+    <li>SAP work order / cost object, object type, object description, company code, cost centre, currency, object status, WBS ID, profit centre, routing
+  number, operation activity/text.</li>
+    <li>WBS budget and forecast: fiscal year, version, cost element, debit/credit indicator, month amounts, WBS element/description.</li>
+    <li>Vendor and purchasing group data where needed for procurement/commercial analysis.</li>
+  </ul>
+
+  <h2>10. Sensing, Traffic, Weather &amp; Operational Context</h2>
+
+  <p>
+    <del>6. Sensing &amp; telemetry (your "sensing side")</del>
+    <ins>Renamed and narrowed to what the table documentation can actually support.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Imagery feeds:
+      <del>Asset Vision dash cam every 5–10m, RetinaVision every 3m, AI defect detection, AID cameras</del>
+      <ins>not table-validated in the current documentation. Treat as interview/future-state inputs unless specific source tables are documented.</ins>
+    </li>
+    <li>
+      Operational telemetry:
+      <del>OMCS alarms, vehicle stopped, jet fan degraded, plant/equipment, GPS/fleet telematics, vehicle locations</del>
+      <ins>not validated by current table docs as a complete telemetry layer.</ins>
+    </li>
+    <li>
+      Table-supported context:
+      <ins>traffic counters, traffic volumes, traffic closures, weather observations/forecast, road network centreline/reference data, closure durations,
+  lane affected, direction, section, chainage.</ins>
+    </li>
+    <li>
+      Flow:
+      <del>Sensor → event → incident record OR work order is the flow Huy described</del>
+      <ins>keep only as a hypothesis to validate. Current tables show modules/forms/incidents/closures/jobs, but not a proven universal sensor-to-event
+  automation flow.</ins>
+    </li>
+  </ul>
+
+  <h2>11. KPIs &amp; Reporting</h2>
+
+  <p>
+    <ins>Keep, but make it explicitly contract-specific and source-quality dependent.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Contract KPI definitions:
+      <ins>validated by contract-specific KPI/compliance tables and views. Do not create a single global KPI schema without mapping.</ins>
+    </li>
+    <li>
+      KPI measurements:
+      inspections scheduled vs completed, compliance pass/fail, jobs raised/closed, due/completed dates, backlog changes, asset condition distribution,
+  pavement roughness/rutting/ride-quality classes, work order target/actual dates.
+    </li>
+    <li>
+      Monthly report outputs:
+      <del>50+ page Word docs today</del>
+      <ins>may be true from interviews, but table docs validate reporting tables and snapshots rather than the Word-document consumption layer.</ins>
+    </li>
+    <li>
+      Data maturity:
+      <ins>include upload-based tables, truncated/undocumented objects, decommissioned all-contract jobs caveat, and contract-specific readiness scores.</
+  ins>
+    </li>
+  </ul>
+
+  <h2>12. Incidents &amp; Closures</h2>
+
+  <p>
+    <del>8. Incidents (tunnel-specific, distinct from defects)</del>
+    <ins>Incidents and closures should be separate from ordinary defects/jobs where incident data exists; do not claim they are only tunnel-specific from
+  table docs alone.</ins>
+  </p>
+
+  <ul>
+    <li>
+      Incident fields:
+      incident ID, incident type, status, status date, section, incident location, traffic direction, severity description, detection method, detection
+  reference.
+    </li>
+    <li>
+      Closure fields:
+      closure type, chainage, traffic flow stopped/resumed, duration, lane affected, section, TGS number, audit flag, AED external ID, AV incident ID,
+  completion code.
+    </li>
+    <li>
+      <del>Non-asset-affecting events captured in OMCS incident management — worth keeping separate from work orders per Huy</del>
+      <ins>current table docs support incident/closure separation, but not the OMCS/Huy-specific statement.</ins>
+    </li>
+  </ul>
+
+  <h2>Things to Flag Before Locking This In</h2>
+
+  <ul>
+    <li>
+      Contract is the partitioning key.
+      <ins>Correct, but not sufficient. The model also needs asset hierarchy, route/section/chainage/WKT, job/work-order IDs, inspection IDs, and SAP/WBS
+  cost objects as structural keys.</ins>
+    </li>
+    <li>
+      Asset Vision schemas are standard across mandatory fields, with contract-specific forms.
+      <ins>Supported by repeated Asset Vision source tables plus formfield/module/custom module patterns. This is a strong modelling principle.</ins>
+    </li>
+    <li>
+      Roads vs tunnels diverge in sensing.
+      <del>Roads = inspector-driven imagery. Tunnels = always-on AID + OMCS alarms.</del>
+      <ins>Likely interview context, but current table docs only validate some road/tunnel contract differences, inspection compliance, traffic/closure/
+  incident data, weather, and Asset Vision modules/forms. Do not hard-code AID/OMCS without source evidence.</ins>
+    </li>
+    <li>
+      As-built / handover data is its own beast.
+      <del>Huy described receiving PDFs + asset registers + geojson at handover...</del>
+      <ins>Keep provenance as a required domain, but mark PDFs/GeoJSON/handover translation as interview evidence not table-doc evidence.</ins>
+    </li>
+    <li>
+      Capital Works / Forward Programme.
+      <ins>Keep and promote to its own domain. Current tables support capital work and capital work task records. dTIMS and multi-year proposal workflow
+  still need table/source confirmation.</ins>
+    </li>
+  </ul>
+
+  <h2>Change Summary</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Removed / downgraded</th>
+        <th>Added / strengthened</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Contract as the single spine.</td>
+        <td>Multiple spines: contract, asset hierarchy, network/chainage/WKT, job/work-order, inspection, SAP/WBS.</td>
+      </tr>
+      <tr>
+        <td>Commercial-model explanation as validated fact.</td>
+        <td>SAP/WBS/job-costing as validated finance/commercial domain.</td>
+      </tr>
+      <tr>
+        <td>RetinaVision, AID, OMCS, jet fan telemetry as table-proven.</td>
+        <td>Traffic, weather, closure, counter, module/form-based operational context.</td>
+      </tr>
+      <tr>
+        <td>Universal SLA algorithm based on severity + asset category.</td>
+        <td>Contract-specific compliance logic, due dates, compliant flags, and SHT compliance calculations.</td>
+      </tr>
+      <tr>
+        <td>One global defect/hazard model.</td>
+        <td>Shared issue/job pattern, with hazards retaining safety semantics.</td>
+      </tr>
+      <tr>
+        <td>As-built/AI-detected provenance as current-state fact.</td>
+        <td>Provenance as required capability, with current partial support through confidence/source/audit/upload fields.</td>
+      </tr>
+      <tr>
+        <td>Monthly Word reports as table-validated consumption layer.</td>
+        <td>KPI tables, inspection compliance views, backlog snapshots, job snapshots, and data maturity notes.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  </body>
+  </html>

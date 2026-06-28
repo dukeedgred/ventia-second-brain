@@ -1,0 +1,140 @@
+{
+  "name": "05_metrics_contract_transport_dev_transport_nel",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_nel' AS schema_name,\n  'utbl_kpi_assets' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Construction Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Construction Date` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ChainageStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ChainageStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`X coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`X coordinate start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Y coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Y coordinate start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Z coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Z coordinate start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Data Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Data Date` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Construction Date` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Construction Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Construction Date` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ChainageStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ChainageStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ChainageStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`X coordinate start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`X coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`X coordinate start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Y coordinate start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Y coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Y coordinate start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Z coordinate start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Z coordinate start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Z coordinate start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Data Date` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Data Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Data Date` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Construction Date|ChainageStart|X coordinate start|Y coordinate start|Z coordinate start|Data Date' AS freshness_columns\nFROM `transport_dev`.`transport_nel`.`utbl_kpi_assets`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_nel' AS schema_name,\n  'utbl_kpi_work_orders' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Anywhere Created` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Anywhere Created` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Target Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Target Start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Target Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Target Finish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Actual Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Actual Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Finish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Finish No Later Than` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Finish No Later Than` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Reported Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Reported Date` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Occurrence Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Occurrence Date` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Anywhere Created` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Anywhere Created` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Anywhere Created` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Target Start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Target Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Target Start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Target Finish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Target Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Target Finish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Actual Start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Actual Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Actual Finish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Actual Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Finish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Finish No Later Than` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Finish No Later Than` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Finish No Later Than` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Reported Date` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Reported Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Reported Date` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Occurrence Date` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Occurrence Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Occurrence Date` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Anywhere Created|Target Start|Target Finish|Actual Start|Actual Finish|Finish No Later Than|Reported Date|Occurrence Date' AS freshness_columns\nFROM `transport_dev`.`transport_nel`.`utbl_kpi_work_orders`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_nel' AS schema_name,\n  'utbl_ref_date_table' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Date` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`LongDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LongDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Last Day of Month` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Last Day of Month` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Week Commencing` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Week Commencing` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DateKey` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DateKey` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Date` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Date` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Date` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`LongDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`LongDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`LongDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Last Day of Month` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Last Day of Month` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Last Day of Month` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Week Commencing` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Week Commencing` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Week Commencing` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DateKey` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DateKey` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DateKey` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Date|LongDate|Last Day of Month|Week Commencing|DateKey' AS freshness_columns\nFROM `transport_dev`.`transport_nel`.`utbl_ref_date_table`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_nel' AS schema_name,\n  'uvw_kpi_sys_av_devices' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`Actual Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Start` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Actual Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Finish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`actual_start_timestamp` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`actual_start_timestamp` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`actual_finish_timestamp` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`actual_finish_timestamp` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`start_datekey` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`start_datekey` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Planned_Downtime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Planned_Downtime` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`Unplanned_Downtime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Unplanned_Downtime` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`Actual Start` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Actual Start` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Start` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Actual Finish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Actual Finish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Actual Finish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`actual_start_timestamp` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`actual_start_timestamp` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`actual_start_timestamp` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`actual_finish_timestamp` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`actual_finish_timestamp` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`actual_finish_timestamp` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`start_datekey` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`start_datekey` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`start_datekey` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Planned_Downtime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Planned_Downtime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Planned_Downtime` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`Unplanned_Downtime` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`Unplanned_Downtime` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`Unplanned_Downtime` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'Actual Start|Actual Finish|actual_start_timestamp|actual_finish_timestamp|start_datekey|Planned_Downtime|Unplanned_Downtime' AS freshness_columns\nFROM `transport_dev`.`transport_nel`.`uvw_kpi_sys_av_devices`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 4
+      }
+    ],
+    "total_row_count": 4,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 4,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_nel",
+        "utbl_kpi_assets",
+        "MANAGED",
+        "1388",
+        "true",
+        null,
+        null,
+        "Construction Date|ChainageStart|X coordinate start|Y coordinate start|Z coordinate start|Data Date"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_nel",
+        "utbl_kpi_work_orders",
+        "MANAGED",
+        "79",
+        "true",
+        null,
+        null,
+        "Anywhere Created|Target Start|Target Finish|Actual Start|Actual Finish|Finish No Later Than|Reported Date|Occurrence Date"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_nel",
+        "utbl_ref_date_table",
+        "MANAGED",
+        "9862",
+        "true",
+        "2026-06-10T00:00:00Z",
+        "1970-01-12T17:06:59Z",
+        "Date|LongDate|Last Day of Month|Week Commencing|DateKey"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_nel",
+        "uvw_kpi_sys_av_devices",
+        "VIEW",
+        "76",
+        "true",
+        "2026-05-30T08:47:00Z",
+        "1970-01-01T00:00:00Z",
+        "Actual Start|Actual Finish|actual_start_timestamp|actual_finish_timestamp|start_datekey|Planned_Downtime|Unplanned_Downtime"
+      ]
+    ]
+  }
+}

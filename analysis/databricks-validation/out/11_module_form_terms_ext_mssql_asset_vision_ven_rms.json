@@ -1,0 +1,1256 @@
+{
+  "name": "11_module_form_terms_ext_mssql_asset_vision_ven_rms",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_rms' AS catalog_name, 'module' AS source_table, ModuleName AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.module\nWHERE Deleted = false\n  AND lower(coalesce(ModuleName, '') || ' ' || coalesce(Name, '') || ' ' || coalesce(Comments, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY ModuleName\nUNION ALL\nSELECT 'ext_mssql_asset_vision_ven_rms' AS catalog_name, 'formfield' AS source_table, Name AS matched_value, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_rms`.dbo.formfield\nWHERE Deleted = false\n  AND lower(coalesce(Name, '') || ' ' || coalesce(Value, '')) RLIKE 'omcs|aid|retina|dash|camera|video|gps|jet|fan|dtims|telemetry|vehicle|alarm|as-built|geojson|handover|ai'\nGROUP BY Name\nORDER BY row_count DESC\nLIMIT 200",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "source_table",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "matched_value",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 200
+      }
+    ],
+    "total_row_count": 200,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 200,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Comments",
+        "554971"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Comments",
+        "278243"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Comments",
+        "257342"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Comments",
+        "201524"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Traffic Management|Number Of Lanes Unavailable",
+        "123634"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Quantity required",
+        "123631"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Follow up job details",
+        "123631"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Intervention",
+        "123549"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Is follow up work required?",
+        "123062"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Scheduling|Timing Constraint",
+        "116851"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Priority",
+        "103197"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Required crew size",
+        "102139"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Incident|If applicable, details of asset damage",
+        "95358"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Incident|Please specify detail for asset configuration change",
+        "74916"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Incident|TNS/Incident permanent repair",
+        "74065"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Asset Management|Failed KPI Reason Comments",
+        "46344"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Asset Management|Failed KPI",
+        "46344"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "External System Details|AI Defect ID",
+        "35190"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Completion Details|Job Financially Closed",
+        "33989"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Completion Details|Job Quality Approval",
+        "33989"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Scheduling|Work Centre",
+        "30619"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - FUNCTIONAL CHECK|Comments",
+        "27510"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Scheduling Details|Due Date (With latitude)",
+        "22788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Scheduling Details|Due Date",
+        "22767"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Crew required",
+        "21493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Incident|If applicable, Details of asset damage",
+        "20992"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Required Start Date",
+        "20910"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Required End Date",
+        "20910"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Follow-Up Work Details|Plant Required",
+        "20910"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Handover/practical completion|Comment",
+        "16203"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Clear work area and recycle or dispose of materials in accordance with project environmental management plan",
+        "12984"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect boundary fences and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect large sign structures and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect open drainage and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect vacant land and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect noise walls and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect kerb and gutter and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect culverts and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect line marking and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect road medians and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect flexible pavement and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect debris or hazards on road network.",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect safety barriers and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect cycleways and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect road network for signs of flooding",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect shoulders and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect bridge structures and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect drainage pits and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect signs and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect tunnel structures and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect non-pavement delineators and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect rest areas and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Inspect the all assets for offensive graffiti",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect roadside landscaping and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect retaining walls and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect slopes and batters and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Visually inspect rigid pavement and note if there are any defects present",
+        "11621"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Route Name",
+        "11620"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Event|Contact_Email",
+        "11269"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Event|Topic Category",
+        "10672"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Event|Record Type",
+        "10637"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Clean repaired area, remove excess loose materials, and apply sand or blinding material where required.",
+        "10502"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Apply binder to provide adequate adhesion of repair material and waterproofing of repaired area",
+        "10502"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Remove water and loose material  from pothole  or defective area",
+        "10502"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Place and compact materials to specification. Capture asphalt supplier and batch details and retain supply docket (AC10 to be used).",
+        "10502"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Trim pothole/defect to ensure mechanical interlock of repair material",
+        "10502"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Job Data - ITS|What works were undertaken to fix this issue",
+        "10170"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Event|Contact Type",
+        "10017"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Support Structure Inspection",
+        "8832"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Start Card|Spill kit available?",
+        "7805"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Start Card|Start Card (3)|First Aid Kit Location",
+        "7805"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Start Card|Start Card (4)|Name of First Aider",
+        "7805"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Start Card|Are plant and equipment pre-starts and risk assessments available and communicated?",
+        "7804"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Start Card|Job Details",
+        "7804"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "module",
+        "Customer Request (VEN)",
+        "7182"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Actual fault code",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Does this Fault require support team investigation?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Site was not operational from",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Does this require further works, material, subcontractors, permits?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Are other resources organised for this work?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Are there any risks onsite that prevented resolving the issue?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Site was not operational to",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Describe why this is a 2 person activity",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|What works were undertaken to fix this issue",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Is this a 2-person activity?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action|Are there any risks with accessing the site?",
+        "6788"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check drawings present and up to date. Make photographic copy.",
+        "6495"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check identification labels",
+        "6494"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Inspect for any sign of vermin infestation or damage in the cabinet",
+        "6494"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check MEN link",
+        "6469"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check Cabinet Earthing",
+        "6469"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check Earth Stake",
+        "6469"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check Sign Details",
+        "6468"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Inspect support structure for structural integrity",
+        "6467"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Remove any Graffiti on cabinets or structures",
+        "6447"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Job Data - Civil|Describe activity you are undertaking",
+        "6123"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Job Data - ITS|Actual fault code",
+        "6016"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check drawings present and up to date. Make photographic copy.",
+        "5952"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check identification labels",
+        "5871"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Inspect for any sign of vermin infestation or damage in the cabinet",
+        "5871"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Sign Details",
+        "5682"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Cabinet Earthing",
+        "5665"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Earth Stake",
+        "5665"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Event|Ongoing_Customer_Narrative",
+        "5627"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Inspect support structure for structural integrity",
+        "5615"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Remove any Graffiti on cabinets or structures",
+        "5373"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Confirm Location Details",
+        "5354"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check solar panel and frame fixings are tight and secure",
+        "5097"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Clean solar panel",
+        "5016"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check that battery is secure and in good condition",
+        "5016"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Record part numbers, serial numbers and manufacturer details for parts where not already recorded in asset database",
+        "4870"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Confirm that solar charge regulator LED indicates normal operation.",
+        "4861"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Sign Make/ Model",
+        "4831"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check supply fuse pole/pit, fuse and holder.",
+        "4770"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check that drain holes are clear",
+        "4749"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check internal condition of control cabinet",
+        "4749"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Open door of control cabinet. Check operation of door. Lubricate door locks, hinges and seals as required and reseat/repair/replace if necessary.",
+        "4749"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check external condition of control cabinet",
+        "4749"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Confirm pole no. or supply location",
+        "4728"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Support Structure Inspection",
+        "4700"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Remove any build-up or scale with Inox (Ph neutral anti-corrosive spray).",
+        "4699"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check for corrosion product on battery terminals.",
+        "4699"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Replace battery if indicated by test result.",
+        "4699"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Main Supply (Mains powered sites only)",
+        "4699"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check for physical damage or fatigue to sign components and structure",
+        "4574"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Fixings Secure",
+        "4560"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Fixings Secure",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check drawings present and up to date. Make photographic copy.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm that solar charge regulator LED indicates normal operation.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Remove any build-up or scale with Inox (Ph neutral anti-corrosive spray).",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Earth Stake",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check for physical damage or fatigue to sign components and structure",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check lantern and annulus screw fixings are tight and secure",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Operations",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm Location Details",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Battery Checks",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm annulus operation (Type 3 signs only)",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm that door tamper switch is reporting door open at CMC.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Battery Quantity",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Sign Make/ Model",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check internal condition of control cabinet",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Return Sign to Normal Service",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Main Supply (Mains powered sites only)",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Sign Details",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check device status report",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check condition of sign face",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm lantern operation",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Clean solar panel",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Open door of control cabinet. Check operation of door. Lubricate door locks, hinges and seals as required and reseat/repair/replace if necessary.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Battery Installation Date",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check that cabinet is level. Adjust if necessary",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check that vents on the housing door are dust free. Clean vents if any build-up is present.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check identification labels",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|State of Charge when disconnected from solar panel(s).",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Cleaning",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check supply fuse pole/pit, fuse and holder.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Inspect for any sign of vermin infestation or damage in the cabinet",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check circuit breakers (mains-powered sites only)",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Clean posts",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Confirm pole no. or supply location",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Control Cabinet",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Remove any Graffiti on cabinets or structures",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check that drain holes are clear",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check Cabinet Earthing",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Sign Controller Checks",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check MEN link (mains-powered sites only)",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check danger (MAINS VOLTAGE) labels (mains-powered sites only)",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Inspect support structure for structural integrity",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check that battery is secure and in good condition",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Clean sign face, lanterns and annulus.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Record part numbers, serial numbers and manufacturer details for parts where not already recorded in asset database",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check for corrosion product on battery terminals.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check solar panel and frame fixings are tight and secure",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Activate the sign test mode via CMC",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Trim all trees that interfere with visibility of sign to road user or obstruct solar panel",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Check external condition of control cabinet",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|If battery has been installed > 3 years, perform battery test. Battery test should be performed when the system is under load and solar panel(s) are disconnected. If voltage drops below 12V, test fails.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Replace battery if indicated by test result.",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Support Structure Inspection",
+        "4545"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE & FUNCTIONAL CHECK|Is there a Backup Battery present (Y/N)?",
+        "4544"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Battery Checks",
+        "4539"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check that cabinet is level. Adjust if necessary",
+        "4493"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance action - PREVENTATIVE MAINTENANCE|Check circuit breakers",
+        "4474"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Control Cabinet",
+        "4472"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check danger (MAINS VOLTAGE) labels (mains-powered sites only)",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check Operations",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check device status report",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Confirm lantern operation",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check condition of sign face",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|State of Charge when disconnected from solar panel(s).",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Confirm annulus operation (Type 3 signs only)",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check circuit breakers (mains-powered sites only)",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Activate the sign test mode via CMC",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Clean posts",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check lantern and annulus screw fixings are tight and secure",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Battery Quantity",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check that vents on the housing door are dust free. Clean vents if any build-up is present.",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Sign Controller Checks",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check \"40 speed\" painted on the pavement",
+        "4458"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_rms",
+        "formfield",
+        "Maintenance Action - Preventative Maintenance|Check and take picture of the condition of Dragon Teeth",
+        "4458"
+      ]
+    ]
+  }
+}

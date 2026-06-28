@@ -1,14 +1,58 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { Button, Input, Spinner, Textarea } from '@heroui/react'
 import { Markdown } from '../lib/markdown'
 import { GraphView } from '../components/GraphView'
 import { ExtractModal } from '../components/ExtractModal'
 import { useIngest } from '../lib/ingest'
+import { api } from '../api'
+
+const TEXT_FILE_EXTENSIONS = new Set([
+  'csv',
+  'json',
+  'log',
+  'md',
+  'markdown',
+  'txt',
+  'tsv',
+  'xml',
+  'yaml',
+  'yml',
+])
+
+const EXTRACTABLE_FILE_EXTENSIONS = new Set(['docx', 'pdf', 'pptx'])
+
+function fileExtension(file: File) {
+  return file.name.split('.').pop()?.toLowerCase() || ''
+}
+
+function isTextFile(file: File) {
+  if (file.type.startsWith('text/')) return true
+  return TEXT_FILE_EXTENSIONS.has(fileExtension(file))
+}
+
+function isExtractableFile(file: File) {
+  return EXTRACTABLE_FILE_EXTENSIONS.has(fileExtension(file))
+}
+
+function readFileAsBase64(file: File) {
+  return new Promise<string>((resolve, reject) => {
+    const reader = new FileReader()
+    reader.onerror = () => reject(reader.error ?? new Error(`Could not read ${file.name}`))
+    reader.onload = () => {
+      const result = String(reader.result || '')
+      resolve(result.includes(',') ? result.slice(result.indexOf(',') + 1) : result)
+    }
+    reader.readAsDataURL(file)
+  })
+}
 
 export default function IngestPage() {
   const navigate = useNavigate()
+  const fileInputRef = useRef<HTMLInputElement | null>(null)
   const [extractPath, setExtractPath] = useState('')
+  const [dragging, setDragging] = useState(false)
+  const [fileError, setFileError] = useState('')
   const {
     title,
     setTitle,
@@ -25,6 +69,60 @@ export default function IngestPage() {
     start,
     stop,
   } = useIngest()
+
+  const readFiles = async (files: File[]) => {
+    if (running || files.length === 0) return
+    setFileError('')
+
+    const unsupported = files.filter((file) => !isTextFile(file) && !isExtractableFile(file))
+    if (unsupported.length > 0) {
+      setFileError(
+        `Cannot read ${unsupported.map((file) => file.name).join(', ')} as source text. Use .txt, .md, .csv, .json, .log, .xml, .yaml, .docx, .pptx, or .pdf.`,
+      )
+      return
+    }
+
+    try {
+      const extractedWarnings: string[] = []
+      const texts = await Promise.all(
+        files.map(async (file) => {
+          if (isTextFile(file)) return file.text()
+          const result = await api.extractFile(file.name, await readFileAsBase64(file))
+          extractedWarnings.push(...result.warnings.map((warning) => `${file.name}: ${warning}`))
+          return result.text
+        }),
+      )
+      const nextContent = texts
+        .map((text, i) => (files.length > 1 ? `# ${files[i].name}\n\n${text}` : text))
+        .join('\n\n---\n\n')
+
+      setContent(nextContent)
+      if (extractedWarnings.length > 0) setFileError(extractedWarnings.join(' '))
+      if (!title.trim() && files.length === 1) {
+        setTitle(files[0].name.replace(/\.[^.]+$/, ''))
+      }
+    } catch (err) {
+      setFileError(`Could not read file: ${(err as Error).message}`)
+    }
+  }
+
+  const handleDrop = (e: React.DragEvent) => {
+    e.preventDefault()
+    setDragging(false)
+    readFiles(Array.from(e.dataTransfer.files))
+  }
+
+  const handlePaste = (e: React.ClipboardEvent<HTMLElement>) => {
+    const files = Array.from(e.clipboardData.files)
+    if (!files.length) return
+    e.preventDefault()
+    readFiles(files)
+  }
+
+  const handleFilePick = (e: React.ChangeEvent<HTMLInputElement>) => {
+    readFiles(Array.from(e.target.files ?? []))
+    e.target.value = ''
+  }
 
   return (
     <div className="flex h-full">
@@ -48,14 +146,37 @@ export default function IngestPage() {
             placeholder="e.g. Supplier Onboarding Workshop, Q2 Spend Report…"
             isDisabled={running}
           />
-          <Textarea
-            label="Source text"
-            value={content}
-            onValueChange={setContent}
-            variant="bordered"
-            minRows={8}
-            placeholder="Paste notes, a document, an article, a transcript…"
-            isDisabled={running}
+          <div
+            onDragOver={(e) => {
+              e.preventDefault()
+              setDragging(true)
+            }}
+            onDragEnter={(e) => {
+              e.preventDefault()
+              setDragging(true)
+            }}
+            onDragLeave={() => setDragging(false)}
+            onDrop={handleDrop}
+            onPaste={handlePaste}
+            className={dragging ? 'rounded-xl opacity-70 ring-2 ring-primary-400' : undefined}
+          >
+            <Textarea
+              label="Source text"
+              value={content}
+              onValueChange={setContent}
+              variant="bordered"
+              minRows={8}
+              placeholder="Paste notes, a document, an article, a transcript…"
+              isDisabled={running}
+            />
+          </div>
+          <input
+            ref={fileInputRef}
+            type="file"
+            multiple
+            accept=".csv,.docx,.json,.log,.md,.markdown,.pdf,.pptx,.txt,.tsv,.xml,.yaml,.yml,text/*"
+            className="hidden"
+            onChange={handleFilePick}
           />
           <div className="flex gap-2">
             {running ? (
@@ -67,7 +188,15 @@ export default function IngestPage() {
                 Ingest
               </Button>
             )}
+            <Button variant="flat" isDisabled={running} onPress={() => fileInputRef.current?.click()}>
+              Add file
+            </Button>
           </div>
+          {fileError && (
+            <div className="rounded-xl border border-warning/40 bg-warning/10 px-4 py-3 text-sm text-warning">
+              {fileError}
+            </div>
+          )}
         </div>
 
         {(steps.length > 0 || running) && (

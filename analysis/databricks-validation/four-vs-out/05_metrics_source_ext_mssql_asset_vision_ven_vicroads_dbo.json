@@ -1,0 +1,572 @@
+{
+  "name": "05_metrics_source_ext_mssql_asset_vision_ven_vicroads_dbo",
+  "statement": "SELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Asset' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ExportDateUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`ConstructionDate` AS TIMESTAMP)), MAX(try_cast(`DisposalDate` AS TIMESTAMP)), MAX(try_cast(`ConditionDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ExportDateUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`ConstructionDate` AS TIMESTAMP)), MIN(try_cast(`DisposalDate` AS TIMESTAMP)), MIN(try_cast(`ConditionDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Asset`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'AssetArea' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`AssetArea`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'AssetAttribute' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`AssetAttribute`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'AssetAudit' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Modified` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Modified` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`AssetAudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'AssetClassification' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`AssetClassification`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'AssetLocation' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`AssetLocation`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'CapitalWork' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`PlannedStart` AS TIMESTAMP)), MAX(try_cast(`PlannedFinish` AS TIMESTAMP)), MAX(try_cast(`ActualStart` AS TIMESTAMP)), MAX(try_cast(`ActualFinish` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`PlannedStart` AS TIMESTAMP)), MIN(try_cast(`PlannedFinish` AS TIMESTAMP)), MIN(try_cast(`ActualStart` AS TIMESTAMP)), MIN(try_cast(`ActualFinish` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`CapitalWork`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'CapitalWorkTask' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`PlannedStart` AS TIMESTAMP)), MAX(try_cast(`PlannedFinish` AS TIMESTAMP)), MAX(try_cast(`ActualStart` AS TIMESTAMP)), MAX(try_cast(`ActualFinish` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`PlannedStart` AS TIMESTAMP)), MIN(try_cast(`PlannedFinish` AS TIMESTAMP)), MIN(try_cast(`ActualStart` AS TIMESTAMP)), MIN(try_cast(`ActualFinish` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`CapitalWorkTask`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'ContractReference' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`ContractReference`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'CustomModuleItem' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`CustomModuleItem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'ExportDate' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`LastExported` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`LastExported` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|LastExported' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`ExportDate`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'ExportDateLog' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`ExportDateID` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`LastExported` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`ExportDateID` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`LastExported` AS TIMESTAMP))) AS earliest_observed_ts,\n  'ExportDateID|DeltaUTC|LastExported' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`ExportDateLog`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'FormField' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`FormField`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Inspection' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`StartReferencePointName` AS TIMESTAMP)), MAX(try_cast(`StartDistancePast` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`ScheduledDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`StartReferencePointName` AS TIMESTAMP)), MIN(try_cast(`StartDistancePast` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`ScheduledDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Inspection`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'InspectionRelationship' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`InspectionRelationship`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'InspectionStatus' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StatusDateUTC` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StatusDateUTC` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`InspectionStatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Job' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledStart` AS TIMESTAMP)), MAX(try_cast(`ScheduledEnd` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`ApprovalDate` AS TIMESTAMP)), MAX(try_cast(`AssignedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedStatus` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP)), MAX(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MAX(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MAX(try_cast(`CRMField6` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledStart` AS TIMESTAMP)), MIN(try_cast(`ScheduledEnd` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`ApprovalDate` AS TIMESTAMP)), MIN(try_cast(`AssignedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedStatus` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP)), MIN(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MIN(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MIN(try_cast(`CRMField6` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Job`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'JobAsset' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`JobAsset`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'JobComment' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`JobComment`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'LaneAccess' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledDate` AS TIMESTAMP)), MAX(try_cast(`Timesheets` AS TIMESTAMP)), MAX(try_cast(`First Sign placed Date Time` AS TIMESTAMP)), MAX(try_cast(`Last Sign placed Date Time` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledDate` AS TIMESTAMP)), MIN(try_cast(`Timesheets` AS TIMESTAMP)), MIN(try_cast(`First Sign placed Date Time` AS TIMESTAMP)), MIN(try_cast(`Last Sign placed Date Time` AS TIMESTAMP))) AS earliest_observed_ts,\n  'CreatedUser|CompletedUser|CreatedDate|StartDate|CompletedDate|ScheduledDate|Timesheets|First Sign placed Date Time|Last Sign placed Date Time' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`LaneAccess`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Log' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  MAX(try_cast(`Modified` AS TIMESTAMP)) AS latest_observed_ts,\n  MIN(try_cast(`Modified` AS TIMESTAMP)) AS earliest_observed_ts,\n  'Modified' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Log`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Module' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`StartPointName` AS TIMESTAMP)), MAX(try_cast(`StartDistancePast` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`StartPointName` AS TIMESTAMP)), MIN(try_cast(`StartDistancePast` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Module`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Photo' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|CreatedDate|CreatedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Photo`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'PlannedResourceItem' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP)), MAX(try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`EndDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`PlannedResourceCreatedDate` AS TIMESTAMP)), MIN(try_cast(`PlannedResourceCreatedUser` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`EndDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedResourceCreatedDate|PlannedResourceCreatedUser|StartDate|EndDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`PlannedResourceItem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'Resource' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ExportDateUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ExportDateUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`Resource`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'ResourceAttribute' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`ResourceAttribute`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'ResourceAudit' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Modified` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Modified` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`ResourceAudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'SqlServerVersions' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`ReleaseDate` AS TIMESTAMP)), MAX(try_cast(`MainstreamSupportEndDate` AS TIMESTAMP)), MAX(try_cast(`ExtendedSupportEndDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`ReleaseDate` AS TIMESTAMP)), MIN(try_cast(`MainstreamSupportEndDate` AS TIMESTAMP)), MIN(try_cast(`ExtendedSupportEndDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'ReleaseDate|MainstreamSupportEndDate|ExtendedSupportEndDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`SqlServerVersions`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'SummaryCheck' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`CheckDateUTC` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`CheckDateUTC` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|CheckDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`SummaryCheck`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'TimesheetItem' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`TimesheetID` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`TimesheetCreatedDate` AS TIMESTAMP)), MAX(try_cast(`TimesheetCreatedUser` AS TIMESTAMP)), MAX(try_cast(`TimesheetTypeName` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`EndDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`TimesheetID` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`TimesheetCreatedDate` AS TIMESTAMP)), MIN(try_cast(`TimesheetCreatedUser` AS TIMESTAMP)), MIN(try_cast(`TimesheetTypeName` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`EndDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`TimesheetItem`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'WorkflowStatus' AS table_name,\n  'BASE TABLE' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StatusDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StatusDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`WorkflowStatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vAssetAudit' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`Modified` AS TIMESTAMP)), MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`Modified` AS TIMESTAMP)), MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'Modified|DeltaUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vAssetAudit`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vAssetLocation' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vAssetLocation`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vCapitalWork' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`PlannedStart` AS TIMESTAMP)), MAX(try_cast(`PlannedFinish` AS TIMESTAMP)), MAX(try_cast(`ActualStart` AS TIMESTAMP)), MAX(try_cast(`ActualFinish` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`PlannedStart` AS TIMESTAMP)), MIN(try_cast(`PlannedFinish` AS TIMESTAMP)), MIN(try_cast(`ActualStart` AS TIMESTAMP)), MIN(try_cast(`ActualFinish` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vCapitalWork`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vCapitalWorkTask' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`PlannedStart` AS TIMESTAMP)), MAX(try_cast(`PlannedFinish` AS TIMESTAMP)), MAX(try_cast(`ActualStart` AS TIMESTAMP)), MAX(try_cast(`ActualFinish` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`PlannedStart` AS TIMESTAMP)), MIN(try_cast(`PlannedFinish` AS TIMESTAMP)), MIN(try_cast(`ActualStart` AS TIMESTAMP)), MIN(try_cast(`ActualFinish` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vCapitalWorkTask`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vInspection' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StartDate` AS TIMESTAMP)), MAX(try_cast(`StartReferencePointName` AS TIMESTAMP)), MAX(try_cast(`StartDistancePast` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`ScheduledDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MAX(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StartDate` AS TIMESTAMP)), MIN(try_cast(`StartReferencePointName` AS TIMESTAMP)), MIN(try_cast(`StartDistancePast` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`ScheduledDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateFrom` AS TIMESTAMP)), MIN(try_cast(`ScheduledDateTo` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vInspection`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vInspectionStatus' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StatusDateUTC` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StatusDateUTC` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vInspectionStatus`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vJob' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP)), MAX(try_cast(`ScheduledStart` AS TIMESTAMP)), MAX(try_cast(`ScheduledEnd` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`ApprovalDate` AS TIMESTAMP)), MAX(try_cast(`AssignedDate` AS TIMESTAMP)), MAX(try_cast(`CompletedStatus` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedUser` AS TIMESTAMP)), MAX(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MAX(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MAX(try_cast(`CRMField6` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP)), MIN(try_cast(`ScheduledStart` AS TIMESTAMP)), MIN(try_cast(`ScheduledEnd` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`ApprovalDate` AS TIMESTAMP)), MIN(try_cast(`AssignedDate` AS TIMESTAMP)), MIN(try_cast(`CompletedStatus` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedUser` AS TIMESTAMP)), MIN(try_cast(`MadeSafeDateUTC` AS TIMESTAMP)), MIN(try_cast(`ComplianceCalculationDate` AS TIMESTAMP)), MIN(try_cast(`CRMField6` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vJob`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vModule' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`CompletedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedDate` AS TIMESTAMP)), MAX(try_cast(`CreatedUser` AS TIMESTAMP)), MAX(try_cast(`StartPointName` AS TIMESTAMP)), MAX(try_cast(`StartDistancePast` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`CompletedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedDate` AS TIMESTAMP)), MIN(try_cast(`CreatedUser` AS TIMESTAMP)), MIN(try_cast(`StartPointName` AS TIMESTAMP)), MIN(try_cast(`StartDistancePast` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vModule`\nUNION ALL\nSELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  'dbo' AS schema_name,\n  'vWorkFlowStatus' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`StatusDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`StatusDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate' AS freshness_columns\nFROM `ext_mssql_asset_vision_ven_vicroads`.`dbo`.`vWorkFlowStatus`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 40
+      }
+    ],
+    "total_row_count": 40,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 40,
+    "data_array": [
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Asset",
+        "BASE TABLE",
+        "333713",
+        "true",
+        "2026-06-09T04:53:25.98Z",
+        "1920-01-06T02:00:00Z",
+        "DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetArea",
+        "BASE TABLE",
+        "696",
+        "true",
+        "2025-03-24T23:27:37.547Z",
+        "2014-01-20T05:58:55.03Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetAttribute",
+        "BASE TABLE",
+        "8105407",
+        "true",
+        "2026-06-09T04:53:26.37Z",
+        "2019-11-23T23:14:15.293Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetAudit",
+        "BASE TABLE",
+        "3835764",
+        "true",
+        "2026-06-09T14:26:04.697Z",
+        "2018-09-20T18:04:27.34Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetClassification",
+        "BASE TABLE",
+        "38802",
+        "true",
+        "2026-06-05T04:51:26.02Z",
+        "2013-11-04T01:06:27.363Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetLocation",
+        "BASE TABLE",
+        "320601",
+        "true",
+        "2026-06-09T04:53:26.937Z",
+        "2019-03-19T04:10:54.793Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CapitalWork",
+        "BASE TABLE",
+        "1218",
+        "true",
+        "2026-12-18T00:00:00Z",
+        "2019-07-29T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CapitalWorkTask",
+        "BASE TABLE",
+        "3145",
+        "true",
+        "2026-06-30T23:59:59Z",
+        "2021-05-26T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ContractReference",
+        "BASE TABLE",
+        "2484",
+        "true",
+        "2023-03-23T05:54:03.073Z",
+        "2021-06-17T05:25:46.717Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CustomModuleItem",
+        "BASE TABLE",
+        "105",
+        "true",
+        "2026-05-08T01:09:16.497Z",
+        "2023-08-22T05:25:58.47Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ExportDate",
+        "BASE TABLE",
+        "20",
+        "true",
+        "2026-06-09T05:22:40.243Z",
+        "2026-06-09T05:21:34.21Z",
+        "DeltaUTC|LastExported"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ExportDateLog",
+        "BASE TABLE",
+        "1278342",
+        "true",
+        "2026-06-09T05:22:40.243Z",
+        "1970-01-01T00:00:01Z",
+        "ExportDateID|DeltaUTC|LastExported"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "FormField",
+        "BASE TABLE",
+        "10153720",
+        "true",
+        "2026-06-09T05:22:36.997Z",
+        "2021-03-28T05:21:12.877Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Inspection",
+        "BASE TABLE",
+        "223496",
+        "true",
+        "2027-06-30T00:00:00Z",
+        "1969-12-31T18:50:10Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "InspectionRelationship",
+        "BASE TABLE",
+        "2283",
+        "true",
+        "2026-06-03T19:19:51.83Z",
+        "2021-05-19T04:44:30.567Z",
+        "DeltaUTC|ModifiedUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "InspectionStatus",
+        "BASE TABLE",
+        "2734804",
+        "true",
+        "2026-06-09T05:22:34.353Z",
+        "2018-02-14T13:00:18.4Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Job",
+        "BASE TABLE",
+        "146849",
+        "true",
+        "2109-03-19T10:08:50.093Z",
+        "2018-02-28T21:41:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "JobAsset",
+        "BASE TABLE",
+        "224332",
+        "true",
+        "2026-06-09T05:22:38.01Z",
+        "2021-03-28T05:19:19.35Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "JobComment",
+        "BASE TABLE",
+        "242233",
+        "true",
+        "2026-06-09T05:22:38.627Z",
+        "2021-03-28T05:19:18.937Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "LaneAccess",
+        "VIEW",
+        "51566",
+        "true",
+        "2026-06-09T15:11:21.577Z",
+        "1970-01-01T00:00:00Z",
+        "CreatedUser|CompletedUser|CreatedDate|StartDate|CompletedDate|ScheduledDate|Timesheets|First Sign placed Date Time|Last Sign placed Date Time"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Log",
+        "BASE TABLE",
+        "1462023",
+        "true",
+        "2026-06-09T05:22:37.44Z",
+        "2021-09-06T06:18:49.757Z",
+        "Modified"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Module",
+        "BASE TABLE",
+        "107",
+        "true",
+        "2026-06-05T03:21:13.79Z",
+        "1969-12-31T23:09:12Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Photo",
+        "BASE TABLE",
+        "839352",
+        "true",
+        "2026-06-09T15:18:53.363Z",
+        "2016-07-05T15:06:04Z",
+        "DeltaUTC|ModifiedUTC|CreatedDate|CreatedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "PlannedResourceItem",
+        "BASE TABLE",
+        "0",
+        "false",
+        null,
+        null,
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedResourceCreatedDate|PlannedResourceCreatedUser|StartDate|EndDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Resource",
+        "BASE TABLE",
+        "568",
+        "true",
+        "2026-05-25T05:16:34.003Z",
+        "2021-05-14T04:01:46.667Z",
+        "DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ResourceAttribute",
+        "BASE TABLE",
+        "513",
+        "true",
+        "2026-04-28T23:36:07.153Z",
+        "2021-06-03T05:30:28.79Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ResourceAudit",
+        "BASE TABLE",
+        "2064",
+        "true",
+        "2026-05-25T15:08:34.26Z",
+        "2021-03-22T13:38:18.37Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "SqlServerVersions",
+        "BASE TABLE",
+        "350",
+        "true",
+        "2030-01-08T00:00:00Z",
+        "2008-08-06T00:00:00Z",
+        "ReleaseDate|MainstreamSupportEndDate|ExtendedSupportEndDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "SummaryCheck",
+        "BASE TABLE",
+        "0",
+        "false",
+        null,
+        null,
+        "DeltaUTC|CheckDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "TimesheetItem",
+        "BASE TABLE",
+        "406449",
+        "true",
+        "2026-06-09T15:14:35.017Z",
+        "1970-01-19T18:53:22Z",
+        "TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "WorkflowStatus",
+        "BASE TABLE",
+        "88579",
+        "true",
+        "2026-06-09T14:47:26.043Z",
+        "2023-01-02T09:56:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vAssetAudit",
+        "VIEW",
+        "3835764",
+        "true",
+        "2026-06-09T14:26:04.697Z",
+        "2018-09-20T18:04:27.34Z",
+        "Modified|DeltaUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vAssetLocation",
+        "VIEW",
+        "320601",
+        "true",
+        "2026-06-09T04:53:26.937Z",
+        "2019-03-19T04:10:54.793Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vCapitalWork",
+        "VIEW",
+        "1218",
+        "true",
+        "2026-12-18T00:00:00Z",
+        "2019-07-29T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vCapitalWorkTask",
+        "VIEW",
+        "3145",
+        "true",
+        "2026-06-30T23:59:59Z",
+        "2021-05-26T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vInspection",
+        "VIEW",
+        "223496",
+        "true",
+        "2027-06-30T00:00:00Z",
+        "1969-12-31T18:50:10Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|ScheduledDateFrom|ScheduledDateTo|CompletedDate|CompletedUser"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vInspectionStatus",
+        "VIEW",
+        "2734804",
+        "true",
+        "2026-06-09T05:22:34.353Z",
+        "2018-02-14T13:00:18.4Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDateUTC"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vJob",
+        "VIEW",
+        "146849",
+        "true",
+        "2109-03-19T10:08:50.093Z",
+        "2018-02-28T21:41:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vModule",
+        "VIEW",
+        "107",
+        "true",
+        "2026-06-05T03:21:13.79Z",
+        "1969-12-31T23:09:12Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CompletedDate|CreatedDate|CreatedUser|StartPointName|StartDistancePast"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vWorkFlowStatus",
+        "VIEW",
+        "88579",
+        "true",
+        "2026-06-09T14:47:26.043Z",
+        "2023-01-02T09:56:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate"
+      ]
+    ]
+  }
+}

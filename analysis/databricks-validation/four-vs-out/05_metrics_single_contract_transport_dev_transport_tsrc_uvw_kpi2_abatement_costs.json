@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi2_abatement_costs",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi2_abatement_costs' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`minIncidentDate` AS TIMESTAMP)), MAX(try_cast(`maxIncidentDate` AS TIMESTAMP)), MAX(try_cast(`AbatementTriggerDate` AS TIMESTAMP)), MAX(try_cast(`completeddate` AS TIMESTAMP)), MAX(try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP)), MAX(try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP)), MAX(try_cast(`ReportSubmissionDate` AS TIMESTAMP)), MAX(try_cast(`DueDate` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`minIncidentDate` AS TIMESTAMP)), MIN(try_cast(`maxIncidentDate` AS TIMESTAMP)), MIN(try_cast(`AbatementTriggerDate` AS TIMESTAMP)), MIN(try_cast(`completeddate` AS TIMESTAMP)), MIN(try_cast(`TriggeredSectionDetails_-_EndDate` AS TIMESTAMP)), MIN(try_cast(`TriggeredSectionDetails_-_StartDate` AS TIMESTAMP)), MIN(try_cast(`ReportSubmissionDate` AS TIMESTAMP)), MIN(try_cast(`DueDate` AS TIMESTAMP))) AS earliest_observed_ts,\n  'minIncidentDate|maxIncidentDate|AbatementTriggerDate|completeddate|TriggeredSectionDetails_-_EndDate|TriggeredSectionDetails_-_StartDate|ReportSubmissionDate|DueDate' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi2_abatement_costs`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi2_abatement_costs' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

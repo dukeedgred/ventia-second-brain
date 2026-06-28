@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi_7_to_14_its_asset_uptime",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi_7_to_14_its_asset_uptime' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`DeltaUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUTC` AS TIMESTAMP)), MAX(try_cast(`ExportDateUTC` AS TIMESTAMP)), MAX(try_cast(`ModifiedUser` AS TIMESTAMP)), MAX(try_cast(`ConstructionDate` AS TIMESTAMP)), MAX(try_cast(`DisposalDate` AS TIMESTAMP)), MAX(try_cast(`ConditionDate` AS TIMESTAMP)), MAX(try_cast(`constructiondate_date` AS TIMESTAMP)), MAX(try_cast(`evaluation_start_date` AS TIMESTAMP)), MAX(try_cast(`evaluation_end_date` AS TIMESTAMP)), MAX(try_cast(`Date` AS TIMESTAMP)), MAX(try_cast(`Uptime` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`DeltaUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUTC` AS TIMESTAMP)), MIN(try_cast(`ExportDateUTC` AS TIMESTAMP)), MIN(try_cast(`ModifiedUser` AS TIMESTAMP)), MIN(try_cast(`ConstructionDate` AS TIMESTAMP)), MIN(try_cast(`DisposalDate` AS TIMESTAMP)), MIN(try_cast(`ConditionDate` AS TIMESTAMP)), MIN(try_cast(`constructiondate_date` AS TIMESTAMP)), MIN(try_cast(`evaluation_start_date` AS TIMESTAMP)), MIN(try_cast(`evaluation_end_date` AS TIMESTAMP)), MIN(try_cast(`Date` AS TIMESTAMP)), MIN(try_cast(`Uptime` AS TIMESTAMP))) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate|constructiondate_date|evaluation_start_date|evaluation_end_date|Date|Uptime' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi_7_to_14_its_asset_uptime`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi_7_to_14_its_asset_uptime' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

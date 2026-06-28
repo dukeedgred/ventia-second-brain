@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_uvw_controlling_doc_transport",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport' AS schema_name,\n  'uvw_controlling_doc_transport' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`document_date` AS TIMESTAMP)), MAX(try_cast(`posting_date` AS TIMESTAMP)), MAX(try_cast(`document_creation_date` AS TIMESTAMP)), MAX(try_cast(`system_date_time` AS TIMESTAMP)), MAX(try_cast(`ods_created_by` AS TIMESTAMP)), MAX(try_cast(`ods_created_on` AS TIMESTAMP)), MAX(try_cast(`ods_updated_by` AS TIMESTAMP)), MAX(try_cast(`ods_updated_on` AS TIMESTAMP)), MAX(try_cast(`archive_delete_schedule_datetime_AEST` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`document_date` AS TIMESTAMP)), MIN(try_cast(`posting_date` AS TIMESTAMP)), MIN(try_cast(`document_creation_date` AS TIMESTAMP)), MIN(try_cast(`system_date_time` AS TIMESTAMP)), MIN(try_cast(`ods_created_by` AS TIMESTAMP)), MIN(try_cast(`ods_created_on` AS TIMESTAMP)), MIN(try_cast(`ods_updated_by` AS TIMESTAMP)), MIN(try_cast(`ods_updated_on` AS TIMESTAMP)), MIN(try_cast(`archive_delete_schedule_datetime_AEST` AS TIMESTAMP))) AS earliest_observed_ts,\n  'document_date|posting_date|document_creation_date|system_date_time|ods_created_by|ods_created_on|ods_updated_by|ods_updated_on|archive_delete_schedule_datetime_AEST' AS freshness_columns\nFROM `transport_dev`.`transport`.`uvw_controlling_doc_transport`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_controlling_doc_transport' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

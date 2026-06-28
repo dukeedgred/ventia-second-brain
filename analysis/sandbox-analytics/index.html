@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>VentureSmart Bad-Area Analytics</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+    :root {
+      color-scheme: dark;
+      --bg: #12110f;
+      --bg-2: #171916;
+      --panel: #1f2420;
+      --panel-2: #252b26;
+      --ink: #f3f0e8;
+      --muted: #b7b0a3;
+      --line: #3b453c;
+      --line-strong: #566352;
+      --green: #12b76a;
+      --teal: #2dd4bf;
+      --amber: #f79009;
+      --red: #f04438;
+      --plum: #b16cea;
+      --shadow: 0 24px 60px rgba(0, 0, 0, 0.28);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(135deg, rgba(45, 212, 191, 0.08), transparent 36%),
+        linear-gradient(225deg, rgba(247, 144, 9, 0.10), transparent 38%),
+        var(--bg);
+      color: var(--ink);
+    }
+    .page-shell { width: min(1480px, 100%); margin: 0 auto; padding: 28px; }
+    .report-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: start;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 22px;
+    }
+    h1, h2, h3, p { margin-top: 0; }
+    h1 { margin-bottom: 10px; font-size: clamp(2rem, 4vw, 4rem); line-height: 1; letter-spacing: 0; }
+    h2 { margin-bottom: 8px; font-size: 1.05rem; letter-spacing: 0; }
+    h3 { margin-bottom: 8px; font-size: 0.92rem; letter-spacing: 0; }
+    .eyebrow {
+      margin-bottom: 8px;
+      color: var(--teal);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+    .lead { max-width: 880px; color: var(--muted); font-size: 1.02rem; line-height: 1.55; }
+    .source-badge {
+      min-width: 330px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      padding: 16px;
+    }
+    .source-badge span { display: block; color: var(--muted); font-size: 0.74rem; text-transform: uppercase; font-weight: 800; }
+    .source-badge strong { display: block; margin-top: 8px; color: var(--ink); line-height: 1.35; word-break: break-word; }
+    section { margin-top: 18px; }
+    .definition-band, .validation-panel, .map-panel, .table-panel, .root-cause-panel, .sql-panel, .breakdown-grid article {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(31, 36, 32, 0.96);
+      box-shadow: var(--shadow);
+    }
+    .definition-band {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 18px;
+      padding: 20px;
+    }
+    .definition-band p, li, small { color: var(--muted); line-height: 1.5; }
+    code {
+      border: 1px solid var(--line);
+      border-radius: 5px;
+      background: #111713;
+      color: #d8fff7;
+      padding: 1px 5px;
+      white-space: nowrap;
+    }
+    .kpi-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .kpi-card {
+      min-height: 118px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(180deg, #252b26, #1b211d);
+      padding: 16px;
+    }
+    .kpi-card span { display: block; color: var(--muted); font-size: 0.76rem; font-weight: 800; text-transform: uppercase; }
+    .kpi-card strong { display: block; margin: 10px 0 6px; color: #fff8e8; font-size: 2rem; line-height: 1; }
+    .kpi-card small { display: block; }
+    .panel-heading {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 18px 20px 0;
+    }
+    .validation-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 16px;
+      padding: 16px 20px 20px;
+    }
+    .validation-grid ul { margin: 0; padding-left: 18px; }
+    .status-pill, .risk-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      border-radius: 999px;
+      padding: 3px 10px;
+      font-size: 0.78rem;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+    .status-pill.ok, .risk-tag.low { background: rgba(18, 183, 106, 0.15); color: #9ff7c8; }
+    .status-pill.bad, .risk-tag.high { background: rgba(240, 68, 56, 0.16); color: #ffb4ad; }
+    .risk-tag.medium { background: rgba(247, 144, 9, 0.17); color: #ffd28a; }
+    .actual-map-shell {
+      position: relative;
+      margin: 16px 20px 20px;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0b1220;
+    }
+    .actual-map {
+      width: 100%;
+      height: min(68vh, 720px);
+      min-height: 540px;
+      background: #0b1220;
+    }
+    .map-loading-note {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      padding: 24px;
+      background: rgba(11, 18, 32, 0.86);
+      color: var(--muted);
+      text-align: center;
+      pointer-events: none;
+    }
+    .map-loading-note:not(.visible) { display: none; }
+    .leaflet-container { background: #0b1220; color: var(--ink); font: inherit; }
+    .leaflet-control-zoom a,
+    .leaflet-control-attribution {
+      border-color: var(--line) !important;
+      background: rgba(17, 23, 19, 0.92) !important;
+      color: var(--ink) !important;
+    }
+    .leaflet-control-zoom a:hover { background: rgba(37, 43, 38, 0.98) !important; }
+    .leaflet-popup-content-wrapper,
+    .leaflet-popup-tip {
+      border: 1px solid var(--line);
+      background: #17201b;
+      color: var(--ink);
+      box-shadow: var(--shadow);
+    }
+    .leaflet-popup-content { margin: 12px; min-width: 230px; }
+    .leaflet-popup-content strong { display: block; margin-bottom: 8px; color: #fff8e8; }
+    .map-popup-grid {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 6px 12px;
+      color: var(--muted);
+      font-size: 0.82rem;
+    }
+    .map-popup-grid b { color: var(--ink); text-align: right; word-break: break-word; }
+    .breakdown-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .breakdown-grid article { padding: 18px 20px; }
+    .panel-note {
+      max-width: 920px;
+      margin: 8px 0 0;
+      color: var(--muted);
+      line-height: 1.5;
+      font-size: 0.92rem;
+    }
+    .root-cause-list {
+      display: grid;
+      gap: 14px;
+      padding: 16px 20px 20px;
+    }
+    .root-cause-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(17, 23, 19, 0.72);
+    }
+    .root-cause-top {
+      display: flex;
+      align-items: start;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 16px 0;
+    }
+    .root-cause-top h3 { margin-bottom: 6px; color: #fff8e8; }
+    .root-cause-top p { margin-bottom: 0; color: var(--muted); line-height: 1.5; }
+    .count-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 8px; }
+    .count-list li { display: flex; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); padding-bottom: 8px; }
+    .count-list b { color: var(--ink); }
+    .table-wrap { overflow-x: auto; padding: 14px 20px 20px; }
+    .table-wrap.compact { padding: 12px 16px 16px; }
+    table { width: 100%; min-width: 1040px; border-collapse: collapse; }
+    th, td { border-bottom: 1px solid var(--line); padding: 12px 10px; text-align: left; vertical-align: top; }
+    th { color: var(--muted); font-size: 0.74rem; font-weight: 800; text-transform: uppercase; }
+    td { color: #ece8dd; font-size: 0.88rem; }
+    td small { display: block; margin-top: 4px; font-size: 0.78rem; }
+    tr:hover { background: rgba(45, 212, 191, 0.05); }
+    .mini-table { min-width: 0; }
+    pre {
+      margin: 16px 20px 20px;
+      max-height: 360px;
+      overflow: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #0f1411;
+      padding: 16px;
+    }
+    pre code { border: 0; background: transparent; padding: 0; white-space: pre; color: #e8fff8; }
+    @media (max-width: 980px) {
+      .page-shell { padding: 18px; }
+      .report-header, .definition-band, .validation-grid, .breakdown-grid { grid-template-columns: 1fr; }
+      .root-cause-top { display: grid; }
+      .source-badge { min-width: 0; }
+      .kpi-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 620px) {
+      .kpi-grid { grid-template-columns: 1fr; }
+      h1 { font-size: 2rem; }
+    }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="report-header">
+        <div>
+          <p class="eyebrow">Python-generated source-table analytics</p>
+          <h1>VentureSmart bad-area report</h1>
+          <p class="lead">
+            This report uses <code>ext_mssql_asset_vision_vsm_gen7.dbo.vjob</code> fields only. Python validates the query shape and
+            row output, then groups bad jobs by location, asset type, issue signature, reference points,
+            direction, and chainage. A job is bad when it is non-compliant or overdue.
+          </p>
+        </div>
+        <div class="source-badge">
+          <span>Selected contract</span>
+          <strong>VentureSmart | Western Australia</strong>
+          <span style="margin-top:14px">Generated</span>
+          <strong>2026-06-09 15:38</strong>
+        </div>
+      </header>
+
+      <section class="definition-band">
+        <article>
+          <p class="eyebrow">Bad-area definition</p>
+          <h2>High-risk source-table clusters</h2>
+          <p>
+            Bad areas are grouped from <code>Area</code> or reference-point fields in <code>vjob</code>.
+            The report avoids curated Transport tables and does not assert an SLA threshold that is not in
+            the source documentation.
+          </p>
+        </article>
+        <article>
+          <p class="eyebrow">Granularity added</p>
+          <h2>Asset and location fields are now first-class</h2>
+          <p>
+            The SQL and report now include <code>AssetTypeName</code>, <code>Section</code>,
+            <code>Direction</code>, <code>ReferencePointName</code>, <code>EndReferencePointName</code>,
+            <code>ChainageFrom</code>, and <code>ChainageTo</code>.
+          </p>
+        </article>
+      </section>
+
+      
+      <section class="validation-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Query and output validation</p>
+            <h2>Validation passed</h2>
+          </div>
+          <span class="status-pill ok">offline_sample</span>
+        </div>
+        <div class="validation-grid">
+          <div>
+            <h3>What I checked</h3>
+            <ul><li>All expected source-query columns are present in the output rows.</li><li>Granular asset, issue, and location fields are populated on every row.</li><li>Every row matches Contract = VentureSmart.</li><li>Every row matches Region = Western Australia.</li><li>Every row has parseable POINT WKT for map and location checks.</li><li>15 rows qualify as bad using overdue or non-compliant logic.</li><li>SQL selected all required columns: yes</li></ul>
+          </div>
+          <div>
+            <h3>Warnings</h3>
+            <ul><li>Live Databricks execution was not used; validation ran against source-shaped prototype rows.</li></ul>
+          </div>
+          <div>
+            <h3>Failures</h3>
+            <ul><li>No failures.</li></ul>
+          </div>
+          <div>
+            <h3>SQL safeguards</h3>
+            <table class="mini-table"><tbody><tr><td>Source Table</td><td>Passed</td></tr><tr><td>Contract Filter</td><td>Passed</td></tr><tr><td>Region Filter</td><td>Passed</td></tr><tr><td>Wkt Filter</td><td>Passed</td></tr><tr><td>Deleted Filter</td><td>Passed</td></tr></tbody></table>
+          </div>
+        </div>
+      </section>
+    
+      <section class="kpi-grid">
+        <article class="kpi-card">
+          <span>Rows validated</span>
+          <strong>22</strong>
+          <small>offline_sample output</small>
+        </article>
+        
+        <article class="kpi-card">
+          <span>Bad jobs</span>
+          <strong>15</strong>
+          <small>68% of validated jobs</small>
+        </article>
+        
+        <article class="kpi-card">
+          <span>Bad locations</span>
+          <strong>3</strong>
+          <small>Grouped by Area/reference points</small>
+        </article>
+        
+        <article class="kpi-card">
+          <span>Asset types</span>
+          <strong>1</strong>
+          <small>From AssetTypeName</small>
+        </article>
+        
+        <article class="kpi-card">
+          <span>Next-month risk</span>
+          <strong>4.5</strong>
+          <small>Bad jobs, low confidence</small>
+        </article>
+        </section>
+      
+      <section class="map-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Actual map</p>
+            <h2>Bad-area jobs on a dark street basemap</h2>
+          </div>
+        </div>
+        <div class="actual-map-shell">
+          <div id="actual-bad-area-map" class="actual-map" role="img" aria-label="Actual street map with bad-area jobs"></div>
+          <div class="map-loading-note" id="map-loading-note">Loading dark street map tiles...</div>
+        </div>
+        <script type="application/json" id="bad-area-map-data">[{"location": "South St / Benningfield Rd", "lat": -32.06144444444445, "lon": 115.85144444444444, "bad_jobs": 8, "total_jobs": 9, "bad_rate": 0.8888888888888888, "risk_band": "high", "top_asset_type": "CCTV camera", "top_issue": "PMCC.PM | Preventative Maintenance", "reference": "South St", "end_reference": "Benningfield Rd", "chainage_from": 1200.0, "chainage_to": 1240.0, "jobs": [{"id": 38383, "lat": -32.061, "lon": 115.85, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1200, "chainage_to": 1212, "days_late": 4, "reason": "Non-compliant, Completed late"}, {"id": 38391, "lat": -32.063, "lon": 115.846, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1214, "chainage_to": 1226, "days_late": 5, "reason": "Non-compliant, Completed late"}, {"id": 38402, "lat": -32.06, "lon": 115.856, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1221, "chainage_to": 1233, "days_late": 5, "reason": "Non-compliant, Completed late"}, {"id": 38416, "lat": -32.064, "lon": 115.858, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1228, "chainage_to": 1240, "days_late": 5, "reason": "Non-compliant, Completed late"}, {"id": 38429, "lat": -32.066, "lon": 115.851, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1200, "chainage_to": 1212, "days_late": 5, "reason": "Completed late"}, {"id": 38437, "lat": -32.059, "lon": 115.849, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1207, "chainage_to": 1219, "days_late": 8, "reason": "Non-compliant, Completed late"}, {"id": 38445, "lat": -32.057, "lon": 115.854, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1214, "chainage_to": 1226, "days_late": 13, "reason": "Non-compliant, Completed late"}, {"id": 38451, "lat": -32.065, "lon": 115.847, "asset_code": "CCTV00070", "asset_name": "South St and Benningfield Rd (East Bound)", "asset_type": "CCTV camera", "issue": "PMCC.PM | Preventative Maintenance", "location": "South St / Benningfield Rd", "direction": "East Bound", "chainage_from": 1221, "chainage_to": 1233, "days_late": 53, "reason": "Non-compliant, Open overdue"}]}, {"location": "Stock Rd / Leach Hwy", "lat": -32.04357142857143, "lon": 115.79228571428573, "bad_jobs": 4, "total_jobs": 7, "bad_rate": 0.5714285714285714, "risk_band": "medium", "top_asset_type": "CCTV camera", "top_issue": "PMES.PM | Preventative Maintenance", "reference": "Stock Rd", "end_reference": "Leach Hwy", "chainage_from": 2140.0, "chainage_to": 2180.0, "jobs": [{"id": 38384, "lat": -32.043, "lon": 115.792, "asset_code": "CCTV00076", "asset_name": "Stock Rd and Leach Hwy (West Bound)", "asset_type": "CCTV camera", "issue": "PMES.PM | Preventative Maintenance", "location": "Stock Rd / Leach Hwy", "direction": "West Bound", "chainage_from": 2168, "chainage_to": 2180, "days_late": 2, "reason": "Non-compliant, Completed late"}, {"id": 38397, "lat": -32.046, "lon": 115.789, "asset_code": "CCTV00076", "asset_name": "Stock Rd and Leach Hwy (West Bound)", "asset_type": "CCTV camera", "issue": "PMES.PM | Preventative Maintenance", "location": "Stock Rd / Leach Hwy", "direction": "West Bound", "chainage_from": 2147, "chainage_to": 2159, "days_late": 4, "reason": "Non-compliant, Completed late"}, {"id": 38419, "lat": -32.039, "lon": 115.791, "asset_code": "CCTV00076", "asset_name": "Stock Rd and Leach Hwy (West Bound)", "asset_type": "CCTV camera", "issue": "PMES.PM | Preventative Maintenance", "location": "Stock Rd / Leach Hwy", "direction": "West Bound", "chainage_from": 2161, "chainage_to": 2173, "days_late": 8, "reason": "Non-compliant, Completed late"}, {"id": 38447, "lat": -32.044, "lon": 115.788, "asset_code": "CCTV00076", "asset_name": "Stock Rd and Leach Hwy (West Bound)", "asset_type": "CCTV camera", "issue": "PMES.PM | Preventative Maintenance", "location": "Stock Rd / Leach Hwy", "direction": "West Bound", "chainage_from": 2140, "chainage_to": 2152, "days_late": 6, "reason": "Non-compliant, Completed late"}]}, {"location": "Roe Hwy / Orrong Rd", "lat": -31.975333333333335, "lon": 115.94566666666667, "bad_jobs": 3, "total_jobs": 6, "bad_rate": 0.5, "risk_band": "medium", "top_asset_type": "CCTV camera", "top_issue": "PMHP.PM | Preventative Maintenance", "reference": "Roe Hwy", "end_reference": "Orrong Rd", "chainage_from": 3380.0, "chainage_to": 3420.0, "jobs": [{"id": 38393, "lat": -31.976, "lon": 115.949, "asset_code": "CCTV00078", "asset_name": "Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)", "asset_type": "CCTV camera", "issue": "PMHP.PM | Preventative Maintenance", "location": "Roe Hwy / Orrong Rd", "direction": "North Bound", "chainage_from": 3394, "chainage_to": 3406, "days_late": 4, "reason": "Non-compliant, Completed late"}, {"id": 38418, "lat": -31.978, "lon": 115.952, "asset_code": "CCTV00078", "asset_name": "Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)", "asset_type": "CCTV camera", "issue": "PMHP.PM | Preventative Maintenance", "location": "Roe Hwy / Orrong Rd", "direction": "North Bound", "chainage_from": 3408, "chainage_to": 3420, "days_late": 8, "reason": "Non-compliant, Completed late"}, {"id": 38435, "lat": -31.97, "lon": 115.947, "asset_code": "CCTV00078", "asset_name": "Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)", "asset_type": "CCTV camera", "issue": "PMHP.PM | Preventative Maintenance", "location": "Roe Hwy / Orrong Rd", "direction": "North Bound", "chainage_from": 3380, "chainage_to": 3392, "days_late": 2, "reason": "Non-compliant, Completed late"}]}]</script>
+        <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+        <script>
+          (() => {
+            const payload = JSON.parse(document.getElementById("bad-area-map-data").textContent);
+            const note = document.getElementById("map-loading-note");
+            const colours = { high: "#f04438", medium: "#f79009", low: "#12b76a" };
+            const h = (value) =>
+              String(value ?? "n/a")
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;")
+                .replaceAll('"', "&quot;")
+                .replaceAll("'", "&#039;");
+            const mapEl = document.getElementById("actual-bad-area-map");
+            if (!window.L) {
+              note.textContent = "The actual map needs browser internet access to load Leaflet and dark map tiles.";
+              note.classList.add("visible");
+              return;
+            }
+            const map = L.map(mapEl, {
+              scrollWheelZoom: true,
+              zoomControl: true,
+              attributionControl: true,
+            });
+            L.tileLayer("https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png", {
+              maxZoom: 19,
+              attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            }).addTo(map);
+
+            const bounds = [];
+            payload.forEach((area) => {
+              const colour = colours[area.risk_band] || colours.low;
+              const areaPoint = [area.lat, area.lon];
+              bounds.push(areaPoint);
+              const radius = 90 + area.bad_jobs * 24;
+              L.circle(areaPoint, {
+                radius,
+                color: colour,
+                weight: 2,
+                fillColor: colour,
+                fillOpacity: 0.24,
+              })
+                .bindPopup(`
+                  <strong>${h(area.location)}</strong>
+                  <div class="map-popup-grid">
+                    <span>Bad jobs</span><b>${h(area.bad_jobs)} / ${h(area.total_jobs)}</b>
+                    <span>Asset type</span><b>${h(area.top_asset_type)}</b>
+                    <span>Issue</span><b>${h(area.top_issue)}</b>
+                    <span>Reference</span><b>${h(area.reference)} to ${h(area.end_reference)}</b>
+                    <span>Chainage</span><b>${h(area.chainage_from)} to ${h(area.chainage_to)}</b>
+                  </div>
+                `)
+                .addTo(map);
+
+              area.jobs.forEach((job) => {
+                if (job.lat === null || job.lon === null) return;
+                const marker = L.circleMarker([job.lat, job.lon], {
+                  radius: job.days_late >= 7 ? 7 : 5,
+                  color: "#0b1220",
+                  weight: 2,
+                  fillColor: colour,
+                  fillOpacity: 0.95,
+                });
+                marker
+                  .bindPopup(`
+                    <strong>Job ${h(job.id)}</strong>
+                    <div class="map-popup-grid">
+                      <span>Reason</span><b>${h(job.reason)}</b>
+                      <span>Asset</span><b>${h(job.asset_code)}</b>
+                      <span>Asset type</span><b>${h(job.asset_type)}</b>
+                      <span>Issue</span><b>${h(job.issue)}</b>
+                      <span>Direction</span><b>${h(job.direction)}</b>
+                      <span>Chainage</span><b>${h(job.chainage_from)} to ${h(job.chainage_to)}</b>
+                    </div>
+                  `)
+                  .addTo(map);
+                bounds.push([job.lat, job.lon]);
+              });
+            });
+            if (bounds.length) map.fitBounds(bounds, { padding: [26, 26], maxZoom: 14 });
+            note.style.display = "none";
+          })();
+        </script>
+      </section>
+    
+      
+      <section class="table-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Granular issue and location matrix</p>
+            <h2>Where the bad work is concentrated</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Location</th>
+                <th>Asset type</th>
+                <th>Issue signature</th>
+                <th>Direction</th>
+                <th>Reference points</th>
+                <th>Chainage</th>
+                <th>Bad jobs</th>
+                <th>Bad rate</th>
+                <th>Avg days late</th>
+                <th>Trend</th>
+              </tr>
+            </thead>
+            <tbody>
+        <tr>
+          <td><b>South St / Benningfield Rd</b><small>Perth metropolitan ITS</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>East Bound</td>
+          <td>South St to Benningfield Rd</td>
+          <td>1200 to 1240</td>
+          <td><span class="risk-tag high">8 / 9</span></td>
+          <td>89%</td>
+          <td>12.2</td>
+          <td>Flat or noisy</td>
+        </tr>
+        
+        <tr>
+          <td><b>Stock Rd / Leach Hwy</b><small>Fremantle corridor ITS</small></td>
+          <td>CCTV camera</td>
+          <td>PMES.PM | Preventative Maintenance</td>
+          <td>West Bound</td>
+          <td>Stock Rd to Leach Hwy</td>
+          <td>2140 to 2180</td>
+          <td><span class="risk-tag medium">4 / 7</span></td>
+          <td>57%</td>
+          <td>5.0</td>
+          <td>Flat or noisy</td>
+        </tr>
+        
+        <tr>
+          <td><b>Roe Hwy / Orrong Rd</b><small>Roe Highway ITS</small></td>
+          <td>CCTV camera</td>
+          <td>PMHP.PM | Preventative Maintenance</td>
+          <td>North Bound</td>
+          <td>Roe Hwy to Orrong Rd</td>
+          <td>3380 to 3420</td>
+          <td><span class="risk-tag medium">3 / 6</span></td>
+          <td>50%</td>
+          <td>4.7</td>
+          <td>Flat or noisy</td>
+        </tr>
+        </tbody>
+          </table>
+        </div>
+      </section>
+    
+      
+      <section class="breakdown-grid">
+        <article>
+          <p class="eyebrow">Issue detail</p>
+          <h2>Bad jobs by hazard/activity</h2>
+          <ul class="count-list"><li><span>PMCC.PM | Preventative Maintenance</span><b>8</b></li><li><span>PMES.PM | Preventative Maintenance</span><b>4</b></li><li><span>PMHP.PM | Preventative Maintenance</span><b>3</b></li></ul>
+        </article>
+        <article>
+          <p class="eyebrow">Asset detail</p>
+          <h2>Bad jobs by AssetTypeName</h2>
+          <ul class="count-list"><li><span>CCTV camera</span><b>15</b></li></ul>
+        </article>
+      </section>
+    
+      
+      <section class="root-cause-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Root-cause driver analysis</p>
+            <h2>Over-indexed factors associated with poor performance</h2>
+            <p class="panel-note">
+              These are associated drivers, not proven causes. Lift compares the driver's bad-outcome share
+              in the bad area with the same driver's bad-outcome share across the selected contract.
+            </p>
+          </div>
+        </div>
+        <div class="root-cause-list">
+            <article class="root-cause-card">
+              <div class="root-cause-top">
+                <div>
+                  <h3>South St / Benningfield Rd</h3>
+                  <p>Direction = East Bound is the strongest associated driver. It accounts for 100% of bad outcomes in this area and is 1.9x over the selected-contract bad-outcome share. Operational action: Review direction-specific access, traffic management, or asset-condition constraints.</p>
+                </div>
+                <span class="risk-tag high">8 bad outcomes</span>
+              </div>
+              <div class="table-wrap compact">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Driver</th>
+                      <th>Driver value</th>
+                      <th>Bad outcome count</th>
+                      <th>Share of bad outcomes</th>
+                      <th>Bad outcome rate</th>
+                      <th>Lift vs contract bad share</th>
+                      <th>Interpretation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td>Direction</td>
+                  <td>East Bound</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Review direction-specific access, traffic management, or asset-condition constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>End reference point</td>
+                  <td>Benningfield Rd</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Inspect this endpoint for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Fault category</td>
+                  <td>PMCC.PM</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Check whether this fault category needs targeted inspection, coding cleanup, or intervention planning.</td>
+                </tr>
+                
+                <tr>
+                  <td>Job type</td>
+                  <td>CCTV planned maintenance</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Review the method pack and due-date assumptions for this job type.</td>
+                </tr>
+                
+                <tr>
+                  <td>Reference point</td>
+                  <td>South St</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Inspect this reference point for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Section</td>
+                  <td>Perth metropolitan ITS</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Field-check this section for access constraints, repeat defects, or local delivery constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Work category</td>
+                  <td>ITS maintenance</td>
+                  <td>8</td>
+                  <td>100%</td>
+                  <td>89%</td>
+                  <td>1.9x</td>
+                  <td>Over-indexed factor and worse-than-baseline bad outcome rate; likely contributor to investigate, not proven cause. Review work-pack design, scheduling rules, and crew capacity for this category.</td>
+                </tr>
+                </tbody>
+                </table>
+              </div>
+            </article>
+            
+            <article class="root-cause-card">
+              <div class="root-cause-top">
+                <div>
+                  <h3>Stock Rd / Leach Hwy</h3>
+                  <p>Direction = West Bound is the strongest associated driver. It accounts for 100% of bad outcomes in this area and is 3.8x over the selected-contract bad-outcome share. Operational action: Review direction-specific access, traffic management, or asset-condition constraints.</p>
+                </div>
+                <span class="risk-tag medium">4 bad outcomes</span>
+              </div>
+              <div class="table-wrap compact">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Driver</th>
+                      <th>Driver value</th>
+                      <th>Bad outcome count</th>
+                      <th>Share of bad outcomes</th>
+                      <th>Bad outcome rate</th>
+                      <th>Lift vs contract bad share</th>
+                      <th>Interpretation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td>Direction</td>
+                  <td>West Bound</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review direction-specific access, traffic management, or asset-condition constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>End reference point</td>
+                  <td>Leach Hwy</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Inspect this endpoint for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Fault category</td>
+                  <td>PMES.PM</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Check whether this fault category needs targeted inspection, coding cleanup, or intervention planning.</td>
+                </tr>
+                
+                <tr>
+                  <td>Job type</td>
+                  <td>CCTV electrical service</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review the method pack and due-date assumptions for this job type.</td>
+                </tr>
+                
+                <tr>
+                  <td>Reference point</td>
+                  <td>Stock Rd</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Inspect this reference point for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Section</td>
+                  <td>Fremantle corridor ITS</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Field-check this section for access constraints, repeat defects, or local delivery constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Work category</td>
+                  <td>Electrical systems maintenance</td>
+                  <td>4</td>
+                  <td>100%</td>
+                  <td>57%</td>
+                  <td>3.8x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review work-pack design, scheduling rules, and crew capacity for this category.</td>
+                </tr>
+                </tbody>
+                </table>
+              </div>
+            </article>
+            
+            <article class="root-cause-card">
+              <div class="root-cause-top">
+                <div>
+                  <h3>Roe Hwy / Orrong Rd</h3>
+                  <p>Direction = North Bound is the strongest associated driver. It accounts for 100% of bad outcomes in this area and is 5.0x over the selected-contract bad-outcome share. Operational action: Review direction-specific access, traffic management, or asset-condition constraints.</p>
+                </div>
+                <span class="risk-tag medium">3 bad outcomes</span>
+              </div>
+              <div class="table-wrap compact">
+                <table>
+                  <thead>
+                    <tr>
+                      <th>Driver</th>
+                      <th>Driver value</th>
+                      <th>Bad outcome count</th>
+                      <th>Share of bad outcomes</th>
+                      <th>Bad outcome rate</th>
+                      <th>Lift vs contract bad share</th>
+                      <th>Interpretation</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                <tr>
+                  <td>Direction</td>
+                  <td>North Bound</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review direction-specific access, traffic management, or asset-condition constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>End reference point</td>
+                  <td>Orrong Rd</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Inspect this endpoint for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Fault category</td>
+                  <td>PMHP.PM</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Check whether this fault category needs targeted inspection, coding cleanup, or intervention planning.</td>
+                </tr>
+                
+                <tr>
+                  <td>Job type</td>
+                  <td>CCTV health check</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review the method pack and due-date assumptions for this job type.</td>
+                </tr>
+                
+                <tr>
+                  <td>Reference point</td>
+                  <td>Roe Hwy</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Inspect this reference point for repeat work, access issues, or location-specific constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Section</td>
+                  <td>Roe Highway ITS</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Field-check this section for access constraints, repeat defects, or local delivery constraints.</td>
+                </tr>
+                
+                <tr>
+                  <td>Work category</td>
+                  <td>High-priority ITS maintenance</td>
+                  <td>3</td>
+                  <td>100%</td>
+                  <td>50%</td>
+                  <td>5.0x</td>
+                  <td>Over-indexed factor in this bad area; likely contributor to investigate, not proven cause. Review work-pack design, scheduling rules, and crew capacity for this category.</td>
+                </tr>
+                </tbody>
+                </table>
+              </div>
+            </article>
+            </div>
+      </section>
+    
+      
+      <section class="table-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Specific issues</p>
+            <h2>Bad job detail with asset type and location fields</h2>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Job</th>
+                <th>Asset</th>
+                <th>Asset type</th>
+                <th>Issue</th>
+                <th>Location</th>
+                <th>Direction</th>
+                <th>Chainage</th>
+                <th>Due</th>
+                <th>Completed</th>
+                <th>Days late</th>
+              </tr>
+            </thead>
+            <tbody>
+        <tr>
+          <td><b>38451</b><small>Non-compliant, Open overdue</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1221 to 1233</td>
+          <td>2022-06-08</td>
+          <td>Open</td>
+          <td>53</td>
+        </tr>
+        
+        <tr>
+          <td><b>38445</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1214 to 1226</td>
+          <td>2022-05-27</td>
+          <td>2022-06-09</td>
+          <td>13</td>
+        </tr>
+        
+        <tr>
+          <td><b>38418</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00078<small>Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMHP.PM | Preventative Maintenance</td>
+          <td>Roe Hwy / Orrong Rd<small>Roe Hwy to Orrong Rd</small></td>
+          <td>North Bound</td>
+          <td>3408 to 3420</td>
+          <td>2022-04-13</td>
+          <td>2022-04-21</td>
+          <td>8</td>
+        </tr>
+        
+        <tr>
+          <td><b>38419</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00076<small>Stock Rd and Leach Hwy (West Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMES.PM | Preventative Maintenance</td>
+          <td>Stock Rd / Leach Hwy<small>Stock Rd to Leach Hwy</small></td>
+          <td>West Bound</td>
+          <td>2161 to 2173</td>
+          <td>2022-04-15</td>
+          <td>2022-04-23</td>
+          <td>8</td>
+        </tr>
+        
+        <tr>
+          <td><b>38437</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1207 to 1219</td>
+          <td>2022-05-09</td>
+          <td>2022-05-17</td>
+          <td>8</td>
+        </tr>
+        
+        <tr>
+          <td><b>38447</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00076<small>Stock Rd and Leach Hwy (West Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMES.PM | Preventative Maintenance</td>
+          <td>Stock Rd / Leach Hwy<small>Stock Rd to Leach Hwy</small></td>
+          <td>West Bound</td>
+          <td>2140 to 2152</td>
+          <td>2022-06-03</td>
+          <td>2022-06-09</td>
+          <td>6</td>
+        </tr>
+        
+        <tr>
+          <td><b>38391</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1214 to 1226</td>
+          <td>2022-02-23</td>
+          <td>2022-02-28</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><b>38402</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1221 to 1233</td>
+          <td>2022-03-14</td>
+          <td>2022-03-19</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><b>38416</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1228 to 1240</td>
+          <td>2022-04-07</td>
+          <td>2022-04-12</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><b>38429</b><small>Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1200 to 1212</td>
+          <td>2022-04-21</td>
+          <td>2022-04-26</td>
+          <td>5</td>
+        </tr>
+        
+        <tr>
+          <td><b>38383</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00070<small>South St and Benningfield Rd (East Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMCC.PM | Preventative Maintenance</td>
+          <td>South St / Benningfield Rd<small>South St to Benningfield Rd</small></td>
+          <td>East Bound</td>
+          <td>1200 to 1212</td>
+          <td>2022-01-21</td>
+          <td>2022-01-25</td>
+          <td>4</td>
+        </tr>
+        
+        <tr>
+          <td><b>38393</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00078<small>Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMHP.PM | Preventative Maintenance</td>
+          <td>Roe Hwy / Orrong Rd<small>Roe Hwy to Orrong Rd</small></td>
+          <td>North Bound</td>
+          <td>3394 to 3406</td>
+          <td>2022-02-20</td>
+          <td>2022-02-24</td>
+          <td>4</td>
+        </tr>
+        
+        <tr>
+          <td><b>38397</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00076<small>Stock Rd and Leach Hwy (West Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMES.PM | Preventative Maintenance</td>
+          <td>Stock Rd / Leach Hwy<small>Stock Rd to Leach Hwy</small></td>
+          <td>West Bound</td>
+          <td>2147 to 2159</td>
+          <td>2022-03-01</td>
+          <td>2022-03-05</td>
+          <td>4</td>
+        </tr>
+        
+        <tr>
+          <td><b>38384</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00076<small>Stock Rd and Leach Hwy (West Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMES.PM | Preventative Maintenance</td>
+          <td>Stock Rd / Leach Hwy<small>Stock Rd to Leach Hwy</small></td>
+          <td>West Bound</td>
+          <td>2168 to 2180</td>
+          <td>2022-01-18</td>
+          <td>2022-01-20</td>
+          <td>2</td>
+        </tr>
+        
+        <tr>
+          <td><b>38435</b><small>Non-compliant, Completed late</small></td>
+          <td>CCTV00078<small>Roe Hwy and Rivervale Wattle Grove Link (Orrong Rd) (North Bound)</small></td>
+          <td>CCTV camera</td>
+          <td>PMHP.PM | Preventative Maintenance</td>
+          <td>Roe Hwy / Orrong Rd<small>Roe Hwy to Orrong Rd</small></td>
+          <td>North Bound</td>
+          <td>3380 to 3392</td>
+          <td>2022-05-22</td>
+          <td>2022-05-24</td>
+          <td>2</td>
+        </tr>
+        </tbody>
+          </table>
+        </div>
+      </section>
+    
+      
+      <section class="sql-panel">
+        <div class="panel-heading">
+          <div>
+            <p class="eyebrow">Validated source query</p>
+            <h2>Databricks SQL extract</h2>
+          </div>
+        </div>
+        <pre><code>-- Source-table-only extract template for the VentureSmart bad-area prototype.
+-- This intentionally avoids curated Transport tables.
+
+SELECT
+  ID,
+  Contract,
+  Region,
+  AssetID,
+  AssetCode,
+  AssetName,
+  AssetTypeName,
+  Section,
+  Area,
+  Classification,
+  HazardDefectCode,
+  HazardCode,
+  ActivityCategoryName,
+  ActivityName,
+  ActivityType,
+  InterventionName,
+  Priority,
+  CreatedDate,
+  DueDate,
+  ScheduledStart,
+  ScheduledEnd,
+  CompletedDate,
+  CompletedStatus,
+  Compliant,
+  MadeSafe,
+  MadeSafeDateUTC,
+  CurrentWorkflowItemCode,
+  CurrentWorkflowItemName,
+  MergedJobID,
+  LinkedJobID,
+  EstimatedQuantity,
+  ActualQuantity,
+  RemainingQuantity,
+  EstimatedLength,
+  EstimatedWidth,
+  EstimatedDepth,
+  Direction,
+  ReferencePointTypeName,
+  ReferencePointName,
+  EndReferencePointTypeName,
+  EndReferencePointName,
+  ChainageFrom,
+  ChainageTo,
+  DistancePast,
+  EndDistancePast,
+  Unit,
+  Reference1,
+  Reference2,
+  Comments,
+  WKT
+FROM ext_mssql_asset_vision_vsm_gen7.dbo.vjob
+WHERE COALESCE(Deleted, false) = false
+  AND Contract = &#x27;VentureSmart&#x27;
+  AND Region = &#x27;Western Australia&#x27;
+  AND WKT IS NOT NULL;</code></pre>
+      </section>
+    
+    </main>
+  </body>
+</html>

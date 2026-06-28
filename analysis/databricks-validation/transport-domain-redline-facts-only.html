@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="en-AU">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Transport Data Asset Domains - Facts Only Redline</title>
+  <style>
+    body {
+      max-width: 980px;
+      margin: 32px auto;
+      padding: 0 24px 48px;
+      color: #1f2937;
+      font-family: Arial, sans-serif;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin: 0 0 24px;
+    }
+
+    h2 {
+      font-size: 19px;
+      margin: 24px 0 8px;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    ul {
+      margin: 8px 0 18px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 7px 0;
+    }
+
+    .changed {
+      color: #b42318;
+      font-weight: 600;
+    }
+
+    .removed {
+      color: #b42318;
+      text-decoration: line-through;
+      font-weight: 600;
+    }
+
+    .note {
+      margin: 0 0 22px;
+      padding: 10px 12px;
+      border-left: 4px solid #b42318;
+      background: #fff1f0;
+      color: #7a271a;
+    }
+  </style>
+</head>
+<body>
+  <h1>High-level domains for the Transport data asset</h1>
+  <p class="note">Red text is factual correction or validation status. Red strikethrough is wording not supported by the current table documentation or the Databricks source-table validation run.</p>
+
+  <h2>1. Contract &amp; Network context (the spine everything hangs off)</h2>
+  <ul>
+    <li>
+      Contract (<span class="changed">source-validated examples: WRU, SRAP-C, TSRC, RAMC Gen2, Brisbane Airport, Port of Brisbane, SHT/WHT, Auckland West Transport, VentureSmart</span>;
+      <span class="removed">VRMC, NEL and City Harbour were not found in the validated Asset Vision source catalogues</span>), business unit, client,
+      <span class="changed">operational status/stage fields where present</span>
+      <span class="removed">Bid -> Mobilise -> Plan -> Inspect -> Renew -> Report was not validated as a source-table lifecycle structure</span>,
+      contract type (roads vs tunnel),
+      <span class="removed">commercial model as a source-table-validated driver of item-level data was not found</span>.
+    </li>
+    <li>
+      Network / route / segment / linear referencing:
+      <span class="changed">source tables contain asset hierarchy, WKT/spatial information and chainage fields where populated</span>.
+    </li>
+  </ul>
+
+  <h2>2. Asset register &amp; hierarchy (your "hierarchy of assets and their properties")</h2>
+  <ul>
+    <li>
+      Parent asset:
+      <span class="changed">parent asset hierarchy is source-backed</span>;
+      <span class="removed">Road or Tunnel as the universal parent asset was not validated</span>.
+    </li>
+    <li>
+      Child asset categories: pavements, drainage (pits, lines), vehicle barriers/guardrails, signage, bridges, culverts, lighting, jet fans (tunnels), etc.
+      <span class="changed">Asset categories vary by contract/catalogue.</span>
+    </li>
+    <li>
+      Per-asset attributes: ID, type, sub-type, location/geometry, dimensions, material, install date, status,
+      <span class="changed">parent asset, WKT/spatial information and chainage where populated</span>.
+      <span class="removed">Ownership categories of ours vs disputed vs client's were not validated.</span>
+      <span class="changed">Handover/practical completion and as-built mismatch references were found in source forms.</span>
+      <span class="removed">AI-detected as asset provenance was not validated; AI Defect ID was found in defect/job-related source data.</span>
+    </li>
+    <li>
+      Asset condition:
+      <span class="changed">condition fields exist, but population varies by contract/catalogue.</span>
+      <span class="removed">A globally populated 1-5 condition scale was not validated.</span>
+    </li>
+  </ul>
+
+  <h2>3. Inspections (separate from defects)</h2>
+  <ul>
+    <li>
+      Scheduled inspection runs:
+      <span class="changed">inspection tables/views contain scheduled and completed dates where populated; coverage varies by contract/catalogue.</span>
+    </li>
+    <li>
+      Inspection record: who, when, what route covered, method
+      <span class="changed">(inspection/form/tunnel maintenance or event records are present in source tables)</span>,
+      evidence (imagery, photos, video, GPS trail
+      <span class="changed">where populated</span>).
+      <span class="removed">RetinaVision, AID camera inspections and dash-cam capture intervals were not validated in the source tables.</span>
+    </li>
+    <li>
+      Link to assets observed and condition assessments made:
+      <span class="changed">inspection records include asset links, job links, capital-work links and WKT where populated; coverage varies by contract/catalogue.</span>
+    </li>
+  </ul>
+
+  <h2>4. Defects &amp; Hazards (one model, severity-flagged)</h2>
+  <ul>
+    <li>
+      Raised from: inspection, public report, incidental observation
+      <span class="changed">where captured in source forms/fields</span>.
+      <span class="removed">AID alert as a validated source-table trigger was not found.</span>
+    </li>
+    <li>
+      Attributes: asset link, defect type / hazard-defect code, severity/hazard level
+      <span class="changed">where populated</span>, photo evidence, raised by, raised at, location/WKT.
+    </li>
+    <li>
+      SLA / response time:
+      <span class="changed">due date and compliance fields are source-backed.</span>
+      <span class="removed">The source tables did not validate the exact SLA auto-calculation rule based on severity plus asset category.</span>
+    </li>
+  </ul>
+
+  <h2>5. Jobs / Work orders (the response side)</h2>
+  <ul>
+    <li>
+      Triggered by defect/hazard OR scheduled maintenance:
+      <span class="changed">job, vjob, jobasset and workflow/status tables are source-backed.</span>
+      <span class="changed">Capital-work links exist where populated.</span>
+      <span class="removed">Capital works proposal as a universal direct trigger was not validated.</span>
+    </li>
+    <li>
+      Crew/resource assignment, scheduled date, response SLA/due date, completion timestamp, before/after/during photos, completion status:
+      <span class="changed">these are source-backed where populated.</span>
+    </li>
+    <li>
+      Routine maintenance vs Capital Works distinction:
+      <span class="changed">capitalwork and vcapitalwork tables exist.</span>
+      <span class="removed">The rule "anything routine can't fix -> capital works" was not validated in the source tables.</span>
+    </li>
+  </ul>
+
+  <h2>6. Sensing &amp; telemetry (your "sensing side")</h2>
+  <ul>
+    <li>
+      <span class="changed">Source forms contain camera/CCTV terms, GPS/location fields, tunnel equipment alarm/check fields, OMCS references, fan-related maintenance fields and AI Defect ID.</span>
+    </li>
+    <li>
+      <span class="removed">Asset Vision dash cam every 5-10m was not validated.</span>
+      <span class="removed">RetinaVision every 3m was not validated.</span>
+      <span class="removed">AID cameras for tunnel incident detection were not validated.</span>
+      <span class="removed">Fleet telematics were not validated.</span>
+    </li>
+    <li>
+      Sensor -> event -> incident/work order flow:
+      <span class="removed">source-table lineage for this full flow was not validated.</span>
+    </li>
+  </ul>
+
+  <h2>7. KPIs &amp; Reporting</h2>
+  <ul>
+    <li>
+      Contract KPI definitions:
+      <span class="changed">measurement fields exist for inspections, jobs, due dates, compliance, completion, workflow/status and asset condition where populated.</span>
+      <span class="removed">A single global KPI definition schema was not validated.</span>
+    </li>
+    <li>
+      KPI measurements: inspections scheduled vs completed, jobs raised vs closed within SLA/compliance, asset condition distribution
+      <span class="changed">where condition is populated</span>, pavement performance
+      <span class="changed">where present in contract-specific forms/fields</span>.
+    </li>
+    <li>
+      Monthly contract report outputs:
+      <span class="removed">50+ page Word report outputs were not validated from the source tables.</span>
+    </li>
+  </ul>
+
+  <h2>8. Incidents (tunnel-specific, distinct from defects)</h2>
+  <ul>
+    <li>
+      <span class="changed">Tunnel event/incident handling appears in source forms and OMCS-related wording.</span>
+      <span class="removed">A complete OMCS incident-management table/feed was not validated in the Asset Vision source tables.</span>
+    </li>
+    <li>
+      <span class="changed">The source validation found Motorway Event Log and OMCS-related form fields.</span>
+    </li>
+  </ul>
+
+  <h2>A few things I'd flag before locking this in</h2>
+  <ul>
+    <li>
+      Contract is the partitioning key:
+      <span class="changed">validated.</span>
+      <span class="changed">Shared core source tables and contract-specific form/module fields are present.</span>
+      <span class="removed">Mandatory-field standardisation across contracts was not validated from the source tables.</span>
+    </li>
+    <li>
+      Roads vs Tunnels diverge meaningfully in the sensing layer:
+      <span class="changed">tunnel-specific camera/CCTV, fan, alarm, OMCS and Motorway Event Log terms were found.</span>
+      <span class="removed">Always-on AID plus OMCS alarm flow was not validated as source-table lineage.</span>
+    </li>
+    <li>
+      As-built / handover data is its own beast:
+      <span class="changed">handover/practical completion and as-built mismatch fields were found.</span>
+      <span class="removed">PDFs plus asset registers plus GeoJSON at handover were not validated from the source tables.</span>
+    </li>
+    <li>
+      Capital Works / Forward Programme:
+      <span class="changed">capitalwork and vcapitalwork tables are present.</span>
+      <span class="changed">dTIMS fields are present in source forms.</span>
+      <span class="removed">A direct dTIMS system feed was not validated.</span>
+    </li>
+  </ul>
+</body>
+</html>

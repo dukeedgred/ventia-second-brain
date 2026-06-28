@@ -1,0 +1,146 @@
+{
+  "name": "10_photo_coverage_ext_mssql_asset_vision_ven_vicroads",
+  "statement": "SELECT 'ext_mssql_asset_vision_ven_vicroads' AS catalog_name, SourceTable, Stage, COUNT(*) AS row_count\nFROM `ext_mssql_asset_vision_ven_vicroads`.dbo.photo\nWHERE Deleted = false OR Deleted IS NULL\nGROUP BY SourceTable, Stage\nORDER BY row_count DESC\nLIMIT 100",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 4,
+      "columns": [
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "SourceTable",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "Stage",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 15
+      }
+    ],
+    "total_row_count": 15,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 15,
+    "data_array": [
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Job",
+        "Job Before",
+        "254055"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Job",
+        "Job After",
+        "183178"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "FormField_Inspection",
+        null,
+        "108718"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Inspection",
+        null,
+        "98150"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "FormField_Inspection",
+        "Job Before",
+        "80224"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Asset",
+        null,
+        "35557"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Job",
+        "Job During",
+        "35082"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Inspection",
+        "Job Before",
+        "30708"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "Asset",
+        "Job Before",
+        "9478"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "CapitalWork",
+        null,
+        "1636"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "FormField_Job",
+        null,
+        "74"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "InspectionAction",
+        null,
+        "52"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "FormField_Module",
+        null,
+        "8"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "CapitalWorkTask",
+        null,
+        "7"
+      ],
+      [
+        "ext_mssql_asset_vision_ven_vicroads",
+        "CapitalWork",
+        "Job Before",
+        "6"
+      ]
+    ]
+  }
+}

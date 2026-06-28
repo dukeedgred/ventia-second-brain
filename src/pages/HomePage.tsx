@@ -1,7 +1,10 @@
-import { useMemo, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { Button, Card, CardBody, Input } from '@heroui/react'
+import { useEffect, useMemo, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { Button, Card, CardBody, Checkbox, Chip, Input } from '@heroui/react'
+import { api } from '../api'
+import { ExtractModal } from '../components/ExtractModal'
 import { useNotes } from '../lib/notes'
+import type { Ticket } from '../types'
 
 const SUGGESTED = [
   'What is the Ventia Spend Cube and why are we building it?',
@@ -12,10 +15,35 @@ const SUGGESTED = [
 
 const OVERVIEW_PATH = 'wiki/Ventia/Ventia Overview.md'
 
+const PRIORITY_WEIGHT: Record<string, number> = {
+  high: 0,
+  medium: 1,
+  low: 2,
+}
+
+const PRIORITY_COLOR: Record<string, 'danger' | 'warning' | 'default'> = {
+  high: 'danger',
+  medium: 'warning',
+  low: 'default',
+}
+
+function noteLabel(path: string) {
+  return path
+    .split('/')
+    .pop()
+    ?.replace(/\.md$/i, '')
+    .replace(/[-_]/g, ' ') || path
+}
+
 export default function HomePage() {
   const { notes } = useNotes()
   const navigate = useNavigate()
   const [q, setQ] = useState('')
+  const [tickets, setTickets] = useState<Ticket[]>([])
+  const [ticketError, setTicketError] = useState('')
+  const [extractPath, setExtractPath] = useState('')
+  const [extractPaths, setExtractPaths] = useState<string[]>([])
+  const [selectedSources, setSelectedSources] = useState<Set<string>>(new Set())
 
   const stats = useMemo(() => {
     const wiki = notes.filter((n) => n.path.startsWith('wiki/')).length
@@ -24,7 +52,51 @@ export default function HomePage() {
     return { total: notes.length, wiki, raw, topics }
   }, [notes])
 
+  const openTodos = useMemo(
+    () =>
+      tickets
+        .filter((t) => !['done', 'archived'].includes(t.status || 'todo'))
+        .sort((a, b) => {
+          const pa = PRIORITY_WEIGHT[a.priority] ?? 9
+          const pb = PRIORITY_WEIGHT[b.priority] ?? 9
+          if (pa !== pb) return pa - pb
+          return a.title.localeCompare(b.title)
+        })
+        .slice(0, 5),
+    [tickets],
+  )
+
+  const recentSources = useMemo(
+    () =>
+      notes
+        .filter((n) => n.path.startsWith('raw/') || n.type === 'source')
+        .sort((a, b) => (b.modified ?? 0) - (a.modified ?? 0))
+        .slice(0, 4),
+    [notes],
+  )
+
+  const refreshTickets = () =>
+    api
+      .tickets()
+      .then((items) => {
+        setTickets(items)
+        setTicketError('')
+      })
+      .catch((err) => setTicketError((err as Error).message))
+
+  useEffect(() => {
+    refreshTickets()
+  }, [])
+
   const ask = (question: string) => navigate(`/ask?q=${encodeURIComponent(question)}`)
+
+  const toggleSource = (path: string) =>
+    setSelectedSources((current) => {
+      const next = new Set(current)
+      if (next.has(path)) next.delete(path)
+      else next.add(path)
+      return next
+    })
 
   return (
     <div className="mx-auto max-w-4xl px-8 py-12">
@@ -88,6 +160,104 @@ export default function HomePage() {
         <StatCard label="Topics" value={stats.topics} />
       </div>
 
+      <Card className="mt-8 border border-default-100 bg-content1">
+        <CardBody className="gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <div className="text-sm font-semibold text-foreground">Today&apos;s to-dos</div>
+              <div className="text-xs text-default-400">
+                Open action items and recent meeting notes ready for extraction.
+              </div>
+            </div>
+            <Button size="sm" variant="flat" onPress={() => navigate('/tickets')}>
+              Open board
+            </Button>
+          </div>
+
+          {ticketError && <div className="text-sm text-danger">{ticketError}</div>}
+
+          <div className="grid gap-4 md:grid-cols-[1.1fr_0.9fr]">
+            <div className="min-w-0">
+              <div className="mb-2 text-xs font-semibold uppercase tracking-wide text-default-400">
+                Open tickets
+              </div>
+              <div className="flex flex-col gap-2">
+                {openTodos.map((ticket) => (
+                  <Link
+                    key={ticket.path}
+                    to="/tickets"
+                    className="rounded-lg border border-default-100 bg-content2/40 px-3 py-2 hover:bg-content2"
+                  >
+                    <div className="flex items-start justify-between gap-3">
+                      <div className="min-w-0">
+                        <div className="truncate text-sm font-medium text-foreground">{ticket.title}</div>
+                        <div className="mt-0.5 line-clamp-2 text-xs text-default-500">
+                          {ticket.body.trim() || 'No description captured yet.'}
+                        </div>
+                      </div>
+                      <Chip size="sm" color={PRIORITY_COLOR[ticket.priority] ?? 'default'} variant="flat">
+                        {ticket.priority || 'medium'}
+                      </Chip>
+                    </div>
+                  </Link>
+                ))}
+                {openTodos.length === 0 && (
+                  <div className="rounded-lg border border-default-100 bg-content2/30 px-3 py-4 text-sm text-default-400">
+                    No open tickets yet.
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="min-w-0">
+              <div className="mb-2 flex items-center justify-between gap-2">
+                <div className="text-xs font-semibold uppercase tracking-wide text-default-400">
+                  Recent sources
+                </div>
+                <Button
+                  size="sm"
+                  variant="flat"
+                  isDisabled={selectedSources.size < 2}
+                  onPress={() => setExtractPaths(Array.from(selectedSources))}
+                >
+                  Generate selected
+                </Button>
+              </div>
+              <div className="flex flex-col gap-2">
+                {recentSources.map((note) => (
+                  <div
+                    key={note.path}
+                    className="flex items-center justify-between gap-3 rounded-lg border border-default-100 bg-content2/40 px-3 py-2"
+                  >
+                    <div className="flex min-w-0 items-center gap-2">
+                      <Checkbox
+                        size="sm"
+                        isSelected={selectedSources.has(note.path)}
+                        onValueChange={() => toggleSource(note.path)}
+                      />
+                      <button
+                        className="min-w-0 truncate text-left text-sm text-foreground hover:text-primary-300"
+                        onClick={() => navigate(`/note/${encodeURIComponent(note.path)}`)}
+                      >
+                        {noteLabel(note.path)}
+                      </button>
+                    </div>
+                    <Button size="sm" variant="flat" onPress={() => setExtractPath(note.path)}>
+                      Generate
+                    </Button>
+                  </div>
+                ))}
+                {recentSources.length === 0 && (
+                  <div className="rounded-lg border border-default-100 bg-content2/30 px-3 py-4 text-sm text-default-400">
+                    No meeting notes have been ingested yet.
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </CardBody>
+      </Card>
+
       <div className="mt-8 grid gap-4 sm:grid-cols-2">
         <NavCard
           title="Ingest meeting notes"
@@ -132,6 +302,37 @@ export default function HomePage() {
           onClick={() => navigate('/log')}
         />
       </div>
+      {extractPath && (
+        <ExtractModal
+          path={extractPath}
+          kind="tickets"
+          isOpen={!!extractPath}
+          onOpenChange={(open) => {
+            if (!open) setExtractPath('')
+          }}
+          onDone={() => {
+            setExtractPath('')
+            refreshTickets()
+            navigate('/tickets')
+          }}
+        />
+      )}
+      {extractPaths.length > 0 && (
+        <ExtractModal
+          paths={extractPaths}
+          kind="tickets"
+          isOpen={extractPaths.length > 0}
+          onOpenChange={(open) => {
+            if (!open) setExtractPaths([])
+          }}
+          onDone={() => {
+            setExtractPaths([])
+            setSelectedSources(new Set())
+            refreshTickets()
+            navigate('/tickets')
+          }}
+        />
+      )}
     </div>
   )
 }

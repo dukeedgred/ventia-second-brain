@@ -1,0 +1,342 @@
+{
+  "name": "01_inventory_source_ext_mssql_asset_vision_ven_vicroads",
+  "statement": "SELECT\n  'source' AS table_family,\n  'ext_mssql_asset_vision_ven_vicroads' AS catalog_name,\n  table_schema AS schema_name,\n  table_name,\n  table_type\nFROM `ext_mssql_asset_vision_ven_vicroads`.information_schema.tables\nWHERE table_schema = 'dbo'\nORDER BY table_name",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 5,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 40
+      }
+    ],
+    "total_row_count": 40,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 40,
+    "data_array": [
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Asset",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetArea",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetAttribute",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetAudit",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetClassification",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "AssetLocation",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CapitalWork",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CapitalWorkTask",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ContractReference",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "CustomModuleItem",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ExportDate",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ExportDateLog",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "FormField",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Inspection",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "InspectionRelationship",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "InspectionStatus",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Job",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "JobAsset",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "JobComment",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "LaneAccess",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Log",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Module",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Photo",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "PlannedResourceItem",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "Resource",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ResourceAttribute",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "ResourceAudit",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "SqlServerVersions",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "SummaryCheck",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "TimesheetItem",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "WorkflowStatus",
+        "BASE TABLE"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vAssetAudit",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vAssetLocation",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vCapitalWork",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vCapitalWorkTask",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vInspection",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vInspectionStatus",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vJob",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vModule",
+        "VIEW"
+      ],
+      [
+        "source",
+        "ext_mssql_asset_vision_ven_vicroads",
+        "dbo",
+        "vWorkFlowStatus",
+        "VIEW"
+      ]
+    ]
+  }
+}

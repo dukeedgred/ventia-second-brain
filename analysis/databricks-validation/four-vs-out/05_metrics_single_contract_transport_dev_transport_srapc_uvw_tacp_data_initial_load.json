@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_srapc_uvw_tacp_data_initial_load",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_srapc' AS schema_name,\n  'uvw_tacp_data_initial_load' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`assetStatusDate` AS TIMESTAMP)), MAX(try_cast(`assetConditionDate` AS TIMESTAMP)), MAX(try_cast(`startLatitude` AS TIMESTAMP)), MAX(try_cast(`startLongitude` AS TIMESTAMP)), MAX(try_cast(`manufacturedDate` AS TIMESTAMP)), MAX(try_cast(`constructedDate` AS TIMESTAMP)), MAX(try_cast(`purchasedDate` AS TIMESTAMP)), MAX(try_cast(`commissionedDate` AS TIMESTAMP)), MAX(try_cast(`in-ServiceDate` AS TIMESTAMP)), MAX(try_cast(`warrantyEndDate` AS TIMESTAMP)), MAX(try_cast(`disposedDate` AS TIMESTAMP)), MAX(try_cast(`serviceLifeEndDate` AS TIMESTAMP)), MAX(try_cast(`plannedDisposalDate` AS TIMESTAMP)), MAX(try_cast(`startKm` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`assetStatusDate` AS TIMESTAMP)), MIN(try_cast(`assetConditionDate` AS TIMESTAMP)), MIN(try_cast(`startLatitude` AS TIMESTAMP)), MIN(try_cast(`startLongitude` AS TIMESTAMP)), MIN(try_cast(`manufacturedDate` AS TIMESTAMP)), MIN(try_cast(`constructedDate` AS TIMESTAMP)), MIN(try_cast(`purchasedDate` AS TIMESTAMP)), MIN(try_cast(`commissionedDate` AS TIMESTAMP)), MIN(try_cast(`in-ServiceDate` AS TIMESTAMP)), MIN(try_cast(`warrantyEndDate` AS TIMESTAMP)), MIN(try_cast(`disposedDate` AS TIMESTAMP)), MIN(try_cast(`serviceLifeEndDate` AS TIMESTAMP)), MIN(try_cast(`plannedDisposalDate` AS TIMESTAMP)), MIN(try_cast(`startKm` AS TIMESTAMP))) AS earliest_observed_ts,\n  'assetStatusDate|assetConditionDate|startLatitude|startLongitude|manufacturedDate|constructedDate|purchasedDate|commissionedDate|in-ServiceDate|warrantyEndDate|disposedDate|serviceLifeEndDate|plannedDisposalDate|startKm' AS freshness_columns\nFROM `transport_dev`.`transport_srapc`.`uvw_tacp_data_initial_load`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_srapc",
+        "uvw_tacp_data_initial_load",
+        "VIEW",
+        "54845",
+        "true",
+        null,
+        null,
+        "assetStatusDate|assetConditionDate|startLatitude|startLongitude|manufacturedDate|constructedDate|purchasedDate|commissionedDate|in-ServiceDate|warrantyEndDate|disposedDate|serviceLifeEndDate|plannedDisposalDate|startKm"
+      ]
+    ]
+  }
+}

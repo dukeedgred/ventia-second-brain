@@ -1,0 +1,104 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_utbl_timesheetitem_jobs_allcontract",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport' AS schema_name,\n  'utbl_timesheetitem_jobs_allcontract' AS table_name,\n  'MANAGED' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetTypeName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetTypeName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetCreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetCreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetCreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetTypeName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetTypeName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetTypeName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate' AS freshness_columns\nFROM `transport_dev`.`transport`.`utbl_timesheetitem_jobs_allcontract`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 1
+      }
+    ],
+    "total_row_count": 1,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 1,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport",
+        "utbl_timesheetitem_jobs_allcontract",
+        "MANAGED",
+        "829182",
+        "true",
+        "2024-08-01T23:45:00Z",
+        "1970-01-01T00:00:01Z",
+        "TimesheetID|DeltaUTC|ModifiedUTC|ModifiedUser|TimesheetCreatedDate|TimesheetCreatedUser|TimesheetTypeName|StartDate|EndDate"
+      ]
+    ]
+  }
+}

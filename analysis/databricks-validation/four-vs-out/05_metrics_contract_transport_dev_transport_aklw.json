@@ -1,0 +1,224 @@
+{
+  "name": "05_metrics_contract_transport_dev_transport_aklw",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_asset' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ConstructionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConstructionDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DisposalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DisposalDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ConditionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConditionDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ExportDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ExportDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ExportDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ConstructionDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ConstructionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConstructionDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DisposalDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DisposalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DisposalDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ConditionDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ConditionDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ConditionDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_asset`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_capitalwork' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_capitalwork`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_capitalworktask' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`PlannedFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`PlannedFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`PlannedFinish` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ActualFinish` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ActualFinish` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ActualFinish` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_capitalworktask`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_formfield' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_formfield`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_inspection' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartReferencePointName` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartReferencePointName` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartReferencePointName` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDistancePast` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDistancePast` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDistancePast` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|CompletedDate|CompletedUser' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_inspection`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_job' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`DueDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DueDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DueDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ScheduledEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ScheduledEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ScheduledEnd` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ApprovalDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ApprovalDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ApprovalDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`AssignedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`AssignedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`AssignedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedStatus` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedStatus` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedStatus` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CompletedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CompletedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CompletedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`MadeSafeDateUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`MadeSafeDateUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ComplianceCalculationDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ComplianceCalculationDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CRMField6` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CRMField6` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CRMField6` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_job`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_plant_pending_timesheet' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetType` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetType` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`TimesheetID` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetID` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetID` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`CreatedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`CreatedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`CreatedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetType` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetType` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetType` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StartDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StartDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StartDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`EndDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`EndDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`EndDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'TimesheetID|CreatedDate|CreatedUser|TimesheetType|StartDate|EndDate' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_plant_pending_timesheet`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_timesheetitem' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`timesheetid` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetid` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`modifieduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifieduser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`timesheetcreateddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetcreateddate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`timesheetcreateduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetcreateduser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`timesheettypename` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheettypename` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`startdate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`enddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`enddate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`timesheetid` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`timesheetid` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetid` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`deltautc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`deltautc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`deltautc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`modifieduser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifieduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifieduser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`timesheetcreateddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`timesheetcreateddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetcreateddate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`timesheetcreateduser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`timesheetcreateduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheetcreateduser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`timesheettypename` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`timesheettypename` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`timesheettypename` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`startdate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`startdate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`startdate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`enddate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`enddate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`enddate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'timesheetid|deltautc|modifiedutc|modifieduser|timesheetcreateddate|timesheetcreateduser|timesheettypename|startdate|enddate' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_timesheetitem`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_timesheetreport' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`TimesheetType` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetType` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetDate` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimesheetDateUnformatted` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetDateUnformatted` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimeStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimeStart` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`TimeEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimeEnd` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`TimesheetType` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetType` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetType` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetDate` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimesheetDateUnformatted` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimesheetDateUnformatted` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimesheetDateUnformatted` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimeStart` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimeStart` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimeStart` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`TimeEnd` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`TimeEnd` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`TimeEnd` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'TimesheetType|TimesheetDate|TimesheetDateUnformatted|TimeStart|TimeEnd' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_timesheetreport`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_updated_dispatch_id' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`modifieduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifieduser` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`modifiedutc` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifiedutc` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifiedutc` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`modifieduser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`modifieduser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`modifieduser` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'modifiedutc|modifieduser' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_updated_dispatch_id`\nUNION ALL\nSELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_aklw' AS schema_name,\n  'uvw_workflowstatus' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MAX(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS latest_observed_ts,\n  LEAST(MIN(CASE WHEN try_cast(`DeltaUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`DeltaUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`DeltaUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUTC` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUTC` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUTC` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`ModifiedUser` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`ModifiedUser` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`ModifiedUser` AS TIMESTAMP) END), MIN(CASE WHEN try_cast(`StatusDate` AS TIMESTAMP) >= TIMESTAMP '1900-01-01 00:00:00' AND try_cast(`StatusDate` AS TIMESTAMP) <= current_timestamp() + INTERVAL 1 DAY THEN try_cast(`StatusDate` AS TIMESTAMP) END)) AS earliest_observed_ts,\n  'DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate' AS freshness_columns\nFROM `transport_dev`.`transport_aklw`.`uvw_workflowstatus`",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 10,
+      "columns": [
+        {
+          "name": "table_family",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "catalog_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "schema_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 3
+        },
+        {
+          "name": "table_type",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 4
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "has_rows",
+          "type_text": "BOOLEAN",
+          "type_name": "BOOLEAN",
+          "position": 6
+        },
+        {
+          "name": "latest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 7
+        },
+        {
+          "name": "earliest_observed_ts",
+          "type_text": "TIMESTAMP",
+          "type_name": "TIMESTAMP",
+          "position": 8
+        },
+        {
+          "name": "freshness_columns",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 9
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 11
+      }
+    ],
+    "total_row_count": 11,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 11,
+    "data_array": [
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_asset",
+        "VIEW",
+        "131234",
+        "true",
+        "2024-10-02T23:28:15.31Z",
+        "2018-01-01T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ExportDateUTC|ModifiedUser|ConstructionDate|DisposalDate|ConditionDate"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_capitalwork",
+        "VIEW",
+        "7",
+        "true",
+        "2024-03-28T00:00:00Z",
+        "2022-11-23T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|CreatedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_capitalworktask",
+        "VIEW",
+        "63",
+        "true",
+        "2024-02-07T20:12:03.543Z",
+        "2022-11-23T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|PlannedStart|PlannedFinish|ActualStart|ActualFinish"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_formfield",
+        "VIEW",
+        "1511718",
+        "true",
+        "2026-06-09T05:42:30.673Z",
+        "2022-11-17T23:08:07.94Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_inspection",
+        "VIEW",
+        "4807",
+        "true",
+        "2024-12-12T00:32:32.25Z",
+        "1970-01-01T00:00:00Z",
+        "DeltaUTC|ModifiedUTC|StartDate|StartReferencePointName|StartDistancePast|CreatedDate|CreatedUser|ScheduledDate|CompletedDate|CompletedUser"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_job",
+        "VIEW",
+        "49571",
+        "true",
+        "2026-05-08T06:38:15.53Z",
+        "2022-08-26T10:21:00Z",
+        "DeltaUTC|ModifiedUTC|CreatedDate|DueDate|ScheduledStart|ScheduledEnd|CompletedDate|ApprovalDate|AssignedDate|CompletedStatus|CreatedUser|CompletedUser|MadeSafeDateUTC|ComplianceCalculationDate|CRMField6"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_plant_pending_timesheet",
+        "VIEW",
+        "4917",
+        "true",
+        "2024-08-07T13:00:00Z",
+        "1970-01-01T11:52:31Z",
+        "TimesheetID|CreatedDate|CreatedUser|TimesheetType|StartDate|EndDate"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_timesheetitem",
+        "VIEW",
+        "31170",
+        "true",
+        "2026-05-08T16:38:16.233Z",
+        "1970-01-01T11:44:23Z",
+        "timesheetid|deltautc|modifiedutc|modifieduser|timesheetcreateddate|timesheetcreateduser|timesheettypename|startdate|enddate"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_timesheetreport",
+        "VIEW",
+        "32775",
+        "true",
+        "2025-08-04T10:04:50.023Z",
+        "2022-10-27T08:09:20.113Z",
+        "TimesheetType|TimesheetDate|TimesheetDateUnformatted|TimeStart|TimeEnd"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_updated_dispatch_id",
+        "VIEW",
+        "0",
+        "false",
+        null,
+        null,
+        "modifiedutc|modifieduser"
+      ],
+      [
+        "contract",
+        "transport_dev",
+        "transport_aklw",
+        "uvw_workflowstatus",
+        "VIEW",
+        "56722",
+        "true",
+        "2024-08-07T15:40:04.48Z",
+        "2022-09-07T13:34:34Z",
+        "DeltaUTC|ModifiedUTC|ModifiedUser|StatusDate"
+      ]
+    ]
+  }
+}

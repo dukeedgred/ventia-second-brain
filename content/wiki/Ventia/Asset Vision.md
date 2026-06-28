@@ -1,10 +1,10 @@
 ---
 type: entity
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [asset-vision, transport, work-management, asset-data, federated-query]
+date-updated: 2026-06-22
+tags: [asset-vision, transport, work-management, asset-data, federated-query, condition-inspections, data-quality, autopilot]
 ---
 
 # Asset Vision
@@ -17,15 +17,49 @@ Asset Vision provides operational reporting data for Transport contracts. The so
 
 The data supports contract-level operational reporting, including work management and asset views. It is one of the key systems to understand for the [[Transport Data Landscape]] gap analysis.
 
+The Pranav walkthrough positions Asset Vision mainly in open-road contracts. Western Roads Upgrade was one of the first Transport contracts to adopt Asset Vision, followed by SRAPC. Queensland contracts such as RAMC, Port of Brisbane, and Brisbane Airport have data coming into Databricks, while VRMC Grampians and Metro East were being mobilized for a 2026-07-01 go-live.
+
+Tunnel or closed-road contracts are treated differently. Sydney Harbour Tunnel uses [[Maximo]], and NZLNNO and T2D are expected to use Maximo because tunnel assets need hierarchical locations such as buildings, levels, rooms, and assets. Asset Vision was described as much cheaper than Maximo but not fit for the tunnel-contract requirements that triggered Maximo adoption.
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] reinforces that boundary from North East Link. Huy said Asset Vision was proposed during the bid but the client rejected it as not sufficient for tunnel asset management, leading North East Link to adopt [[Maximo]].
+
+The SAP finance walkthrough adds that Asset Vision is deployed across about five Australian roads contracts, but each contract has a different configuration. This reinforces that Asset Vision is not one uniform activity model even when the same product name is used across contracts.
+
+The Rui Luan stakeholder interview reinforced this operating split from a Western Roads Upgrade perspective. Open-road maintenance needs rapid geolocated issue capture, while tunnel work needs componentised asset hierarchies. Rui described Asset Vision as the open-road system and [[Maximo]] as the tunnel system.
+
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds the detailed [[Western Roads Upgrade]] view. Rui said the core Asset Vision tables and mandatory fields are broadly standard across contract databases, with inspections, defects, and jobs as the common modules; the contract-specific variation sits in custom fields, custom forms, workflow configuration, local views, and dashboards.
+
+The Toby Lin stakeholder interview adds a field-level view of how Asset Vision is maintained by the open-road Asset team. Client handover data can be inaccurate at mobilisation, so crews and inspectors validate missing or wrongly located assets, then the asset team uses Nearmap, Google Street View, QGIS, and Asset Vision updates to keep the inventory aligned with site reality. This workflow is captured on [[Transport Asset Inventory Validation]].
+
+Toby also described the operating hierarchy inside Asset Vision: roads contain asset categories such as drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can then have defects or hazards attached. The scheduled inspection and response workflow is captured on [[Transport Asset Condition Inspections]].
+
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds the Queensland shared-resource view. Anna supports Asset Vision and reporting across RAMCSC, BAC / Brisbane Airport, and Port of Brisbane, and said these contracts record work in the field in a broadly standard way while downstream billing and contractual reporting differ by contract. She also confirmed that these contracts use Asset Vision Autopilot rather than Retina Vision.
+
+Anna described how Asset Vision configuration reduces contract-rule burden for field users. Defect codes, activity codes or SOR-style repair options, intervention levels, road classification, repair type, and measurements such as pothole depth are configured so the system can calculate response time after the user selects the relevant defect and repair context.
+
+Rui's WRU walkthrough adds that Asset Vision inspection imaging can capture road images every few metres, store photo records with links back to inspections, defects, jobs, and image URLs, and expose those records through data services and Databricks. The image file itself is not the structured data record; the metadata and relational context sit in the Asset Vision reporting tables.
+
 ## Databricks Access Pattern
 
 Ventia has an Azure SQL Server in its cloud environment with elastic compute and seven databases associated with the Asset Vision reporting data. Asset Vision synchronizes data from its cloud into this Azure SQL Server.
 
 Databricks uses federated queries against those Azure SQL databases, so queries pass through rather than staging all Asset Vision reporting data through the full Databricks medallion pattern. The walk-through also described a migration from Asset Vision-hosted reporting data toward Ventia-hosted reporting data.
 
+Rui described the open-road Asset Vision reporting path as a direct integration that pulls raw data into Ventia data services, hosts reporting data in Azure Databricks, and runs Power BI over the collated tables. He described the standard open-road modules as inspections, defects, and jobs.
+
+In Part 2, Rui showed the same pattern at WRU contract level: local views over the Asset Vision data feed support inspection KPI dashboards and response or job dashboards. This makes WRU's inspection, job, photo, timesheet, and capital works views important candidates for validating the reusable open-road Asset Vision core.
+
+Toby indicated that defect and hazard data is available through Transport Databricks views aligned to the Asset Vision hierarchy, but he had limited access and could not confirm whether SLA or response-time fields can be extracted directly. He uses Databricks mainly for KPI tracker and dashboard purposes.
+
+Anna said she does not personally use Databricks much, but Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status. That points to RAMCSC backlog reporting as a concrete lineage candidate for validating Asset Vision-to-Databricks-to-Power BI flow.
+
+The [[Transport Data Product Meeting Recording]] confirms that current data-product work includes checking Asset Vision data quality and completeness in Databricks. Donguk Kang said the team aggregated available Asset Vision source tables without transformation logic and reviewed metric completeness across the Transport contract dimension. The early view appeared sparse across multiple metrics, but Shachi Shastry cautioned that the team first needs to understand the end product, key data touchpoints, transformation logic, and which data points are critical before defining data-quality rules.
+
 ## Data Product Implications
 
 Asset Vision does not by itself solve the wider Transport asset-standardisation problem. The source noted that Transport contracts may define assets differently, use different systems, and need different metadata, so any centralized Transport asset product would require SME agreement beyond the technical Databricks connection.
+
+The 2026-06-22 data product meeting reinforces that boundary. Asset Vision is the current starting source because it is the data available to the team, but the intended Transport data product covers all contracts and must also account for what is missing from Databricks, including Maximo-based contexts such as Sydney Harbour.
 
 ## Tender And Transition Context
 
@@ -35,11 +69,37 @@ The Evolve/RAMC discussion also says the Asset Vision contract should be renewed
 
 In the [[Transport Gen 3 Tender Innovation]] context, Asset Vision needs to be compared side by side with SAP and Nextspace for functionality, cost, data ownership, and ability to support digitally actionable outputs from [[Transport Asset Intelligence Roadmap]].
 
+The Pranav walkthrough adds that cross-contract reporting is difficult even inside Asset Vision because activity specifications use activity category, activity, and intervention levels, and each contract has configured those levels differently. This makes [[Transport Sector Reporting Opportunities]] dependent on definition alignment, not just source-system access.
+
+The SAP walkthrough frames Asset Vision as one input to activity-based costing rather than the whole solution. Bhupesh Balani said Maximo and client AWM/AVM systems also need to be mapped, and the team needs a translation guide showing which fields in each system are equivalent before [[Transport Financial Reporting]] costs can be connected to operational activities.
+
+Sydney Harbour Tunnel is already on Maximo, but Bhupesh understood that Maximo data for Sydney Harbour Tunnel was not yet connected into Databricks. Future contracts may be configured differently so Maximo data can be brought into Databricks more easily.
+
+The Rui Luan interview adds a field-capture constraint for this costing path. Asset Vision job records only become useful for bid intelligence and benchmarking when crews capture timesheets, materials, equipment, and job details accurately and those entries are easy to validate.
+
+The second Rui interview adds a workflow constraint to the automation roadmap. Asset Vision Autopilot and Regional Vision can detect defects and, in some cases, support job creation, but Rui cautioned that automatic generation would create noisy or irrelevant jobs unless a human cleanses and validates detections against contract scope and intervention rules.
+
+Toby's interview adds an asset-register constraint. Asset Vision data is only useful for routing, inspections, defects, hazards, and capital planning when location, asset type, condition, ownership status, and third-party works updates are actively maintained.
+
 ## Related Pages
 
 - [[Transport Data Landscape]]
+- [[Transport Contract Portfolio]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
+- [[Transport Sector Reporting Opportunities]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Product Meeting Recording]]
+- [[Western Roads Upgrade]]
+- [[Maximo]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Financial Reporting]]
 - [[Transport Data and AI Working Group]]
 - [[Ventia Databricks Platform]]
 - [[Databricks Walk-Through]]

@@ -3,8 +3,8 @@ type: overview
 topic: Ventia
 sources: ["raw/DAII Monthly Meeting Transcript.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [ai, innovation, investor-day, safety, venspark]
+date-updated: 2026-06-02
+tags: [overview, ai, innovation, investor-day, safety, venspark]
 ---
 
 # Ventia AI and Innovation Portfolio

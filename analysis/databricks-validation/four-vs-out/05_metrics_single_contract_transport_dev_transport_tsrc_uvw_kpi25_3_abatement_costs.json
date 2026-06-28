@@ -1,0 +1,14 @@
+{
+  "name": "05_metrics_single_contract_transport_dev_transport_tsrc_uvw_kpi25_3_abatement_costs",
+  "statement": "SELECT\n  'contract' AS table_family,\n  'transport_dev' AS catalog_name,\n  'transport_tsrc' AS schema_name,\n  'uvw_kpi25_3_abatement_costs' AS table_name,\n  'VIEW' AS table_type,\n  COUNT(*) AS row_count,\n  COUNT(*) > 0 AS has_rows,\n  GREATEST(MAX(try_cast(`createddate_time` AS TIMESTAMP)), MAX(try_cast(`duedate_time` AS TIMESTAMP)), MAX(try_cast(`completeddate_time` AS TIMESTAMP)), MAX(try_cast(`createddate` AS TIMESTAMP)), MAX(try_cast(`duedate` AS TIMESTAMP)), MAX(try_cast(`completeddate` AS TIMESTAMP)), MAX(try_cast(`completedstatus` AS TIMESTAMP)), MAX(try_cast(`KPI_TwiceDueDate` AS TIMESTAMP)), MAX(try_cast(`KPI_Add10_BusDays` AS TIMESTAMP)), MAX(try_cast(`KPI_25_ComplianceDueDate` AS TIMESTAMP)), MAX(try_cast(`KPI_25_ComplianceDueDate_Type` AS TIMESTAMP)), MAX(try_cast(`KPI_Assessment_Date` AS TIMESTAMP)), MAX(try_cast(`Date` AS TIMESTAMP)), MAX(try_cast(`KPI_Assessment_Date_time` AS TIMESTAMP)), MAX(try_cast(`KPI_2XRT_Timer_hr` AS TIMESTAMP))) AS latest_observed_ts,\n  LEAST(MIN(try_cast(`createddate_time` AS TIMESTAMP)), MIN(try_cast(`duedate_time` AS TIMESTAMP)), MIN(try_cast(`completeddate_time` AS TIMESTAMP)), MIN(try_cast(`createddate` AS TIMESTAMP)), MIN(try_cast(`duedate` AS TIMESTAMP)), MIN(try_cast(`completeddate` AS TIMESTAMP)), MIN(try_cast(`completedstatus` AS TIMESTAMP)), MIN(try_cast(`KPI_TwiceDueDate` AS TIMESTAMP)), MIN(try_cast(`KPI_Add10_BusDays` AS TIMESTAMP)), MIN(try_cast(`KPI_25_ComplianceDueDate` AS TIMESTAMP)), MIN(try_cast(`KPI_25_ComplianceDueDate_Type` AS TIMESTAMP)), MIN(try_cast(`KPI_Assessment_Date` AS TIMESTAMP)), MIN(try_cast(`Date` AS TIMESTAMP)), MIN(try_cast(`KPI_Assessment_Date_time` AS TIMESTAMP)), MIN(try_cast(`KPI_2XRT_Timer_hr` AS TIMESTAMP))) AS earliest_observed_ts,\n  'createddate_time|duedate_time|completeddate_time|createddate|duedate|completeddate|completedstatus|KPI_TwiceDueDate|KPI_Add10_BusDays|KPI_25_ComplianceDueDate|KPI_25_ComplianceDueDate_Type|KPI_Assessment_Date|Date|KPI_Assessment_Date_time|KPI_2XRT_Timer_hr' AS freshness_columns\nFROM `transport_dev`.`transport_tsrc`.`uvw_kpi25_3_abatement_costs`",
+  "status": {
+    "state": "FAILED",
+    "error": {
+      "error_code": "BAD_REQUEST",
+      "message": "[INSUFFICIENT_PERMISSIONS] Insufficient privileges:\nTable 'uvw_kpi25_3_abatement_costs' does not have sufficient privilege to execute because the owner of one of the underlying resources failed an authorization check. SQLSTATE: 42501"
+    },
+    "sql_state": "42501"
+  },
+  "manifest": null,
+  "result": null
+}

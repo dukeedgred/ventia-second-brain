@@ -1,10 +1,10 @@
 ---
 type: concept
 topic: Ventia
-sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md"]
+sources: ["raw/Databricks walk-through.md", "raw/Transport Data and AI Working Group[SEC=INTERNAL CONFIDENTIAL].md", "raw/DB walkthrough with Pranav Kumar.md", "raw/Ventia_Transport_Executive_Brief_Damien.md", "raw/transport-first-two-week-plan-detailed-2026-05-28.md", "raw/SAP data walk-through (transport sector)-20260603_093206-Meeting.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443.md", "raw/Transport Data Asset Stakeholder Interview-20260604_130526-Toby Lin.md", "raw/Transport Data Asset Stakeholder Interview-20260609_111323-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260605_140612-Meeting Recording.md", "raw/Transport Data Asset Stakeholder Interview-20260603_110443-Meeting Transcript Rui Luan Part 2.md", "raw/Transport Data Asset Stakeholder Interview-20260609_160356-Meeting Recording Syed Umar.md", "raw/Transport Data Product-20260622_153334-Meeting Recording.md"]
 date-created: 2026-05-28
-date-updated: 2026-05-28
-tags: [transport, data-landscape, asset-data, sap, gis]
+date-updated: 2026-06-22
+tags: [transport, data-landscape, data-product, asset-data, sap, gis, data-asset, condition-inspections, kpis, hand-back]
 ---
 
 # Transport Data Landscape
@@ -15,7 +15,11 @@ The Transport data landscape spans enterprise financial data, contract-specific 
 
 Most Transport financial data is managed in SAP like other Ventia sectors. The source described this as enterprise financial data rather than Transport-named data, with Transport reporting filtered through structures such as profit centres and sector-level hierarchy.
 
-Bhupesh was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He is a key contact on [[Engagement Team]] for understanding how SAP-derived financial data is used in Transport reporting.
+Bhupesh Balani was identified as the Transport reporting sector lead for financial and SAP-related Transport data. He is a key contact on [[Engagement Team]] for understanding how SAP-derived financial data is used in [[Transport Financial Reporting]].
+
+The [[SAP Data Walk-Through Transport Sector]] clarifies the current finance source path. Detailed Transport finance line items come from SAP BW controlling-document data rather than Databricks because BW currently provides the granularity and table-linking needed by operations. Databricks contributes enterprise open commitment data for remaining purchase-order commitments, but the SAP line-item view still depends on BW.
+
+The same source warns that Transport finance report filters are not an authoritative contract inventory. The filters are based on cost in a selected month, so a contract can appear in one month and disappear in another even if it remains part of the [[Transport Contract Portfolio]]. Bhupesh said there are separate Databricks or BW datasets that can list all contracts within a sector.
 
 ## Operational And Asset Data
 
@@ -23,15 +27,43 @@ Transport work order, work management, and asset data are not primarily held in 
 
 The platform accesses Asset Vision reporting data through federated queries to Azure SQL databases. Production reporting was still tied to existing Asset Vision-hosted reporting structures, while Ventia was migrating toward hosting the reporting data in its own Azure SQL environment.
 
+The supplied [[Databricks Source Systems]] inventory maps several Asset Vision source catalogs to Transport contract contexts: `ext_mssql_asset_vision_ven_gen7` to RAMC, BAC, PoB, and TSRC; `ext_mssql_asset_vision_ven_rms_old` to SRAPC; `ext_mssql_asset_vision_ven_vicroads` to WRU; `ext_mssql_asset_vision_vns_gen7` to SHT/WHT; `ext_mssql_asset_vision_vnz_gen7` to Auckland West; and `ext_mssql_asset_vision_vsm_gen7` to VentureSmart. No comment was supplied for `ext_mssql_asset_vision_ven_rms`.
+
 The Transport Data and AI Working Group source adds concrete roads-asset capture requirements for VRMC, RAMC, and most roads contracts. The defect list spans pavement, signs, vegetation, drainage, litter, barriers, line marking, roadkill, graffiti, guideposts, and possible future tunnel assets. Those inputs need to become geolocated outputs with defect data, duplicate capture detection, patterns, and work order details.
 
 These requirements are tracked in [[Transport Asset Intelligence Roadmap]] because the key question is not only where the source data sits, but how captured observations become visual, trusted, and digitally actionable work.
+
+The Rui Luan stakeholder interview clarified the operational split behind those data requirements. Open-road contracts need fast location-based issue capture and response, while tunnel projects need componentised asset hierarchies and more planned work management. Rui described [[Asset Vision]] as the open-road system and [[Maximo]] as the tunnel system.
+
+For open-road Asset Vision reporting, Rui described a relatively standard module set of inspections, defects, and jobs. Those modules are an immediate candidate for current-state mapping in the [[Integrated Transport Data Asset]], but the field definitions still need contract-by-contract validation.
+
+[[Transport Data Asset Stakeholder Interview Rui Luan Part 2]] adds the contract-database detail behind that candidate. Rui said [[Asset Vision]] mandatory fields and core tables are broadly standard across the individual contract databases, while local custom fields, custom forms, workflow configuration, views, and dashboards handle contract-specific requirements. For [[Western Roads Upgrade]], the relevant Databricks-facing context is the WRU/VicRoads Asset Vision pattern and the documented [[Transport Contract Tables - transport_wru]] views.
+
+The [[Transport Data Asset Stakeholder Interview Toby Lin]] adds the asset-team operating detail behind those modules. Open-road roads assets include drainage lines, pits, guardrails, kerb and channel, line marking, signage, and barriers; each asset can carry defects or hazards, inspection records, condition ratings, and job history. The Asset team actively reconciles client handover data with site reality through [[Transport Asset Inventory Validation]].
+
+The [[Transport Data Asset Stakeholder Interview Anna Covell]] adds a shared Queensland contract pattern. RAMCSC, BAC / Brisbane Airport, and Port of Brisbane use shared resources and broadly standard field recording in [[Asset Vision]], but contractual billing, KPI treatment, condition terminology, and monthly reporting diverge after the field-capture step.
+
+The [[Transport Data Asset Stakeholder Interview Huy Nguyen]] adds the North East Link tunnel pattern. During mobilisation, the asset team works with D&C as-built asset registers, spatial files, agreed metadata, hierarchy, and coordinate requirements before Maximo has real operational data. The target operating landscape includes [[Maximo]], Databricks, Power BI, QGIS, OMCS, AID camera alerts, work orders, incident records, and future maintenance or inspection data.
+
+The [[Transport Data Asset Stakeholder Interview Syed Umar]] adds the systems transition pattern for the same North East Link context. Each D&C system is assessed separately to decide whether the system itself should transition into operations or whether only its asset, maintenance, spare-part, consumable, and manufacturer data should be transformed and loaded into an operational system. Syed also distinguished [[Transport Hand-Back Systems]] such as Maximo from corporate systems such as SAP, Databricks, Excel, SharePoint, and Power BI.
+
+The Pranav walkthrough adds a portfolio-level view: Transport has roughly 15 to 20 contracts across Australia and New Zealand, captured on [[Transport Contract Portfolio]]. There is no confirmed centralized report that lists all contracts, dates, data feeds, and maturity, so contract inventory remains part of the data-discovery work.
+
+The executive brief for Damien turns this discovery into a six-week [[Integrated Transport Data Asset]] programme. The immediate status map needs to show which data is available across Transport contracts, what has already been centralised into Databricks, what remains decentralised and why, and how the current data is used.
+
+The [[Transport First Two Week Plan]] makes the first pass more explicit: the enterprise Transport data product should map core and adjacent data domains, source systems, ownership, access paths, and reusable asset patterns before week 3 starts. This raises access and ownership mapping to first-week deliverables, not later documentation tasks.
+
+The [[Transport Data Product Meeting Recording]] adds a concise current-state framing for the same landscape problem. Donguk Kang said Ventia lacks a standardised data asset and that enterprise-level reporting or AI is difficult because data sources are not in one place. The meeting confirms active data-quality and completeness checking in Databricks for Transport [[Asset Vision]] data, including a dashboard over contract dimensions, metric completeness, contract locations, overdue work, defects, hazards, criticality, and asset-level analysis.
+
+The same meeting keeps the evidence boundary clear: the current Databricks work only covers Asset Vision data available for certain Transport contracts, while the project is also looking for data that is missing from Databricks. Sydney Harbour was named as an example where operational data sits in [[Maximo]] rather than Asset Vision, so all-contract Transport coverage cannot be solved by Asset Vision alone.
 
 ## Contract-Level Schemas
 
 Transport reporting is organized through schemas owned by Transport sector users and broader contract groups. Contract-specific schema names mentioned in the source included examples such as AKLW, BAC, and Final District.
 
 Shared views can be placed in a common Transport schema, while contract-specific requirements sit in the relevant contract schema. This creates flexibility for local reporting but makes cross-contract standardisation harder.
+
+The Pranav walkthrough described a Transport development catalog with one schema per contract or purpose, including examples such as Auckland West, Brisbane Airport, finance, FNDC, SDC, NZLNNO, and SRAPC. User tables and user views are built in development and then promoted to production by the Digital Services team, linking the contract operating model back to [[Ventia Databricks Platform]].
 
 ## Standardisation Gaps
 
@@ -41,16 +73,74 @@ Any shared Transport asset model would need SME agreement on what counts as an a
 
 The later working group source reinforces this gap by naming several tools that may need to interoperate: SAP, Retina Vision, Nextspace, [[Asset Vision]], SAP S/4HANA, SAP SAC, Maximo, and SAP Asset Performance Management. It explicitly notes uncertainty about how those pieces are intended to fit together.
 
+The Pranav walkthrough adds a more specific standardisation barrier: even when contracts use [[Asset Vision]], each contract can configure activity category, activity, and intervention structures differently. KPIs and SLAs also vary by contract, so cross-contract reporting needs a clear senior-management question before detailed KPI harmonisation.
+
+The 2026-06-22 Transport data product meeting shows that the senior-management question is still forming. The team has heard that Transport lacks consolidated enterprise-level KPIs, but the first data-product scope has not yet landed on a stable KPI set. Examples discussed include job or work-order volume, completion, on-time or overdue work, defects and hazards, incident or safety reporting, and contract-specific KPI reporting.
+
+Anna's interview adds a concrete example of that barrier. The three Queensland contracts can share field resources because Asset Vision restricts users to contract-configured defect codes, activity codes, repair options, and intervention levels, but the contracts still use different condition wording and reporting obligations. Any RAMCSC Gen 3 changes need to account for BAC and Port of Brisbane alignment because the operating team is shared.
+
+The SAP finance walkthrough adds the operational-system side of the same gap. Activity-based costing requires a translation guide across [[Asset Vision]], Maximo, and client AWM/AVM systems so equivalent fields can be mapped before costs and activities are combined.
+
+Rui's interview adds the field-capture side of the same issue: SAP job-cost linkage is only useful if crews capture time, materials, equipment, and job details accurately, and if those entries are validated in a way that is practical for field teams.
+
+The second Rui interview adds the commercial-model side. WRU's flat-payment or drawdown-style model reduces the contractual incentive for item-level Asset Vision-to-SAP linkage, while other contracts that approve and pay work by job or standard rate have stronger reason to track job-level revenue, cost, and margin.
+
+Toby's interview adds that open-road contracts may share broad asset categories, but condition definitions, KPI standards, response rules, and reporting measures remain contract-specific. That makes [[Transport Asset Condition Inspections]] a data-standardisation problem as much as an operational workflow.
+
+Huy's interview adds the tunnel version of the same issue. Maximo may provide a broadly standard schema for tunnel projects, but contract-specific reporting requirements, custom attributes, custom modules, and naming differences still need to be modelled explicitly. He also called out the practical need for common names across projects, such as resolving jet fan versus fan terminology for bid support and benchmarking.
+
+Syed adds a contract-governance version of the same issue. Client or hand-back systems may be controlled by the client, local to the tunnel, or transferable at contract end, while corporate systems are optimised for Ventia internal processes. That boundary affects whether data can be extracted, who has administrative access, and whether integration should be lean or deep.
+
+## Reporting And Opportunity Areas
+
+Most Databricks-backed Transport reporting is converted into simplified views for downstream Power BI reports, with Excel still used in some cases. WRU appears to have the most mature reporting footprint, while SRAPC appears more mature from a technology and delivery-practice perspective.
+
+Enterprise opportunities are tracked on [[Transport Sector Reporting Opportunities]]. They include bid intelligence, mobilization support, delivery reporting, predictive maintenance, and benchmarking or activity-based costing. Pranav cautioned that earlier activity-based costing work struggled because SAP cost structures and contract-level activity models were not aligned.
+
+The current [[Transport Financial Reporting]] layer is comparatively mature for finance management reporting: it is Power BI based, contract-secured, refreshed every three hours, and supports drilling from WBS to work orders and SAP line items. It does not cover contractual reporting obligations, SHeQ reporting, or operational activity classification.
+
+The Damien brief adds the expected foundation scope for the integrated asset: asset management, GPS, telematics, fleet management, job scheduling, vehicle and service locations, contract KPIs, and service provision information. Those inputs need to support a business-tested live use case within the six-week programme and a roadmap for further operational and investment decisions.
+
+Toby's interview shows one concrete contract-reporting shape for this scope. Monthly client KPI reporting can include scheduled and completed condition inspections, inspection incidents, and counts by asset class, while annual audits may test job evidence and response compliance. The full KPI list is likely owned by commercial or project leadership rather than a single data table.
+
+Anna's interview identifies RAMCSC backlog reporting as an immediate Databricks/Power BI lineage to validate: Pranav Kumar has built Power BI reporting that uses Databricks for RAMCSC backlog status, while KPI reporting remains tied to contract-specific monthly reporting requirements.
+
+Rui's WRU walkthrough adds another lineage candidate: inspection KPI dashboards, response or job dashboards, photo evidence records, timesheet/material capture, and capital works views built over WRU Asset Vision data. These can test whether the open-road core can be centralised without losing contract-specific KPI and response-rule context.
+
 ## Adjacent Data Domains
 
 Ventia has enterprise safety and compliance data in Databricks, which may apply to Transport analysis. ESRI/GIS data is managed by a separate team, and Databricks can connect to the Postgres database behind ESRI for bespoke use cases. Whether Transport uses Ventia-managed GIS data or provider-managed GIS data still needs validation.
 
+Anna said the Queensland contracts predominantly use QGIS, with ArcGIS also used. That confirms both desktop GIS tooling and ESRI-adjacent tooling should be included in Transport source-system mapping rather than treating GIS as a single platform.
+
+The first-two-week plan also names sensing and telemetry inputs that sit adjacent to the existing operational landscape: Retina Vision, BYD telemetry, drainage IoT, weather data, traffic data, and open road datasets. These inputs connect the data landscape to [[Transport Asset Intelligence Roadmap]] and may require different owners, access paths, and integration patterns from existing Databricks-backed reporting sources.
+
 ## Related Pages
 
 - [[Databricks Walk-Through]]
+- [[Databricks Source Systems]]
 - [[Transport Data and AI Working Group]]
+- [[Transport Executive Brief Damien]]
+- [[Transport First Two Week Plan]]
+- [[SAP Data Walk-Through Transport Sector]]
+- [[Transport Data Asset Stakeholder Interview]]
+- [[Transport Data Asset Stakeholder Interview Rui Luan Part 2]]
+- [[Transport Data Asset Stakeholder Interview Toby Lin]]
+- [[Transport Data Asset Stakeholder Interview Anna Covell]]
+- [[Transport Data Asset Stakeholder Interview Huy Nguyen]]
+- [[Transport Data Asset Stakeholder Interview Syed Umar]]
+- [[Transport Data Product Meeting Recording]]
+- [[Transport Hand-Back Systems]]
+- [[Western Roads Upgrade]]
+- [[Maximo]]
+- [[Transport Asset Inventory Validation]]
+- [[Transport Asset Condition Inspections]]
+- [[Transport Financial Reporting]]
+- [[Integrated Transport Data Asset]]
 - [[Transport Asset Intelligence Roadmap]]
 - [[Transport Gen 3 Tender Innovation]]
+- [[Transport Contract Portfolio]]
+- [[Transport Sector Reporting Opportunities]]
 - [[Ventia Databricks Platform]]
 - [[Asset Vision]]
 - [[Engagement Team]]
