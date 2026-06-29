@@ -64,7 +64,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -118,7 +118,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -171,7 +171,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -215,7 +215,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -257,7 +257,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -296,7 +296,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -348,7 +348,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -400,7 +400,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -444,7 +444,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -493,7 +493,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -545,7 +545,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
@@ -613,7 +613,7 @@ WITH TABLE_DRAIN_ASSETS AS (
 INSP AS (
     SELECT IL.source_context, IL.inspection_id, IL.asset_id,
            I.scheduled_date, I.completed_date, I.inspection_type_name,
-           I.current_status, I.job_id
+           I.job_id
     FROM transport_dev.integ_transport_assets.vw_silver_transport_inspection_asset_link IL
     INNER JOIN transport_dev.integ_transport_assets.vw_bronze_transport_inspection_base I
         ON IL.source_context = I.source_context
