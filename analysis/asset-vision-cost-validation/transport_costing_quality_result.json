@@ -1,0 +1,367 @@
+{
+  "generated_at": "2026-07-03T14:24:43",
+  "profile": "ventia-transport",
+  "warehouse_id": "e736bc08efffb739",
+  "statement_id": "01f17697-1b9a-19d4-befa-672cefc40a82",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 21,
+      "columns": [
+        {
+          "name": "Contract",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "AV_Database",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 2
+        },
+        {
+          "name": "distinct_job_ids",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        },
+        {
+          "name": "rows_with_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 4
+        },
+        {
+          "name": "rows_positive_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "rows_zero_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 6
+        },
+        {
+          "name": "rows_negative_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 7
+        },
+        {
+          "name": "rows_with_duration",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 8
+        },
+        {
+          "name": "positive_cost_without_duration_or_quantity",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 9
+        },
+        {
+          "name": "rows_with_sap_record",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 10
+        },
+        {
+          "name": "total_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 11
+        },
+        {
+          "name": "avg_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 12
+        },
+        {
+          "name": "p50_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 13
+        },
+        {
+          "name": "p90_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 14
+        },
+        {
+          "name": "p99_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 15
+        },
+        {
+          "name": "max_resource_cost",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 16
+        },
+        {
+          "name": "p50_cost_per_hour",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 17
+        },
+        {
+          "name": "p90_cost_per_hour",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 18
+        },
+        {
+          "name": "p99_cost_per_hour",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 19
+        },
+        {
+          "name": "max_cost_per_hour",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 20
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 9
+      }
+    ],
+    "total_row_count": 9,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 9,
+    "data_array": [
+      [
+        "Auckland West Transport",
+        "vnz_gen7",
+        "306924",
+        "7",
+        "0",
+        "0",
+        "0",
+        "0",
+        "185179",
+        "0",
+        "267066",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Brisbane Airport",
+        "gen7",
+        "12709",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "9039",
+        "0",
+        "6003",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Port of Brisbane",
+        "gen7",
+        "1081",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "685",
+        "0",
+        "0",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "RAMC - Gen 2 - 2019-2024",
+        "gen7",
+        "697177",
+        "136",
+        "0",
+        "0",
+        "0",
+        "0",
+        "498937",
+        "0",
+        "515783",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "SRAP-C",
+        "RMS",
+        "1663691",
+        "32",
+        "0",
+        "0",
+        "0",
+        "0",
+        "589680",
+        "0",
+        "1633145",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Sydney Harbour Tunnel (SHT)",
+        "vns_gen7",
+        "543",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "5",
+        "0",
+        "73",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Toowoomba Second Range Crossing",
+        "gen7",
+        "27838",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "22156",
+        "0",
+        "5352",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "VentureSmart",
+        "vsm_gen7",
+        "11854",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "Western Roads Upgrade (WRU)",
+        "Vicroads",
+        "298968",
+        "138",
+        "0",
+        "0",
+        "0",
+        "0",
+        "186026",
+        "0",
+        "0",
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  }
+}

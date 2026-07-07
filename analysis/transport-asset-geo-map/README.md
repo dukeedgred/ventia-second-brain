@@ -1,6 +1,6 @@
-# Transport Asset Geography Overview
+# Where Our Transport Assets Are
 
-This analysis unions documented Transport Asset Vision source asset data in Databricks, aggregates it before download, and writes a simple map/report.
+This report shows where Transport Asset Vision records are located, which projects have the most assets, and which asset types dominate.
 
 ## Open
 
@@ -8,8 +8,8 @@ Open `output/transport_asset_geo_map.html`.
 
 ## Outputs
 
-- `output/transport_asset_geo_map.html`: interactive full-view Australian map and project/class comparison.
-- `output/transport_asset_geo_aggregated.json`: aggregated grid, source and class counts embedded in the HTML.
+- `output/transport_asset_geo_map.html`: interactive map and project/asset type summary.
+- `output/transport_asset_geo_aggregated.json`: source data used by the HTML page.
 - `output/transport_asset_geo_query.sql`: SQL used for Databricks aggregation.
 
 ## Scope
@@ -24,11 +24,12 @@ Included source contexts:
 - `asset_vision_vsm_gen7` / `ext_mssql_asset_vision_vsm_gen7` / VentureSmart
 
 Skipped source contexts:
-- `asset_vision_ven_rms_old` / `ext_mssql_asset_vision_ven_rms_old`: Statement failed: [TABLE_OR_VIEW_NOT_FOUND] The table or view `ext_mssql_asset_vision_ven_rms_old`.`information_schema`.`tables` cannot be found. Verify the spelling and correctness of the schema and catalog.
+- `asset_vision_ven_rms_old` / `ext_mssql_asset_vision_ven_rms_old`: source table was not available in the current Databricks environment.
 
 ## Notes
 
 - Generated at 2026-06-11T01:25:12+00:00.
-- Data is aggregated in Databricks before being written locally.
-- Map coordinates use the first coordinate found in each WKT geometry as a representative point.
-- Asset class comparison uses Asset Vision `AssetType`.
+- This is a location overview, not an exact engineering drawing.
+- Nearby assets are grouped into circles so the browser stays fast.
+- Some line or polygon assets are shown using a representative point.
+- Asset type comes from Asset Vision `AssetType`.

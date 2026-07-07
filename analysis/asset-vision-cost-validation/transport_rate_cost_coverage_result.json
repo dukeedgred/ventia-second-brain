@@ -1,0 +1,362 @@
+{
+  "generated_at": "2026-07-03T14:26:23",
+  "profile": "ventia-transport",
+  "warehouse_id": "e736bc08efffb739",
+  "statement_id": "01f17697-53eb-12fd-b637-26a41c8239da",
+  "status": {
+    "state": "SUCCEEDED"
+  },
+  "manifest": {
+    "format": "JSON_ARRAY",
+    "schema": {
+      "column_count": 14,
+      "columns": [
+        {
+          "name": "table_name",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 0
+        },
+        {
+          "name": "Contract",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 1
+        },
+        {
+          "name": "AV_Database",
+          "type_text": "STRING",
+          "type_name": "STRING",
+          "position": 2
+        },
+        {
+          "name": "row_count",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 3
+        },
+        {
+          "name": "rows_with_resource_rate",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 4
+        },
+        {
+          "name": "rows_positive_resource_rate",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 5
+        },
+        {
+          "name": "rows_with_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 6
+        },
+        {
+          "name": "rows_positive_resource_cost",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 7
+        },
+        {
+          "name": "rows_with_total_duration",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 8
+        },
+        {
+          "name": "rows_can_calc_duration_x_rate",
+          "type_text": "BIGINT",
+          "type_name": "LONG",
+          "position": 9
+        },
+        {
+          "name": "p50_resource_rate",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 10
+        },
+        {
+          "name": "p90_resource_rate",
+          "type_text": "DOUBLE",
+          "type_name": "DOUBLE",
+          "position": 11
+        },
+        {
+          "name": "p50_calc_cost",
+          "type_text": "DECIMAL(13,2)",
+          "type_name": "DECIMAL",
+          "position": 12,
+          "type_precision": 13,
+          "type_scale": 2
+        },
+        {
+          "name": "p90_calc_cost",
+          "type_text": "DECIMAL(13,2)",
+          "type_name": "DECIMAL",
+          "position": 13,
+          "type_precision": 13,
+          "type_scale": 2
+        }
+      ]
+    },
+    "total_chunk_count": 1,
+    "chunks": [
+      {
+        "chunk_index": 0,
+        "row_offset": 0,
+        "row_count": 15
+      }
+    ],
+    "total_row_count": 15,
+    "truncated": false
+  },
+  "result": {
+    "chunk_index": 0,
+    "row_offset": 0,
+    "row_count": 15,
+    "data_array": [
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Auckland West Transport",
+        "vnz_gen7",
+        "306924",
+        "0",
+        "0",
+        "0",
+        "0",
+        "185179",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Brisbane Airport",
+        "gen7",
+        "12709",
+        "0",
+        "0",
+        "0",
+        "0",
+        "9039",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Port of Brisbane",
+        "gen7",
+        "1081",
+        "0",
+        "0",
+        "0",
+        "0",
+        "685",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "RAMC - Gen 2 - 2019-2024",
+        "gen7",
+        "697177",
+        "0",
+        "0",
+        "0",
+        "0",
+        "498937",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "SRAP-C",
+        "RMS",
+        "1663691",
+        "0",
+        "0",
+        "0",
+        "0",
+        "589680",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Sydney Harbour Tunnel (SHT)",
+        "vns_gen7",
+        "543",
+        "0",
+        "0",
+        "0",
+        "0",
+        "5",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Toowoomba Second Range Crossing",
+        "gen7",
+        "27838",
+        "0",
+        "0",
+        "0",
+        "0",
+        "22156",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "VentureSmart",
+        "vsm_gen7",
+        "11854",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_job_costing_timesheets_all_contracts",
+        "Western Roads Upgrade (WRU)",
+        "Vicroads",
+        "298968",
+        "0",
+        "0",
+        "0",
+        "0",
+        "186026",
+        "0",
+        null,
+        null,
+        null,
+        null
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "RMS",
+        "245201",
+        null,
+        null,
+        "18980",
+        "18980",
+        "83489",
+        null,
+        null,
+        null,
+        "1.00",
+        "1.00"
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "Vicroads",
+        "266103",
+        null,
+        null,
+        "23423",
+        "1890",
+        "186529",
+        null,
+        null,
+        null,
+        "0.00",
+        "0.00"
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "gen7",
+        "273628",
+        null,
+        null,
+        "158461",
+        "154537",
+        "181463",
+        null,
+        null,
+        null,
+        "45.84",
+        "105.00"
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "vns_gen7",
+        "441",
+        null,
+        null,
+        "14",
+        "14",
+        "5",
+        null,
+        null,
+        null,
+        "140.26",
+        "1154.54"
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "vnz_gen7",
+        "32647",
+        null,
+        null,
+        "9895",
+        "9895",
+        "22131",
+        null,
+        null,
+        null,
+        "29.58",
+        "35.20"
+      ],
+      [
+        "transport.utbl_timesheetitem_jobs_allcontract",
+        null,
+        "vsm_gen7",
+        "11162",
+        null,
+        null,
+        "0",
+        "0",
+        "0",
+        null,
+        null,
+        null,
+        null,
+        null
+      ]
+    ]
+  }
+}

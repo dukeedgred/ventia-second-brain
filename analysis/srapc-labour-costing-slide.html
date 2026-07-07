@@ -1,0 +1,434 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SRAPC labour costing slide</title>
+  <style>
+    :root {
+      --ink: #17202a;
+      --muted: #5f6975;
+      --paper: #f7f4ed;
+      --panel: #ffffff;
+      --line: #d8d1c5;
+      --bad: #b8332f;
+      --bad-soft: #fae6e3;
+      --good: #117a65;
+      --good-soft: #e1f3ed;
+      --gold: #c8841a;
+      --blue: #24577a;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      min-height: 100%;
+      background: #2b2b2b;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      display: grid;
+      place-items: center;
+      padding: 24px;
+    }
+
+    .slide {
+      position: relative;
+      width: min(96vw, 1600px);
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(36, 87, 122, 0.1), transparent 28%, transparent 72%, rgba(17, 122, 101, 0.08)),
+        var(--paper);
+      box-shadow: 0 20px 70px rgba(0, 0, 0, 0.28);
+      padding: 46px 58px 42px;
+    }
+
+    .eyebrow {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      color: var(--muted);
+      font-size: 18px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .source-pill {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 9px 14px;
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--blue);
+      font-size: 16px;
+      text-transform: none;
+      white-space: nowrap;
+    }
+
+    h1 {
+      max-width: 1120px;
+      margin: 16px 0 10px;
+      font-size: 60px;
+      line-height: 0.98;
+      letter-spacing: 0;
+    }
+
+    .question {
+      display: inline-flex;
+      align-items: center;
+      gap: 14px;
+      margin-top: 4px;
+      padding: 13px 18px;
+      border-left: 7px solid var(--gold);
+      background: rgba(255, 255, 255, 0.72);
+      font-size: 29px;
+      font-weight: 800;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 1fr 150px 1fr;
+      gap: 24px;
+      align-items: stretch;
+      margin-top: 22px;
+      min-height: 430px;
+    }
+
+    .side {
+      display: grid;
+      grid-template-rows: auto auto 1fr auto;
+      gap: 12px;
+      min-width: 0;
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+    }
+
+    .side.bad {
+      border-top: 8px solid var(--blue);
+    }
+
+    .side.good {
+      border-top: 8px solid var(--good);
+    }
+
+    .label {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      font-size: 18px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .badge {
+      display: inline-grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 26px;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    .bad .badge {
+      background: var(--blue);
+    }
+
+    .good .badge {
+      background: var(--good);
+      font-size: 18px;
+    }
+
+    .side h2 {
+      margin: 0;
+      font-size: 36px;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .side p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 20px;
+      line-height: 1.28;
+    }
+
+    .metric-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+      align-content: start;
+    }
+
+    .metric {
+      min-height: 78px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fcfbf8;
+    }
+
+    .metric strong {
+      display: block;
+      font-size: 32px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.2;
+    }
+
+    .bad .metric strong {
+      color: var(--blue);
+    }
+
+    .good .metric strong {
+      color: var(--good);
+    }
+
+    .bullets {
+      display: grid;
+      gap: 8px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      font-size: 18px;
+      line-height: 1.18;
+    }
+
+    .bullets li {
+      display: grid;
+      grid-template-columns: 24px 1fr;
+      gap: 10px;
+      align-items: start;
+    }
+
+    .bullets li::before {
+      content: "";
+      width: 16px;
+      height: 16px;
+      margin-top: 4px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    .bad .bullets {
+      color: var(--blue);
+    }
+
+    .good .bullets {
+      color: var(--good);
+    }
+
+    .bullets span {
+      color: var(--ink);
+    }
+
+    .divider {
+      display: grid;
+      grid-template-rows: 1fr auto 1fr;
+      place-items: center;
+      color: var(--muted);
+      font-weight: 900;
+    }
+
+    .divider::before,
+    .divider::after {
+      content: "";
+      width: 2px;
+      height: 100%;
+      background: var(--line);
+    }
+
+    .versus {
+      display: grid;
+      place-items: center;
+      width: 112px;
+      height: 112px;
+      border-radius: 50%;
+      background: var(--ink);
+      color: #fff;
+      font-size: 26px;
+      letter-spacing: 0;
+    }
+
+    .formula {
+      position: absolute;
+      left: 58px;
+      right: 58px;
+      bottom: 18px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+      padding: 13px 16px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .formula strong {
+      color: var(--ink);
+      white-space: nowrap;
+    }
+
+    .formula code {
+      color: var(--blue);
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 700;
+    }
+
+    .notes {
+      width: min(96vw, 1600px);
+      margin-top: 16px;
+      padding: 18px 20px;
+      background: #fff;
+      border-radius: 8px;
+      color: #333;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .notes h2 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .notes p {
+      margin: 6px 0;
+    }
+
+    @media print {
+      body {
+        display: block;
+        padding: 0;
+        background: #fff;
+      }
+
+      .slide {
+        width: 100vw;
+        height: 100vh;
+        box-shadow: none;
+      }
+
+      .notes {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="slide" aria-label="SRAPC labour costing comparison slide">
+    <div class="eyebrow">
+      <div>Schema Discrepancy: Asset Vision dbo vs SRAPC</div>
+      <div class="source-pill">Databricks validation extracts | June 2026</div>
+    </div>
+
+    <h1>The difference is not labour tables. It is schema shape.</h1>
+    <div class="question">Asset Vision has the costing spine; SRAPC has richer job semantics but not raw costing tables inside <code>transport_srapc</code>.</div>
+
+    <section class="layout" aria-label="Side by side comparison">
+      <article class="side bad">
+        <div class="label"><span class="badge">AV</span> Standard Asset Vision dbo</div>
+        <h2>Already has the raw costing spine</h2>
+        <p>The other Asset Vision schemas consistently include the generic job, resource, planned-resource, and timesheet tables.</p>
+
+        <div class="metric-grid" aria-label="Fragmented data limitations">
+          <div class="metric">
+            <strong>38-40</strong>
+            <span>Tables per source schema</span>
+          </div>
+          <div class="metric">
+            <strong>84</strong>
+            <span>Columns in <code>job</code></span>
+          </div>
+          <div class="metric">
+            <strong>24</strong>
+            <span>Columns in <code>timesheetitem</code></span>
+          </div>
+          <div class="metric">
+            <strong>24</strong>
+            <span>Columns in <code>plannedresourceitem</code></span>
+          </div>
+        </div>
+
+        <ul class="bullets">
+          <li><span><code>timesheetitem</code> carries <code>Hours</code>, <code>Minutes</code>, <code>Quantity</code>, <code>Cost</code>, <code>ResourceType</code>, and dates.</span></li>
+          <li><span><code>plannedresourceitem</code> carries the same planned hours, quantity, cost, and resource fields.</span></li>
+          <li><span>The challenge is mapping generic Asset Vision rows into a clean contract/fault/activity view.</span></li>
+        </ul>
+      </article>
+
+      <div class="divider" aria-hidden="true">
+        <div class="versus">VS</div>
+      </div>
+
+      <article class="side good">
+        <div class="label"><span class="badge">OK</span> transport_srapc</div>
+        <h2>Richer job context, not raw costing tables</h2>
+        <p><code>transport_srapc</code> is a contract/reporting schema with SRAPC-specific job and attribute views.</p>
+
+        <div class="metric-grid" aria-label="SRAPC data coverage">
+          <div class="metric">
+            <strong>42</strong>
+            <span>Tables/views in <code>transport_srapc</code></span>
+          </div>
+          <div class="metric">
+            <strong>117k</strong>
+            <span>Rows in <code>uvw_job</code></span>
+          </div>
+          <div class="metric">
+            <strong>115k</strong>
+            <span>Rows in <code>uvw_job_all_attributes</code></span>
+          </div>
+          <div class="metric">
+            <strong>0</strong>
+            <span>Raw <code>timesheetitem</code> / <code>plannedresourceitem</code> tables</span>
+          </div>
+        </div>
+
+        <ul class="bullets">
+          <li><span>Good SRAPC context: <code>uvw_job</code>, <code>uvw_job_all_attributes</code>, <code>uvw_pbi_master_jobs_export</code>, ArcGIS jobs.</span></li>
+          <li><span>Missing from this schema: exact raw <code>jobasset</code>, <code>resource</code>, <code>timesheetitem</code>, and <code>plannedresourceitem</code>.</span></li>
+          <li><span>Costing must bridge SRAPC job/fault semantics to all-contract costing tables in <code>transport</code>.</span></li>
+        </ul>
+      </article>
+    </section>
+
+    <aside class="formula" aria-label="Calculation method">
+      <strong>Correct costing path</strong>
+      <div><code>transport_srapc.uvw_job*</code> + <code>transport.utbl_ref_job_costing_fault_map</code> + <code>transport.utbl_job_costing_timesheets_all_contracts</code></div>
+      <strong>= clean unit cost</strong>
+    </aside>
+  </main>
+
+  <section class="notes" aria-label="Source notes">
+    <h2>Speaker and source notes</h2>
+    <p>Use this as the talk track: "The earlier assumption was too strong. The standard Asset Vision schemas already contain job, timesheet, planned-resource, and resource tables. The actual discrepancy is that <code>transport_srapc</code> is a richer SRAPC reporting schema, not a raw Asset Vision <code>dbo</code> schema."</p>
+    <p>Databricks-backed checks: source Asset Vision schemas such as <code>ext_mssql_asset_vision_ven_gen7.dbo</code>, <code>ext_mssql_asset_vision_ven_rms.dbo</code>, <code>ext_mssql_asset_vision_vns_gen7.dbo</code>, <code>ext_mssql_asset_vision_vnz_gen7.dbo</code>, and <code>ext_mssql_asset_vision_vsm_gen7.dbo</code> all include <code>job</code>, <code>jobasset</code>, <code>timesheetitem</code>, <code>plannedresourceitem</code>, <code>resource</code>, <code>assetattribute</code>, and <code>formfield</code>.</p>
+    <p><code>transport_srapc</code> has 42 tables/views and includes <code>uvw_job</code> with 117,015 rows and <code>uvw_job_all_attributes</code> with 115,004 rows, but no raw <code>jobasset</code>, <code>timesheetitem</code>, <code>plannedresourceitem</code>, <code>resource</code>, or <code>formfield</code> table in that schema.</p>
+    <p>For pothole unit cost, the clean path is to identify SRAPC pothole jobs through SRAPC job/activity/fault fields, then join or reconcile to the all-contract costing spine: <code>transport.utbl_job_costing_timesheets_all_contracts</code>, <code>transport.utbl_timesheetitem_jobs_allcontract</code>, and <code>transport.utbl_ref_job_costing_fault_map</code>.</p>
+  </section>
+</body>
+</html>

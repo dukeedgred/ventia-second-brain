@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SRAPC Analytics Summary</title>
+  <style>
+    :root {
+      --ink: #15222e;
+      --muted: #566372;
+      --paper: #f7f3ea;
+      --white: #ffffff;
+      --line: #d8d0c2;
+      --blue: #244f72;
+      --green: #0f6f5c;
+      --gold: #a66f1c;
+      --red: #9f3a33;
+      --slate: #263340;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      background: #1c2229;
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    body {
+      padding: 0;
+    }
+
+    code {
+      color: inherit;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight: 900;
+      overflow-wrap: anywhere;
+      word-break: normal;
+    }
+
+    .slide {
+      width: 1600px;
+      height: 900px;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      padding: 36px 54px 34px;
+      background: var(--paper);
+      box-shadow: 0 18px 70px rgba(0, 0, 0, 0.32);
+    }
+
+    .slide::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(159, 58, 51, 0.12), transparent 34%, transparent 64%, rgba(15, 111, 92, 0.14)),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.65), transparent 44%);
+      pointer-events: none;
+    }
+
+    .inner {
+      position: relative;
+      z-index: 1;
+      height: 100%;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 14px;
+    }
+
+    .topline,
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+      line-height: 1.15;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .topline span:last-child,
+    .footer span:last-child {
+      text-align: right;
+      text-transform: none;
+      font-weight: 800;
+      max-width: 1080px;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin: 0;
+    }
+
+    h1 {
+      max-width: 1220px;
+      font-size: 40px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .subtitle {
+      max-width: 1350px;
+      color: var(--ink);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1.15;
+    }
+
+    .content {
+      display: grid;
+      grid-template-rows: auto 454px 104px;
+      gap: 11px;
+      min-height: 0;
+    }
+
+    .intro {
+      display: grid;
+      gap: 10px;
+      border-left: 9px solid var(--green);
+      padding-left: 20px;
+    }
+
+    .comparison {
+      display: grid;
+      grid-template-columns: 0.88fr 1.12fr;
+      gap: 20px;
+      min-height: 0;
+    }
+
+    .panel {
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+      gap: 10px;
+      min-height: 0;
+      padding: 16px 18px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-top: 8px solid var(--red);
+    }
+
+    .panel.good {
+      border-top-color: var(--green);
+    }
+
+    .panel h2 {
+      font-size: 24px;
+      line-height: 1;
+      letter-spacing: 0;
+    }
+
+    .panel .tag {
+      width: fit-content;
+      padding: 5px 8px;
+      color: var(--white);
+      background: var(--slate);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .panel.bad .tag {
+      background: var(--red);
+    }
+
+    .panel.good .tag {
+      background: var(--green);
+    }
+
+    .bullets {
+      display: grid;
+      gap: 9px;
+      align-content: start;
+    }
+
+    .bullet {
+      display: grid;
+      grid-template-columns: 12px 1fr;
+      gap: 10px;
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.16;
+    }
+
+    .bullet::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      margin-top: 6px;
+      background: var(--red);
+    }
+
+    .good .bullet::before {
+      background: var(--green);
+    }
+
+    .issue-list {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+
+    .issue {
+      padding: 8px 11px;
+      background: #fffaf1;
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--red);
+    }
+
+    .issue b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.05;
+    }
+
+    .issue span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.16;
+    }
+
+    .driver-table {
+      display: grid;
+      grid-template-columns: 155px 1fr 255px;
+      background: var(--white);
+      border: 1px solid var(--line);
+    }
+
+    .driver-table > div {
+      min-height: 36px;
+      padding: 6px 8px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.1;
+      overflow-wrap: anywhere;
+    }
+
+    .driver-table > div:nth-child(3n) {
+      border-right: 0;
+    }
+
+    .driver-table .head {
+      min-height: 30px;
+      color: var(--white);
+      background: var(--slate);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+    }
+
+    .driver-table .family {
+      color: var(--ink);
+      background: #fbf8f0;
+      font-weight: 900;
+    }
+
+    .driver-table .srapc {
+      color: var(--green);
+      font-weight: 900;
+    }
+
+    .takeaway {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+
+    .metric {
+      min-height: 92px;
+      padding: 10px 14px;
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid var(--line);
+      border-left: 7px solid var(--gold);
+    }
+
+    .metric b {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 20px;
+      line-height: 1.05;
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.18;
+    }
+
+    @media print {
+      body {
+        padding: 0;
+        background: #fff;
+      }
+
+      .slide {
+        box-shadow: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <section class="slide" aria-label="SRAPC versus Asset Vision summary">
+    <div class="inner">
+      <header class="topline">
+        <span>Transport analytics</span>
+        <span>One-slide summary: what Asset Vision lacks versus what SRAPC adds</span>
+      </header>
+
+      <main class="content">
+        <section class="intro">
+          <h1>Asset Vision has actual cost fields, but raw job-level cost is uneven. SRAPC adds the missing drivers.</h1>
+          <p class="subtitle">Validation uses raw Asset Vision source actuals from <code>timesheetitem.Cost</code>; <code>plannedresourceitem</code> is excluded because it is planned, not historical actual. SRAPC adds the traffic, incident/KPI, workflow, rework and civil-risk fields needed to explain cost where actual cost is populated.</p>
+        </section>
+
+        <section class="comparison">
+          <article class="panel bad">
+            <span class="tag">Asset Vision as-is</span>
+            <h2>The validated gaps are different types of issues.</h2>
+            <div class="issue-list">
+              <div class="issue">
+                <b>Cost data quality issue</b>
+                <span>Actual source cost checked: <code>timesheetitem.Cost</code> only. Gen7 is partly populated; RMS is mostly missing / $1-like; VicRoads is mostly zero / missing; VSM has no populated timesheet cost.</span>
+              </div>
+              <div class="issue">
+                <b>Analytics-readiness issue</b>
+                <span>Traffic, incident/KPI and follow-up values are not exposed as a clean job-level driver set; they need formfield pivots and workflow/comment joins.</span>
+              </div>
+              <div class="issue">
+                <b>Data availability issue</b>
+                <span>Civil-risk fields such as functional failure, risk rating, P-F interval and immediate response time are not found as raw Asset Vision physical columns.</span>
+              </div>
+              <div class="issue">
+                <b>Cost lineage issue</b>
+                <span>Power BI cost still needs lineage back to the Asset Vision source / joins. This slide should not treat planned resource cost as historical actual.</span>
+              </div>
+            </div>
+          </article>
+
+          <article class="panel good">
+            <span class="tag">SRAPC</span>
+            <h2>Extra fields available for cost analysis.</h2>
+            <div class="driver-table" aria-label="SRAPC driver columns">
+              <div class="head">Driver</div>
+              <div class="head">Raw columns exposed by SRAPC</div>
+              <div class="head">Found in</div>
+
+              <div class="family">Traffic management</div>
+              <div><code>Traffic Management - Is traffic management to be installed?</code>; <code>Length of Closure (m)</code>; <code>Number Of Lanes Unavailable</code>; <code>TGS Number</code></div>
+              <div class="srapc"><code>uvw_job_all_attributes</code>; <code>uvw_pbi_master_jobs_export</code></div>
+
+              <div class="family">Incident and KPI</div>
+              <div><code>Incident - Is this an Incident?</code>; <code>Is there Asset Damage?</code>; <code>KPI Exemption</code>; <code>KPI Exemption Reason</code>; <code>CRM Number</code></div>
+              <div class="srapc"><code>uvw_job_all_attributes</code>; most PBI aliases in <code>uvw_pbi_master_jobs_export</code></div>
+
+              <div class="family">Workflow and rework</div>
+              <div><code>Current Workflow Status Name</code>; <code>Current Workflow Reason</code>; <code>Latest Comment</code>; <code>Follow-Up Work Details - Is follow up work required?</code></div>
+              <div class="srapc"><code>uvw_job_all_attributes</code>; workflow/comment joins</div>
+
+              <div class="family">Civil risk model</div>
+              <div><code>Functional_Failure</code>; <code>Potential_Failure_Mode___Including_but_not_inclusive_of</code>; <code>Risk_Rating</code>; <code>P-F_Interval</code>; <code>Immediate_Response_Time</code></div>
+              <div class="srapc"><code>utbl_tmp_civil_master</code>; <code>uvw_av_tmp_combined</code></div>
+            </div>
+          </article>
+        </section>
+
+        <section class="takeaway" aria-label="Concrete pothole example">
+          <div class="metric">
+            <b>Example question</b>
+            <span>For pothole jobs, how much extra cost is associated with traffic management, incident/KPI treatment, or follow-up work?</span>
+          </div>
+          <div class="metric">
+            <b>Asset Vision as-is</b>
+            <span>Actual <code>timesheetitem.Cost</code> is inconsistent, and driver fields must be rebuilt from formfield rows and workflow/comment joins before cost can be grouped by those conditions.</span>
+          </div>
+          <div class="metric">
+            <b>SRAPC</b>
+            <span>Group actual Asset Vision <code>timesheetitem.Cost</code> by named SRAPC columns for traffic management required, KPI exemption, and follow-up work required.</span>
+          </div>
+        </section>
+      </main>
+
+      <footer class="footer">
+        <span>Bottom line</span>
+        <span>Historical cost basis: Asset Vision <code>timesheetitem.Cost</code> only; exclude planned resource cost; use SRAPC for explanatory drivers.</span>
+      </footer>
+    </div>
+  </section>
+</body>
+</html>

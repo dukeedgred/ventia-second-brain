@@ -394,11 +394,11 @@ def normalise_sets(result_sets: dict[str, list[dict[str, Any]]]) -> dict[str, An
         "top_asset_types": top_asset_types,
         "top_projects": top_projects,
         "assumptions": [
-            "All extract work is aggregated in Databricks before downloading to the laptop.",
-            "The map uses the first coordinate found in each Asset Vision WKT value as a representative point for aggregation.",
-            "Asset class comparison uses Asset Vision AssetType as the primary class and Classification as supporting detail.",
-            f"Grid aggregation rounds coordinates to {GRID_DEGREES} degrees to keep the browser and laptop responsive.",
-            "Rows without valid Australia/New Zealand extent lon/lat coordinates are excluded from the map but still appear in the class summary via geocoded row counts.",
+            "This is a location overview, not an exact engineering drawing.",
+            "Nearby assets are grouped into circles so the browser stays fast.",
+            "Some line or polygon assets are shown using a representative point.",
+            "Asset type comes from Asset Vision. Some names may need cleanup before executive reporting.",
+            "Records without a usable Australia/New Zealand location are not shown on the map.",
         ],
     }
 
@@ -430,6 +430,15 @@ def render_html(data: dict[str, Any]) -> str:
     classes = data["classes"]
     summary = data["summary"]
     totals = data["totals"]
+    source_label_by_context = {row["source_context"]: row["source_label"] for row in summary}
+    source_label_by_context.update({context: label for context, _catalog, label in SOURCE_CONTEXTS})
+
+    def friendly_source(row: dict[str, Any]) -> str:
+        return row.get("source_label") or source_label_by_context.get(
+            row.get("source_context", ""),
+            row.get("source_context", ""),
+        )
+
     summary_rows = "\n".join(
         f"""
         <tr>
@@ -444,7 +453,7 @@ def render_html(data: dict[str, Any]) -> str:
     class_rows = "\n".join(
         f"""
         <tr data-project="{html.escape(row['project'])}" data-asset-type="{html.escape(row['asset_type'])}">
-          <td>{html.escape(row['project'])}<br><span>{html.escape(row['source_context'])}</span></td>
+          <td>{html.escape(row['project'])}<br><span>{html.escape(friendly_source(row))}</span></td>
           <td>{html.escape(row['asset_type'])}</td>
           <td>{row['asset_count']:,}</td>
           <td>{row['geocoded_rows']:,}</td>
@@ -457,7 +466,7 @@ def render_html(data: dict[str, Any]) -> str:
     skipped_note = ""
     if data.get("skipped_contexts"):
         skipped_rows = "".join(
-            f"<li><strong>{html.escape(row['source_context'])}</strong>: {html.escape(row['reason'])}</li>"
+            f"<li><strong>{html.escape(source_label_by_context.get(row['source_context'], row['source_context']))}</strong>: source table was not available in the current Databricks environment.</li>"
             for row in data["skipped_contexts"]
         )
         skipped_note = f"<ul>{skipped_rows}</ul>"
@@ -467,7 +476,7 @@ def render_html(data: dict[str, Any]) -> str:
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Transport Asset Geography Overview</title>
+  <title>Where Our Transport Assets Are</title>
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
   <style>
     :root {{
@@ -525,6 +534,28 @@ def render_html(data: dict[str, Any]) -> str:
     .label {{ color: var(--muted); font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; }}
     .value {{ font-size: 30px; font-weight: 850; margin-top: 6px; }}
     .note {{ color: var(--muted); font-size: 12px; margin-top: 7px; }}
+    .reader-guide {{
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 16px;
+    }}
+    .guide-card {{
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px 15px;
+      box-shadow: var(--shadow);
+    }}
+    .guide-card strong {{
+      display: block;
+      font-size: 14px;
+      margin-bottom: 5px;
+    }}
+    .guide-card span {{
+      color: var(--muted);
+      font-size: 13px;
+    }}
     .grid {{
       display: grid;
       grid-template-columns: minmax(0, 1.25fr) minmax(380px, .75fr);
@@ -604,6 +635,7 @@ def render_html(data: dict[str, Any]) -> str:
     @media (max-width: 1100px) {{
       .grid {{ grid-template-columns: 1fr; }}
       .kpis {{ grid-template-columns: repeat(2, minmax(0, 1fr)); }}
+      .reader-guide {{ grid-template-columns: 1fr; }}
       #map {{ height: 560px; }}
     }}
   </style>
@@ -611,19 +643,25 @@ def render_html(data: dict[str, Any]) -> str:
 <body>
   <header>
     <div class="shell">
-      <div class="eyebrow">Transport source asset geography</div>
-      <h1>Transport Asset Geography Overview</h1>
-      <p class="subtitle">Aggregated Asset Vision source data across documented Transport source contexts. The map uses grid-level counts from WKT, not raw asset geometry, to keep the laptop and browser responsive.</p>
+      <div class="eyebrow">Transport assets</div>
+      <h1>Where Our Transport Assets Are</h1>
+      <p class="subtitle">A simple map of Asset Vision records by project and asset type. Bigger circles mean more assets in that area. Use the filters to answer: where are the assets, which projects have the most, and what asset types dominate?</p>
     </div>
   </header>
 
   <main>
     <section class="kpis">
-      <article class="card"><div class="label">Source contexts</div><div class="value">{totals['source_contexts']:,}</div><div class="note">Asset Vision source catalogs included</div></article>
-      <article class="card"><div class="label">Assets counted</div><div class="value">{totals['assets']:,}</div><div class="note">Distinct source asset IDs, summed by context</div></article>
-      <article class="card"><div class="label">Geo rows</div><div class="value">{totals['valid_geo_rows']:,}</div><div class="note">Rows with valid ANZ lon/lat</div></article>
-      <article class="card"><div class="label">Map grid cells</div><div class="value">{totals['grid_cells']:,}</div><div class="note">{GRID_DEGREES}-degree aggregated cells</div></article>
-      <article class="card"><div class="label">Skipped contexts</div><div class="value">{totals['skipped_contexts']:,}</div><div class="note">Missing required source tables in this environment</div></article>
+      <article class="card"><div class="label">Data sources</div><div class="value">{totals['source_contexts']:,}</div><div class="note">Asset Vision sources included</div></article>
+      <article class="card"><div class="label">Assets found</div><div class="value">{totals['assets']:,}</div><div class="note">Total asset records counted</div></article>
+      <article class="card"><div class="label">Assets on map</div><div class="value">{totals['valid_geo_rows']:,}</div><div class="note">Records with usable location</div></article>
+      <article class="card"><div class="label">Map areas</div><div class="value">{totals['grid_cells']:,}</div><div class="note">Nearby assets grouped together</div></article>
+      <article class="card"><div class="label">Missing source</div><div class="value">{totals['skipped_contexts']:,}</div><div class="note">One source was unavailable</div></article>
+    </section>
+
+    <section class="reader-guide">
+      <div class="guide-card"><strong>1. Start with the map</strong><span>Look for the largest circles. They show where the most assets are concentrated.</span></div>
+      <div class="guide-card"><strong>2. Filter to a project or asset type</strong><span>Use the dropdowns to focus on one contract, one project, or one asset type.</span></div>
+      <div class="guide-card"><strong>3. Use the side panels for the story</strong><span>The right-hand charts explain which asset types and projects drive the numbers.</span></div>
     </section>
 
     <section class="grid">
@@ -631,16 +669,16 @@ def render_html(data: dict[str, Any]) -> str:
         <section class="panel">
           <div class="panel-head">
             <div>
-              <h2>Full Transport Asset Map</h2>
-              <p class="hint">Circle size reflects asset count in the aggregated grid cell. Use filters to compare project/source contexts and asset classes.</p>
+              <h2>Asset Map</h2>
+              <p class="hint">Each circle is a group of nearby assets. Bigger circle = more assets. Colours show the source system group.</p>
             </div>
             <div class="legend" id="legend"></div>
           </div>
           <div class="panel-body">
             <div class="controls">
-              <select id="projectFilter"><option value="">All projects</option></select>
-              <select id="assetTypeFilter"><option value="">All asset classes</option></select>
-              <input id="searchBox" type="search" placeholder="Search project, source or asset class">
+              <select id="projectFilter"><option value="">All projects / contracts</option></select>
+              <select id="assetTypeFilter"><option value="">All asset types</option></select>
+              <input id="searchBox" type="search" placeholder="Search project or asset type">
             </div>
             <div id="map"></div>
           </div>
@@ -649,8 +687,8 @@ def render_html(data: dict[str, Any]) -> str:
         <section class="panel">
           <div class="panel-head">
             <div>
-              <h2>Asset Classes By Project</h2>
-              <p class="hint">Aggregated counts. The table is capped visually but the JSON embedded in the page contains all aggregated rows.</p>
+              <h2>What Assets Are In Each Project?</h2>
+              <p class="hint">Use this table when someone asks what asset types sit under a contract or project.</p>
             </div>
           </div>
           <div class="panel-body">
@@ -658,11 +696,11 @@ def render_html(data: dict[str, Any]) -> str:
               <table>
                 <thead>
                   <tr>
-                    <th>Project / context</th>
-                    <th>Asset class</th>
+                    <th>Project / contract</th>
+                    <th>Asset type</th>
                     <th>Assets</th>
-                    <th>Geo rows</th>
-                    <th>Classifications</th>
+                    <th>Mapped records</th>
+                    <th>Detail groups</th>
                   </tr>
                 </thead>
                 <tbody id="classRows">{class_rows}</tbody>
@@ -674,32 +712,32 @@ def render_html(data: dict[str, Any]) -> str:
 
       <aside>
         <section class="panel">
-          <div class="panel-head"><div><h2>Top Asset Classes</h2><p class="hint">Across all included source contexts.</p></div></div>
+          <div class="panel-head"><div><h2>Most Common Asset Types</h2><p class="hint">The asset types with the most records in Asset Vision.</p></div></div>
           <div class="panel-body">{bars_html(data['top_asset_types'], 'asset_type', 'asset_count')}</div>
         </section>
 
         <section class="panel">
-          <div class="panel-head"><div><h2>Top Projects / Contracts</h2><p class="hint">Based on Asset Vision Contract where available; otherwise source context.</p></div></div>
+          <div class="panel-head"><div><h2>Largest Projects / Contracts</h2><p class="hint">Projects or contracts with the most asset records.</p></div></div>
           <div class="panel-body">{bars_html(data['top_projects'], 'project', 'asset_count')}</div>
         </section>
 
         <section class="panel">
-          <div class="panel-head"><div><h2>Source Coverage</h2><p class="hint">Counts before and after valid Australian coordinate filtering.</p></div></div>
+          <div class="panel-head"><div><h2>Data Coverage</h2><p class="hint">How much data was available, and how much had a usable map location.</p></div></div>
           <div class="panel-body table-wrap">
             <table>
-              <thead><tr><th>Source</th><th>Assets</th><th>Geo rows</th><th>Rows</th></tr></thead>
+              <thead><tr><th>Data source</th><th>Assets</th><th>Mapped records</th><th>Total rows</th></tr></thead>
               <tbody>{summary_rows}</tbody>
             </table>
           </div>
         </section>
 
         <section class="panel">
-          <div class="panel-head"><div><h2>Assumptions</h2><p class="hint">Kept deliberately simple for a fast demo.</p></div></div>
+          <div class="panel-head"><div><h2>What To Remember</h2><p class="hint">Plain-language notes for non-technical viewers.</p></div></div>
           <div class="panel-body"><ul>{notes}</ul></div>
         </section>
 
         <section class="panel">
-          <div class="panel-head"><div><h2>Skipped Source Contexts</h2><p class="hint">Documented but unavailable or incomplete in the current Databricks environment.</p></div></div>
+          <div class="panel-head"><div><h2>Missing Data</h2><p class="hint">One documented source was not available when this page was generated.</p></div></div>
           <div class="panel-body">{skipped_note or '<p class="hint">None skipped.</p>'}</div>
         </section>
       </aside>
@@ -714,8 +752,10 @@ def render_html(data: dict[str, Any]) -> str:
     const classes = data.classes;
     const fmt = new Intl.NumberFormat('en-AU');
     const palette = ['#235e9f','#17847d','#27804a','#aa5a00','#7b4ea3','#b72f56','#52606d','#006d9c','#6f6a00','#bf4f24'];
-    const contexts = [...new Set(points.map((row) => row.source_context))].sort();
-    const colorByContext = Object.fromEntries(contexts.map((context, index) => [context, palette[index % palette.length]]));
+    const sourceLabelByContext = Object.fromEntries(data.source_contexts.map((row) => [row.source_context, row.label]));
+    const friendlySource = (row) => row.source_label || sourceLabelByContext[row.source_context] || row.source_context;
+    const sources = [...new Set(points.map((row) => friendlySource(row)))].sort();
+    const colorBySource = Object.fromEntries(sources.map((source, index) => [source, palette[index % palette.length]]));
 
     const map = L.map('map', {{ preferCanvas: true }}).setView([-27.8, 134.2], 4);
     L.tileLayer('https://{{s}}.tile.openstreetmap.org/{{z}}/{{x}}/{{y}}.png', {{
@@ -736,7 +776,7 @@ def render_html(data: dict[str, Any]) -> str:
 
     populateSelect('projectFilter', [...new Set(points.map((row) => row.project))].sort());
     populateSelect('assetTypeFilter', [...new Set(points.map((row) => row.asset_type))].sort());
-    document.getElementById('legend').innerHTML = contexts.map((context) => `<span><i class="swatch" style="background:${{colorByContext[context]}}"></i>${{context}}</span>`).join('');
+    document.getElementById('legend').innerHTML = sources.map((source) => `<span><i class="swatch" style="background:${{colorBySource[source]}}"></i>${{source}}</span>`).join('');
 
     function filteredPoints() {{
       const project = document.getElementById('projectFilter').value;
@@ -746,7 +786,7 @@ def render_html(data: dict[str, Any]) -> str:
         if (project && row.project !== project) return false;
         if (assetType && row.asset_type !== assetType) return false;
         if (!search) return true;
-        const text = `${{row.project}} ${{row.source_context}} ${{row.source_label}} ${{row.asset_type}} ${{row.example_classification || ''}}`.toLowerCase();
+        const text = `${{row.project}} ${{friendlySource(row)}} ${{row.asset_type}} ${{row.example_classification || ''}}`.toLowerCase();
         return text.includes(search);
       }});
     }}
@@ -757,14 +797,15 @@ def render_html(data: dict[str, Any]) -> str:
       let bounds = [];
       rows.forEach((row) => {{
         const radius = Math.max(4, Math.min(26, 3 + Math.sqrt(row.asset_count) * 1.1));
+        const source = friendlySource(row);
         const marker = L.circleMarker([row.lat, row.lon], {{
           radius,
-          color: colorByContext[row.source_context] || '#235e9f',
+          color: colorBySource[source] || '#235e9f',
           weight: 1,
-          fillColor: colorByContext[row.source_context] || '#235e9f',
+          fillColor: colorBySource[source] || '#235e9f',
           fillOpacity: 0.42
         }});
-        marker.bindTooltip(`<strong>${{row.project}}</strong><br>${{row.asset_type}}<br>${{fmt.format(row.asset_count)}} assets<br>${{row.source_label}}`, {{ sticky: true }});
+        marker.bindTooltip(`<strong>${{row.project}}</strong><br>${{row.asset_type}}<br>${{fmt.format(row.asset_count)}} assets in this area<br>${{source}}`, {{ sticky: true }});
         marker.addTo(layer);
         bounds.push([row.lat, row.lon]);
       }});
@@ -783,11 +824,11 @@ def render_html(data: dict[str, Any]) -> str:
         if (project && row.project !== project) return false;
         if (assetType && row.asset_type !== assetType) return false;
         if (!search) return true;
-        return `${{row.project}} ${{row.source_context}} ${{row.asset_type}}`.toLowerCase().includes(search);
+        return `${{row.project}} ${{friendlySource(row)}} ${{row.asset_type}}`.toLowerCase().includes(search);
       }}).slice(0, 500);
       document.getElementById('classRows').innerHTML = rows.map((row) => `
         <tr>
-          <td>${{row.project}}<br><span>${{row.source_context}}</span></td>
+          <td>${{row.project}}<br><span>${{friendlySource(row)}}</span></td>
           <td>${{row.asset_type}}</td>
           <td>${{fmt.format(row.asset_count)}}</td>
           <td>${{fmt.format(row.geocoded_rows)}}</td>
@@ -824,9 +865,9 @@ def write_outputs(data: dict[str, Any], sql: str) -> None:
     (OUT_DIR / "transport_asset_geo_query.sql").write_text(sql, encoding="utf-8")
     (OUT_DIR / "transport_asset_geo_map.html").write_text(render_html(data), encoding="utf-8")
     (ROOT / "README.md").write_text(
-        f"""# Transport Asset Geography Overview
+        f"""# Where Our Transport Assets Are
 
-This analysis unions documented Transport Asset Vision source asset data in Databricks, aggregates it before download, and writes a simple map/report.
+This report shows where Transport Asset Vision records are located, which projects have the most assets, and which asset types dominate.
 
 ## Open
 
@@ -834,8 +875,8 @@ Open `output/transport_asset_geo_map.html`.
 
 ## Outputs
 
-- `output/transport_asset_geo_map.html`: interactive full-view Australian map and project/class comparison.
-- `output/transport_asset_geo_aggregated.json`: aggregated grid, source and class counts embedded in the HTML.
+- `output/transport_asset_geo_map.html`: interactive map and project/asset type summary.
+- `output/transport_asset_geo_aggregated.json`: source data used by the HTML page.
 - `output/transport_asset_geo_query.sql`: SQL used for Databricks aggregation.
 
 ## Scope
@@ -849,9 +890,10 @@ Skipped source contexts:
 ## Notes
 
 - Generated at {data['generated_at_utc']}.
-- Data is aggregated in Databricks before being written locally.
-- Map coordinates use the first coordinate found in each WKT geometry as a representative point.
-- Asset class comparison uses Asset Vision `AssetType`.
+- This is a location overview, not an exact engineering drawing.
+- Nearby assets are grouped into circles so the browser stays fast.
+- Some line or polygon assets are shown using a representative point.
+- Asset type comes from Asset Vision `AssetType`.
 """,
         encoding="utf-8",
     )
