@@ -1,0 +1,2478 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Data Asset · Transport POV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A2726;--teal:#0E7A78;--teal-deep:#0B3B3C;--lime:#C4E000;--lime-deep:#8FA600;
+    --h2c:#3E8F68;
+    --bg:#F3F5F1;--card:#FFFFFF;--line:#E4E8E3;--line-soft:#EDF0EA;--muted:#5C6A67;--faint:#8C9895;
+    --exists:#1F8F5F;--partial:#C98A00;--gap:#C43F28;--unknown:#8D9997;
+    --exists-bg:#E4F3EA;--partial-bg:#FCF0D6;--gap-bg:#FAE3DC;--unknown-bg:#EAEEEC;
+    --radius:16px;--radius-sm:10px;
+    --shadow-sm:0 1px 2px rgba(9,38,37,.05);
+    --shadow-md:0 1px 2px rgba(9,38,37,.05),0 10px 26px -6px rgba(9,38,37,.10);
+    --shadow-lg:0 6px 16px -4px rgba(9,38,37,.14),0 22px 46px -12px rgba(9,38,37,.16);
+    --shadow:var(--shadow-md);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);
+    background:
+      radial-gradient(760px 420px at 100% -8%,rgba(14,122,120,.07),transparent 60%),
+      radial-gradient(600px 360px at -6% 8%,rgba(196,224,0,.08),transparent 55%),
+      var(--bg);
+    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+  ::selection{background:rgba(196,224,0,.35);color:var(--ink)}
+
+  @keyframes riseIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  header{position:relative;overflow:hidden;background:linear-gradient(150deg,#0A3231 0%,#0E4F4E 58%,#125D5B 100%);
+    color:#EAF3F1;border-bottom:3px solid var(--lime)}
+  header::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(480px 260px at 88% 0%,rgba(196,224,0,.16),transparent 65%),
+      radial-gradient(360px 220px at 8% 110%,rgba(255,255,255,.06),transparent 60%)}
+  .head-inner{position:relative;padding:28px 20px 24px;max-width:1240px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;
+    font-weight:800;letter-spacing:.02em;font-size:12.5px;text-transform:uppercase}
+  .brand .er{color:var(--lime)}.brand .x{color:#6E9997;font-weight:600}.brand .vt{color:#CFE0DE}
+  h1{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.025em;
+    font-size:clamp(25px,4.4vw,39px);line-height:1.05;margin:16px 0 9px}
+  h1 .accent{color:var(--lime)}
+  .sub{color:#B9CFCD;max-width:64ch;font-size:15px;margin:0}
+  .sub code{font-family:"IBM Plex Mono",monospace;font-size:.86em;color:#DCEBE9;
+    background:rgba(255,255,255,.09);padding:2px 7px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
+
+  .assume{background:#FFFBEF;border-bottom:1px solid #F0E5B8;color:#6B520A;font-size:13.5px}
+  .assume .wrap{padding:12px 20px;display:flex;gap:12px;align-items:flex-start}
+  .assume b{font-weight:600}
+  .assume .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--partial);margin-top:1px;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:"Archivo",sans-serif}
+  .assume .dot::before{content:"!"}
+  .assume.qa{background:#EDF7F5;border-bottom-color:#C9E6E1;color:#0B3B3C}
+  .assume.qa .dot{background:var(--teal)}
+  .assume.qa .dot::before{content:"✓"}
+
+  .summary{padding:26px 0 8px}
+  .summary-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .summary-head h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:17px;margin:0;letter-spacing:-.01em}
+  .shown{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+  .shown b{color:var(--ink)}
+  .condition{display:flex;height:42px;border-radius:12px;overflow:hidden;border:1px solid var(--line);
+    background:var(--card);box-shadow:var(--shadow-sm)}
+  .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;font-weight:500;min-width:0;transition:flex-basis .4s ease;white-space:nowrap;overflow:hidden;
+    position:relative}
+  .seg+.seg::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,.28)}
+  .seg.exists{background:linear-gradient(180deg,#28A06A,var(--exists))}.seg.partial{background:linear-gradient(180deg,#DCA426,var(--partial))}
+  .seg.gap{background:linear-gradient(180deg,#D2543C,var(--gap))}.seg.unknown{background:linear-gradient(180deg,#A2ACA9,var(--unknown))}
+  .seg.h1{background:linear-gradient(180deg,#159795,var(--teal))}.seg.h2{background:linear-gradient(180deg,#4FA277,var(--h2c))}.seg.h3{background:linear-gradient(180deg,#A6C000,var(--lime-deep))}
+  .seg span{padding:0 8px}
+  .chips-stat{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+  .stat{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px 6px 11px;font-size:13px;color:var(--muted);box-shadow:var(--shadow-sm)}
+  .stat .sw{width:9px;height:9px;border-radius:3px}
+  .stat b{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-weight:500}
+  .sw.exists{background:var(--exists)}.sw.partial{background:var(--partial)}
+  .sw.gap{background:var(--gap)}.sw.unknown{background:var(--unknown)}
+  .sw.h1{background:var(--teal)}.sw.h2{background:var(--h2c)}.sw.h3{background:var(--lime-deep)}
+
+  .controls{position:sticky;top:0;z-index:20;background:rgba(243,245,241,.88);backdrop-filter:blur(10px) saturate(1.1);
+    -webkit-backdrop-filter:blur(10px) saturate(1.1);padding:14px 0;margin-top:16px;border-bottom:1px solid var(--line);
+    transition:box-shadow .2s ease}
+  .viewswitch{display:inline-flex;background:#E7EBE5;border-radius:12px;padding:4px;gap:3px;margin-bottom:12px}
+  .vbtn{border:none;background:transparent;font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;
+    color:var(--muted);padding:8px 16px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:7px;
+    transition:background .15s ease,color .15s ease}
+  .vbtn[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .vbtn:not([aria-selected="true"]):hover{color:var(--teal-deep)}
+  .vbtn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .vbtn .n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint)}
+  .vbtn[aria-selected="true"] .n{color:var(--teal)}
+
+  .area-row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+  .area-lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-right:2px;font-weight:600}
+  .achip{padding:7px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12.5px;
+    cursor:pointer;color:var(--muted);font-family:"Archivo",sans-serif;font-weight:600;
+    transition:border-color .15s ease,color .15s ease,background .15s ease,transform .1s ease}
+  .achip:hover{border-color:var(--teal);color:var(--teal-deep)}
+  .achip[aria-pressed="true"]{border-color:var(--ink);color:#fff;background:var(--ink);box-shadow:var(--shadow-sm)}
+  .achip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .area-cap{font-size:12.5px;color:var(--muted);margin-left:auto;display:flex;align-items:center;gap:8px;text-align:right}
+  .area-cap a{color:var(--teal);text-decoration:none;border-bottom:1px solid #CDE0DE;white-space:nowrap}
+  .area-cap a:hover{border-bottom-color:var(--teal)}
+  @media (max-width:640px){.area-cap{margin-left:0;flex-basis:100%;text-align:left}}
+
+  .filters-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .controls.no-filters .filters-row,.controls.no-filters .status-row{display:none}
+  .search{flex:1 1 240px;min-width:180px;position:relative}
+  .search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line);border-radius:var(--radius-sm);
+    background:var(--card);font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+  .search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,122,120,.14)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+  select{padding:9px 30px 9px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);
+    font-family:inherit;font-size:13.5px;color:var(--ink);appearance:none;-webkit-appearance:none;cursor:pointer;
+    transition:border-color .15s ease;
+    background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' stroke='%235E6B69' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 10px center}
+  select:hover{border-color:var(--faint)}
+  select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,122,120,.14)}
+  .btn{padding:9px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);font-family:inherit;
+    font-size:13.5px;color:var(--ink);cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:7px;
+    transition:border-color .15s ease,color .15s ease,background .15s ease,transform .1s ease}
+  .btn:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn.primary:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+  .status-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .status-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .schip{padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12.5px;
+    cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;
+    transition:border-color .15s ease,color .15s ease,background .15s ease}
+  .schip:hover{border-color:var(--faint)}
+  .schip .sw{width:9px;height:9px;border-radius:3px}
+  .schip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:#fff;font-weight:500;box-shadow:var(--shadow-sm)}
+  .schip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .edit-hint{font-size:11px;color:var(--faint);margin-left:auto;display:flex;align-items:center;gap:5px}
+
+  main{padding:10px 0 60px}
+  .layer{margin-top:38px}
+  .layer-tag{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .layer-tag .lt-code{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;color:var(--teal-deep);
+    background:linear-gradient(180deg,#EAF4F3,#DDEEEC);border:1px solid #C5E0E0;border-radius:8px;padding:4px 11px;letter-spacing:.05em;text-transform:uppercase}
+  .layer-tag h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;margin:0;letter-spacing:-.015em}
+  .layer-rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin:12px 0 0}
+  .domain{margin-top:24px}
+  .domain-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+  .domain-head h4{font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;margin:0;color:var(--teal-deep)}
+  .domain-head .count{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint)}
+  .domain-note{color:var(--muted);font-size:13px;margin:4px 0 13px;max-width:80ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 17px 15px;box-shadow:var(--shadow-md);position:relative;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;animation:riseIn .35s ease both}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .card-name{font-weight:600;font-size:14.5px;line-height:1.3}
+  .card-id{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);display:block;margin-bottom:3px;letter-spacing:.03em}
+  .pill{border:none;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;padding:6px 10px;
+    border-radius:999px;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center;gap:6px;transition:filter .12s ease,transform .12s ease}
+  .pill:hover{filter:brightness(.95);transform:translateY(-1px)}
+  .pill:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .pill .sw{width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+  .pill.exists{background:var(--exists-bg);color:#1B6E48}.pill.exists .sw{background:var(--exists)}
+  .pill.partial{background:var(--partial-bg);color:#8A6708}.pill.partial .sw{background:var(--partial)}
+  .pill.gap{background:var(--gap-bg);color:#9A3020}.pill.gap .sw{background:var(--gap)}
+  .pill.unknown{background:var(--unknown-bg);color:#565F5D}.pill.unknown .sw{background:var(--unknown)}
+  .card-desc{color:var(--muted);font-size:12.8px;margin:9px 0 2px;line-height:1.45}
+  .card-flag{font-size:11.5px;color:var(--faint);font-style:italic;margin:7px 0 11px;line-height:1.45}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding-top:11px;border-top:1px dashed var(--line)}
+  .m{min-width:0}
+  .m .k{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);display:block;margin-bottom:2px}
+  .m .v{font-size:12.5px;color:var(--ink);word-break:break-word}
+  .m .v.edit{border-bottom:1px dashed var(--faint);cursor:text;outline:none;padding-bottom:1px;display:inline-block;min-width:20px;border-radius:2px}
+  .m .v.edit:focus{border-bottom:1px solid var(--teal);background:#F0F6F5}
+  .m .v.edit:hover{border-bottom-color:var(--teal)}
+  .m.wide{grid-column:1/-1}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:4px 8px;border-radius:7px;
+    background:#EEF3F2;color:var(--teal-deep);border:1px solid #DCE7E5}
+  .tag.rads{background:#F4F8DE;color:var(--lime-deep);border-color:#E6EEC1}
+
+  /* Roadmap */
+  .horizon{margin-top:32px}
+  .h-tag{display:flex;align-items:flex-start;gap:13px;margin-bottom:4px}
+  .h-code{font-family:"Archivo",sans-serif;font-weight:800;font-size:14px;color:#fff;border-radius:9px;
+    padding:6px 12px;letter-spacing:.03em;flex:0 0 auto;box-shadow:var(--shadow-sm)}
+  .h-code.h1{background:linear-gradient(155deg,#149794,var(--teal))}.h-code.h2{background:linear-gradient(155deg,#4FA277,var(--h2c))}.h-code.h3{background:linear-gradient(155deg,#A6C000,var(--lime-deep))}
+  .h-tag h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:18.5px;margin:0 0 3px;letter-spacing:-.015em}
+  .h-tag .h-desc{color:var(--muted);font-size:13px;margin:0;max-width:82ch}
+  .h-rule{height:2px;border-radius:2px;margin:13px 0 19px}
+  .h-rule.h1{background:linear-gradient(90deg,var(--teal) 0%,rgba(14,110,110,.15) 50%,transparent)}
+  .h-rule.h2{background:linear-gradient(90deg,var(--h2c) 0%,rgba(74,140,106,.15) 50%,transparent)}
+  .h-rule.h3{background:linear-gradient(90deg,var(--lime-deep) 0%,rgba(143,166,0,.15) 50%,transparent)}
+  .rm-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px;
+    box-shadow:var(--shadow-md);transition:transform .18s ease,box-shadow .18s ease;animation:riseIn .35s ease both}
+  .rm-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .rm-name{font-weight:600;font-size:14.5px;line-height:1.3;margin-bottom:10px}
+  .rm-flow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:12px}
+  .rm-target{font-size:12.8px;color:var(--ink);font-weight:500;background:#F0F6F5;border:1px solid #DCE7E5;
+    border-radius:8px;padding:6px 10px;flex:1 1 auto;min-width:120px}
+  .rm-arrow{color:var(--lime-deep);flex:0 0 auto}
+  .rm-line{font-size:12.6px;color:var(--muted);margin:0 0 6px;display:flex;gap:7px}
+  .rm-line .lab{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);
+    flex:0 0 58px;padding-top:2px}
+  .rm-line .val{color:var(--ink)}
+  .rm-line.value .val{color:var(--lime-deep);font-weight:600}
+  .rm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;padding-top:11px;border-top:1px dashed var(--line)}
+
+  /* Roadmap canvas */
+  .rm-toggle{display:flex;justify-content:flex-end;margin-bottom:16px}
+  .rm-toggle-group{display:inline-flex;background:#E7EBE5;border-radius:11px;padding:4px;gap:3px}
+  .rmt-btn{border:none;background:transparent;font-family:"Archivo",sans-serif;font-weight:600;font-size:12.5px;
+    color:var(--muted);padding:7px 13px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;
+    transition:background .15s ease,color .15s ease}
+  .rmt-btn[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .rmt-btn:not([aria-selected="true"]):hover{color:var(--teal-deep)}
+  .rmt-btn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .rm-canvas-tools{display:flex;align-items:center;gap:8px;margin-top:-6px;margin-bottom:16px}
+  .rm-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start;position:relative}
+  .rm-canvas.with-lineage{grid-template-columns:.9fr 1.9fr 1fr;gap:16px}
+  .lin-datasets{display:flex;flex-direction:column;gap:16px;min-width:0}
+  .rmc-col{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--line);border-radius:var(--radius);
+    padding:18px 17px 16px;box-shadow:var(--shadow-md);position:relative;z-index:2}
+  .rmc-col.h1{border-top-color:var(--teal)}
+  .rmc-col.h2{border-top-color:var(--h2c)}
+  .rmc-col.h3{border-top-color:var(--lime-deep)}
+  .rmc-head{display:flex;align-items:center;justify-content:space-between}
+  .rmc-count{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint)}
+  .rmc-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:16.5px;margin:11px 0 4px;letter-spacing:-.01em}
+  .rmc-desc{font-size:12.2px;color:var(--muted);line-height:1.45;margin:0 0 13px}
+  .rmc-bar{display:flex;height:7px;border-radius:4px;overflow:hidden;background:#E7EBE5;margin-bottom:16px}
+  .rmc-bar span{height:100%}
+  .rmc-lanes{display:flex;flex-direction:column;gap:13px}
+  .rmc-lane-head{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px;font-weight:500}
+  .rmc-tiles{display:flex;flex-wrap:wrap;gap:6px}
+  .rmc-tile{border:none;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;
+    letter-spacing:.02em;padding:6px 8px;border-radius:8px;transition:transform .12s ease,filter .12s ease,opacity .15s ease;
+    box-shadow:0 1px 2px rgba(9,38,37,.08)}
+  .rmc-tile:hover{transform:translateY(-2px) scale(1.05);filter:brightness(1.06)}
+  .rmc-tile:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px}
+  .rmc-tile.exists{background:var(--exists);color:#fff}
+  .rmc-tile.partial{background:var(--partial);color:#3B2600}
+  .rmc-tile.gap{background:var(--gap);color:#fff}
+  .rmc-tile.unknown{background:var(--unknown);color:#22302D}
+  .rmc-tile.active{outline:2px solid var(--teal-deep);outline-offset:1px}
+  .rmc-tile.dim{opacity:.28}
+  .rmc-foot{margin-top:15px;padding-top:12px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted)}
+  .rmc-foot b{color:var(--ink)}
+  .rmc-empty{font-size:12px;color:var(--faint);font-style:italic;margin:0}
+
+  /* Lineage rails */
+  .lin-rail{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 13px;
+    box-shadow:var(--shadow-md);position:relative;z-index:2}
+  .lin-rail-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--faint);margin:0 0 12px}
+  .lin-uc-list{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+  .lin-node,.lin-uc{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;
+    border-radius:10px;padding:8px 10px;margin-bottom:8px;cursor:pointer;font-family:inherit;
+    transition:border-color .15s ease,background .15s ease,opacity .15s ease,box-shadow .15s ease}
+  .lin-uc-list .lin-uc{margin-bottom:0}
+  .lin-node{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted)}
+  .lin-node b{color:var(--ink);font-family:"Archivo",sans-serif;font-size:12px;font-weight:600}
+  .lin-node .cnt{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--faint)}
+  .lin-node:hover,.lin-uc:hover{border-color:var(--teal)}
+  .lin-node.active,.lin-uc.active{border-color:var(--teal);background:#EAF5F3;box-shadow:0 0 0 3px rgba(14,122,120,.12)}
+  .lin-node.dim,.lin-uc.dim{opacity:.35}
+  .lin-node:focus-visible,.lin-uc:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .lin-uc-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .lin-uc .cid{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--faint)}
+  .lin-uc .ttl{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3}
+  .lin-svg{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:1}
+  @media (max-width:980px){
+    .rm-canvas,.rm-canvas.with-lineage{grid-template-columns:1fr}
+    .lin-uc-list{grid-template-columns:1fr}
+    .lin-svg{display:none}
+  }
+
+  /* Use cases */
+  .uc-intro{color:var(--muted);font-size:14px;max-width:80ch;margin:6px 0 4px}
+  .uc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:15px;margin-top:20px}
+  .uc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px 16px;
+    box-shadow:var(--shadow-md);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease;
+    animation:riseIn .35s ease both}
+  .uc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .uc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:9px}
+  .uc-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:16px;line-height:1.25;letter-spacing:-.01em}
+  .uc-type{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:5px 9px;border-radius:999px;
+    white-space:nowrap;flex:0 0 auto;text-transform:uppercase;letter-spacing:.04em}
+  .uc-type.foundation{background:#E7F1F1;color:var(--teal-deep)}
+  .uc-type.optimise{background:#E9F2EC;color:var(--h2c)}
+  .uc-type.proactive,.uc-type.predictive{background:#F3F7DE;color:var(--lime-deep)}
+  .uc-type.innovate{background:#FBF1D8;color:#8A6708}
+  .uc-outcome{color:var(--muted);font-size:13.2px;line-height:1.5;margin:0 0 14px}
+  .uc-ready{margin-bottom:12px}
+  .uc-ready-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .uc-ready-head .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+  .uc-ready-head .pc{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--ink)}
+  .uc-bar{height:9px;border-radius:999px;background:#E7EBE5;overflow:hidden;box-shadow:inset 0 1px 2px rgba(9,38,37,.06)}
+  .uc-bar span{display:block;height:100%;border-radius:999px;transition:width .5s ease}
+  .uc-needs .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:7px;display:block}
+  .uc-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .uc-chip{display:flex;align-items:center;gap:6px;font-size:11.5px;border:1px solid var(--line);border-radius:999px;
+    padding:4px 10px 4px 8px;cursor:pointer;background:#fff;color:var(--muted);transition:border-color .12s ease,color .12s ease,transform .12s ease}
+  .uc-chip:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-1px)}
+  .uc-chip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .uc-chip .sw{width:8px;height:8px;border-radius:50%}
+  .uc-chip .cid{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--faint)}
+  .uc-foot{margin-top:auto;padding-top:12px;display:flex;gap:6px;flex-wrap:wrap}
+  .uc-hook{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:4px 9px;border-radius:7px;
+    background:#EEF3F2;color:var(--teal-deep);border:1px solid #DCE7E5}
+  .uc-lever{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:4px 9px;border-radius:7px;
+    background:var(--ink);color:var(--lime);border:1px solid var(--ink);text-transform:uppercase;letter-spacing:.04em}
+  .uc-mech{font-size:12.3px;color:var(--ink);background:#F4F8DE;border:1px solid #E6EEC1;border-radius:9px;
+    padding:9px 11px;margin:0 0 13px;line-height:1.45}
+  .uc-mech .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--lime-deep);display:block;margin-bottom:3px;font-weight:700}
+
+  .lever-strip{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:10px;margin:16px 0 6px}
+  .lever-card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:var(--radius-sm);padding:12px 13px;
+    cursor:pointer;font-family:inherit;box-shadow:var(--shadow-sm);transition:border-color .15s ease,box-shadow .15s ease,transform .12s ease}
+  .lever-card:hover{border-color:var(--teal);transform:translateY(-2px);box-shadow:var(--shadow-md)}
+  .lever-card:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .lever-card[aria-pressed="true"]{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+  .lever-card .ln{font-family:"Archivo",sans-serif;font-weight:700;font-size:13px;display:flex;justify-content:space-between;align-items:baseline}
+  .lever-card .ln .cnt{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);font-weight:400}
+  .lever-card .ld{font-size:11.5px;color:var(--muted);margin-top:4px;line-height:1.4}
+
+  /* Horizontal anatomy stepper */
+  .hz-wrap{overflow-x:auto;padding:10px 2px 6px;-webkit-overflow-scrolling:touch}
+  .hz-flow{display:flex;align-items:flex-start;min-width:max-content;padding:4px 6px}
+  .hz-step{display:flex;flex-direction:column;align-items:center;width:112px;flex:0 0 auto;
+    background:none;border:none;cursor:pointer;font-family:inherit;padding:0}
+  .hz-step:focus-visible .hz-tile{outline:2px solid var(--teal);outline-offset:2px}
+  .hz-tile{width:52px;height:52px;border-radius:15px;background:var(--card);border:1px solid var(--line);
+    display:flex;align-items:center;justify-content:center;color:var(--teal);box-shadow:var(--shadow-md);
+    transition:transform .15s ease,box-shadow .15s ease}
+  .hz-step:hover .hz-tile{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .hz-tile.sel{background:linear-gradient(155deg,#0E4F4E,var(--teal-deep));color:var(--lime);border-color:var(--teal-deep)}
+  .hz-tile.dash{border-style:dashed;background:transparent;box-shadow:none}
+  .hz-tile.dash.sel{background:linear-gradient(155deg,#0E4F4E,var(--teal-deep));border-style:solid}
+  .hz-lab{font-family:"IBM Plex Mono",monospace;font-size:9.5px;letter-spacing:.08em;color:var(--faint);
+    margin-top:9px;text-transform:uppercase}
+  .hz-name{font-size:12px;font-weight:600;color:var(--ink);margin-top:3px;text-align:center;line-height:1.25}
+  .hz-line{flex:0 0 22px;height:1px;background:var(--line);margin-top:26px}
+  .hz-detail{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px;box-shadow:var(--shadow-md);margin-top:12px;animation:riseIn .3s ease both}
+
+  /* Levers page */
+  .lv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:14px;margin-top:18px}
+  .lv-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 17px 15px;box-shadow:var(--shadow-md);display:flex;flex-direction:column;
+    transition:transform .18s ease,box-shadow .18s ease;animation:riseIn .35s ease both}
+  .lv-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .lv-head{display:flex;justify-content:space-between;align-items:baseline;gap:10px;margin-bottom:6px}
+  .lv-head h4{font-family:"Archivo",sans-serif;font-weight:800;font-size:19px;letter-spacing:-.01em;margin:0}
+  .lv-ready{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+  .lv-ready b{color:var(--ink);font-weight:600;font-size:15px}
+  .lv-desc{color:var(--muted);font-size:13.2px;line-height:1.5;margin:0 0 12px}
+  .lv-count{font-size:12.3px;color:var(--ink);background:#F0F6F5;border:1px solid #DCE7E5;border-radius:9px;
+    padding:9px 11px;margin:0 0 13px;line-height:1.45}
+  .lv-count .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--teal-deep);display:block;margin-bottom:3px;font-weight:700}
+  .lv-ucs .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);display:block;margin-bottom:7px}
+  .lv-uc{display:flex;align-items:center;justify-content:space-between;gap:10px;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:10px;padding:8px 11px;margin-bottom:6px;
+    cursor:pointer;font-family:inherit;font-size:12.5px;color:var(--ink);transition:border-color .15s ease}
+  .lv-uc:hover{border-color:var(--teal)}
+  .lv-uc:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .lv-uc .pc{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint);flex:0 0 auto}
+
+  /* Anatomy */
+  .an-intro{color:var(--muted);font-size:14px;max-width:82ch;margin:6px 0 4px}
+  .an-h{font-family:"Archivo",sans-serif;font-weight:700;font-size:18.5px;letter-spacing:-.01em;margin:36px 0 4px}
+  .an-sub{color:var(--muted);font-size:13px;margin:0 0 16px;max-width:82ch}
+  .an-flow{display:flex;flex-direction:column;margin-top:16px}
+  .an-stage{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-md)}
+  .an-stage-head{display:flex;gap:11px;align-items:baseline;flex-wrap:wrap}
+  .an-num{font-family:"IBM Plex Mono",monospace;font-size:11px;color:#fff;background:linear-gradient(155deg,#149794,var(--teal));
+    border-radius:7px;padding:3px 9px;flex:0 0 auto}
+  .an-stage-head h4{font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;margin:0}
+  .an-stage-head .q{color:var(--faint);font-size:12.5px;font-style:italic}
+  .an-desc{color:var(--muted);font-size:13px;margin:7px 0 10px;max-width:90ch}
+  .an-cross{font-size:12.3px;margin:0 0 11px;display:flex;gap:8px}
+  .an-cross .lab{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);flex:0 0 70px;padding-top:2px}
+  .an-cross .val{color:var(--ink)}
+  .an-conn{display:flex;justify-content:center;padding:4px 0;color:var(--faint)}
+  .an-loop{border:1px dashed #BFCBC8;background:#F1F4F2;border-radius:var(--radius);padding:14px 17px;
+    font-size:13px;color:var(--muted);display:flex;gap:10px;align-items:flex-start;margin-top:6px}
+  .an-loop b{color:var(--ink);font-weight:600}
+  .an-areas{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:12px}
+  .an-acard{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow-md);
+    transition:transform .18s ease,box-shadow .18s ease}
+  .an-acard:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+  .an-acard.sel{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
+  .an-acard h5{font-family:"Archivo",sans-serif;font-weight:700;font-size:14.5px;margin:0 0 9px}
+  .an-kv{font-size:12.3px;margin:0 0 6px;display:flex;gap:7px}
+  .an-kv .lab{font-size:9.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);flex:0 0 56px;padding-top:2px}
+  .an-kv .val{color:var(--ink)}
+  .an-kv.diff .val{color:var(--lime-deep);font-weight:600}
+  .an-vgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+  .an-vcard{background:linear-gradient(150deg,#0A3231,#125D5B);color:#DCEBE9;border-radius:var(--radius);padding:18px 17px;box-shadow:var(--shadow-md)}
+  .an-vcard h5{font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;margin:0 0 8px;color:#fff}
+  .an-vcard h5 .vk{color:var(--lime)}
+  .an-vcard p{font-size:13px;line-height:1.5;margin:0;color:#B9CFCD}
+  .an-vcard p b{color:#EAF3F1;font-weight:600}
+
+  .empty{text-align:center;padding:70px 20px;color:var(--faint)}
+  .empty h4{font-family:"Archivo",sans-serif;color:var(--muted);margin:0 0 6px;font-size:16px}
+  footer{border-top:1px solid var(--line);padding:24px 0 44px;color:var(--faint);font-size:12.5px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer b{color:var(--muted);font-weight:600}
+
+  @media (max-width:600px){
+    .grid,.uc-grid,.lv-grid,.an-areas,.an-vgrid{grid-template-columns:1fr}
+    .controls{position:static}
+    .edit-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="brand"><span class="er">Ventia</span><span class="x">·</span><span class="vt">Transport</span></div>
+    <h1>Enterprise data asset<br><span class="accent">transport proof of value</span></h1>
+    <p class="sub">Transport asset data: what we have today, where it goes, and the value it unlocks, across road, structures, tunnels, rail and fleet. Road themes follow the Austroads <code>RADS v4</code> standard, extended across the wider transport base; obligations map to <code>RAMC CN-25949</code>.</p>
+  </div>
+</header>
+
+<div class="assume">
+  <div class="wrap"><span class="dot"></span>
+    <div><b>Everything below is a best-guess draft for the team to correct.</b> Click any status to re-rate it, edit source and owner in place, then export to CSV. Re-rating flows through to the roadmap and value-case readiness.</div>
+  </div>
+</div>
+
+<div class="assume qa">
+  <div class="wrap"><span class="dot qa"></span>
+    <div><b>Databricks QA pass (2026-07-06):</b> All 65 original stocktake items were validated exclusively against queryable Databricks content in the <code>transport_dev</code> catalog: <code>integ_transport_assets</code>, <code>transport</code>, <code>transport_ramc</code>, <code>transport_tsrc</code>, <code>transport_nel</code>, <code>transport_sht</code> and <code>transport_wru</code>. Only populated SQL-queryable tables were treated as confirmed evidence. The <code>ext_mssql_asset_vision_ven_gen7</code> federated catalog is JDBC-inaccessible; RAMC <code>uvw_*</code> views are blocked or permission-denied; SHT tunnel JDBC views are blocked. No data was confirmed directly from ARMIS, dTIMS, BIS or GIS, only downstream Databricks content.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="summary">
+    <div class="summary-head"><h2 id="sumTitle">Data condition · current view</h2><div class="shown" id="shown"></div></div>
+    <div class="condition" id="conditionBar" role="img" aria-label="Breakdown"></div>
+    <div class="chips-stat" id="statChips"></div>
+  </section>
+</div>
+
+<div class="controls" id="controls">
+  <div class="wrap">
+    <div class="viewswitch" role="tablist" aria-label="View">
+      <button class="vbtn" role="tab" data-view="stocktake" aria-selected="true"><span class="n">01</span> Stocktake</button>
+      <button class="vbtn" role="tab" data-view="roadmap" aria-selected="false"><span class="n">02</span> Roadmap</button>
+      <button class="vbtn" role="tab" data-view="usecases" aria-selected="false"><span class="n">03</span> Value cases</button>
+      <button class="vbtn" role="tab" data-view="anatomy" aria-selected="false"><span class="n">04</span> Anatomy</button>
+      <button class="vbtn" role="tab" data-view="levers" aria-selected="false"><span class="n">05</span> Levers</button>
+    </div>
+    <div class="area-row" id="areaRow"><span class="area-lab">Transport area</span></div>
+    <div class="filters-row">
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="search" placeholder="Search datasets, systems, descriptions...">
+      </div>
+      <select id="fLayer" aria-label="Filter by layer"><option value="">All layers</option></select>
+      <select id="fDomain" aria-label="Filter by theme"><option value="">All themes</option></select>
+      <select id="fSource" aria-label="Filter by source system"><option value="">All systems</option></select>
+      <button class="btn primary" id="exportBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0L5 7m3 3l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12v1.5h10V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Export CSV
+      </button>
+      <button class="btn" id="resetBtn" type="button">Reset</button>
+    </div>
+    <div class="status-row">
+      <div class="status-chips" id="statusChips"></div>
+      <div class="edit-hint">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M11 2l3 3-8 8H3v-3l8-8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        Status, source and owner are editable
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <span>Ventia Transport · enterprise data asset, transport proof of value · draft for review</span>
+    <span><b>Themes:</b> Austroads RADS v4 &nbsp;·&nbsp; <b>Obligations:</b> RAMC CN-25949 (GCC + Appendices A–N)</span>
+  </div>
+</footer>
+
+<script>
+const LAYERS={A:"Core asset data",B:"Operational & commercial",C:"Context, performance & glue"};
+const DOMAINS=[
+  {key:"network",layer:"A",name:"Network & location referencing",note:"Austroads Network group plus the Object Locations common class. The spine everything else hangs off (1D linear, 2D GIS, 3D BIM)."},
+  {key:"inventory",layer:"A",name:"Asset register / inventory",note:"The Austroads Inventory group, literally the Asset Register. RAMC handover data carries unpopulated fields (App. J Attachment 2)."},
+  {key:"condition",layer:"A",name:"Condition & demand",note:"Austroads Condition, Demand & Utilisation. Feeds dTIMS. Clause 20 makes collection and dTIMS-compatibility the Contractor's obligation at its own cost."},
+  {key:"works",layer:"B",name:"Works & maintenance",note:"Austroads Works & Cost group (child of an asset or the network). RAMC Appendices M, N and D."},
+  {key:"finance",layer:"B",name:"Financial & commercial",note:"Cost side of Works & Cost plus the Valuation common class. Tied to the Asset Management Services Fee (App. B)."},
+  {key:"overlays",layer:"C",name:"Spatial overlays & environment",note:"Where the network meets its constraints. RAMC Appendices A (limits), C (interfaces) and L (environmental & cultural heritage)."},
+  {key:"performance",layer:"C",name:"Performance & compliance",note:"RAMC App. B. Keep OPMs and LOS response times (payment-linked) tagged distinctly from KRA/KPI trend reporting (no payment impact)."},
+  {key:"reference",layer:"C",name:"Reference & master data",note:"The glue: RADS code lists, asset hierarchies, supplier and resource master data. Turns siloed systems into one enterprise asset."}
+];
+const STATUSES=[{key:"exists",label:"Exists"},{key:"partial",label:"Partial"},{key:"gap",label:"Gap"},{key:"unknown",label:"Unknown"}];
+const HORIZONS=[
+  {key:"h1",code:"H1",name:"Foundation · single view of assets",desc:"Integrate the silos, align to RADS and link works and cost to the asset, so there is one authoritative, spatially-referenced record per asset."},
+  {key:"h2",code:"H2",name:"Optimise · better decisions now",desc:"Connect condition, works and cost to target spend where it moves the network most, prioritise by risk and hold level of service."},
+  {key:"h3",code:"H3",name:"Predictive · proactive & preventive",desc:"dTIMS-driven deterioration forecasting and proactive maintenance, with NextSpace as the single view and the enablement layer for a digital twin."}
+];
+const READY={exists:1,partial:.5,unknown:.25,gap:0};
+const AREAS=[
+  {key:"road",name:"Road networks",note:"Arterial, local and rural roads and active-transport paths.",url:"https://www.ventia.com/what-we-do/industries/transport"},
+  {key:"motorway",name:"Motorways & tunnels",note:"Freeways, toll roads, smart motorways and tunnels, with tunnel M&E, ITS and control-room operations.",url:"https://www.ventia.com/what-we-do/capabilities/motorway-tunnel-road-network-maintenance"},
+  {key:"rail",name:"Rail",note:"Freight, passenger, metro and light rail: track, signalling, structures and stations.",url:"https://www.ventia.com/what-we-do/industries/transport"},
+  {key:"port",name:"Ports",note:"Container, bulk, cargo, cruise and defence ports: pavement, wharves, ramps and structures.",url:"https://www.ventia.com/what-we-do/industries/transport"},
+  {key:"airport",name:"Airports",note:"Airside runways, taxiways and aprons, plus landside roads and carparks.",url:"https://www.ventia.com/what-we-do/capabilities/aviation-facilities-management"}
+];
+const ALL_AREAS=AREAS.map(a=>a.key);
+const AREA_MAP={
+  "INV-01":["road","motorway","port","airport"],"INV-02":["road","motorway"],
+  "INV-03":["road","motorway","rail","port"],"INV-09":["road","motorway","rail","port"],"CON-04":["road","motorway","rail","port"],
+  "INV-04":["road","motorway","port","airport"],"INV-05":["road","motorway","port","airport"],
+  "INV-06":["road","motorway"],"INV-07":["road","motorway","port","airport"],
+  "CON-01":["road","motorway","port","airport"],"CON-02":["road","motorway"],"CON-03":["road","motorway"],
+  "CON-05":["road","motorway"],"CON-06":["road","motorway"],
+  "INV-10":["motorway"],"INV-11":["motorway"],"CON-07":["motorway"],"INV-15":["road","motorway"],
+  "INV-12":["rail"],"INV-13":["rail"],"CON-08":["rail"],"INV-19":["rail"],
+  "INV-16":["airport"],"INV-17":["airport"],"CON-10":["airport"],"INV-18":["port"]
+};
+function areasFor(d){return AREA_MAP[d.id]||ALL_AREAS;}
+const UC_AREA={UC1:["road","motorway","airport"],UC2:["road","motorway","port","airport"],UC4:["road","motorway","rail","port"],UC7:["road","motorway","rail"],UC8:["motorway"],UC9:["road","motorway","rail","port"],UC11:["rail"],UC13:["airport"],UC14:["road","motorway"]};
+function ucAreas(u){return UC_AREA[u.id]||ALL_AREAS;}
+function visibleUsecases(){return USECASES.filter(u=>(!filters.area||ucAreas(u).includes(filters.area))&&(!filters.lever||u.lever===filters.lever));}
+
+const ANATOMY=[
+  {num:"00",name:"Design & build",q:"New-build entry",dash:true,datasets:["WRK-05","INV-10","INV-09"],
+   desc:"Where the asset is new (a tunnel, a new motorway, rail works), the loop is entered here: the register is born from design models and as-constructed data, and condition is monitored from day one. Where the asset is inherited, this stage is skipped and the loop is entered at 02 with a handover register.",
+   cross:"New-build areas (tunnels, major structures, new alignments) start here with BIM and as-built. Maintenance contracts (road networks) start at 02 with a register to verify and cleanse: the same loop, entered at a different door."},
+  {num:"01",name:"Locate",q:"Where is it?",datasets:["NET-01","NET-02","OVL-01","OVL-02"],
+   desc:"The spatial spine. Every asset, defect, work order and dollar resolves to a location on it, which is what lets the rest of the loop join up.",
+   cross:"The concept is universal; the referencing differs: a road LRS, rail chainage, a berth layout, a runway and taxiway grid."},
+  {num:"02",name:"Register",q:"What do we look after?",datasets:["INV-01","INV-03","INV-10","INV-12","INV-16","INV-18","REF-02"],
+   desc:"The asset register: what exists, its make-up and hierarchy, sitting on the spine. The quality of everything downstream is capped by the quality of this.",
+   cross:"The structure is shared (RADS-style classes and hierarchy); the asset classes differ completely per area, from pavement to track to wharves to aprons."},
+  {num:"03",name:"Measure",q:"What condition is it in, and how hard is it worked?",datasets:["CON-01","CON-04","CON-07","CON-08","CON-10","CON-05","WRK-07"],
+   desc:"Condition and demand against each registered asset: surveys, inspections, telemetry, traffic and loading.",
+   cross:"Each area has its own instrument and regime: road survey vans, bridge inspection cycles, SCADA telemetry in tunnels, track recording runs, PCN/ACN and FOD airside."},
+  {num:"04",name:"Plan",q:"What should we do, when?",datasets:["WRK-03","WRK-06","REF-06","REF-07","OVL-03","OVL-04","OVL-07","OVL-08"],
+   desc:"Asset management plans and works programmes built from register plus condition: for RAMC that is dTIMS modelling feeding the CTAMP, FWP and AWP, screened against environmental and heritage constraints. This is where strategic asset management lives, and where decades of institutional knowledge (which treatment, which material, which timing) earns its keep.",
+   cross:"The planning logic is shared; the constraint that shapes it differs: network occupancy on roads, rail possessions, berth windows at ports, curfews and scheduled shutdowns at airports."},
+  {num:"05",name:"Do",q:"Do the work",datasets:["WRK-01","WRK-02","WRK-04"],
+   desc:"Work orders, routine maintenance and defect response, executed against the plan and geolocated back to the asset they touch.",
+   cross:"This is the most shared stage: one works management spine (work orders, activities, defects) serves every area with only the activity codes changing."},
+  {num:"06",name:"Cost",q:"What did it cost?",datasets:["FIN-01","FIN-02","FIN-03","FIN-04","FIN-05"],
+   desc:"Materials, labour, plant, claims and rates joined to the work order, and through it to the asset and its condition.",
+   cross:"Fully shared: one SAP cost spine across every area. The join to the asset is what turns cost data into unit rates and evidence."},
+  {num:"07",name:"Prove",q:"Did it work, and can we show it?",datasets:["PERF-01","PERF-02","PERF-03"],
+   desc:"Performance against KRAs, KPIs and payment-linked OPMs and LOS response times, plus compliance and audit evidence.",
+   cross:"The framing is shared; the measures differ: LOS response on roads, availability in tunnels, safety limits on rail, berth and runway availability at ports and airports."}
+];
+const AREA_ANATOMY=[
+  {key:"road",name:"Road networks",entry:"Maintenance entry: register inherited at handover, then verified and cleansed (App. J Att 2)",spine:"Road LRS (ARMIS)",measure:"Annual pavement survey, defect inspection",plan:"dTIMS to CTAMP / FWP / AWP",trigger:"Condition indices and LOS response",diff:"Austroads RADS standard; TMR contract obligations"},
+  {key:"motorway",name:"Motorways & tunnels",entry:"Mixed entry: new-build tunnels born at 00 from design and as-built (BIM); operating motorways at handover",spine:"Road LRS + tunnel 3D/BIM",measure:"Pavement survey + live SCADA telemetry",plan:"Programmed closures and testing regime",trigger:"Availability and safety systems",diff:"M&E and ITS dominate; control-room operations"},
+  {key:"rail",name:"Rail",entry:"Brownfield entry: inherited registers upgraded through possession-planned works and renewals",spine:"Track chainage",measure:"Track recording runs, signalling testing",plan:"Possession-planned works",trigger:"Geometry safety limits",diff:"Rail safety regulator; signalling is time-critical"},
+  {key:"port",name:"Ports",entry:"Operating-asset entry: inherited register plus a marine inspection baseline",spine:"Berth and terminal layout",measure:"Structural and marine inspection",plan:"Works inside berth windows",trigger:"Berth availability, corrosion",diff:"Marine environment; security-sensitive sites"},
+  {key:"airport",name:"Airports",entry:"Operating-airfield entry: baseline surveys captured inside shutdown windows",spine:"Runway / taxiway / apron grid",measure:"PCN/ACN, FOD and lighting checks",plan:"Works inside shutdowns and curfews",trigger:"Airside safety and availability",diff:"Aviation standards; airside security regime"}
+];
+const AN_ICONS={
+  "00":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M15 4l5 5L9 20H4v-5L15 4z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M13 6l5 5" stroke="currentColor" stroke-width="1.6"/></svg>',
+  "01":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M12 21s-7-5.6-7-11a7 7 0 0114 0c0 5.4-7 11-7 11z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><circle cx="12" cy="10" r="2.6" stroke="currentColor" stroke-width="1.6"/></svg>',
+  "02":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="5" y="3.5" width="14" height="17" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M9 9h6M9 12.5h6M9 16h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  "03":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M5 17a7 7 0 0114 0" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 17l3.4-4.2" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="currentColor"/></svg>',
+  "04":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><rect x="4" y="6" width="16" height="14" rx="2" stroke="currentColor" stroke-width="1.6"/><path d="M4 10.5h16M8.5 3.5V7M15.5 3.5V7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  "05":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M20 6.5a4.4 4.4 0 01-6 5.4L7.4 18.5a2 2 0 11-2.8-2.8L11.2 9a4.4 4.4 0 015.4-6l-2.6 2.6 2.6 2.6L19.2 5.6c.5.3.7.6.8.9z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>',
+  "06":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M14.6 9.2c-.5-.8-1.4-1.2-2.6-1.2-1.6 0-2.6.8-2.6 2 0 2.7 5.4 1.4 5.4 4.2 0 1.2-1 2-2.8 2-1.2 0-2.2-.5-2.7-1.3M12 6.4v11.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+  "07":'<svg width="22" height="22" viewBox="0 0 24 24" fill="none"><circle cx="12" cy="12" r="8.5" stroke="currentColor" stroke-width="1.6"/><path d="M8.3 12.4l2.5 2.5 4.8-5.3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>'
+};
+
+const SEED=[
+  {
+    "id": "NET-01",
+    "domain": "network",
+    "name": "Road network & LRS (links, sections, nodes)",
+    "desc": "The declared road network with linear referencing, segmentation and node topology.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Partial - WKT + chainage",
+    "cadence": "Periodic",
+    "pds": "SRA Core",
+    "status": "partial",
+    "flag": "Databricks-only validation: segments with geometry exist in integ_transport_assets.silver_transport_asset (15,783 Segment assets; 99.4% WKT; 99.2% chainage) plus 5,106 Sections. Detailed LRS topology in transport_ramc.uvw_stripmap_full is permission-blocked, so full links/nodes/datum referencing cannot be confirmed from queryable content.",
+    "hook": "App. A",
+    "rads": "Network",
+    "horizon": "h1",
+    "target": "Canonical network in the platform, every asset linked to it",
+    "action": "Publish the LRS as the master reference layer",
+    "value": "Every dataset resolves to a consistent location",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_ramc.uvw_stripmap_full (blocked)"
+  },
+  {
+    "id": "NET-02",
+    "domain": "network",
+    "name": "Road segmentation & carriageways",
+    "desc": "Carriageway geometry, direction and segmentation aligned to the network.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Partial - segment WKT",
+    "cadence": "Periodic",
+    "pds": "SRA Core",
+    "status": "partial",
+    "flag": "Databricks-only validation: segment geometry exists in the integrated asset layer, but carriageway/direction segmentation attributes are only described in blocked RAMC views and are not queryable in silver_transport_asset. Cannot confirm full carriageway/direction model.",
+    "hook": "App. A",
+    "rads": "Network",
+    "horizon": "h1",
+    "target": "Consistent, RADS-aligned segmentation",
+    "action": "Standardise segmentation rules to RADS",
+    "value": "Condition and cost are comparable per segment",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_ramc.uvw_stripmap_full (blocked)"
+  },
+  {
+    "id": "NET-03",
+    "domain": "network",
+    "name": "Gazetted boundaries & declared limits",
+    "desc": "Region and responsibility boundaries defining the contract network extent.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "No queryable boundary layer",
+    "cadence": "Static",
+    "pds": "SRA",
+    "status": "gap",
+    "flag": "Databricks-only validation: no queryable gazetted boundary, declared-limit, contract-extent or responsibility-boundary spatial table was found. Contract fields can filter records by contract, but they do not prove boundary geometry or declared limits.",
+    "hook": "App. A",
+    "rads": "Network",
+    "horizon": "h1",
+    "target": "Confirmed, undisputed contract extent",
+    "action": "Resolve region and council interface limits",
+    "value": "No disputed responsibility at boundaries",
+    "evidence": "None found: no queryable boundary/limits table; contract field only"
+  },
+  {
+    "id": "INV-01",
+    "domain": "inventory",
+    "name": "Pavement inventory",
+    "desc": "Pavement type, structure, layers and construction history by segment.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - WKT",
+    "cadence": "Event-driven",
+    "pds": "SRA Core",
+    "status": "exists",
+    "flag": "Databricks-only validation: confirmed pavement inventory attributes are populated: Pav_Base_Type 12,613/13,340, Year Constructed 12,616, Pavement Type 13,902/14,183. ATM metrics include 7,919 Pavement Inventory, 5,476 Pavement and 9,524 Pavement Surfacing records at 100% WKT. ARMIS/dTIMS lineage is not directly confirmed.",
+    "hook": "App. J Att 2",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Complete, RADS-aligned pavement register",
+    "action": "Populate handover gaps and align fields to RADS",
+    "value": "A register you can trust for modelling",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.integ_transport_assets.atm_asset_type_metrics_summary; transport_dev.integ_transport_assets.vw_bronze_transport_asset_attribute_base"
+  },
+  {
+    "id": "INV-02",
+    "domain": "inventory",
+    "name": "Surfacing inventory (seal type, age)",
+    "desc": "Surface type, seal age, treatment history and remaining life.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - WKT",
+    "cadence": "Event-driven",
+    "pds": "SRA",
+    "status": "partial",
+    "flag": "Databricks-only validation: surfacing data is well populated but not complete: Seal_Age 12,616/13,340, Pav_Seal_Type 12,597, Year Last Surfaced 12,692 and Seal_Layer1_Type 12,617. ARMIS attribution remains unverified.",
+    "hook": "App. J Att 2",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Full surfacing age and treatment history",
+    "action": "Backfill seal age from works history",
+    "value": "Accurate reseal and renewal forecasting",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.integ_transport_assets.vw_bronze_transport_asset_attribute_base"
+  },
+  {
+    "id": "INV-03",
+    "domain": "inventory",
+    "name": "Structures (bridges, major culverts)",
+    "desc": "Bridge and major culvert inventory, dimensions and componentisation.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - WKT/coordinates",
+    "cadence": "Periodic",
+    "pds": "SRA Core",
+    "status": "exists",
+    "flag": "Databricks-only validation: structures are registered and geolocated across multiple contracts: 868 Bridges at 98.8% WKT, 232 Bridge-size Culverts at 100% WKT, 192 Bridge or Major Culvert at 100% WKT, plus TSRC bridge records with chainage/coordinates and 3,980 structure-component records.",
+    "hook": "App. N",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Structures linked to condition and works",
+    "action": "Link BIS into the platform",
+    "value": "Whole-of-life view of each structure",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_tsrc.utbl_aed_asset_bridge"
+  },
+  {
+    "id": "INV-04",
+    "domain": "inventory",
+    "name": "Minor culverts & drainage assets",
+    "desc": "Pits, pipes, open drains and roadside drainage inventory.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "Yes - >99% WKT",
+    "cadence": "Ad hoc",
+    "pds": "SRA Ext",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. Drainage register exists with 96,272 drainage assets including 27,321 pits, 20,936 culverts, 18,596 stormwater assets, 4,659 gully pits and 5,055 drainage lines. WKT coverage is >99%; condition varies by subtype, including 85.7% for pits and 0% for stormwater.",
+    "hook": "App. M",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Geolocated drainage inventory",
+    "action": "Confirm attribute/condition completeness on the existing geolocated register",
+    "value": "Unlocks proactive drainage maintenance",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset"
+  },
+  {
+    "id": "INV-05",
+    "domain": "inventory",
+    "name": "Signs, line marking, ITS & lighting",
+    "desc": "Regulatory and guide signs, line marking, ITS assets and lighting.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Yes - ~100% WKT",
+    "cadence": "Ad hoc",
+    "pds": "SRA Ext",
+    "status": "partial",
+    "flag": "Databricks-only validation: signs and line marking are fully or near-fully geolocated and mostly classified: Minor Sign 60,077 records at 100% WKT with 38.6% condition, Sign 27,448 at 99.99% WKT with 11.3% condition, and Line Marking 29,158 at 100% WKT with 78% condition. Real gap is condition completeness, not geolocation.",
+    "hook": "App. M",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Complete, classified ancillary register",
+    "action": "Backfill classification and condition attributes, not geolocation",
+    "value": "Defect and renewal planning for roadside assets",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset"
+  },
+  {
+    "id": "INV-06",
+    "domain": "inventory",
+    "name": "Road barriers & safety devices",
+    "desc": "Guardrail, wire rope and end-terminal inventory.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Yes - ~100% WKT",
+    "cadence": "Ad hoc",
+    "pds": "SRA Ext",
+    "status": "partial",
+    "flag": "Databricks-only validation: safety-device assets are essentially fully geolocated, but condition varies sharply by subtype: Safety Barrier 4,048 at 99.7% WKT with 0% condition, Vehicle Barrier 1,242 at 100% WKT with 81% condition, Road Barrier 605 at 100% WKT with 79% condition, Guardrail 307 at 100% WKT/condition, Barrier End Terminal 188 at 100% WKT and 99% condition, Crash Cushion 135 at 100% WKT with 0% condition.",
+    "hook": "App. N",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Complete safety-device register",
+    "action": "Confirm attribute/condition completeness on the existing geolocated register",
+    "value": "Safety-asset compliance and renewal planning",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset"
+  },
+  {
+    "id": "INV-07",
+    "domain": "inventory",
+    "name": "Kerb, channel & pathways",
+    "desc": "Kerb and channel, footpaths and shared paths.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - 100% WKT",
+    "cadence": "Static",
+    "pds": "SRA Ext",
+    "status": "partial",
+    "flag": "Databricks-only validation: Kerb and Channel 27,898, Channel 11,639, Footpath 10,184 and Berm 8,843 records all show 100% WKT. Original urban-only caveat is not supported by queryable data; remaining gap is attribute/condition completeness, including 0% condition on footpath.",
+    "hook": "App. M",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Network-wide kerb and path register",
+    "action": "Extend capture beyond urban segments",
+    "value": "Complete active-transport asset picture",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset"
+  },
+  {
+    "id": "INV-08",
+    "domain": "inventory",
+    "name": "Asset valuation attributes",
+    "desc": "Replacement cost, useful life and componentisation for valuation.",
+    "source": "Databricks",
+    "owner": "Finance",
+    "spatial": "No",
+    "cadence": "Annual",
+    "pds": "Core",
+    "status": "partial",
+    "flag": "Databricks-only validation: Equipment NBV has 3,641 rows and WBS has 15,099 rows, but no RADS-aligned componentisation or full valuation-attribute table was found.",
+    "hook": "App. B",
+    "rads": "Valuation",
+    "horizon": "h2",
+    "target": "RADS-aligned componentisation",
+    "action": "Componentise to the valuation standard",
+    "value": "Defensible valuation and depreciation",
+    "evidence": "transport_dev.transport.uvw_equipment_nbv_dep_zftm_asseteqip; transport_dev.transport.uvw_wbs_master_data_prps"
+  },
+  {
+    "id": "INV-09",
+    "domain": "inventory",
+    "name": "Bridge components & elements",
+    "desc": "Component-level structure data: deck, bearings, joints, piers and abutments.",
+    "source": "Databricks",
+    "owner": "TMR / Ventia",
+    "spatial": "Partial - split WKT coverage",
+    "cadence": "Cyclic",
+    "pds": "SRA Ext",
+    "status": "partial",
+    "flag": "Databricks-only validation: structure-component evidence exists but remains thin and split: 2,087 Structure Component records at 100% WKT with 0% condition, plus 1,893 records at 0% WKT with 92% condition.",
+    "hook": "App. N",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Component-level structure register",
+    "action": "Capture elements against each structure",
+    "value": "Times strengthening and renewal precisely",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset"
+  },
+  {
+    "id": "INV-10",
+    "domain": "inventory",
+    "name": "Tunnel civil structure",
+    "desc": "Tunnel lining, portals, cross-passages and civil elements.",
+    "source": "Databricks",
+    "owner": "Ventia / operator",
+    "spatial": "Yes - WKT",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: 1,499 SHT tunnel assets are queryable at 100% WKT, but only 6.1% have condition populated and detailed SHT tunnel JDBC views are blocked. Civil structure is registered, but detailed live register quality remains partial.",
+    "hook": "App. N",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Structured tunnel civil register",
+    "action": "Digitise from as-built and BIM",
+    "value": "Foundation for tunnel asset management",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_sht.uvw_all_assets (blocked)"
+  },
+  {
+    "id": "INV-11",
+    "domain": "inventory",
+    "name": "Tunnel M&E systems",
+    "desc": "Ventilation, lighting, fire, drainage pumps and SCADA/control systems.",
+    "source": "Databricks",
+    "owner": "Ventia / operator",
+    "spatial": "Partial - assets + telemetry",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. Tunnel M&E is confirmed with SHT assets including Fire Detection 1,859, Lighting & Switching 674, Surveillance 373, Ventilation 237, Plant Monitoring 146 and HVAC 126, plus 14.4M+ PPM telemetry readings. NEL adds 1,388 ITS/tunnel assets.",
+    "hook": "App. N",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "M&E register linked to control systems",
+    "action": "Integrate BMS and SCADA asset data",
+    "value": "Availability and safety of tunnel systems",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_sht.utbl_nps03_sb; transport_dev.transport_sht.utbl_nps04_nb; transport_dev.transport_sht.utbl_sps01_nb; transport_dev.transport_sht.utbl_sps02_sb; transport_dev.transport_sht.utbl_tvs03_sb; transport_dev.transport_sht.utbl_tvs07_nb; transport_dev.transport_nel.utbl_assets"
+  },
+  {
+    "id": "INV-12",
+    "domain": "inventory",
+    "name": "Rail track & formation",
+    "desc": "Track, ballast, sleepers and formation inventory.",
+    "source": "Databricks",
+    "owner": "Rail operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no rail track or formation data was found. Mentions of RAIL in equipment master refer to fleet vehicles, not rail infrastructure.",
+    "hook": "Rail safety",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Rail track register on a chainage LRS",
+    "action": "Establish rail inventory and referencing",
+    "value": "Base for rail maintenance planning",
+    "evidence": "None found: no queryable rail track/formation table"
+  },
+  {
+    "id": "INV-13",
+    "domain": "inventory",
+    "name": "Rail signalling & level crossings",
+    "desc": "Signalling assets, interlockings and level-crossing infrastructure.",
+    "source": "Databricks",
+    "owner": "Rail operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no signalling or level-crossing asset data was found in queryable Databricks content.",
+    "hook": "Rail safety",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Signalling and crossing register",
+    "action": "Capture signalling and crossing assets",
+    "value": "Safety-critical asset visibility",
+    "evidence": "None found: no queryable signalling/level-crossing table"
+  },
+  {
+    "id": "INV-14",
+    "domain": "inventory",
+    "name": "Fleet & mobile plant register",
+    "desc": "Vehicles, mobile plant and equipment owned or operated.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Live - GPS not confirmed",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: fleet/mobile plant register is confirmed through Equipment Master with 26,038 records including vehicle type, licence, cost centre and WBS, plus SAP Plant with 200,860 rows. Linkage to works/cost remains the value unlock.",
+    "hook": "App. B",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Fleet managed as an asset class",
+    "action": "Link the fleet register to works and cost",
+    "value": "True fleet cost and utilisation",
+    "evidence": "transport_dev.transport.uvw_equipment_master_data_ie36; transport_dev.transport.utbl_sap_items_20_24_fy (GL Mapping = Plant)"
+  },
+  {
+    "id": "INV-15",
+    "domain": "inventory",
+    "name": "ITS & traffic management systems",
+    "desc": "Variable message signs, cameras, ramp signals, detectors and control-room systems.",
+    "source": "Databricks",
+    "owner": "Ventia / operator",
+    "spatial": "Yes - 100% WKT",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. ITS register is extensive: 22,464 ITS/Traffic Control assets across 32 types at 100% WKT, plus VentureSmart 6,720 ITS assets, TSRC 21,677 AED assets and NEL 1,388 assets.",
+    "hook": "App. M",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "ITS assets and feeds in the platform",
+    "action": "Integrate ITS asset and event data",
+    "value": "Network operations and incident response",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_tsrc.utbl_aed_assets; transport_dev.transport_nel.utbl_assets"
+  },
+  {
+    "id": "INV-16",
+    "domain": "inventory",
+    "name": "Airside pavement (runways, taxiways, aprons)",
+    "desc": "Airfield pavements on aviation standards, distinct from road pavement.",
+    "source": "Databricks",
+    "owner": "Airport operator / Ventia",
+    "spatial": "Partial",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: upgraded to partial. Brisbane Airport has 7,328 assets, including 13 Airside and 16 Major Structure Airside records, but no PCN/ACN runway-pavement type or aviation-standard pavement inventory was found.",
+    "hook": "Aviation",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Airside pavement register on aviation standards",
+    "action": "Establish airside pavement inventory",
+    "value": "Runway availability and safety",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset (filter by Brisbane Airport contract)"
+  },
+  {
+    "id": "INV-17",
+    "domain": "inventory",
+    "name": "Airfield ground lighting & navaids",
+    "desc": "Runway and taxiway lighting, guidance signs and navigation aids.",
+    "source": "Databricks",
+    "owner": "Airport operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no airfield lighting or navaid asset data was found in queryable Databricks content.",
+    "hook": "Aviation",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Airfield lighting and navaid register",
+    "action": "Capture lighting and navaid assets",
+    "value": "Airside safety compliance",
+    "evidence": "None found: no queryable airfield lighting/navaid table"
+  },
+  {
+    "id": "INV-18",
+    "domain": "inventory",
+    "name": "Wharf, ramp & berth structures",
+    "desc": "Wharves, ramps, berths and marine structures at ports.",
+    "source": "Databricks",
+    "owner": "Port operator / Ventia",
+    "spatial": "Partial",
+    "cadence": "Cyclic",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: upgraded to partial. Port of Brisbane has 1,256 assets, but no explicit wharf, berth or marine-structure asset type was found; records appear mostly road-adjacent.",
+    "hook": "Ports",
+    "rads": "Inventory",
+    "horizon": "h1",
+    "target": "Marine structure register",
+    "action": "Establish wharf and berth inventory",
+    "value": "Berth availability and safety",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset (filter by Port of Brisbane contract)"
+  },
+  {
+    "id": "INV-19",
+    "domain": "inventory",
+    "name": "Rail stations & platforms",
+    "desc": "Station buildings, platforms and passenger facilities.",
+    "source": "Databricks",
+    "owner": "Rail operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no rail station or platform asset data was found in queryable Databricks content.",
+    "hook": "Rail safety",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Station and platform register",
+    "action": "Capture station assets and facilities",
+    "value": "Passenger facility management",
+    "evidence": "None found: no queryable rail station/platform table"
+  },
+  {
+    "id": "CON-01",
+    "domain": "condition",
+    "name": "Pavement condition (roughness, rutting, cracking)",
+    "desc": "Network condition survey: IRI, rutting and cracking indices.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - segment-linked",
+    "cadence": "Annual",
+    "pds": "SRA Core",
+    "status": "exists",
+    "flag": "Databricks-only validation: pavement condition is confirmed with populated indices: IRI 7,919 measured plus 13,340 raw non-null, Rut Depth 12,616, Crocodile Cracking 9,054, Roughness-LPPC 9,054 and RoughnessClass 12,616.",
+    "hook": "Clause 20",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Condition feeding live deterioration models",
+    "action": "Stream survey into dTIMS and the platform",
+    "value": "Predict failure and optimise treatment timing",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.integ_transport_assets.vw_bronze_transport_asset_attribute_base"
+  },
+  {
+    "id": "CON-02",
+    "domain": "condition",
+    "name": "Deflection / structural (FWD)",
+    "desc": "Falling weight deflectometer and structural strength data.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - segment-linked",
+    "cadence": "Cyclic",
+    "pds": "SRA Ext",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. FWD/deflection data is well populated rather than merely selective: Delf_D0 12,617/13,340, Delf_D200 12,617, Delf_SCI 12,617, Deflection Air Temp 9,054 and Deflection Surface Temp 9,054.",
+    "hook": "Clause 20",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Structural strength across the network",
+    "action": "Extend FWD coverage",
+    "value": "Rehabilitate vs resurface decisions",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.integ_transport_assets.vw_bronze_transport_asset_attribute_base"
+  },
+  {
+    "id": "CON-03",
+    "domain": "condition",
+    "name": "Skid resistance & surface texture",
+    "desc": "Skid and texture measurement for safety and surface performance.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Partial",
+    "cadence": "Cyclic",
+    "pds": "SRA Ext",
+    "status": "gap",
+    "flag": "Databricks-only validation: no queryable skid-resistance or surface-texture field/table was found. With no Databricks evidence for this condition dataset, the item is treated as a gap.",
+    "hook": "Clause 20",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Safety-surface monitoring network-wide",
+    "action": "Extend skid coverage on high-risk routes",
+    "value": "Proactive safety intervention",
+    "evidence": "None found: no explicit skid-resistance or texture field/table"
+  },
+  {
+    "id": "CON-04",
+    "domain": "condition",
+    "name": "Bridge condition (L1/L2/L3 inspections)",
+    "desc": "Structure condition ratings from inspection cycles.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - structure-linked",
+    "cadence": "Cyclic",
+    "pds": "SRA",
+    "status": "partial",
+    "flag": "Databricks-only validation: downgraded. Structure-component condition exists at 92% in one set, but bridge-only condition is 3.6% and no L1/L2/L3 bridge-condition rating field is queryable. Generic inspections exist at scale, but bridge-specific condition ratings cannot be confirmed.",
+    "hook": "App. N",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Predictive structure deterioration",
+    "action": "Model inspection trends over time",
+    "value": "Prioritise structure renewals early",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.integ_transport_assets.silver_transport_inspection; transport_dev.integ_transport_assets.silver_transport_inspection_by_asset"
+  },
+  {
+    "id": "CON-05",
+    "domain": "condition",
+    "name": "Traffic volumes / AADT",
+    "desc": "Annual average daily traffic and classified counts.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Yes - segment-linked",
+    "cadence": "Annual",
+    "pds": "SRA Core",
+    "status": "exists",
+    "flag": "Databricks-only validation: traffic demand is confirmed: MT_AADT 12,617/13,340, Year_AADT 12,616, AADT Annual Change 12,616, with WRU traffic count tables also present.",
+    "hook": "App. J",
+    "rads": "Utilisation",
+    "horizon": "h2",
+    "target": "Traffic linked to condition and cost",
+    "action": "Join traffic to network segments",
+    "value": "Demand-weighted prioritisation",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport_wru.utbl_counts_by_carriageway; transport_dev.transport_wru.utbl_counts_by_lane; transport_dev.transport_wru.utbl_counts_hourly"
+  },
+  {
+    "id": "CON-06",
+    "domain": "condition",
+    "name": "Traffic loading & growth (ESA)",
+    "desc": "Equivalent standard axles, loading and growth factors.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "Unknown",
+    "cadence": "Periodic",
+    "pds": "SRA Ext",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no ESA/loading field was found. Traffic Percent Heavy (NC) exists with 13,376 rows but is entirely null, so loading remains unknown.",
+    "hook": "Clause 20",
+    "rads": "Demand",
+    "horizon": "h3",
+    "target": "Measured loading for modelling",
+    "action": "Confirm and extend loading data",
+    "value": "Accurate pavement-life prediction",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset (Traffic Percent Heavy checked; null); no ESA/loading table found"
+  },
+  {
+    "id": "CON-07",
+    "domain": "condition",
+    "name": "Tunnel M&E condition & testing",
+    "desc": "System testing, alarms, telemetry and condition of tunnel mechanical and electrical assets.",
+    "source": "Databricks",
+    "owner": "Ventia / operator",
+    "spatial": "Partial",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. SHT has six queryable Delta telemetry tables with 14.4M+ continuous sensor readings, supporting live tunnel condition/testing evidence.",
+    "hook": "App. N",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Condition derived from live M&E telemetry",
+    "action": "Turn SCADA telemetry into asset condition",
+    "value": "Predict tunnel system failures",
+    "evidence": "transport_dev.transport_sht.utbl_nps03_sb; transport_dev.transport_sht.utbl_nps04_nb; transport_dev.transport_sht.utbl_sps01_nb; transport_dev.transport_sht.utbl_sps02_sb; transport_dev.transport_sht.utbl_tvs03_sb; transport_dev.transport_sht.utbl_tvs07_nb"
+  },
+  {
+    "id": "CON-08",
+    "domain": "condition",
+    "name": "Rail track geometry & condition",
+    "desc": "Track recording, geometry and rail condition data.",
+    "source": "Databricks",
+    "owner": "Rail operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Cyclic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no rail track geometry or rail condition data was found.",
+    "hook": "Rail safety",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Track geometry feeding maintenance",
+    "action": "Ingest track recording runs",
+    "value": "Maintain before a safety-limit breach",
+    "evidence": "None found: no queryable rail geometry/condition table"
+  },
+  {
+    "id": "CON-09",
+    "domain": "condition",
+    "name": "Fleet telematics & utilisation",
+    "desc": "GPS, engine hours, utilisation and diagnostics from plant and vehicles.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Partial",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: fleet register evidence exists (26K equipment records) and VentureSmart ITS evidence exists, but no fleet telematics time-series was found. Condition-based servicing evidence remains partial.",
+    "hook": "App. B",
+    "rads": "Utilisation",
+    "horizon": "h2",
+    "target": "Telematics driving condition-based servicing",
+    "action": "Feed telematics into servicing and utilisation models",
+    "value": "Right-size the fleet, cut idle plant",
+    "evidence": "transport_dev.transport.uvw_equipment_master_data_ie36; no telematics time-series table found"
+  },
+  {
+    "id": "CON-10",
+    "domain": "condition",
+    "name": "Airside pavement condition (PCN/ACN, FOD)",
+    "desc": "Airfield pavement strength, condition and foreign-object-debris risk.",
+    "source": "Databricks",
+    "owner": "Airport operator / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Cyclic",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no airside pavement condition, PCN/ACN or FOD condition data was found.",
+    "hook": "Aviation",
+    "rads": "Condition",
+    "horizon": "h3",
+    "target": "Airside condition feeding maintenance",
+    "action": "Survey and monitor airside pavement",
+    "value": "Predict and prevent runway defects",
+    "evidence": "None found: no queryable airside pavement condition table"
+  },
+  {
+    "id": "CON-11",
+    "domain": "condition",
+    "name": "Last-inspected-per-asset tracking (RAMC)",
+    "desc": "View giving the most recent inspection date per asset, usable as a condition-currency check.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Partial",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: downgraded. transport_ramc.uvw_roadlastinspected is registered but JDBC-blocked. A proxy, silver_transport_inspection_by_asset, has 73,527 rows, but the specific last-inspected view cannot be confirmed.",
+    "hook": "Clause 20",
+    "rads": "Condition",
+    "horizon": "h1",
+    "target": "Condition currency checked automatically",
+    "action": "Surface last-inspected dates in the condition view",
+    "value": "Know which assets have stale condition data",
+    "evidence": "transport_dev.transport_ramc.uvw_roadlastinspected (blocked); transport_dev.integ_transport_assets.silver_transport_inspection_by_asset"
+  },
+  {
+    "id": "WRK-01",
+    "domain": "works",
+    "name": "Work orders",
+    "desc": "Maintenance work orders raised, scheduled and completed.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Partial - asset-linked",
+    "cadence": "Continuous",
+    "pds": "SRA Ext",
+    "status": "exists",
+    "flag": "Databricks-only validation: work orders are confirmed with utbl_jobs_allcontract 283,918 rows, silver_transport_job 380K+ rows and 58,046 RAMC jobs. Records are asset-linked and activity-coded.",
+    "hook": "App. M / N",
+    "rads": "Works & Cost",
+    "horizon": "h1",
+    "target": "Every work order geolocated to its asset",
+    "action": "Enforce asset-linking at the point of raising",
+    "value": "True cost and history per asset",
+    "evidence": "transport_dev.transport.utbl_jobs_allcontract; transport_dev.integ_transport_assets.silver_transport_job"
+  },
+  {
+    "id": "WRK-02",
+    "domain": "works",
+    "name": "Routine maintenance activities",
+    "desc": "Routine and reactive maintenance activity records.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Partial",
+    "cadence": "Continuous",
+    "pds": "SRA Ext",
+    "status": "exists",
+    "flag": "Databricks-only validation: routine maintenance activity evidence is confirmed through 3M timesheet rows and 284K jobs coded to activities including Pavement, Drainage, Signs and Vegetation.",
+    "hook": "App. M",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Activity data joined to condition",
+    "action": "Link activities to asset condition",
+    "value": "Measure what maintenance actually achieves",
+    "evidence": "transport_dev.transport.utbl_job_costing_timesheets_all_contracts; transport_dev.transport.utbl_jobs_allcontract; transport_dev.integ_transport_assets.silver_transport_job"
+  },
+  {
+    "id": "WRK-03",
+    "domain": "works",
+    "name": "Programmed / forward works (FWP, AWP)",
+    "desc": "Forward works and annual works plans from condition and modelling.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "Partial",
+    "cadence": "Annual",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: capitalwork_base contains 2,064 records, including 316 RAMC records with planned dates, but no explicit FWP/AWP table was found.",
+    "hook": "App. D",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Model-driven forward works programme",
+    "action": "Generate FWP/AWP directly from dTIMS",
+    "value": "Right work, right place, right time",
+    "evidence": "transport_dev.integ_transport_assets.vw_bronze_transport_capitalwork_base"
+  },
+  {
+    "id": "WRK-04",
+    "domain": "works",
+    "name": "Defect inspections & response",
+    "desc": "Defect capture, prioritisation and response timing.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "Yes - asset-linked",
+    "cadence": "Continuous",
+    "pds": "SRA Ext",
+    "status": "exists",
+    "flag": "Databricks-only validation: upgraded. Defect capture is comprehensive: silver_transport_defect_by_asset has 64,550 records, including Potholes 15K and Drain Defects 8.6K, plus overdue ageing around 28K and SLA breach flags.",
+    "hook": "App. M",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Live defect-to-response tracking",
+    "action": "Automate the defect-to-OPM linkage",
+    "value": "LOS compliance, avoids payment risk",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_defect_by_asset"
+  },
+  {
+    "id": "WRK-05",
+    "domain": "works",
+    "name": "Works history / as-constructed",
+    "desc": "As-built records fed back to update the asset register.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "Partial",
+    "cadence": "Event-driven",
+    "pds": "SRA Ext",
+    "status": "partial",
+    "flag": "Databricks-only validation: upgraded from gap. capitalwork_base has 2,064 records and treatment-history attributes such as Year Last Surfaced, Year Last Prevented and Year Last Rehabilitated have 12K+ non-null values. This is partial works-history feedback, not a full closed as-built loop.",
+    "hook": "App. J Att 2",
+    "rads": "Works & Cost",
+    "horizon": "h1",
+    "target": "Closed as-built loop to the register",
+    "action": "Auto-update the register from completed works",
+    "value": "The register never goes stale",
+    "evidence": "transport_dev.integ_transport_assets.vw_bronze_transport_capitalwork_base; transport_dev.integ_transport_assets.vw_bronze_transport_asset_attribute_base"
+  },
+  {
+    "id": "WRK-06",
+    "domain": "works",
+    "name": "Consolidated works pipeline (capital & maintenance)",
+    "desc": "All capital works programs and maintenance schedules across contracts and areas in one network view, including the client's published pipeline (QTRIP) and third-party works.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no consolidated works pipeline or QTRIP table was found.",
+    "hook": "App. D",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "One pipeline view across contracts and areas",
+    "action": "Aggregate QTRIP, FWPs and third-party works onto the network",
+    "value": "Bid pricing, coordination and clash avoidance",
+    "evidence": "None found: no consolidated pipeline or QTRIP table"
+  },
+  {
+    "id": "WRK-07",
+    "domain": "works",
+    "name": "Capture-as-you-go field data (crew & vehicle-borne)",
+    "desc": "Asset inventory and condition captured by crews and vehicles during routine works: mounted cameras, mobile capture, AI extraction from imagery.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no imagery or capture-as-you-go data was found. Route-optimisation evidence is only a two-geometry-row prototype and was not treated as confirmation.",
+    "hook": "New service line",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Every crew and vehicle a capture platform",
+    "action": "Deploy vehicle-mounted and mobile capture with AI extraction",
+    "value": "Survey-grade data as a by-product of maintenance",
+    "evidence": "None found: no imagery/capture-as-you-go table; route prototype not accepted"
+  },
+  {
+    "id": "WRK-08",
+    "domain": "works",
+    "name": "Backlog & job-snapshot tracking (RAMC)",
+    "desc": "Monthly backlog change and job-snapshot reporting already captured in Asset Vision for RAMC.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Monthly",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: backlog and snapshot reporting is confirmed through utbl_backlog_change_report 1,824 rows, utbl_monthly_backlog_reduction 157 rows and bkp_current_month_job_snapshot 29,115 rows, with reporting through July 2026.",
+    "hook": "App. D",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Backlog tracking wired into the platform's works view",
+    "action": "Surface the existing backlog/snapshot tables in reporting",
+    "value": "Backlog movement visible without manual reporting",
+    "evidence": "transport_dev.transport_ramc.utbl_backlog_change_report; transport_dev.transport_ramc.utbl_monthly_backlog_reduction; transport_dev.transport_ramc.bkp_current_month_job_snapshot"
+  },
+  {
+    "id": "FIN-01",
+    "domain": "finance",
+    "name": "Material costs",
+    "desc": "Materials consumed and cost against works.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: material costs are confirmed through Materials GL with 14,471 rows and $13M, plus PO data with 228K rows. Asset linkage is not confirmed.",
+    "hook": "App. B",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Cost linked to asset and work",
+    "action": "Join SAP cost to work orders and assets",
+    "value": "Unit-rate benchmarking",
+    "evidence": "transport_dev.transport.utbl_sap_items_20_24_fy (GL Mapping = Materials); transport_dev.transport.uvw_po_header_data_ekko"
+  },
+  {
+    "id": "FIN-02",
+    "domain": "finance",
+    "name": "People / labour costs",
+    "desc": "Labour hours and cost by activity and crew.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: people/labour costs are confirmed through Payroll GL with 606,936 rows and $153M, 3M timesheet rows and 31,817 employee records.",
+    "hook": "App. B",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Labour cost per asset activity",
+    "action": "Join timesheets to works",
+    "value": "True cost-to-serve",
+    "evidence": "transport_dev.transport.utbl_sap_items_20_24_fy (GL Mapping = Payroll); transport_dev.transport.utbl_job_costing_timesheets_all_contracts; transport_dev.transport.uvw_employee_listing"
+  },
+  {
+    "id": "FIN-03",
+    "domain": "finance",
+    "name": "Plant & equipment costs",
+    "desc": "Plant, fleet and equipment cost allocation.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: plant/equipment costs are confirmed through Plant GL with 200,860 rows and $14M, plus 26K equipment records.",
+    "hook": "App. B",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Plant cost per activity",
+    "action": "Allocate plant to works",
+    "value": "Complete activity costing",
+    "evidence": "transport_dev.transport.utbl_sap_items_20_24_fy (GL Mapping = Plant); transport_dev.transport.uvw_equipment_master_data_ie36"
+  },
+  {
+    "id": "FIN-04",
+    "domain": "finance",
+    "name": "Invoices, claims & payments",
+    "desc": "Payables, receivables and monthly claim data.",
+    "source": "Databricks",
+    "owner": "Ventia / Finance",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: invoices, claims and payments are confirmed through vendor cleared 117,481 rows, vendor open 2,914 rows, subcontractor 137,940 rows worth $475M and revenue 27,961 rows worth $690M.",
+    "hook": "App. B",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Claims traceable to works and assets",
+    "action": "Link AP/AR to work orders",
+    "value": "Auditable claims, faster reconciliation",
+    "evidence": "transport_dev.transport.uvw_vendor_cleared_items_bsak; transport_dev.transport.uvw_vendor_open_items_bsik; transport_dev.transport.utbl_sap_items_20_24_fy (GL Mapping = Subcontractor / Rev)"
+  },
+  {
+    "id": "FIN-05",
+    "domain": "finance",
+    "name": "Schedule of rates",
+    "desc": "Contract rates for works pricing and valuation.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "No",
+    "cadence": "Contract event",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: no schedule-of-rates table was found. SAP cost elements exist but do not provide structured contract rates.",
+    "hook": "Tender Schedules",
+    "rads": "Works & Cost",
+    "horizon": "h2",
+    "target": "Rates driving works valuation",
+    "action": "Load the schedule of rates into the pricing layer",
+    "value": "Consistent works pricing and forecasting",
+    "evidence": "transport_dev.transport.utbl_sap_items_20_24_fy; no schedule-of-rates table found"
+  },
+  {
+    "id": "FIN-06",
+    "domain": "finance",
+    "name": "Valuation & depreciation",
+    "desc": "Asset valuation, depreciation and financial reporting.",
+    "source": "Databricks",
+    "owner": "Finance",
+    "spatial": "No",
+    "cadence": "Annual",
+    "pds": "Core",
+    "status": "partial",
+    "flag": "Databricks-only validation: Equipment NBV has 3,641 rows, but no valuation report with RADS alignment or full depreciation model was found.",
+    "hook": "App. B",
+    "rads": "Valuation",
+    "horizon": "h2",
+    "target": "Automated valuation from a componentised register",
+    "action": "Automate from INV-08",
+    "value": "Reliable financial reporting",
+    "evidence": "transport_dev.transport.uvw_equipment_nbv_dep_zftm_asseteqip"
+  },
+  {
+    "id": "OVL-01",
+    "domain": "overlays",
+    "name": "Maintenance responsibility limits",
+    "desc": "Contract-defined limits of maintenance responsibility.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "No queryable limits layer",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no queryable spatial limits or maintenance-responsibility layer was found. Contract filtering is not evidence of a published responsibility-limits dataset, so this is a gap in Databricks.",
+    "hook": "App. A",
+    "rads": "Network",
+    "horizon": "h1",
+    "target": "Limits enforced inside the platform",
+    "action": "Publish limits as a spatial layer",
+    "value": "Clarity on what is in scope",
+    "evidence": "None found: no queryable spatial limits table; contract filtering only"
+  },
+  {
+    "id": "OVL-02",
+    "domain": "overlays",
+    "name": "Interface & boundary arrangements",
+    "desc": "Interfaces with councils, adjacent contracts and third parties.",
+    "source": "Databricks",
+    "owner": "TMR / Ventia",
+    "spatial": "Unknown",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no queryable interface or boundary-arrangement table was found. Adjacent-party interfaces are not evidenced in Databricks, so this is a gap.",
+    "hook": "App. C",
+    "rads": "Network",
+    "horizon": "h2",
+    "target": "Mapped third-party interfaces",
+    "action": "Digitise the interface arrangements",
+    "value": "Fewer boundary disputes",
+    "evidence": "None found: no queryable interface/boundary-arrangement table"
+  },
+  {
+    "id": "OVL-03",
+    "domain": "overlays",
+    "name": "Environmental management (EMP) constraints",
+    "desc": "Environmental constraints, sensitive areas and EMP requirements.",
+    "source": "Databricks",
+    "owner": "TMR / Ventia",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: downgraded. No EMP, environmental constraint or environmental overlay data was found in queryable Databricks tables.",
+    "hook": "App. L",
+    "rads": "n/a",
+    "horizon": "h3",
+    "target": "Spatial environmental constraints in planning",
+    "action": "Convert EMP into a spatial layer",
+    "value": "Environment-aware works planning",
+    "evidence": "None found: no queryable EMP/environmental constraint table"
+  },
+  {
+    "id": "OVL-04",
+    "domain": "overlays",
+    "name": "Cultural heritage overlays",
+    "desc": "Cultural heritage sites and constraints.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "No",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no cultural heritage data was found.",
+    "hook": "App. L",
+    "rads": "n/a",
+    "horizon": "h3",
+    "target": "Heritage-aware works screening",
+    "action": "Resolve sourcing and access arrangements",
+    "value": "Avoid heritage breaches (App. L)",
+    "evidence": "None found: no queryable cultural heritage table"
+  },
+  {
+    "id": "OVL-05",
+    "domain": "overlays",
+    "name": "Drainage, flood & hydrology",
+    "desc": "Flood extents, hydrology and drainage catchment data.",
+    "source": "Databricks",
+    "owner": "TMR / council",
+    "spatial": "Unknown",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "unknown",
+    "flag": "Databricks-only validation: no flood or hydrology data was found. transport_weather has zero tables.",
+    "hook": "App. M",
+    "rads": "n/a",
+    "horizon": "h3",
+    "target": "Flood and hydrology in maintenance planning",
+    "action": "Consolidate flood and hydrology sources",
+    "value": "Proactive wet-season readiness",
+    "evidence": "transport_dev.transport_weather schema checked: zero tables; no flood/hydrology table found"
+  },
+  {
+    "id": "OVL-06",
+    "domain": "overlays",
+    "name": "Land under roads / tenure",
+    "desc": "Cadastral tenure and land under the road corridor.",
+    "source": "Databricks",
+    "owner": "TMR",
+    "spatial": "No",
+    "cadence": "Static",
+    "pds": "SRA",
+    "status": "gap",
+    "flag": "Databricks-only validation: downgraded. No cadastral, tenure or land-under-roads data was found.",
+    "hook": "App. A",
+    "rads": "Inventory",
+    "horizon": "h2",
+    "target": "Tenure matched to the network",
+    "action": "Reconcile cadastre to the LRS",
+    "value": "Clear tenure for works",
+    "evidence": "None found: no queryable cadastre/tenure table"
+  },
+  {
+    "id": "OVL-07",
+    "domain": "overlays",
+    "name": "External context (growth, land use, crash, climate)",
+    "desc": "Population growth and demographics, land use planning, crash data, weather and climate, joined to the network.",
+    "source": "Databricks",
+    "owner": "External / Ventia",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no external context data such as ABS, crash, BoM, climate or land-use data was found.",
+    "hook": "App. D",
+    "rads": "n/a",
+    "horizon": "h3",
+    "target": "External context joined to planning",
+    "action": "Ingest and geo-join external sources to the LRS",
+    "value": "Plan for where the network is going, not where it was",
+    "evidence": "None found: no queryable ABS/crash/BoM/climate/land-use table"
+  },
+  {
+    "id": "OVL-08",
+    "domain": "overlays",
+    "name": "Community & social value data",
+    "desc": "Community impact, disruption footprint and social value measures around works and assets.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: downgraded. No community, social-value or TOMs data was found in queryable Databricks tables.",
+    "hook": "App. D",
+    "rads": "n/a",
+    "horizon": "h3",
+    "target": "Community impact inside works planning",
+    "action": "Join social value and disruption data to the pipeline",
+    "value": "Community outcomes evidenced in bids and delivery",
+    "evidence": "None found: no queryable community/social value/TOMs table"
+  },
+  {
+    "id": "PERF-01",
+    "domain": "performance",
+    "name": "KRAs & KPIs (trend reporting)",
+    "desc": "Key result areas and performance indicators for trend reporting.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Monthly",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: TSRC KPI has 233,317 rows and overdue ageing has around 28K rows, but this is contract-specific and does not prove a unified KRA/KPI reporting layer.",
+    "hook": "App. B",
+    "rads": "Performance",
+    "horizon": "h2",
+    "target": "Automated trend reporting",
+    "action": "Build KRA/KPI reporting on the platform",
+    "value": "Less manual reporting effort",
+    "evidence": "transport_dev.transport_tsrc.utbl_asset_perf_maint_kpi25_1; transport_dev.integ_transport_assets.gold_transport_overdue_job_ageing"
+  },
+  {
+    "id": "PERF-02",
+    "domain": "performance",
+    "name": "OPMs & LOS response times",
+    "desc": "Operational performance measures tied to level-of-service response times.",
+    "source": "Databricks",
+    "owner": "Ventia / TMR",
+    "spatial": "Partial",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: SLA breach proxy flags exist on 64K defect records and overdue tracking is queryable, but a complete real-time OPM/LOS performance system is not confirmed.",
+    "hook": "App. B",
+    "rads": "Performance",
+    "horizon": "h2",
+    "target": "Real-time level-of-service performance",
+    "action": "Automate OPM measurement from defect and works data",
+    "value": "Protects the fee, avoids suspension risk",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_defect_by_asset; transport_dev.integ_transport_assets.gold_transport_overdue_job_ageing"
+  },
+  {
+    "id": "PERF-03",
+    "domain": "performance",
+    "name": "Compliance & audit reporting",
+    "desc": "Contract compliance, audit evidence and reporting packs.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: no explicit compliance-pack table was found. Monthly reporting evidence exists through SRAPC, so this remains partial.",
+    "hook": "App. B / D",
+    "rads": "Performance",
+    "horizon": "h2",
+    "target": "One-click compliance packs",
+    "action": "Automate evidence assembly",
+    "value": "Audit-ready at any time",
+    "evidence": "transport_dev.transport_srapc.utbl_monthly_report; no compliance-pack table found"
+  },
+  {
+    "id": "REF-01",
+    "domain": "reference",
+    "name": "Austroads RADS code lists",
+    "desc": "Standard classifications, code lists and data item specs from RADS v4.",
+    "source": "Databricks",
+    "owner": "Ventia data governance",
+    "spatial": "No",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no RADS v4 code-list table was found. utbl_ref_job_costing_std_road_class has 40 Austroads road-class rows, but that is only a partial proxy and not the full RADS standard.",
+    "hook": "RADS v4",
+    "rads": "Reference",
+    "horizon": "h1",
+    "target": "RADS as the classification backbone",
+    "action": "Establish the RADS code lists",
+    "value": "Interoperable, standards-aligned data",
+    "evidence": "transport_dev.transport.utbl_ref_job_costing_std_road_class; no RADS v4 code-list table found"
+  },
+  {
+    "id": "REF-02",
+    "domain": "reference",
+    "name": "Asset classification & hierarchy",
+    "desc": "Asset class hierarchy and parent-child relationships.",
+    "source": "Databricks",
+    "owner": "TMR / Ventia",
+    "spatial": "No",
+    "cadence": "Static",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: confirmed partial. asset_vision_asset_type_category_map has 244 raw-to-standardised mappings and atm_asset_type_mapping has 245 rows. A working hierarchy exists but RADS alignment is not confirmed.",
+    "hook": "RADS v4",
+    "rads": "Reference",
+    "horizon": "h1",
+    "target": "Hierarchy aligned to RADS",
+    "action": "Re-map asset classes to RADS",
+    "value": "Consistent reporting and roll-ups",
+    "evidence": "transport_dev.integ_transport_assets.asset_vision_asset_type_category_map; transport_dev.integ_transport_assets.atm_asset_type_mapping"
+  },
+  {
+    "id": "REF-03",
+    "domain": "reference",
+    "name": "Supplier / contractor master",
+    "desc": "Governed supplier and subcontractor master data.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: supplier/contractor master is confirmed through uvw_vendor_master_data with 120,070 rows.",
+    "hook": "App. B",
+    "rads": "Reference",
+    "horizon": "h2",
+    "target": "Supplier master linked to cost and works",
+    "action": "Join MDM to cost and works",
+    "value": "Supplier performance and spend view",
+    "evidence": "transport_dev.transport.uvw_vendor_master_data"
+  },
+  {
+    "id": "REF-04",
+    "domain": "reference",
+    "name": "Resource / people master",
+    "desc": "Crew, role and resource master data.",
+    "source": "Databricks",
+    "owner": "Ventia",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "exists",
+    "flag": "Databricks-only validation: resource/people master is confirmed through uvw_employee_listing with 31,817 rows and utbl_resource_allcontract with 214,507 resource rows including ResourceType, ResourceGroup and Contract.",
+    "hook": "n/a",
+    "rads": "Reference",
+    "horizon": "h2",
+    "target": "Resource master linked to works",
+    "action": "Join HR to activities",
+    "value": "Capacity and productivity view",
+    "evidence": "transport_dev.transport.uvw_employee_listing; transport_dev.transport.utbl_resource_allcontract"
+  },
+  {
+    "id": "REF-05",
+    "domain": "reference",
+    "name": "Cost indices (Rawlinsons, ABS PPI, TMR Bitumen)",
+    "desc": "External cost indices for rise-and-fall and benchmarking.",
+    "source": "Databricks",
+    "owner": "Ventia commercial",
+    "spatial": "No",
+    "cadence": "Periodic",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no Rawlinsons, ABS PPI, TMR Bitumen or equivalent external cost-index table was found. The original exists claim is unsupported by queryable Databricks content, so this is a gap.",
+    "hook": "App. B",
+    "rads": "Reference",
+    "horizon": "h2",
+    "target": "Indices driving rise-and-fall and benchmarking",
+    "action": "Automate the index feeds",
+    "value": "Defensible cost escalation",
+    "evidence": "None found: no Rawlinsons/ABS PPI/TMR Bitumen cost-index table"
+  },
+  {
+    "id": "REF-06",
+    "domain": "reference",
+    "name": "Materials & treatment performance library",
+    "desc": "Which material and treatment was used where, and how it actually performed: deterioration by material grade, traffic, climate and substrate.",
+    "source": "Databricks",
+    "owner": "Ventia engineering",
+    "spatial": "Linked",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "partial",
+    "flag": "Databricks-only validation: raw treatment and cost history exists: Year_Last_Surf, Year_Last_Prvnt and Year_Last_Rehab attributes have 12K+ non-null values and SAP cost history is queryable. No curated materials-performance library was found.",
+    "hook": "Advisory",
+    "rads": "Reference",
+    "horizon": "h2",
+    "target": "Queryable whole-of-life performance library",
+    "action": "Curate works and condition history into a materials library",
+    "value": "Evidence for treatment selection and advisory",
+    "evidence": "transport_dev.integ_transport_assets.silver_transport_asset; transport_dev.transport.utbl_sap_items_20_24_fy"
+  },
+  {
+    "id": "REF-07",
+    "domain": "reference",
+    "name": "Codified institutional knowledge (expert rules & local factors)",
+    "desc": "Decades of engineering judgement made explicit: local deterioration factors, what works where, and why.",
+    "source": "Databricks",
+    "owner": "Ventia engineering",
+    "spatial": "No",
+    "cadence": "Continuous",
+    "pds": "n/a",
+    "status": "gap",
+    "flag": "Databricks-only validation: no expert-rules, codified-knowledge or AI knowledge-capture table was found.",
+    "hook": "Advisory",
+    "rads": "Reference",
+    "horizon": "h3",
+    "target": "Institutional knowledge captured and queryable",
+    "action": "AI-assisted capture of expert rules and local factors",
+    "value": "Expertise that outlives tenure and scales",
+    "evidence": "None found: no queryable expert-rules/codified-knowledge table"
+  }
+];
+
+const LEVERS=[
+  {key:"win",name:"Win",color:"#0E6E6E",desc:"Sharper bids: evidence-based unit rates and risk pricing, full visibility of the capital works and maintenance pipeline, and community outcomes that score in non-price criteria.",measure:"Bid win rate, and price competitiveness at held margin"},
+  {key:"protect",name:"Protect",color:"#0B3B3C",desc:"Keep contracted revenue: fee defence (App. B plan quality), avoid OPM payment adjustments and suspension.",measure:"Value at risk retained: adjustments avoided, plans accepted first time"},
+  {key:"margin",name:"Margin",color:"#8FA600",desc:"Cost-out on fixed-fee and schedule-of-rates work: every dollar of avoided cost is margin.",measure:"Cost-to-serve per lane-km and per asset, reactive-to-planned ratio"},
+  {key:"grow",name:"Grow",color:"#4A8C6A",desc:"Paid scope and new lines on top of the base: data remediation as variation, digital and operations service lines, and data collection sold as a service.",measure:"Variation and service-line revenue on top of the base fee"},
+  {key:"renew",name:"Renew",color:"#D19A0A",desc:"Performance evidence that wins extensions and the re-bid.",measure:"Extension and re-bid win probability, backed by KRA/KPI trend"},
+  {key:"replicate",name:"Replicate",color:"#2E7D5B",desc:"Cross-sell into adjacent areas and contracts at low marginal cost of capability.",measure:"Mobilisation cost and time per new contract or area"}
+];
+const USECASES=[
+  {id:"UC1",title:"Predictive pavement deterioration & treatment timing",type:"predictive",hook:"Clause 20 · dTIMS",lever:"margin",mech:"Cheapest effective treatment on a fixed fee: whole-of-life cost down, margin up.",datasets:["CON-01","CON-06","INV-01","INV-02","WRK-05","REF-01"],
+   outcome:"Forecast where pavements will fail and schedule the cheapest effective treatment before they do, lowering whole-of-life cost rather than reacting to failure."},
+  {id:"UC2",title:"Proactive drainage & culvert maintenance",type:"proactive",hook:"App. M",lever:"margin",mech:"Reactive callouts and washout repairs avoided; wet-season cost becomes planned cost.",datasets:["INV-04","OVL-05","WRK-04","CON-05"],
+   outcome:"Clear and repair drainage ahead of the wet season to prevent washouts, cutting reactive callouts, road closures and safety risk."},
+  {id:"UC3",title:"Cost-to-condition value for money",type:"optimise",hook:"App. B fee defence",lever:"protect",mech:"Defends the Asset Management Services Fee with evidence, and the same unit rates sharpen the next bid.",datasets:["FIN-01","FIN-02","FIN-03","WRK-01","CON-01","FIN-05"],
+   outcome:"See true cost per asset and per unit of condition improvement, so spend goes where it moves the network most and the Asset Management Services Fee is defensible."},
+  {id:"UC4",title:"Risk-based inspection & renewal prioritisation",type:"optimise",hook:"App. N",lever:"margin",mech:"Inspection and renewal budget lands where risk is, cutting spend on low-consequence assets.",datasets:["CON-01","CON-04","CON-05","INV-03","REF-02"],
+   outcome:"Rank assets by consequence and condition so the highest-risk structures and pavements are inspected and renewed first."},
+  {id:"UC5",title:"Automated level-of-service & OPM compliance",type:"optimise",hook:"App. B · value at risk",lever:"protect",mech:"Avoids OPM payment adjustments and rejection-driven suspension: value at risk kept, and the evidence feeds renewal.",datasets:["WRK-04","PERF-02","WRK-01","NET-01"],
+   outcome:"Track defect-to-response against LOS in real time, protecting the fee and avoiding suspension after repeated rejections."},
+  {id:"UC6",title:"Single view of assets & digital-twin enablement",type:"foundation",hook:"NextSpace · dTIMS",lever:"win",mech:"Bid differentiator in non-price criteria, and the platform every other lever runs on.",datasets:["NET-01","INV-01","CON-01","WRK-01","OVL-01"],
+   outcome:"One authoritative, spatially-linked record per asset in NextSpace as the single view; dTIMS then supplies the predictive layer that earns the twin label."},
+  {id:"UC7",title:"Environment & heritage-aware works planning",type:"proactive",hook:"App. L",lever:"protect",mech:"Avoids breach penalties, stop-works and rectification cost on App. L obligations.",datasets:["OVL-03","OVL-04","WRK-03","NET-01"],
+   outcome:"Screen forward works against environmental and cultural-heritage constraints automatically, de-risking delivery and avoiding breaches."},
+  {id:"UC8",title:"Tunnel M&E predictive maintenance & availability",type:"predictive",hook:"App. N · safety",lever:"protect",mech:"Protects availability-linked payment and avoids the cost of unplanned closures.",datasets:["INV-11","CON-07","WRK-04","PERF-02"],
+   outcome:"Predict failure of tunnel ventilation, lighting and fire systems and service them before they affect availability or safety, avoiding unplanned tunnel closures."},
+  {id:"UC9",title:"Bridge & structure whole-of-life renewal",type:"predictive",hook:"App. N",lever:"margin",mech:"Life extension defers capital and smooths renewal spend across the term.",datasets:["INV-03","INV-09","CON-04","FIN-01","REF-02"],
+   outcome:"Model structure deterioration at component level to time strengthening and renewal, extending asset life and smoothing capital spend."},
+  {id:"UC10",title:"Fleet & plant optimisation",type:"predictive",hook:"App. B · fleet",lever:"margin",mech:"Fewer assets doing more work: idle plant out, condition-based servicing in.",datasets:["INV-14","CON-09","FIN-03","WRK-02"],
+   outcome:"Use telematics and utilisation to right-size the fleet, cut idle plant and move to condition-based servicing instead of fixed intervals."},
+  {id:"UC11",title:"Rail corridor condition & safety",type:"proactive",hook:"Rail safety",lever:"replicate",mech:"Rail entry on the shared works-cost-performance spine: adjacency revenue at low marginal cost.",datasets:["INV-12","INV-13","CON-08","WRK-04"],
+   outcome:"Monitor track geometry and level-crossing assets to schedule maintenance before defects breach safety limits."},
+  {id:"UC12",title:"Multi-modal network operating picture",type:"foundation",hook:"NextSpace · VenSights",lever:"replicate",mech:"The cross-sell engine: each new area or contract re-seeds three layers, not seven.",datasets:["NET-01","INV-01","INV-03","INV-10","INV-12","INV-14"],
+   outcome:"One operating picture across road, structure, tunnel, rail and fleet assets, so the network is managed as a system rather than by asset silo."},
+  {id:"UC13",title:"Airside pavement & runway safety",type:"predictive",hook:"Aviation safety",lever:"replicate",mech:"Airport adjacency: the road pavement capability re-aimed at airside standards.",datasets:["INV-16","CON-10","WRK-04","PERF-02"],
+   outcome:"Monitor runway and taxiway pavement strength and defects to plan maintenance inside scheduled shutdowns and keep the airfield safe and available."},
+  {id:"UC14",title:"ITS-driven operations & incident response",type:"optimise",hook:"App. M · ITS",lever:"grow",mech:"Network operations and control-room services become a sellable line on top of maintenance.",datasets:["INV-15","CON-05","WRK-04","PERF-02","NET-01"],
+   outcome:"Use live ITS feeds and traffic data to run the network from the control room, speed incident response and keep motorways moving."},
+  {id:"UC15",title:"Contract performance evidence & renewal pack",type:"optimise",hook:"App. B · extension",lever:"renew",mech:"Evidence compounds: accepted plans, met LOS and held condition become the extension and re-bid case, built continuously rather than at the end.",datasets:["PERF-01","PERF-02","PERF-03","CON-01","FIN-04"],
+   outcome:"Assemble a running record of plans accepted first time, response times met and network condition held, so the extension and re-bid case is evidence, not assertion."},
+  {id:"UC16",title:"One pipeline: capital works & maintenance in a single view",type:"foundation",hook:"App. D · QTRIP",lever:"win",mech:"Bid teams see the whole pipeline and every schedule: sharper pricing, bundled delivery, clash avoidance and credibility.",datasets:["WRK-06","WRK-03","NET-01","INV-01"],
+   outcome:"Every capital works program and maintenance schedule visible on one network view, so bids are priced with full knowledge of what is planned, works are coordinated across contracts and disruption is bundled."},
+  {id:"UC17",title:"External-data planning & community outcomes",type:"optimise",hook:"App. D · community",lever:"win",mech:"Non-price criteria: plans grounded in growth, safety and community impact score in the bid and de-risk delivery.",datasets:["OVL-07","OVL-08","WRK-03","CON-05","NET-01"],
+   outcome:"Join growth, land use, crash and climate data to the network and overlay community impact, so infrastructure is planned for where demand is going and works are scheduled to minimise disruption to the community."},
+  {id:"UC18",title:"Asset capture as a service (every crew a survey crew)",type:"innovate",hook:"New service line",lever:"grow",mech:"Asset owners pay survey firms to collect data Ventia's crews drive past daily: capture it as a by-product and sell it as a service.",datasets:["WRK-07","WRK-01","WRK-05","INV-05"],
+   outcome:"Maintenance crews are already on every asset. With vehicle-mounted and mobile capture plus AI extraction they collect inventory and condition as they work, feeding a clean register and sold to asset owners as a data service that today goes to separate survey firms."},
+  {id:"UC19",title:"Rapid disaster damage assessment as a service",type:"innovate",hook:"Disaster funding evidence",lever:"grow",mech:"Crews are first on the network after an event, and restoration funding claims run on evidence.",datasets:["WRK-07","OVL-05","NET-01","WRK-04"],
+   outcome:"After floods and storms, capture damage network-wide with the same crews and capture technology, producing the evidence base for restoration funding claims and reconstruction programs faster than a separately mobilised survey."},
+  {id:"UC20",title:"Network insights as a product",type:"innovate",hook:"Data product",lever:"grow",mech:"The joined dataset itself becomes sellable: condition, pipeline and benchmark insights as a subscription.",datasets:["CON-01","WRK-06","PERF-01","FIN-05"],
+   outcome:"Package condition trends, the works pipeline and benchmarked performance as insight products for asset owners and councils, turning the enterprise data asset into recurring revenue in its own right."},
+  {id:"UC21",title:"Materials whole-of-life cost-benefit advisory",type:"innovate",hook:"Advisory · whole-of-life",lever:"grow",mech:"High grade at $1M for 12 years, or medium at $300K for 8? Decades of measured deterioration answer it per site, and the answer is sellable.",datasets:["REF-06","CON-01","WRK-05","FIN-01","INV-02"],
+   outcome:"Advise on material and treatment selection from measured performance rather than supplier claims: what each option truly costs per year of life in that traffic and climate, when premium pays and when it does not."},
+  {id:"UC22",title:"Strategic asset management advisory",type:"innovate",hook:"ISO 55001 · whole-of-life",lever:"grow",mech:"Decades of institutional knowledge plus the data asset become an investment-planning advisory line for asset owners.",datasets:["REF-06","REF-07","CON-01","WRK-06","FIN-06"],
+   outcome:"Whole-of-life investment strategy for asset owners: renewal timing, budget scenarios and risk trade-offs grounded in the deterioration and cost evidence of decades of operating the assets, under an ISO 55001-certified framework."},
+  {id:"UC23",title:"Anomaly detection for job costing",type:"optimise",hook:"App. B · financial integrity",lever:"margin",mech:"Statistical outliers caught before claims are paid: overclaiming and entry errors become avoided cost, not margin leakage.",datasets:["FIN-01","FIN-02","FIN-03","FIN-05","WRK-01","FIN-04"],
+   outcome:"Flag statistical outliers in material, labour and plant costs against the schedule of rates and historical norms — surfacing data entry errors and potential subcontractor overclaiming before claims are approved and paid."},
+  {id:"UC24",title:"Route optimisation for maintenance activities",type:"optimise",hook:"App. M · operational efficiency",lever:"margin",mech:"Less windshield time, more wrench time: routed crews cut fuel and travel cost per job, sharpening cost-to-serve.",datasets:["NET-01","NET-02","WRK-01","WRK-02","WRK-03","CON-05"],
+   outcome:"Sequence and route maintenance crews across the network to minimise travel time, reduce fuel cost and maximise productive hours — for routine patrols, defect response and programmed works runs."}
+];
+
+let data=structuredClone(SEED);
+let view="stocktake";
+let anatomySel=1;
+const filters={search:"",layer:"",domain:"",source:"",status:new Set(),area:"",lever:""};
+const $=s=>document.querySelector(s);
+const row=id=>data.find(d=>d.id===id);
+const statusMeta=k=>STATUSES.find(s=>s.key===k);
+const domainOf=k=>DOMAINS.find(d=>d.key===k);
+const horizonOf=k=>HORIZONS.find(h=>h.key===k);
+
+(function initSelects(){
+  const fl=$("#fLayer");Object.entries(LAYERS).forEach(([k,v])=>fl.insertAdjacentHTML("beforeend",`<option value="${k}">Layer ${k} · ${v}</option>`));
+  const fd=$("#fDomain");DOMAINS.forEach(d=>fd.insertAdjacentHTML("beforeend",`<option value="${d.key}">${d.name}</option>`));
+  const fs=$("#fSource");[...new Set(SEED.map(d=>d.source))].sort().forEach(s=>fs.insertAdjacentHTML("beforeend",`<option value="${s}">${s}</option>`));
+})();
+(function initStatusChips(){
+  const c=$("#statusChips");
+  STATUSES.forEach(s=>{
+    const b=document.createElement("button");b.className="schip";b.type="button";b.setAttribute("aria-pressed","false");b.dataset.status=s.key;
+    b.innerHTML=`<span class="sw ${s.key}"></span>${s.label}`;
+    b.addEventListener("click",()=>{filters.status.has(s.key)?(filters.status.delete(s.key),b.setAttribute("aria-pressed","false")):(filters.status.add(s.key),b.setAttribute("aria-pressed","true"));render();});
+    c.appendChild(b);
+  });
+})();
+(function initAreaChips(){
+  const row=$("#areaRow");
+  const mk=(key,label)=>{const b=document.createElement("button");b.className="achip";b.type="button";b.dataset.area=key;b.textContent=label;b.setAttribute("aria-pressed",key===""?"true":"false");
+    b.addEventListener("click",()=>{filters.area=key;document.querySelectorAll(".achip").forEach(x=>x.setAttribute("aria-pressed",x===b?"true":"false"));render();});row.appendChild(b);};
+  mk("","All areas");AREAS.forEach(a=>mk(a.key,a.name));
+  const cap=document.createElement("span");cap.className="area-cap";cap.id="areaCap";row.appendChild(cap);
+})();
+
+document.querySelectorAll(".vbtn").forEach(b=>b.addEventListener("click",()=>{
+  view=b.dataset.view;
+  document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+  $("#controls").classList.toggle("no-filters",view==="usecases"||view==="anatomy"||view==="levers");
+  render();
+}));
+$("#search").addEventListener("input",e=>{filters.search=e.target.value.toLowerCase();render();});
+$("#fLayer").addEventListener("change",e=>{filters.layer=e.target.value;render();});
+$("#fDomain").addEventListener("change",e=>{filters.domain=e.target.value;render();});
+$("#fSource").addEventListener("change",e=>{filters.source=e.target.value;render();});
+$("#resetBtn").addEventListener("click",()=>{
+  filters.search="";filters.layer="";filters.domain="";filters.source="";filters.status.clear();filters.area="";filters.lever="";
+  $("#search").value="";$("#fLayer").value="";$("#fDomain").value="";$("#fSource").value="";
+  document.querySelectorAll(".schip").forEach(b=>b.setAttribute("aria-pressed","false"));
+  document.querySelectorAll(".achip").forEach(b=>b.setAttribute("aria-pressed",b.dataset.area===""?"true":"false"));render();
+});
+$("#exportBtn").addEventListener("click",exportCSV);
+
+function passesFilters(r){
+  const dm=domainOf(r.domain);
+  if(filters.area&&!areasFor(r).includes(filters.area))return false;
+  if(filters.layer&&dm.layer!==filters.layer)return false;
+  if(filters.domain&&r.domain!==filters.domain)return false;
+  if(filters.source&&r.source!==filters.source)return false;
+  if(filters.status.size&&!filters.status.has(r.status))return false;
+  if(filters.search){const hay=(r.name+" "+r.desc+" "+r.source+" "+r.owner+" "+r.id+" "+r.hook+" "+r.flag+" "+r.action+" "+r.target).toLowerCase();if(!hay.includes(filters.search))return false;}
+  return true;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function readiness(ids){const v=ids.reduce((a,id)=>a+READY[row(id).status],0);return Math.round((v/ids.length)*100);}
+function readyColor(pc){return pc>=70?"var(--exists)":pc>=40?"var(--partial)":"var(--gap)";}
+
+function render(){
+  renderAreaCap();
+  if(view==="levers"){renderSummaryLevers();renderLevers();return;}
+  if(view==="anatomy"){renderSummaryAnatomy();renderAnatomy();return;}
+  if(view==="usecases"){renderSummaryUC();renderUsecases();return;}
+  const visible=data.filter(passesFilters);
+  renderSummary(visible);
+  view==="stocktake"?renderStocktake(visible):renderRoadmap(visible);
+}
+function renderAreaCap(){
+  const cap=$("#areaCap");if(!cap)return;
+  if(!filters.area){cap.innerHTML=`<span>Areas map to Ventia's transport service catalogue</span> <a href="https://www.ventia.com/what-we-do/industries/transport" target="_blank" rel="noopener">View catalogue</a>`;return;}
+  const a=AREAS.find(x=>x.key===filters.area);
+  cap.innerHTML=`<span>${escapeHtml(a.note)}</span> <a href="${a.url}" target="_blank" rel="noopener">View on Ventia</a>`;
+}
+
+function renderSummary(rows){
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  if(view==="stocktake"){
+    $("#sumTitle").textContent="Data condition · current view";
+    const c={exists:0,partial:0,gap:0,unknown:0};rows.forEach(r=>c[r.status]++);const t=rows.length||1;
+    STATUSES.forEach(s=>{const seg=document.createElement("div");seg.className=`seg ${s.key}`;seg.style.flex=`${c[s.key]} 1 0`;seg.style.display=c[s.key]===0?"none":"flex";seg.innerHTML=`<span>${s.label} ${c[s.key]}</span>`;bar.appendChild(seg);});
+    STATUSES.forEach(s=>chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw ${s.key}"></span>${s.label} <b>${c[s.key]}</b> · ${Math.round(c[s.key]/t*100)}%</div>`));
+  }else{
+    $("#sumTitle").textContent="Roadmap · datasets by horizon";
+    const c={h1:0,h2:0,h3:0};rows.forEach(r=>c[r.horizon]++);const t=rows.length||1;
+    HORIZONS.forEach(h=>{const seg=document.createElement("div");seg.className=`seg ${h.key}`;seg.style.flex=`${c[h.key]} 1 0`;seg.style.display=c[h.key]===0?"none":"flex";seg.innerHTML=`<span>${h.code} · ${c[h.key]}</span>`;bar.appendChild(seg);});
+    HORIZONS.forEach(h=>chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw ${h.key}"></span>${h.code} <b>${c[h.key]}</b> · ${Math.round(c[h.key]/t*100)}%</div>`));
+  }
+  $("#shown").innerHTML=`<b>${rows.length}</b> of ${data.length} datasets shown`;
+}
+
+function renderSummaryUC(){
+  $("#sumTitle").textContent="Value cases · capability readiness";
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  const ucs=visibleUsecases();
+  const avg=ucs.length?Math.round(ucs.reduce((a,u)=>a+readiness(u.datasets),0)/ucs.length):0;
+  const seg=document.createElement("div");seg.className="seg";seg.style.background=readyColor(avg);seg.style.flex=`${avg} 1 0`;seg.style.display=avg===0?"none":"flex";seg.innerHTML=`<span>Ready ${avg}%</span>`;
+  const rest=document.createElement("div");rest.className="seg unknown";rest.style.flex=`${100-avg} 1 0`;rest.style.display=avg>=100?"none":"flex";rest.innerHTML=`<span>To close ${100-avg}%</span>`;
+  bar.appendChild(seg);bar.appendChild(rest);
+  const byType={};ucs.forEach(u=>byType[u.type]=(byType[u.type]||0)+1);
+  Object.entries(byType).forEach(([k,n])=>{if(n)chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="uc-type ${k}" style="padding:2px 7px">${k}</span> <b>${n}</b></div>`);});
+  $("#shown").innerHTML=`<b>${ucs.length}</b> capabilities · avg ${avg}% data-ready`;
+}
+
+function statusPill(r){const sm=statusMeta(r.status);return `<button class="pill ${r.status}" type="button" data-id="${r.id}" title="Click to re-rate"><span class="sw"></span>${sm.label}</button>`;}
+
+function renderStocktake(rows){
+  const main=$("#main");main.innerHTML="";
+  if(!rows.length){main.innerHTML=emptyMsg();return;}
+  ["A","B","C"].forEach(layer=>{
+    if(!rows.some(r=>domainOf(r.domain).layer===layer))return;
+    const sec=document.createElement("section");sec.className="layer";
+    sec.innerHTML=`<div class="layer-tag"><span class="lt-code">Layer ${layer}</span><h3>${LAYERS[layer]}</h3></div><div class="layer-rule"></div>`;
+    DOMAINS.filter(d=>d.layer===layer).forEach(dm=>{
+      const dRows=rows.filter(r=>r.domain===dm.key);if(!dRows.length)return;
+      const dv=document.createElement("div");dv.className="domain";
+      dv.innerHTML=`<div class="domain-head"><h4>${dm.name}</h4><span class="count">${dRows.length} dataset${dRows.length>1?"s":""}</span></div><p class="domain-note">${dm.note}</p>`;
+      const grid=document.createElement("div");grid.className="grid";
+      dRows.forEach(r=>grid.appendChild(stCard(r)));dv.appendChild(grid);sec.appendChild(dv);
+    });
+    main.appendChild(sec);
+  });
+  wirePills();wireEdits();
+}
+function stCard(r){
+  const el=document.createElement("article");el.className=`card ${r.status}`;
+  el.innerHTML=`<div class="card-top"><div><span class="card-id">${r.id}</span><span class="card-name">${escapeHtml(r.name)}</span></div>${statusPill(r)}</div>
+    <p class="card-desc">${escapeHtml(r.desc)}</p><p class="card-flag">${escapeHtml(r.flag)}</p>
+    <div class="meta">
+      <div class="m"><span class="k">Source system</span><span class="v edit" contenteditable="true" data-field="source" data-id="${r.id}">${escapeHtml(r.source)}</span></div>
+      <div class="m"><span class="k">Owner</span><span class="v edit" contenteditable="true" data-field="owner" data-id="${r.id}">${escapeHtml(r.owner)}</span></div>
+      <div class="m"><span class="k">Spatial</span><span class="v">${escapeHtml(r.spatial)}</span></div>
+      <div class="m"><span class="k">Refresh</span><span class="v">${escapeHtml(r.cadence)}</span></div>
+      <div class="m"><span class="k">Austroads PDS</span><span class="v">${escapeHtml(r.pds)}</span></div>
+      <div class="m"><span class="k">RADS group</span><span class="v">${escapeHtml(r.rads)}</span></div>
+      <div class="m wide"><span class="k">Evidence tables</span><span class="v">${escapeHtml(r.evidence||"Not recorded")}</span></div>
+    </div>
+    <div class="tags"><span class="tag">RAMC · ${escapeHtml(r.hook)}</span><span class="tag rads">RADS · ${escapeHtml(r.rads)}</span></div>`;
+  return el;
+}
+
+const SOURCE_CLUSTERS=[
+  {key:"assetvision",label:"Asset Vision",test:s=>/asset vision/i.test(s)},
+  {key:"legacy",label:"ARMIS · dTIMS · BIS (TMR legacy)",test:s=>/armis|dtims|\bbis\b|chartview/i.test(s)},
+  {key:"rail",label:"Rail asset & signalling systems",test:s=>/rail/i.test(s)},
+  {key:"airport",label:"Airport asset systems",test:s=>/airport/i.test(s)},
+  {key:"port",label:"Port asset systems",test:s=>/\bport\b/i.test(s)},
+  {key:"fleet",label:"Fleet & telematics",test:s=>/fleet|telematics/i.test(s)},
+  {key:"tunnel",label:"Tunnel BMS / SCADA",test:s=>/bms|scada/i.test(s)},
+  {key:"its",label:"ITS / traffic mgmt",test:s=>/\bits\b/i.test(s)},
+  {key:"gis",label:"GIS · cadastre",test:s=>/gis|cadastre/i.test(s)},
+  {key:"survey",label:"Survey · field capture",test:s=>/survey|field/i.test(s)},
+  {key:"sap",label:"SAP (Ventia ERP)",test:s=>/\bsap\b/i.test(s)},
+  {key:"reporting",label:"Reporting layer",test:s=>/report/i.test(s)},
+  {key:"external",label:"External / tender reference",test:s=>/tender|external|census/i.test(s)},
+  {key:"other",label:"Other / unclassified",test:()=>true}
+];
+function clusterOf(source){return SOURCE_CLUSTERS.find(c=>c.test(source));}
+const STATUS_HEX={exists:"#1F8F5F",partial:"#C98A00",gap:"#C43F28",unknown:"#8D9997"};
+const UCTYPE_HEX={foundation:"#0E7A78",optimise:"#3E8F68",proactive:"#8FA600",predictive:"#8FA600",innovate:"#C98A00"};
+
+let roadmapMode="canvas";
+let lineageOn=true;
+let lineageFocus=null;
+function setLineageFocus(kind,key){
+  lineageFocus=(lineageFocus&&lineageFocus.kind===kind&&lineageFocus.key===key)?null:{kind,key};
+  render();
+}
+function renderRoadmap(rows){
+  const main=$("#main");main.innerHTML="";
+  const toggle=document.createElement("div");toggle.className="rm-toggle";
+  toggle.innerHTML=`<div class="rm-toggle-group" role="tablist" aria-label="Roadmap view">
+      <button class="rmt-btn" type="button" data-mode="canvas" role="tab" aria-selected="${roadmapMode==="canvas"}">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="4" height="11" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="6.5" y="2.5" width="4" height="7" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11.5" y="2.5" width="3" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+        Canvas</button>
+      <button class="rmt-btn" type="button" data-mode="cards" role="tab" aria-selected="${roadmapMode==="cards"}">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1.5" y="6.8" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1.5" y="11.6" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+        Detail cards</button>
+    </div>
+    ${roadmapMode==="canvas"?`<div class="rm-canvas-tools">
+      <button class="schip lin-toggle-btn" type="button" aria-pressed="${lineageOn}"><span class="sw" style="background:var(--teal)"></span>Show lineage</button>
+      ${lineageFocus?'<button class="btn" type="button" id="linClear">Clear focus</button>':""}
+    </div>`:""}`;
+  main.appendChild(toggle);
+  toggle.querySelectorAll(".rmt-btn").forEach(b=>b.addEventListener("click",()=>{
+    if(roadmapMode===b.dataset.mode)return;
+    roadmapMode=b.dataset.mode;render();
+  }));
+  const linToggleBtn=toggle.querySelector(".lin-toggle-btn");
+  if(linToggleBtn)linToggleBtn.addEventListener("click",()=>{lineageOn=!lineageOn;lineageFocus=null;render();});
+  const linClearBtn=toggle.querySelector("#linClear");
+  if(linClearBtn)linClearBtn.addEventListener("click",()=>{lineageFocus=null;render();});
+  if(!rows.length){main.insertAdjacentHTML("beforeend",emptyMsg());return;}
+  roadmapMode==="canvas"?renderRoadmapCanvas(main,rows):renderRoadmapCards(main,rows);
+}
+function renderRoadmapCards(main,rows){
+  HORIZONS.forEach(h=>{
+    const hRows=rows.filter(r=>r.horizon===h.key);if(!hRows.length)return;
+    const sec=document.createElement("section");sec.className="horizon";
+    sec.innerHTML=`<div class="h-tag"><span class="h-code ${h.key}">${h.code}</span><div><h3>${h.name}</h3><p class="h-desc">${h.desc}</p></div></div><div class="h-rule ${h.key}"></div>`;
+    const grid=document.createElement("div");grid.className="grid";
+    hRows.forEach(r=>grid.appendChild(rmCard(r)));sec.appendChild(grid);main.appendChild(sec);
+  });
+  wirePills();
+}
+function renderRoadmapCanvas(main,rows){
+  const visibleIds=new Set(rows.map(r=>r.id));
+  const byCluster={};
+  rows.forEach(r=>{const c=clusterOf(r.source);(byCluster[c.key]=byCluster[c.key]||{cluster:c,rows:[]}).rows.push(r);});
+  const related=(()=>{
+    if(!lineageFocus)return null;
+    const relDatasets=new Set(),relClusters=new Set(),relUcs=new Set();
+    if(lineageFocus.kind==="tile"){
+      const r=row(lineageFocus.key);if(!r)return null;
+      relDatasets.add(r.id);relClusters.add(clusterOf(r.source).key);
+      USECASES.forEach(u=>{if(u.datasets.includes(r.id))relUcs.add(u.id);});
+    }else if(lineageFocus.kind==="cluster"){
+      relClusters.add(lineageFocus.key);
+      rows.forEach(r=>{if(clusterOf(r.source).key===lineageFocus.key){relDatasets.add(r.id);USECASES.forEach(u=>{if(u.datasets.includes(r.id))relUcs.add(u.id);});}});
+    }else if(lineageFocus.kind==="uc"){
+      relUcs.add(lineageFocus.key);
+      const u=USECASES.find(x=>x.id===lineageFocus.key);
+      if(u)u.datasets.forEach(id=>{if(visibleIds.has(id)){relDatasets.add(id);relClusters.add(clusterOf(row(id).source).key);}});
+    }
+    return {relDatasets,relClusters,relUcs};
+  })();
+  const dimTile=id=>related&&!related.relDatasets.has(id);
+  const activeTile=id=>related&&related.relDatasets.has(id);
+  const dimCluster=k=>related&&!related.relClusters.has(k);
+  const activeCluster=k=>related&&related.relClusters.has(k);
+  const dimUc=id=>related&&!related.relUcs.has(id);
+  const activeUc=id=>related&&related.relUcs.has(id);
+
+  function buildHorizonCol(h,i){
+    const hRows=rows.filter(r=>r.horizon===h.key);
+    const col=document.createElement("div");col.className=`rmc-col ${h.key}`;
+    const counts={exists:0,partial:0,gap:0,unknown:0};hRows.forEach(r=>counts[r.status]++);
+    const total=hRows.length||1;
+    const barSegs=STATUSES.filter(s=>counts[s.key]).map(s=>`<span style="flex:${counts[s.key]} 1 0;background:var(--${s.key})" title="${s.label} · ${counts[s.key]}"></span>`).join("");
+    const notReady=hRows.filter(r=>r.status==="gap"||r.status==="unknown").length;
+    const byDomain={};hRows.forEach(r=>{(byDomain[r.domain]=byDomain[r.domain]||[]).push(r);});
+    const lanes=DOMAINS.filter(d=>byDomain[d.key]).map(d=>{
+      const tiles=byDomain[d.key].map(r=>{
+        const cls=["rmc-tile",r.status];
+        if(lineageOn){if(activeTile(r.id))cls.push("active");if(dimTile(r.id))cls.push("dim");}
+        const hint=lineageOn?"click to trace lineage":"click to re-rate";
+        return `<button class="${cls.join(" ")}" type="button" data-id="${r.id}" title="${escapeHtml(r.id)} · ${escapeHtml(r.name)} — ${escapeHtml(statusMeta(r.status).label)} (${hint})">${r.id}</button>`;
+      }).join("");
+      return `<div class="rmc-lane"><div class="rmc-lane-head"><span>${escapeHtml(d.name)}</span><span>${byDomain[d.key].length}</span></div><div class="rmc-tiles">${tiles}</div></div>`;
+    }).join("");
+    col.innerHTML=`
+      <div class="rmc-head"><span class="h-code ${h.key}">${h.code}</span><span class="rmc-count">${hRows.length} dataset${hRows.length===1?"":"s"}</span></div>
+      <h3 class="rmc-title">${escapeHtml(h.name)}</h3>
+      <p class="rmc-desc">${escapeHtml(h.desc)}</p>
+      <div class="rmc-bar">${barSegs}</div>
+      <div class="rmc-lanes">${lanes||'<p class="rmc-empty">No datasets match the current filters.</p>'}</div>
+      <div class="rmc-foot">${notReady?`<b>${notReady}</b> of ${total} not yet at "exists"`:"All datasets in this horizon exist"}${i<HORIZONS.length-1?` · feeds → ${HORIZONS[i+1].code}`:""}</div>`;
+    return col;
+  }
+
+  const board=document.createElement("div");board.className=`rm-canvas${lineageOn?" with-lineage":""}`;
+
+  if(lineageOn){
+    // Lineage is a strict 3-stage Sankey (sources -> datasets -> value cases) so every
+    // connector only ever crosses ONE gutter between adjacent boxes and can sit safely
+    // behind the cards, instead of tunnelling under unrelated horizon columns.
+    const srcRail=document.createElement("div");srcRail.className="lin-rail lin-rail-src";
+    srcRail.innerHTML=`<div class="lin-rail-title">Source systems</div>${
+      Object.values(byCluster).map(({cluster,rows:crows})=>
+        `<button class="lin-node${activeCluster(cluster.key)?" active":""}${dimCluster(cluster.key)?" dim":""}" type="button" data-cluster="${cluster.key}">
+          <b>${escapeHtml(cluster.label)}</b><span class="cnt">${crows.length} dataset${crows.length===1?"":"s"}</span></button>`
+      ).join("")}`;
+    board.appendChild(srcRail);
+
+    const dsCol=document.createElement("div");dsCol.className="lin-datasets";
+    HORIZONS.forEach((h,i)=>dsCol.appendChild(buildHorizonCol(h,i)));
+    board.appendChild(dsCol);
+
+    const ucRail=document.createElement("div");ucRail.className="lin-rail lin-rail-uc";
+    ucRail.innerHTML=`<div class="lin-rail-title">Value cases</div><div class="lin-uc-list">${
+      visibleUsecases().map(u=>`<button class="lin-uc${activeUc(u.id)?" active":""}${dimUc(u.id)?" dim":""}" type="button" data-uc="${u.id}">
+          <div class="lin-uc-top"><span class="cid">${u.id}</span><span class="uc-type ${u.type}" style="padding:2px 6px;font-size:8.5px">${u.type}</span></div>
+          <div class="ttl">${escapeHtml(u.title)}</div></button>`).join("")}</div>`;
+    board.appendChild(ucRail);
+
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("class","lin-svg");
+    board.appendChild(svg);
+  }else{
+    HORIZONS.forEach((h,i)=>board.appendChild(buildHorizonCol(h,i)));
+  }
+
+  main.appendChild(board);
+  if(lineageOn)drawLineage(board,rows);
+  board.querySelectorAll(".lin-node").forEach(n=>n.addEventListener("click",()=>setLineageFocus("cluster",n.dataset.cluster)));
+  board.querySelectorAll(".lin-uc").forEach(n=>n.addEventListener("click",()=>setLineageFocus("uc",n.dataset.uc)));
+  board.querySelectorAll(".rmc-tile").forEach(t=>t.addEventListener("click",()=>{
+    lineageOn?setLineageFocus("tile",t.dataset.id):cycleStatus(t.dataset.id);
+  }));
+}
+function drawLineage(board,rows){
+  const svg=board.querySelector(".lin-svg");if(!svg)return;
+  const brect=board.getBoundingClientRect();
+  svg.setAttribute("width",brect.width);svg.setAttribute("height",brect.height);
+  svg.setAttribute("viewBox",`0 0 ${brect.width} ${brect.height}`);
+  const rightOf=el=>{const r=el.getBoundingClientRect();return{x:r.right-brect.left,y:r.top-brect.top+r.height/2};};
+  const leftOf=el=>{const r=el.getBoundingClientRect();return{x:r.left-brect.left,y:r.top-brect.top+r.height/2};};
+  const mkPath=(a,b,color,strong)=>{
+    const mx=(a.x+b.x)/2;
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d",`M${a.x},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`);
+    p.setAttribute("fill","none");p.setAttribute("stroke",color);
+    p.setAttribute("stroke-width",strong?"2.2":"1");
+    p.setAttribute("opacity",strong?"0.9":(lineageFocus?"0.04":"0.18"));
+    p.setAttribute("stroke-linecap","round");
+    return p;
+  };
+  const frag=document.createDocumentFragment();
+  rows.forEach(r=>{
+    const tile=board.querySelector(`.rmc-tile[data-id="${r.id}"]`);if(!tile)return;
+    const cluster=clusterOf(r.source);
+    const clusterNode=board.querySelector(`.lin-node[data-cluster="${cluster.key}"]`);
+    const tileFocused=lineageFocus&&(
+      (lineageFocus.kind==="tile"&&lineageFocus.key===r.id)||
+      (lineageFocus.kind==="cluster"&&lineageFocus.key===cluster.key)
+    );
+    if(clusterNode)frag.appendChild(mkPath(rightOf(clusterNode),leftOf(tile),STATUS_HEX[r.status],tileFocused));
+    USECASES.forEach(u=>{
+      if(!u.datasets.includes(r.id))return;
+      const ucNode=board.querySelector(`.lin-uc[data-uc="${u.id}"]`);if(!ucNode)return;
+      const edgeFocused=lineageFocus&&(
+        (lineageFocus.kind==="tile"&&lineageFocus.key===r.id)||
+        (lineageFocus.kind==="cluster"&&lineageFocus.key===cluster.key)||
+        (lineageFocus.kind==="uc"&&lineageFocus.key===u.id)
+      );
+      frag.appendChild(mkPath(rightOf(tile),leftOf(ucNode),UCTYPE_HEX[u.type]||"#8D9997",edgeFocused));
+    });
+  });
+  svg.appendChild(frag);
+}
+function debounce(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};}
+window.addEventListener("resize",debounce(()=>{if(view==="roadmap")render();},150));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(view==="roadmap")render();});
+function rmCard(r){
+  const el=document.createElement("article");el.className=`rm-card ${r.status}`;
+  el.innerHTML=`<div class="rm-name"><span class="card-id">${r.id} · ${escapeHtml(domainOf(r.domain).name)}</span>${escapeHtml(r.name)}</div>
+    <div class="rm-flow">${statusPill(r)}
+      <svg class="rm-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M1 7h14m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="rm-target">${escapeHtml(r.target)}</span></div>
+    <p class="rm-line"><span class="lab">Move</span><span class="val">${escapeHtml(r.action)}</span></p>
+    <p class="rm-line value"><span class="lab">Value</span><span class="val">${escapeHtml(r.value)}</span></p>
+    <div class="rm-tags"><span class="tag">RAMC · ${escapeHtml(r.hook)}</span><span class="tag rads">RADS · ${escapeHtml(r.rads)}</span></div>`;
+  return el;
+}
+
+function renderSummaryAnatomy(){
+  $("#sumTitle").textContent="Anatomy · shared spine vs area-specific";
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  const shared=data.filter(d=>!AREA_MAP[d.id]).length, specific=data.length-shared;
+  const s1=document.createElement("div");s1.className="seg h1";s1.style.flex=`${shared} 1 0`;s1.innerHTML=`<span>Shared spine ${shared}</span>`;
+  const s2=document.createElement("div");s2.className="seg h3";s2.style.flex=`${specific} 1 0`;s2.innerHTML=`<span>Varies by area ${specific}</span>`;
+  bar.appendChild(s1);bar.appendChild(s2);
+  chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw h1"></span>Shared across all areas <b>${shared}</b></div><div class="stat"><span class="sw h3"></span>Area-specific <b>${specific}</b></div>`);
+  $("#shown").innerHTML=`<b>${Math.round(shared/data.length*100)}%</b> of the data asset is common to every transport area`;
+}
+
+function anChips(ids){
+  const list=filters.area?ids.filter(id=>areasFor(row(id)).includes(filters.area)):ids;
+  return list.map(id=>{const d=row(id);return `<button class="uc-chip" type="button" data-goto="${id}"><span class="sw ${d.status}"></span><span class="cid">${id}</span> ${escapeHtml(d.name.split(" (")[0])}</button>`;}).join("");
+}
+function renderAnatomy(){
+  const main=$("#main");
+  const strip=ANATOMY.map((s,i)=>`
+    <button class="hz-step" type="button" data-si="${i}" aria-pressed="${i===anatomySel}">
+      <span class="hz-tile${s.dash?" dash":""}${i===anatomySel?" sel":""}">${AN_ICONS[s.num]}</span>
+      <span class="hz-lab">${s.num==="00"?"Entry":"Step "+s.num}</span>
+      <span class="hz-name">${s.name}</span>
+    </button>${i<ANATOMY.length-1?'<span class="hz-line" aria-hidden="true"></span>':""}`).join("");
+  const s=ANATOMY[anatomySel];
+  const detail=`
+    <div class="hz-detail">
+      <div class="an-stage-head"><span class="an-num">${s.num}</span><h4>${s.name}</h4><span class="q">${s.q}</span></div>
+      <p class="an-desc">${s.desc}</p>
+      <p class="an-cross"><span class="lab">Across areas</span><span class="val">${s.cross}</span></p>
+      <div class="uc-chips">${anChips(s.datasets)}</div>
+    </div>`;
+  const areaCards=AREA_ANATOMY.map(a=>`
+    <div class="an-acard${filters.area===a.key?" sel":""}">
+      <h5>${a.name}</h5>
+      <p class="an-kv diff"><span class="lab">Entry</span><span class="val">${a.entry}</span></p>
+      <p class="an-kv"><span class="lab">Spine</span><span class="val">${a.spine}</span></p>
+      <p class="an-kv"><span class="lab">Measure</span><span class="val">${a.measure}</span></p>
+      <p class="an-kv"><span class="lab">Plan</span><span class="val">${a.plan}</span></p>
+      <p class="an-kv"><span class="lab">Trigger</span><span class="val">${a.trigger}</span></p>
+      <p class="an-kv"><span class="lab">Differs</span><span class="val">${a.diff}</span></p>
+    </div>`).join("");
+  main.innerHTML=`
+    <p class="an-intro">Every transport service runs the same loop: locate it, register it, measure it, plan the work, do the work, cost it, prove it, then feed what was built back into the register. What differs by area is where the loop is entered: new builds like tunnels start at design and as-constructed, maintenance contracts like road networks start with an inherited register. Tap a stage for its data.</p>
+    <div class="hz-wrap"><div class="hz-flow">${strip}</div></div>
+    ${detail}
+    <div class="an-loop"><svg width="18" height="18" viewBox="0 0 18 18" fill="none" style="flex:0 0 auto;margin-top:1px"><path d="M15 9a6 6 0 11-1.76-4.24M15 2v3.5h-3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <div><b>Close the loop:</b> as-constructed data (WRK-05) flows back to step 02 so the register never goes stale. On new builds this is the loop that creates the register; on maintenance contracts it is the loop most often left open, and the reason mobilisation starts with re-collecting assets that were already built once.</div></div>
+    <h3 class="an-h">The same loop, five doors in</h3>
+    <p class="an-sub">Steps 05 to 07 (do, cost, prove) run on the same corporate spine everywhere. Steps 00 to 04 are where each area speaks its own language and enters the loop through its own door.</p>
+    <div class="an-areas">${areaCards}</div>
+    <div class="an-loop" style="margin-top:22px"><div><b>Where the crossings pay:</b> the commercial case for these joins lives on the Levers page.</div>
+      <button class="btn primary" type="button" id="goLevers" style="flex:0 0 auto;margin-left:auto">Open revenue levers</button></div>`;
+  main.querySelectorAll(".hz-step").forEach(b=>b.addEventListener("click",()=>{anatomySel=+b.dataset.si;render();}));
+  const gl=main.querySelector("#goLevers");
+  if(gl)gl.addEventListener("click",()=>{
+    view="levers";
+    document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x.dataset.view==="levers"?"true":"false"));
+    render();window.scrollTo({top:0,behavior:"smooth"});
+  });
+  main.querySelectorAll(".uc-chip").forEach(c=>c.addEventListener("click",()=>{
+    const id=c.dataset.goto;
+    view="stocktake";filters.search=id;$("#search").value=id;
+    document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x.dataset.view==="stocktake"?"true":"false"));
+    $("#controls").classList.remove("no-filters");render();window.scrollTo({top:0,behavior:"smooth"});
+  }));
+}
+
+function leverUCs(k){return USECASES.filter(u=>u.lever===k&&(!filters.area||ucAreas(u).includes(filters.area)));}
+function renderSummaryLevers(){
+  $("#sumTitle").textContent="Revenue levers · how data and AI convert to money";
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  LEVERS.forEach(l=>{
+    const n=leverUCs(l.key).length;
+    const seg=document.createElement("div");seg.className="seg";seg.style.background=l.color;
+    seg.style.flex=`${n} 1 0`;seg.style.display=n===0?"none":"flex";seg.innerHTML=`<span>${l.name} ${n}</span>`;
+    bar.appendChild(seg);
+    const ucs=leverUCs(l.key);
+    const pc=ucs.length?Math.round(ucs.reduce((a,u)=>a+readiness(u.datasets),0)/ucs.length):0;
+    chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw" style="background:${l.color}"></span>${l.name} <b>${pc}%</b> ready</div>`);
+  });
+  const total=LEVERS.reduce((a,l)=>a+leverUCs(l.key).length,0);
+  $("#shown").innerHTML=`<b>${total}</b> capabilities across <b>6</b> levers`;
+}
+function renderLevers(){
+  const main=$("#main");
+  const cards=LEVERS.map(l=>{
+    const ucs=leverUCs(l.key);
+    const pc=ucs.length?Math.round(ucs.reduce((a,u)=>a+readiness(u.datasets),0)/ucs.length):0;
+    const col=readyColor(pc);
+    const ucRows=ucs.length?ucs.map(u=>`<button class="lv-uc" type="button" data-gouc="${l.key}"><span>${escapeHtml(u.title)}</span><span class="pc">${readiness(u.datasets)}%</span></button>`).join("")
+      :`<p class="an-sub" style="margin:0">No capability in the selected area pulls this lever yet.</p>`;
+    return `<article class="lv-card">
+      <div class="lv-head"><h4>${l.name}</h4><span class="lv-ready"><b>${pc}%</b> data-ready</span></div>
+      <div class="uc-bar" style="margin-bottom:12px"><span style="width:${pc}%;background:${col}"></span></div>
+      <p class="lv-desc">${l.desc}</p>
+      <p class="lv-count"><span class="lab">What to count</span>${l.measure}</p>
+      <div class="lv-ucs"><span class="lab">Capabilities that pull it</span>${ucRows}</div>
+    </article>`;}).join("");
+  main.innerHTML=`
+    <p class="an-intro">Six ways the data asset converts to money on transport contracts. Each lever shows the capabilities that pull it and a live data-readiness score from the stocktake, so the levers page doubles as an investment view: the gap between a lever's value and its readiness is the case for closing the data gaps that feed it. Protect and Margin are the near-term levers on a live contract; Win, Renew and Replicate compound over the term.</p>
+    <div class="lv-grid">${cards}</div>`;
+  main.querySelectorAll(".lv-uc").forEach(b=>b.addEventListener("click",()=>{
+    filters.lever=b.dataset.gouc;view="usecases";
+    document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x.dataset.view==="usecases"?"true":"false"));
+    render();window.scrollTo({top:0,behavior:"smooth"});
+  }));
+}
+
+function renderUsecases(){
+  const main=$("#main");
+  const leverCounts={};USECASES.filter(u=>!filters.area||ucAreas(u).includes(filters.area)).forEach(u=>leverCounts[u.lever]=(leverCounts[u.lever]||0)+1);
+  const strip=LEVERS.map(l=>`<button class="lever-card" type="button" data-lever="${l.key}" aria-pressed="${filters.lever===l.key}">
+      <span class="ln">${l.name}<span class="cnt">${leverCounts[l.key]||0}</span></span>
+      <span class="ld">${l.desc}</span></button>`).join("");
+  main.innerHTML=`<p class="uc-intro">Each capability below is a question the network needs answered, and the datasets that answer it. Every capability pulls one of six revenue levers; tap a lever to filter, and tap a dataset chip to jump to it. Readiness is computed live from the stocktake, so re-rating a dataset updates every capability it feeds. Together they ladder up to whole-of-life strategic asset management: the institutional expertise built over decades of operating these assets, made explicit in data.</p>
+    <div class="lever-strip">${strip}</div>
+    <div class="uc-grid" id="ucGrid"></div>`;
+  main.querySelectorAll(".lever-card").forEach(b=>b.addEventListener("click",()=>{
+    filters.lever=filters.lever===b.dataset.lever?"":b.dataset.lever;render();
+  }));
+  const grid=$("#ucGrid");
+  const ucs=visibleUsecases();
+  if(!ucs.length){grid.innerHTML=`<div class="empty"><h4>No value cases match</h4><div>Clear the lever or switch area.</div></div>`;return;}
+  ucs.forEach(u=>{
+    const pc=readiness(u.datasets);const col=readyColor(pc);
+    const lv=LEVERS.find(l=>l.key===u.lever);
+    const chips=u.datasets.map(id=>{const d=row(id);return `<button class="uc-chip" type="button" data-goto="${id}"><span class="sw ${d.status}"></span><span class="cid">${id}</span> ${escapeHtml(d.name.split(" (")[0])}</button>`;}).join("");
+    const el=document.createElement("article");el.className="uc-card";
+    el.innerHTML=`<div class="uc-top"><div class="uc-title">${escapeHtml(u.title)}</div><span class="uc-type ${u.type}">${u.type}</span></div>
+      <p class="uc-outcome">${escapeHtml(u.outcome)}</p>
+      <p class="uc-mech"><span class="lab">Revenue lever · ${lv.name}</span>${escapeHtml(u.mech)}</p>
+      <div class="uc-ready"><div class="uc-ready-head"><span class="lab">Data readiness</span><span class="pc">${pc}%</span></div><div class="uc-bar"><span style="width:${pc}%;background:${col}"></span></div></div>
+      <div class="uc-needs"><span class="lab">Data it draws on</span><div class="uc-chips">${chips}</div></div>
+      <div class="uc-foot"><span class="uc-lever">${lv.name}</span><span class="uc-hook">RAMC · ${escapeHtml(u.hook)}</span></div>`;
+    grid.appendChild(el);
+  });
+  grid.querySelectorAll(".uc-chip").forEach(c=>c.addEventListener("click",()=>{
+    const id=c.dataset.goto;
+    view="stocktake";filters.search=id;$("#search").value=id;
+    document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x.dataset.view==="stocktake"?"true":"false"));
+    $("#controls").classList.remove("no-filters");render();window.scrollTo({top:0,behavior:"smooth"});
+  }));
+}
+
+function wirePills(){document.querySelectorAll(".pill").forEach(p=>p.addEventListener("click",()=>cycleStatus(p.dataset.id)));}
+function wireEdits(){document.querySelectorAll(".edit").forEach(sp=>{
+  sp.addEventListener("blur",()=>{const r=row(sp.dataset.id);if(r)r[sp.dataset.field]=sp.textContent.trim();});
+  sp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sp.blur();}});
+});}
+function cycleStatus(id){const r=row(id);const order=STATUSES.map(s=>s.key);r.status=order[(order.indexOf(r.status)+1)%order.length];render();}
+function emptyMsg(){return `<div class="empty"><h4>No datasets match</h4><div>Try clearing a filter or the search box.</div></div>`;}
+
+function exportCSV(){
+  const cols=["id","layer","domain","name","description","source_system","evidence_tables","owner","spatial","refresh","austroads_pds","rads_group","status","horizon","target_state","action","value","transport_areas","ramc_hook","note"];
+  const lines=[cols.join(",")];
+  data.forEach(r=>{const dm=domainOf(r.domain);
+    const areas=areasFor(r).map(k=>AREAS.find(a=>a.key===k).name).join("; ");
+    const vals=[r.id,dm.layer,dm.name,r.name,r.desc,r.source,r.evidence||"",r.owner,r.spatial,r.cadence,r.pds,r.rads,statusMeta(r.status).label,horizonOf(r.horizon).code,r.target,r.action,r.value,areas,r.hook,r.flag];
+    lines.push(vals.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(","));
+  });
+  const blob=new Blob([lines.join("\r\n")],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");
+  a.href=url;a.download="EDA_Transport_Stocktake_Roadmap.csv";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>

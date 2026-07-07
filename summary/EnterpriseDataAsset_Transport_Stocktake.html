@@ -1,0 +1,854 @@
+<!DOCTYPE html>
+<html lang="en-AU">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Enterprise Data Asset · Transport POV</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#0A2726;--teal:#0E7A78;--teal-deep:#0B3B3C;--lime:#C4E000;--lime-deep:#8FA600;
+    --h2c:#3E8F68;
+    --bg:#F3F5F1;--card:#FFFFFF;--line:#E4E8E3;--line-soft:#EDF0EA;--muted:#5C6A67;--faint:#8C9895;
+    --exists:#1F8F5F;--partial:#C98A00;--gap:#C43F28;--unknown:#8D9997;
+    --exists-bg:#E4F3EA;--partial-bg:#FCF0D6;--gap-bg:#FAE3DC;--unknown-bg:#EAEEEC;
+    --radius:16px;--radius-sm:10px;
+    --shadow-sm:0 1px 2px rgba(9,38,37,.05);
+    --shadow-md:0 1px 2px rgba(9,38,37,.05),0 10px 26px -6px rgba(9,38,37,.10);
+    --shadow-lg:0 6px 16px -4px rgba(9,38,37,.14),0 22px 46px -12px rgba(9,38,37,.16);
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;color:var(--ink);
+    background:
+      radial-gradient(760px 420px at 100% -8%,rgba(14,122,120,.07),transparent 60%),
+      radial-gradient(600px 360px at -6% 8%,rgba(196,224,0,.08),transparent 55%),
+      var(--bg);
+    font-family:"Inter",system-ui,sans-serif;font-size:15px;line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 20px}
+  ::selection{background:rgba(196,224,0,.35);color:var(--ink)}
+
+  @keyframes riseIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+  header{position:relative;overflow:hidden;background:linear-gradient(150deg,#0A3231 0%,#0E4F4E 58%,#125D5B 100%);
+    color:#EAF3F1;border-bottom:3px solid var(--lime)}
+  header::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:radial-gradient(480px 260px at 88% 0%,rgba(196,224,0,.16),transparent 65%),
+      radial-gradient(360px 220px at 8% 110%,rgba(255,255,255,.06),transparent 60%)}
+  .head-inner{position:relative;padding:28px 20px 24px;max-width:1240px;margin:0 auto}
+  .brand{display:flex;align-items:center;gap:10px;font-family:"Archivo",sans-serif;
+    font-weight:800;letter-spacing:.02em;font-size:12.5px;text-transform:uppercase}
+  .brand .er{color:var(--lime)}.brand .x{color:#6E9997;font-weight:600}.brand .vt{color:#CFE0DE}
+  h1{font-family:"Archivo",sans-serif;font-weight:800;letter-spacing:-.025em;
+    font-size:clamp(25px,4.4vw,39px);line-height:1.05;margin:16px 0 9px}
+  h1 .accent{color:var(--lime)}
+  .sub{color:#B9CFCD;max-width:64ch;font-size:15px;margin:0}
+  .sub code{font-family:"IBM Plex Mono",monospace;font-size:.86em;color:#DCEBE9;
+    background:rgba(255,255,255,.09);padding:2px 7px;border-radius:6px;border:1px solid rgba(255,255,255,.08)}
+
+  .assume{background:#FFFBEF;border-bottom:1px solid #F0E5B8;color:#6B520A;font-size:13.5px}
+  .assume .wrap{padding:12px 20px;display:flex;gap:12px;align-items:flex-start}
+  .assume b{font-weight:600}
+  .assume .dot{flex:0 0 auto;width:20px;height:20px;border-radius:50%;background:var(--partial);margin-top:1px;
+    display:flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:700;font-family:"Archivo",sans-serif}
+  .assume .dot::before{content:"!"}
+  .assume.qa{background:#EDF7F5;border-bottom-color:#C9E6E1;color:#0B3B3C}
+  .assume.qa .dot{background:var(--teal)}
+  .assume.qa .dot::before{content:"✓"}
+
+  .summary{padding:26px 0 8px}
+  .summary-head{display:flex;justify-content:space-between;align-items:flex-end;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+  .summary-head h2{font-family:"Archivo",sans-serif;font-weight:700;font-size:17px;margin:0;letter-spacing:-.01em}
+  .shown{font-family:"IBM Plex Mono",monospace;font-size:12.5px;color:var(--muted)}
+  .shown b{color:var(--ink)}
+  .condition{display:flex;height:42px;border-radius:12px;overflow:hidden;border:1px solid var(--line);
+    background:var(--card);box-shadow:var(--shadow-sm)}
+  .seg{display:flex;align-items:center;justify-content:center;color:#fff;font-family:"IBM Plex Mono",monospace;
+    font-size:12.5px;font-weight:500;min-width:0;transition:flex-basis .4s ease;white-space:nowrap;overflow:hidden;
+    position:relative}
+  .seg+.seg::before{content:"";position:absolute;left:0;top:20%;bottom:20%;width:1px;background:rgba(255,255,255,.28)}
+  .seg.exists{background:linear-gradient(180deg,#28A06A,var(--exists))}.seg.partial{background:linear-gradient(180deg,#DCA426,var(--partial))}
+  .seg.gap{background:linear-gradient(180deg,#D2543C,var(--gap))}.seg.unknown{background:linear-gradient(180deg,#A2ACA9,var(--unknown))}
+  .seg.h1{background:linear-gradient(180deg,#159795,var(--teal))}.seg.h2{background:linear-gradient(180deg,#4FA277,var(--h2c))}.seg.h3{background:linear-gradient(180deg,#A6C000,var(--lime-deep))}
+  .seg span{padding:0 8px}
+  .chips-stat{display:flex;gap:9px;flex-wrap:wrap;margin-top:13px}
+  .stat{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--line);
+    border-radius:999px;padding:6px 14px 6px 11px;font-size:13px;color:var(--muted);box-shadow:var(--shadow-sm)}
+  .stat .sw{width:9px;height:9px;border-radius:3px}
+  .stat b{font-family:"IBM Plex Mono",monospace;color:var(--ink);font-weight:500}
+  .sw.exists{background:var(--exists)}.sw.partial{background:var(--partial)}
+  .sw.gap{background:var(--gap)}.sw.unknown{background:var(--unknown)}
+  .sw.h1{background:var(--teal)}.sw.h2{background:var(--h2c)}.sw.h3{background:var(--lime-deep)}
+
+  .controls{position:sticky;top:0;z-index:20;background:rgba(243,245,241,.88);backdrop-filter:blur(10px) saturate(1.1);
+    -webkit-backdrop-filter:blur(10px) saturate(1.1);padding:14px 0;margin-top:16px;border-bottom:1px solid var(--line);
+    transition:box-shadow .2s ease}
+  .viewswitch{display:inline-flex;background:#E7EBE5;border-radius:12px;padding:4px;gap:3px;margin-bottom:12px}
+  .vbtn{border:none;background:transparent;font-family:"Archivo",sans-serif;font-weight:600;font-size:13.5px;
+    color:var(--muted);padding:8px 16px;border-radius:9px;cursor:pointer;display:flex;align-items:center;gap:7px;
+    transition:background .15s ease,color .15s ease}
+  .vbtn[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .vbtn:not([aria-selected="true"]):hover{color:var(--teal-deep)}
+  .vbtn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .vbtn .n{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint)}
+  .vbtn[aria-selected="true"] .n{color:var(--teal)}
+
+  .filters-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center}
+  .controls.no-filters .filters-row,.controls.no-filters .status-row{display:none}
+  .search{flex:1 1 240px;min-width:180px;position:relative}
+  .search input{width:100%;padding:10px 12px 10px 36px;border:1px solid var(--line);border-radius:var(--radius-sm);
+    background:var(--card);font-family:inherit;font-size:14px;color:var(--ink);transition:border-color .15s ease,box-shadow .15s ease}
+  .search input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,122,120,.14)}
+  .search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);color:var(--faint)}
+  select{padding:9px 30px 9px 12px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);
+    font-family:inherit;font-size:13.5px;color:var(--ink);appearance:none;-webkit-appearance:none;cursor:pointer;
+    transition:border-color .15s ease;
+    background-image:url("data:image/svg+xml,%3Csvg width='12' height='12' viewBox='0 0 12 12' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M2.5 4.5L6 8l3.5-3.5' stroke='%235E6B69' stroke-width='1.4' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 10px center}
+  select:hover{border-color:var(--faint)}
+  select:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(14,122,120,.14)}
+  .btn{padding:9px 14px;border:1px solid var(--line);border-radius:var(--radius-sm);background:var(--card);font-family:inherit;
+    font-size:13.5px;color:var(--ink);cursor:pointer;font-weight:500;display:inline-flex;align-items:center;gap:7px;
+    transition:border-color .15s ease,color .15s ease,background .15s ease,transform .1s ease}
+  .btn:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .btn.primary:hover{background:var(--teal);border-color:var(--teal);color:#fff}
+  .status-row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:10px}
+  .status-chips{display:flex;gap:6px;flex-wrap:wrap}
+  .schip{padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:12.5px;
+    cursor:pointer;color:var(--muted);display:flex;align-items:center;gap:6px;font-family:"IBM Plex Mono",monospace;
+    transition:border-color .15s ease,color .15s ease,background .15s ease}
+  .schip:hover{border-color:var(--faint)}
+  .schip .sw{width:9px;height:9px;border-radius:3px}
+  .schip[aria-pressed="true"]{border-color:var(--ink);color:var(--ink);background:#fff;font-weight:500;box-shadow:var(--shadow-sm)}
+  .schip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .edit-hint{font-size:11px;color:var(--faint);margin-left:auto;display:flex;align-items:center;gap:5px}
+
+  main{padding:10px 0 60px}
+  .layer{margin-top:38px}
+  .layer-tag{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+  .layer-tag .lt-code{font-family:"Archivo",sans-serif;font-weight:800;font-size:12px;color:var(--teal-deep);
+    background:linear-gradient(180deg,#EAF4F3,#DDEEEC);border:1px solid #C5E0E0;border-radius:8px;padding:4px 11px;letter-spacing:.05em;text-transform:uppercase}
+  .layer-tag h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:21px;margin:0;letter-spacing:-.015em}
+  .layer-rule{height:1px;background:linear-gradient(90deg,var(--line),transparent);margin:12px 0 0}
+  .domain{margin-top:24px}
+  .domain-head{display:flex;justify-content:space-between;gap:14px;align-items:baseline;flex-wrap:wrap}
+  .domain-head h4{font-family:"Archivo",sans-serif;font-weight:700;font-size:15.5px;margin:0;color:var(--teal-deep)}
+  .domain-head .count{font-family:"IBM Plex Mono",monospace;font-size:12px;color:var(--faint)}
+  .domain-note{color:var(--muted);font-size:13px;margin:4px 0 13px;max-width:80ch}
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:13px}
+
+  .card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+    padding:18px 17px 15px;box-shadow:var(--shadow-md);position:relative;
+    transition:transform .18s ease,box-shadow .18s ease,border-color .18s ease;animation:riseIn .35s ease both}
+  .card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .card-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start}
+  .card-name{font-weight:600;font-size:14.5px;line-height:1.3}
+  .card-id{font-family:"IBM Plex Mono",monospace;font-size:10.5px;color:var(--faint);display:block;margin-bottom:3px;letter-spacing:.03em}
+  .pill{border:none;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:11px;font-weight:600;padding:6px 10px;
+    border-radius:999px;white-space:nowrap;flex:0 0 auto;display:flex;align-items:center;gap:6px;transition:filter .12s ease,transform .12s ease}
+  .pill:hover{filter:brightness(.95);transform:translateY(-1px)}
+  .pill:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+  .pill .sw{width:7px;height:7px;border-radius:50%;box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+  .pill.exists{background:var(--exists-bg);color:#1B6E48}.pill.exists .sw{background:var(--exists)}
+  .pill.partial{background:var(--partial-bg);color:#8A6708}.pill.partial .sw{background:var(--partial)}
+  .pill.gap{background:var(--gap-bg);color:#9A3020}.pill.gap .sw{background:var(--gap)}
+  .pill.unknown{background:var(--unknown-bg);color:#565F5D}.pill.unknown .sw{background:var(--unknown)}
+  .card-desc{color:var(--muted);font-size:12.8px;margin:9px 0 2px;line-height:1.45}
+  .card-flag{font-size:11.5px;color:var(--faint);font-style:italic;margin:7px 0 11px;line-height:1.45}
+  .meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 14px;padding-top:11px;border-top:1px dashed var(--line)}
+  .m{min-width:0}
+  .m .k{font-size:9.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--faint);display:block;margin-bottom:2px}
+  .m .v{font-size:12.5px;color:var(--ink);word-break:break-word}
+  .m .v.edit{border-bottom:1px dashed var(--faint);cursor:text;outline:none;padding-bottom:1px;display:inline-block;min-width:20px;border-radius:2px}
+  .m .v.edit:focus{border-bottom:1px solid var(--teal);background:#F0F6F5}
+  .m .v.edit:hover{border-bottom-color:var(--teal)}
+  .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+  .tag{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:4px 8px;border-radius:7px;
+    background:#EEF3F2;color:var(--teal-deep);border:1px solid #DCE7E5}
+  .tag.rads{background:#F4F8DE;color:var(--lime-deep);border-color:#E6EEC1}
+
+  /* Roadmap */
+  .horizon{margin-top:32px}
+  .h-tag{display:flex;align-items:flex-start;gap:13px;margin-bottom:4px}
+  .h-code{font-family:"Archivo",sans-serif;font-weight:800;font-size:14px;color:#fff;border-radius:9px;
+    padding:6px 12px;letter-spacing:.03em;flex:0 0 auto;box-shadow:var(--shadow-sm)}
+  .h-code.h1{background:linear-gradient(155deg,#149794,var(--teal))}.h-code.h2{background:linear-gradient(155deg,#4FA277,var(--h2c))}.h-code.h3{background:linear-gradient(155deg,#A6C000,var(--lime-deep))}
+  .h-tag h3{font-family:"Archivo",sans-serif;font-weight:700;font-size:18.5px;margin:0 0 3px;letter-spacing:-.015em}
+  .h-tag .h-desc{color:var(--muted);font-size:13px;margin:0;max-width:82ch}
+  .h-rule{height:2px;border-radius:2px;margin:13px 0 19px}
+  .h-rule.h1{background:linear-gradient(90deg,var(--teal) 0%,rgba(14,110,110,.15) 50%,transparent)}
+  .h-rule.h2{background:linear-gradient(90deg,var(--h2c) 0%,rgba(74,140,106,.15) 50%,transparent)}
+  .h-rule.h3{background:linear-gradient(90deg,var(--lime-deep) 0%,rgba(143,166,0,.15) 50%,transparent)}
+  .rm-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:17px;
+    box-shadow:var(--shadow-md);transition:transform .18s ease,box-shadow .18s ease;animation:riseIn .35s ease both}
+  .rm-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .rm-name{font-weight:600;font-size:14.5px;line-height:1.3;margin-bottom:10px}
+  .rm-flow{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-bottom:12px}
+  .rm-target{font-size:12.8px;color:var(--ink);font-weight:500;background:#F0F6F5;border:1px solid #DCE7E5;
+    border-radius:8px;padding:6px 10px;flex:1 1 auto;min-width:120px}
+  .rm-arrow{color:var(--lime-deep);flex:0 0 auto}
+  .rm-line{font-size:12.6px;color:var(--muted);margin:0 0 6px;display:flex;gap:7px}
+  .rm-line .lab{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);
+    flex:0 0 58px;padding-top:2px}
+  .rm-line .val{color:var(--ink)}
+  .rm-line.value .val{color:var(--lime-deep);font-weight:600}
+  .rm-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:11px;padding-top:11px;border-top:1px dashed var(--line)}
+
+  /* Roadmap canvas */
+  .rm-toggle{display:flex;justify-content:flex-end;margin-bottom:16px}
+  .rm-toggle-group{display:inline-flex;background:#E7EBE5;border-radius:11px;padding:4px;gap:3px}
+  .rmt-btn{border:none;background:transparent;font-family:"Archivo",sans-serif;font-weight:600;font-size:12.5px;
+    color:var(--muted);padding:7px 13px;border-radius:8px;cursor:pointer;display:flex;align-items:center;gap:6px;
+    transition:background .15s ease,color .15s ease}
+  .rmt-btn[aria-selected="true"]{background:var(--card);color:var(--ink);box-shadow:var(--shadow-sm)}
+  .rmt-btn:not([aria-selected="true"]):hover{color:var(--teal-deep)}
+  .rmt-btn:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .rm-canvas-tools{display:flex;align-items:center;gap:8px;margin-top:-6px;margin-bottom:16px}
+  .rm-canvas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;align-items:start;position:relative}
+  .rm-canvas.with-lineage{grid-template-columns:.82fr 1fr 1fr 1fr .9fr;gap:14px}
+  .rmc-col{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--line);border-radius:var(--radius);
+    padding:18px 17px 16px;box-shadow:var(--shadow-md);position:relative;z-index:2}
+  .rmc-col.h1{border-top-color:var(--teal)}
+  .rmc-col.h2{border-top-color:var(--h2c)}
+  .rmc-col.h3{border-top-color:var(--lime-deep)}
+  .rmc-head{display:flex;align-items:center;justify-content:space-between}
+  .rmc-count{font-family:"IBM Plex Mono",monospace;font-size:11px;color:var(--faint)}
+  .rmc-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:16.5px;margin:11px 0 4px;letter-spacing:-.01em}
+  .rmc-desc{font-size:12.2px;color:var(--muted);line-height:1.45;margin:0 0 13px}
+  .rmc-bar{display:flex;height:7px;border-radius:4px;overflow:hidden;background:#E7EBE5;margin-bottom:16px}
+  .rmc-bar span{height:100%}
+  .rmc-lanes{display:flex;flex-direction:column;gap:13px;max-height:560px;overflow-y:auto;padding-right:2px}
+  .rmc-lanes::-webkit-scrollbar{width:6px}
+  .rmc-lanes::-webkit-scrollbar-thumb{background:var(--line);border-radius:6px}
+  .rmc-lane-head{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:7px;font-weight:500}
+  .rmc-tiles{display:flex;flex-wrap:wrap;gap:6px}
+  .rmc-tile{border:none;cursor:pointer;font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:700;
+    letter-spacing:.02em;padding:6px 8px;border-radius:8px;transition:transform .12s ease,filter .12s ease,opacity .15s ease;
+    box-shadow:0 1px 2px rgba(9,38,37,.08)}
+  .rmc-tile:hover{transform:translateY(-2px) scale(1.05);filter:brightness(1.06)}
+  .rmc-tile:focus-visible{outline:2px solid var(--teal-deep);outline-offset:2px}
+  .rmc-tile.exists{background:var(--exists);color:#fff}
+  .rmc-tile.partial{background:var(--partial);color:#3B2600}
+  .rmc-tile.gap{background:var(--gap);color:#fff}
+  .rmc-tile.unknown{background:var(--unknown);color:#22302D}
+  .rmc-tile.active{outline:2px solid var(--teal-deep);outline-offset:1px}
+  .rmc-tile.dim{opacity:.28}
+  .rmc-foot{margin-top:15px;padding-top:12px;border-top:1px dashed var(--line);font-size:11.5px;color:var(--muted)}
+  .rmc-foot b{color:var(--ink)}
+  .rmc-empty{font-size:12px;color:var(--faint);font-style:italic;margin:0}
+
+  /* Lineage rails */
+  .lin-rail{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:16px 13px;
+    box-shadow:var(--shadow-md);position:relative;z-index:2}
+  .lin-rail-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:11px;text-transform:uppercase;
+    letter-spacing:.05em;color:var(--faint);margin:0 0 12px}
+  .lin-node,.lin-uc{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;
+    border-radius:10px;padding:8px 10px;margin-bottom:8px;cursor:pointer;font-family:inherit;
+    transition:border-color .15s ease,background .15s ease,opacity .15s ease,box-shadow .15s ease}
+  .lin-node{display:flex;flex-direction:column;gap:3px;font-size:11.5px;color:var(--muted)}
+  .lin-node b{color:var(--ink);font-family:"Archivo",sans-serif;font-size:12px;font-weight:600}
+  .lin-node .cnt{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--faint)}
+  .lin-node:hover,.lin-uc:hover{border-color:var(--teal)}
+  .lin-node.active,.lin-uc.active{border-color:var(--teal);background:#EAF5F3;box-shadow:0 0 0 3px rgba(14,122,120,.12)}
+  .lin-node.dim,.lin-uc.dim{opacity:.35}
+  .lin-node:focus-visible,.lin-uc:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .lin-uc-top{display:flex;align-items:center;gap:6px;margin-bottom:4px}
+  .lin-uc .cid{font-family:"IBM Plex Mono",monospace;font-size:9.5px;color:var(--faint)}
+  .lin-uc .ttl{font-size:11.5px;font-weight:600;color:var(--ink);line-height:1.3}
+  .lin-svg{position:absolute;inset:0;pointer-events:none;overflow:visible;z-index:1}
+  @media (max-width:980px){
+    .rm-canvas,.rm-canvas.with-lineage{grid-template-columns:1fr}
+    .rmc-lanes{max-height:none;overflow-y:visible}
+    .lin-svg{display:none}
+  }
+
+  /* Use cases */
+  .uc-intro{color:var(--muted);font-size:14px;max-width:80ch;margin:6px 0 4px}
+  .uc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:15px;margin-top:20px}
+  .uc-card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);padding:20px 18px 16px;
+    box-shadow:var(--shadow-md);display:flex;flex-direction:column;transition:transform .18s ease,box-shadow .18s ease;
+    animation:riseIn .35s ease both}
+  .uc-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg)}
+  .uc-top{display:flex;justify-content:space-between;gap:10px;align-items:flex-start;margin-bottom:9px}
+  .uc-title{font-family:"Archivo",sans-serif;font-weight:700;font-size:16px;line-height:1.25;letter-spacing:-.01em}
+  .uc-type{font-family:"IBM Plex Mono",monospace;font-size:10px;font-weight:600;padding:5px 9px;border-radius:999px;
+    white-space:nowrap;flex:0 0 auto;text-transform:uppercase;letter-spacing:.04em}
+  .uc-type.foundation{background:#E7F1F1;color:var(--teal-deep)}
+  .uc-type.optimise{background:#E9F2EC;color:var(--h2c)}
+  .uc-type.proactive,.uc-type.predictive{background:#F3F7DE;color:var(--lime-deep)}
+  .uc-outcome{color:var(--muted);font-size:13.2px;line-height:1.5;margin:0 0 14px}
+  .uc-ready{margin-bottom:12px}
+  .uc-ready-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px}
+  .uc-ready-head .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint)}
+  .uc-ready-head .pc{font-family:"IBM Plex Mono",monospace;font-size:13px;font-weight:600;color:var(--ink)}
+  .uc-bar{height:9px;border-radius:999px;background:#E7EBE5;overflow:hidden;box-shadow:inset 0 1px 2px rgba(9,38,37,.06)}
+  .uc-bar span{display:block;height:100%;border-radius:999px;transition:width .5s ease}
+  .uc-needs .lab{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--faint);margin-bottom:7px;display:block}
+  .uc-chips{display:flex;flex-wrap:wrap;gap:6px}
+  .uc-chip{display:flex;align-items:center;gap:6px;font-size:11.5px;border:1px solid var(--line);border-radius:999px;
+    padding:4px 10px 4px 8px;cursor:pointer;background:#fff;color:var(--muted);transition:border-color .12s ease,color .12s ease,transform .12s ease}
+  .uc-chip:hover{border-color:var(--teal);color:var(--teal-deep);transform:translateY(-1px)}
+  .uc-chip:focus-visible{outline:2px solid var(--teal);outline-offset:1px}
+  .uc-chip .sw{width:8px;height:8px;border-radius:50%}
+  .uc-chip .cid{font-family:"IBM Plex Mono",monospace;font-size:10px;color:var(--faint)}
+  .uc-foot{margin-top:auto;padding-top:12px}
+  .uc-hook{font-family:"IBM Plex Mono",monospace;font-size:10.5px;padding:4px 9px;border-radius:7px;
+    background:#EEF3F2;color:var(--teal-deep);border:1px solid #DCE7E5}
+
+  .empty{text-align:center;padding:70px 20px;color:var(--faint)}
+  .empty h4{font-family:"Archivo",sans-serif;color:var(--muted);margin:0 0 6px;font-size:16px}
+  footer{border-top:1px solid var(--line);padding:24px 0 44px;color:var(--faint);font-size:12.5px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+  footer b{color:var(--muted);font-weight:600}
+
+  @media (max-width:600px){
+    .grid,.uc-grid{grid-template-columns:1fr}
+    .controls{position:static}
+    .edit-hint{display:none}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="head-inner">
+    <div class="brand"><span class="er">EdgeRed</span><span class="x">×</span><span class="vt">Ventia</span></div>
+    <h1>Enterprise data asset<br><span class="accent">transport proof of value</span></h1>
+    <p class="sub">Road asset data: what we have today, where it goes, and the value it unlocks. Themes follow the Austroads Road Asset Data Standard <code>RADS v4</code>; obligations map to <code>RAMC CN-25949</code>.</p>
+  </div>
+</header>
+
+<div class="assume">
+  <div class="wrap"><span class="dot"></span>
+    <div><b>Everything below is an EdgeRed best-guess assumption for you to correct.</b> Click any status to re-rate it, edit source and owner in place, then export to CSV. Re-rating flows through to the roadmap and value-case readiness.</div>
+  </div>
+</div>
+
+<div class="assume qa">
+  <div class="wrap"><span class="dot qa"></span>
+    <div><b>Databricks QA pass (2026-07-02):</b> Statuses and flags below were cross-checked against the Second Brain Databricks knowledge base (RAMC-scoped). Corrections are called out in each card's flag text. Named TMR-side systems (ARMIS, Chartview, dTIMS, BIS, SAP PM/HR/FA) are interview-sourced and could not be independently confirmed in Databricks &mdash; only Asset Vision (<code>asset_vision_ven_gen7</code> / <code>transport_ramc</code>) and the shared <code>transport</code> SAP-adjacent schema are directly observed there. Two datasets (WRK-06, CON-07) already exist in Databricks but were missing from the original stocktake and have been added.</div>
+  </div>
+</div>
+
+<div class="wrap">
+  <section class="summary">
+    <div class="summary-head"><h2 id="sumTitle">Data condition · current view</h2><div class="shown" id="shown"></div></div>
+    <div class="condition" id="conditionBar" role="img" aria-label="Breakdown"></div>
+    <div class="chips-stat" id="statChips"></div>
+  </section>
+</div>
+
+<div class="controls" id="controls">
+  <div class="wrap">
+    <div class="viewswitch" role="tablist" aria-label="View">
+      <button class="vbtn" role="tab" data-view="stocktake" aria-selected="true"><span class="n">01</span> Stocktake</button>
+      <button class="vbtn" role="tab" data-view="roadmap" aria-selected="false"><span class="n">02</span> Roadmap</button>
+      <button class="vbtn" role="tab" data-view="usecases" aria-selected="false"><span class="n">03</span> Value cases</button>
+    </div>
+    <div class="filters-row">
+      <div class="search">
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><circle cx="7" cy="7" r="5" stroke="currentColor" stroke-width="1.5"/><path d="M11 11l3.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="text" id="search" placeholder="Search datasets, systems, descriptions...">
+      </div>
+      <select id="fLayer" aria-label="Filter by layer"><option value="">All layers</option></select>
+      <select id="fDomain" aria-label="Filter by theme"><option value="">All themes</option></select>
+      <select id="fSource" aria-label="Filter by source system"><option value="">All systems</option></select>
+      <button class="btn primary" id="exportBtn" type="button">
+        <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2v8m0 0L5 7m3 3l3-3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3 12v1.5h10V12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        Export CSV
+      </button>
+      <button class="btn" id="resetBtn" type="button">Reset</button>
+    </div>
+    <div class="status-row">
+      <div class="status-chips" id="statusChips"></div>
+      <div class="edit-hint">
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none"><path d="M11 2l3 3-8 8H3v-3l8-8z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+        Status, source and owner are editable
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="wrap" id="main"></main>
+
+<footer>
+  <div class="wrap">
+    <span>EdgeRed data &amp; AI · Ventia RAMC bid support · draft for review</span>
+    <span><b>Themes:</b> Austroads RADS v4 &nbsp;·&nbsp; <b>Obligations:</b> RAMC CN-25949 (GCC + Appendices A–N)</span>
+  </div>
+</footer>
+
+<script>
+const LAYERS={A:"Core asset data",B:"Operational & commercial",C:"Context, performance & glue"};
+const DOMAINS=[
+  {key:"network",layer:"A",name:"Network & location referencing",note:"Austroads Network group plus the Object Locations common class. The spine everything else hangs off (1D linear, 2D GIS, 3D BIM)."},
+  {key:"inventory",layer:"A",name:"Asset register / inventory",note:"The Austroads Inventory group, literally the Asset Register. RAMC handover data carries unpopulated fields (App. J Attachment 2)."},
+  {key:"condition",layer:"A",name:"Condition & demand",note:"Austroads Condition, Demand & Utilisation. Feeds dTIMS. Clause 20 makes collection and dTIMS-compatibility the Contractor's obligation at its own cost."},
+  {key:"works",layer:"B",name:"Works & maintenance",note:"Austroads Works & Cost group (child of an asset or the network). RAMC Appendices M, N and D."},
+  {key:"finance",layer:"B",name:"Financial & commercial",note:"Cost side of Works & Cost plus the Valuation common class. Tied to the Asset Management Services Fee (App. B)."},
+  {key:"overlays",layer:"C",name:"Spatial overlays & environment",note:"Where the network meets its constraints. RAMC Appendices A (limits), C (interfaces) and L (environmental & cultural heritage)."},
+  {key:"performance",layer:"C",name:"Performance & compliance",note:"RAMC App. B. Keep OPMs and LOS response times (payment-linked) tagged distinctly from KRA/KPI trend reporting (no payment impact)."},
+  {key:"reference",layer:"C",name:"Reference & master data",note:"The glue: RADS code lists, asset hierarchies, supplier and resource master data. Turns siloed systems into one enterprise asset."}
+];
+const STATUSES=[{key:"exists",label:"Exists"},{key:"partial",label:"Partial"},{key:"gap",label:"Gap"},{key:"unknown",label:"Unknown"}];
+const HORIZONS=[
+  {key:"h1",code:"H1",name:"Foundation · single view of assets",desc:"Integrate the silos, align to RADS and link works and cost to the asset, so there is one authoritative, spatially-referenced record per asset."},
+  {key:"h2",code:"H2",name:"Optimise · better decisions now",desc:"Connect condition, works and cost to target spend where it moves the network most, prioritise by risk and hold level of service."},
+  {key:"h3",code:"H3",name:"Predictive · proactive & preventive",desc:"dTIMS-driven deterioration forecasting and proactive maintenance, with NextSpace as the single view and the enablement layer for a digital twin."}
+];
+const READY={exists:1,partial:.5,unknown:.25,gap:0};
+
+const SEED=[
+  {id:"NET-01",domain:"network",name:"Road network & LRS (links, sections, nodes)",desc:"The declared road network with linear referencing, segmentation and node topology.",source:"ARMIS / Chartview",owner:"TMR",spatial:"Yes · 1D+2D",cadence:"Periodic",pds:"SRA Core",status:"exists",flag:"Authoritative TMR network; the reference frame for all asset linking. QA: Databricks confirms network/segment referencing via Asset Vision (asset_vision_ven_gen7 asset table, RAMC/BAC/PoB/TSRC); ARMIS/Chartview attribution is interview-sourced and not independently verified in Databricks.",hook:"App. A",rads:"Network",horizon:"h1",target:"Canonical network in the platform, every asset linked to it",action:"Publish the LRS as the master reference layer",value:"Every dataset resolves to a consistent location"},
+  {id:"NET-02",domain:"network",name:"Road segmentation & carriageways",desc:"Carriageway geometry, direction and segmentation aligned to the network.",source:"GIS (Esri)",owner:"TMR",spatial:"Yes · 2D",cadence:"Periodic",pds:"SRA Core",status:"exists",flag:"Good coverage on the declared network. QA: Databricks confirms carriageway/segment geometry (ChainageFrom/To, Direction) via Asset Vision; Esri GIS attribution is interview-sourced and not independently verified in Databricks.",hook:"App. A",rads:"Network",horizon:"h1",target:"Consistent, RADS-aligned segmentation",action:"Standardise segmentation rules to RADS",value:"Condition and cost are comparable per segment"},
+  {id:"NET-03",domain:"network",name:"Gazetted boundaries & declared limits",desc:"Region and responsibility boundaries defining the contract network extent.",source:"TMR cadastre / GIS",owner:"TMR",spatial:"Yes · 2D",cadence:"Static",pds:"SRA",status:"partial",flag:"Edge cases at region and council interface limits need confirming.",hook:"App. A",rads:"Network",horizon:"h1",target:"Confirmed, undisputed contract extent",action:"Resolve region and council interface limits",value:"No disputed responsibility at boundaries"},
+
+  {id:"INV-01",domain:"inventory",name:"Pavement inventory",desc:"Pavement type, structure, layers and construction history by segment.",source:"ARMIS / dTIMS",owner:"TMR",spatial:"Yes · 1D",cadence:"Event-driven",pds:"SRA Core",status:"exists",flag:"Some fields unpopulated on ARMIS handover (App. J Att 2). QA: Databricks confirms pavement type/structure/construction-year fields via Asset Vision (transport_ramc uvw_stripmap_full: Pav_Base_Type, Year Constructed); ARMIS/dTIMS lineage is interview-sourced and not independently verified in Databricks.",hook:"App. J Att 2",rads:"Inventory",horizon:"h1",target:"Complete, RADS-aligned pavement register",action:"Populate handover gaps and align fields to RADS",value:"A register you can trust for modelling"},
+  {id:"INV-02",domain:"inventory",name:"Surfacing inventory (seal type, age)",desc:"Surface type, seal age, treatment history and remaining life.",source:"ARMIS",owner:"TMR",spatial:"Yes · 1D",cadence:"Event-driven",pds:"SRA",status:"partial",flag:"Surfacing age and last-treatment gaps common. QA: Databricks confirms seal type/age/last-surfaced fields via Asset Vision (Pav_Seal_Type, Seal_Age, Year Last Surfaced); ARMIS attribution is interview-sourced and not independently verified in Databricks.",hook:"App. J Att 2",rads:"Inventory",horizon:"h1",target:"Full surfacing age and treatment history",action:"Backfill seal age from works history",value:"Accurate reseal and renewal forecasting"},
+  {id:"INV-03",domain:"inventory",name:"Structures (bridges, major culverts)",desc:"Bridge and major culvert inventory, dimensions and componentisation.",source:"BIS / ARMIS",owner:"TMR",spatial:"Yes · 2D",cadence:"Periodic",pds:"SRA Core",status:"exists",flag:"Inspection-backed and reasonably complete.",hook:"App. N",rads:"Inventory",horizon:"h2",target:"Structures linked to condition and works",action:"Link BIS into the platform",value:"Whole-of-life view of each structure"},
+  {id:"INV-04",domain:"inventory",name:"Minor culverts & drainage assets",desc:"Pits, pipes, open drains and roadside drainage inventory.",source:"Asset Vision (RAMC/BAC/PoB/TSRC)",owner:"Ventia / TMR",spatial:"Yes · 2D",cadence:"Ad hoc",pds:"SRA Ext",status:"partial",flag:"QA correction (was \"gap\"): pits (27,321), culverts (20,936) and stormwater (18,596) assets are ~100% geolocated in Asset Vision; condition/attribute completeness beyond location is still unconfirmed, so downgraded from gap to partial rather than left as-is.",hook:"App. M",rads:"Inventory",horizon:"h1",target:"Geolocated drainage inventory",action:"Confirm attribute/condition completeness on the existing geolocated register",value:"Unlocks proactive drainage maintenance"},
+  {id:"INV-05",domain:"inventory",name:"Signs, line marking, ITS & lighting",desc:"Regulatory and guide signs, line marking, ITS assets and lighting.",source:"ARMIS / field capture",owner:"Ventia",spatial:"Yes · 2D",cadence:"Ad hoc",pds:"SRA Ext",status:"partial",flag:"QA correction: signs (99.99% WKT) and line marking (100% WKT) are essentially fully geolocated in Asset Vision, not \"part-geolocated\" as originally flagged. The real gap is classification (~11% coverage) and condition (~0%) attributes.",hook:"App. M",rads:"Inventory",horizon:"h1",target:"Complete, classified ancillary register",action:"Backfill classification and condition attributes, not geolocation",value:"Defect and renewal planning for roadside assets"},
+  {id:"INV-06",domain:"inventory",name:"Road barriers & safety devices",desc:"Guardrail, wire rope and end-terminal inventory.",source:"ARMIS / field",owner:"Ventia",spatial:"Yes · 2D",cadence:"Ad hoc",pds:"SRA Ext",status:"partial",flag:"QA correction: barrier end-terminal, crash cushion and fence assets show ~100% WKT coverage in Asset Vision, including rural runs, not \"incomplete rural geolocation\" as originally flagged. Remaining gap is likely attribute/condition completeness.",hook:"App. N",rads:"Inventory",horizon:"h1",target:"Complete safety-device register",action:"Confirm attribute/condition completeness on the existing geolocated register",value:"Safety-asset compliance and renewal planning"},
+  {id:"INV-07",domain:"inventory",name:"Kerb, channel & pathways",desc:"Kerb and channel, footpaths and shared paths.",source:"ARMIS",owner:"TMR",spatial:"Partial · 1D",cadence:"Static",pds:"SRA Ext",status:"partial",flag:"Largely urban segments only.",hook:"App. M",rads:"Inventory",horizon:"h2",target:"Network-wide kerb and path register",action:"Extend capture beyond urban segments",value:"Complete active-transport asset picture"},
+  {id:"INV-08",domain:"inventory",name:"Asset valuation attributes",desc:"Replacement cost, useful life and componentisation for valuation.",source:"SAP FA",owner:"Finance",spatial:"No",cadence:"Annual",pds:"Core",status:"partial",flag:"Componentisation incomplete against RADS.",hook:"App. B",rads:"Valuation",horizon:"h2",target:"RADS-aligned componentisation",action:"Componentise to the valuation standard",value:"Defensible valuation and depreciation"},
+
+  {id:"CON-01",domain:"condition",name:"Pavement condition (roughness, rutting, cracking)",desc:"Network condition survey: IRI, rutting and cracking indices.",source:"dTIMS / survey contractor",owner:"TMR",spatial:"Yes · 1D",cadence:"Annual",pds:"SRA Core",status:"exists",flag:"Annual network survey feeds dTIMS modelling. QA: Databricks confirms roughness/rutting/cracking indices via Asset Vision (transport_ramc uvw_stripmap_full: Roughness NRM, Rut Depth, Transverse/Crocodile Cracking %); dTIMS ingestion is interview-sourced and not independently verified in Databricks.",hook:"Clause 20",rads:"Condition",horizon:"h3",target:"Condition feeding live deterioration models",action:"Stream survey into dTIMS and the platform",value:"Predict failure and optimise treatment timing"},
+  {id:"CON-02",domain:"condition",name:"Deflection / structural (FWD)",desc:"Falling weight deflectometer and structural strength data.",source:"Survey / dTIMS",owner:"TMR",spatial:"Yes · 1D",cadence:"Cyclic",pds:"SRA Ext",status:"partial",flag:"Selective coverage on priority routes.",hook:"Clause 20",rads:"Condition",horizon:"h3",target:"Structural strength across the network",action:"Extend FWD coverage",value:"Rehabilitate vs resurface decisions"},
+  {id:"CON-03",domain:"condition",name:"Skid resistance & surface texture",desc:"Skid and texture measurement for safety and surface performance.",source:"Survey contractor",owner:"TMR",spatial:"Yes · 1D",cadence:"Cyclic",pds:"SRA Ext",status:"partial",flag:"Priority and high-risk routes only.",hook:"Clause 20",rads:"Condition",horizon:"h3",target:"Safety-surface monitoring network-wide",action:"Extend skid coverage on high-risk routes",value:"Proactive safety intervention"},
+  {id:"CON-04",domain:"condition",name:"Bridge condition (L1/L2/L3 inspections)",desc:"Structure condition ratings from inspection cycles.",source:"BIS",owner:"TMR",spatial:"Yes · 2D",cadence:"Cyclic",pds:"SRA",status:"exists",flag:"Inspection-cycle backed and current.",hook:"App. N",rads:"Condition",horizon:"h3",target:"Predictive structure deterioration",action:"Model inspection trends over time",value:"Prioritise structure renewals early"},
+  {id:"CON-05",domain:"condition",name:"Traffic volumes / AADT",desc:"Annual average daily traffic and classified counts.",source:"TMR traffic census",owner:"TMR",spatial:"Yes · 1D",cadence:"Annual",pds:"SRA Core",status:"exists",flag:"Good on major routes, thinner on local roads. QA: Databricks confirms segment-level AADT via Asset Vision (transport_ramc uvw_stripmap_full: MT_AADT, Year_AADT); TMR traffic census as the origin system is interview-sourced and not independently verified in Databricks.",hook:"App. J",rads:"Utilisation",horizon:"h2",target:"Traffic linked to condition and cost",action:"Join traffic to network segments",value:"Demand-weighted prioritisation"},
+  {id:"CON-06",domain:"condition",name:"Traffic loading & growth (ESA)",desc:"Equivalent standard axles, loading and growth factors.",source:"TMR / dTIMS",owner:"TMR",spatial:"Yes · 1D",cadence:"Periodic",pds:"SRA Ext",status:"unknown",flag:"Extent of measured vs modelled loading unclear. QA: no ESA/loading field found in documented Databricks tables; status unknown is consistent with KB silence.",hook:"Clause 20",rads:"Demand",horizon:"h3",target:"Measured loading for modelling",action:"Confirm and extend loading data",value:"Accurate pavement-life prediction"},
+  {id:"CON-07",domain:"condition",name:"Last-inspected-per-asset tracking (RAMC)",desc:"View giving the most recent inspection date per asset, usable as a condition-currency check.",source:"Asset Vision (transport_ramc)",owner:"Ventia",spatial:"Partial",cadence:"Continuous",pds:"n/a",status:"exists",flag:"QA addition: uvw_roadlastinspected already exists in Databricks but was omitted from the original stocktake.",hook:"Clause 20",rads:"Condition",horizon:"h1",target:"Condition currency checked automatically",action:"Surface last-inspected dates in the condition view",value:"Know which assets have stale condition data"},
+
+  {id:"WRK-01",domain:"works",name:"Work orders",desc:"Maintenance work orders raised, scheduled and completed.",source:"Asset Vision (transport_ramc)",owner:"Ventia",spatial:"Partial · linked",cadence:"Continuous",pds:"SRA Ext",status:"exists",flag:"Not always geolocated back to the asset worked. QA correction: RAMC work orders are sourced from Asset Vision (uvw_job / uvw_stripmap_jobs), not SAP PM - the cross-contract SAP jobs table (utbl_jobs_allcontract) is documented in Databricks as decommissioned. SAP work-order numbers appear only as a linked reference field.",hook:"App. M / N",rads:"Works & Cost",horizon:"h1",target:"Every work order geolocated to its asset",action:"Enforce asset-linking at the point of raising",value:"True cost and history per asset"},
+  {id:"WRK-02",domain:"works",name:"Routine maintenance activities",desc:"Routine and reactive maintenance activity records.",source:"SAP PM",owner:"Ventia",spatial:"Partial",cadence:"Continuous",pds:"SRA Ext",status:"exists",flag:"Activity-coded against the maintenance specification.",hook:"App. M",rads:"Works & Cost",horizon:"h2",target:"Activity data joined to condition",action:"Link activities to asset condition",value:"Measure what maintenance actually achieves"},
+  {id:"WRK-03",domain:"works",name:"Programmed / forward works (FWP, AWP)",desc:"Forward works and annual works plans from condition and modelling.",source:"dTIMS / Contract Plan",owner:"Ventia / TMR",spatial:"Partial",cadence:"Annual",pds:"n/a",status:"partial",flag:"Plan-stage; quality tied to Appendix B rejection risk.",hook:"App. D",rads:"Works & Cost",horizon:"h2",target:"Model-driven forward works programme",action:"Generate FWP/AWP directly from dTIMS",value:"Right work, right place, right time"},
+  {id:"WRK-04",domain:"works",name:"Defect inspections & response",desc:"Defect capture, prioritisation and response timing.",source:"Ventia field app",owner:"Ventia",spatial:"Yes · point",cadence:"Continuous",pds:"SRA Ext",status:"partial",flag:"App-captured but variable completeness; feeds OPMs.",hook:"App. M",rads:"Works & Cost",horizon:"h2",target:"Live defect-to-response tracking",action:"Automate the defect-to-OPM linkage",value:"LOS compliance, avoids payment risk"},
+  {id:"WRK-05",domain:"works",name:"Works history / as-constructed",desc:"As-built records fed back to update the asset register.",source:"SAP / GIS",owner:"Ventia / TMR",spatial:"Partial",cadence:"Event-driven",pds:"SRA Ext",status:"gap",flag:"As-built loop back to the register is rarely closed.",hook:"App. J Att 2",rads:"Works & Cost",horizon:"h1",target:"Closed as-built loop to the register",action:"Auto-update the register from completed works",value:"The register never goes stale"},
+  {id:"WRK-06",domain:"works",name:"Backlog & job-snapshot tracking (RAMC)",desc:"Monthly backlog change and job-snapshot reporting already captured in Asset Vision for RAMC.",source:"Asset Vision (transport_ramc)",owner:"Ventia",spatial:"No",cadence:"Monthly",pds:"n/a",status:"exists",flag:"QA addition: utbl_backlog_change_report, utbl_current_month_job_snapshot and utbl_monthly_backlog_reduction already exist in Databricks but were omitted from the original stocktake.",hook:"App. D",rads:"Works & Cost",horizon:"h2",target:"Backlog tracking wired into the platform's works view",action:"Surface the existing backlog/snapshot tables in reporting",value:"Backlog movement visible without manual reporting"},
+
+  {id:"FIN-01",domain:"finance",name:"Material costs",desc:"Materials consumed and cost against works.",source:"SAP MM",owner:"Ventia",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Cost-coded but not asset-linked.",hook:"App. B",rads:"Works & Cost",horizon:"h2",target:"Cost linked to asset and work",action:"Join SAP cost to work orders and assets",value:"Unit-rate benchmarking"},
+  {id:"FIN-02",domain:"finance",name:"People / labour costs",desc:"Labour hours and cost by activity and crew.",source:"SAP HR / payroll",owner:"Ventia",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Timesheet-driven.",hook:"App. B",rads:"Works & Cost",horizon:"h2",target:"Labour cost per asset activity",action:"Join timesheets to works",value:"True cost-to-serve"},
+  {id:"FIN-03",domain:"finance",name:"Plant & equipment costs",desc:"Plant, fleet and equipment cost allocation.",source:"SAP",owner:"Ventia",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Fleet-coded.",hook:"App. B",rads:"Works & Cost",horizon:"h2",target:"Plant cost per activity",action:"Allocate plant to works",value:"Complete activity costing"},
+  {id:"FIN-04",domain:"finance",name:"Invoices, claims & payments",desc:"Payables, receivables and monthly claim data.",source:"SAP AP/AR",owner:"Ventia / Finance",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Not linked to asset or work order.",hook:"App. B",rads:"Works & Cost",horizon:"h2",target:"Claims traceable to works and assets",action:"Link AP/AR to work orders",value:"Auditable claims, faster reconciliation"},
+  {id:"FIN-05",domain:"finance",name:"Schedule of rates",desc:"Contract rates for works pricing and valuation.",source:"Tender Schedules",owner:"Ventia / TMR",spatial:"No",cadence:"Contract event",pds:"n/a",status:"partial",flag:"Most material commercial gap if pricing obligations must be captured.",hook:"Tender Schedules",rads:"Works & Cost",horizon:"h2",target:"Rates driving works valuation",action:"Load the schedule of rates into the pricing layer",value:"Consistent works pricing and forecasting"},
+  {id:"FIN-06",domain:"finance",name:"Valuation & depreciation",desc:"Asset valuation, depreciation and financial reporting.",source:"SAP FA",owner:"Finance",spatial:"No",cadence:"Annual",pds:"Core",status:"partial",flag:"Depends on INV-08 componentisation.",hook:"App. B",rads:"Valuation",horizon:"h2",target:"Automated valuation from a componentised register",action:"Automate from INV-08",value:"Reliable financial reporting"},
+
+  {id:"OVL-01",domain:"overlays",name:"Maintenance responsibility limits",desc:"Contract-defined limits of maintenance responsibility.",source:"GIS / App. A",owner:"TMR",spatial:"Yes · 2D",cadence:"Static",pds:"n/a",status:"exists",flag:"Contract-defined and authoritative.",hook:"App. A",rads:"Network",horizon:"h1",target:"Limits enforced inside the platform",action:"Publish limits as a spatial layer",value:"Clarity on what is in scope"},
+  {id:"OVL-02",domain:"overlays",name:"Interface & boundary arrangements",desc:"Interfaces with councils, adjacent contracts and third parties.",source:"GIS",owner:"TMR / Ventia",spatial:"Yes · 2D",cadence:"Static",pds:"n/a",status:"partial",flag:"Adjacent-party interfaces not fully mapped.",hook:"App. C",rads:"Network",horizon:"h2",target:"Mapped third-party interfaces",action:"Digitise the interface arrangements",value:"Fewer boundary disputes"},
+  {id:"OVL-03",domain:"overlays",name:"Environmental management (EMP) constraints",desc:"Environmental constraints, sensitive areas and EMP requirements.",source:"GIS overlays / EMP docs",owner:"TMR / Ventia",spatial:"Yes · 2D",cadence:"Periodic",pds:"n/a",status:"partial",flag:"Doc-based; not fully spatially enabled.",hook:"App. L",rads:"n/a",horizon:"h3",target:"Spatial environmental constraints in planning",action:"Convert EMP into a spatial layer",value:"Environment-aware works planning"},
+  {id:"OVL-04",domain:"overlays",name:"Cultural heritage overlays",desc:"Cultural heritage sites and constraints.",source:"GIS / DATSIP",owner:"TMR",spatial:"Yes · 2D",cadence:"Static",pds:"n/a",status:"gap",flag:"Sensitive and access-restricted; sourcing unresolved.",hook:"App. L",rads:"n/a",horizon:"h3",target:"Heritage-aware works screening",action:"Resolve sourcing and access arrangements",value:"Avoid heritage breaches (App. L)"},
+  {id:"OVL-05",domain:"overlays",name:"Drainage, flood & hydrology",desc:"Flood extents, hydrology and drainage catchment data.",source:"GIS / council",owner:"TMR / council",spatial:"Yes · 2D",cadence:"Static",pds:"n/a",status:"unknown",flag:"Fragmented across state and council sources.",hook:"App. M",rads:"n/a",horizon:"h3",target:"Flood and hydrology in maintenance planning",action:"Consolidate flood and hydrology sources",value:"Proactive wet-season readiness"},
+  {id:"OVL-06",domain:"overlays",name:"Land under roads / tenure",desc:"Cadastral tenure and land under the road corridor.",source:"Cadastre / GIS",owner:"TMR",spatial:"Yes · 2D",cadence:"Static",pds:"SRA",status:"partial",flag:"Cadastre-to-network match is imperfect.",hook:"App. A",rads:"Inventory",horizon:"h2",target:"Tenure matched to the network",action:"Reconcile cadastre to the LRS",value:"Clear tenure for works"},
+
+  {id:"PERF-01",domain:"performance",name:"KRAs & KPIs (trend reporting)",desc:"Key result areas and performance indicators for trend reporting.",source:"Reporting layer / Power BI",owner:"Ventia",spatial:"No",cadence:"Monthly",pds:"n/a",status:"partial",flag:"Report-built; generally no direct payment impact.",hook:"App. B",rads:"Performance",horizon:"h2",target:"Automated trend reporting",action:"Build KRA/KPI reporting on the platform",value:"Less manual reporting effort"},
+  {id:"PERF-02",domain:"performance",name:"OPMs & LOS response times",desc:"Operational performance measures tied to level-of-service response times.",source:"Works mgmt + performance",owner:"Ventia / TMR",spatial:"Partial",cadence:"Continuous",pds:"n/a",status:"partial",flag:"Payment-linked; distinct from KRA trend reporting.",hook:"App. B",rads:"Performance",horizon:"h2",target:"Real-time level-of-service performance",action:"Automate OPM measurement from defect and works data",value:"Protects the fee, avoids suspension risk"},
+  {id:"PERF-03",domain:"performance",name:"Compliance & audit reporting",desc:"Contract compliance, audit evidence and reporting packs.",source:"Reporting layer",owner:"Ventia",spatial:"No",cadence:"Periodic",pds:"n/a",status:"partial",flag:"Largely manual assembly today.",hook:"App. B / D",rads:"Performance",horizon:"h2",target:"One-click compliance packs",action:"Automate evidence assembly",value:"Audit-ready at any time"},
+
+  {id:"REF-01",domain:"reference",name:"Austroads RADS code lists",desc:"Standard classifications, code lists and data item specs from RADS v4.",source:"Standards register (new)",owner:"EdgeRed / Ventia",spatial:"No",cadence:"Static",pds:"n/a",status:"gap",flag:"To be established as the classification backbone.",hook:"RADS v4",rads:"Reference",horizon:"h1",target:"RADS as the classification backbone",action:"Establish the RADS code lists",value:"Interoperable, standards-aligned data"},
+  {id:"REF-02",domain:"reference",name:"Asset classification & hierarchy",desc:"Asset class hierarchy and parent-child relationships.",source:"ARMIS / master data",owner:"TMR / Ventia",spatial:"No",cadence:"Static",pds:"n/a",status:"partial",flag:"Not yet aligned to RADS classes.",hook:"RADS v4",rads:"Reference",horizon:"h1",target:"Hierarchy aligned to RADS",action:"Re-map asset classes to RADS",value:"Consistent reporting and roll-ups"},
+  {id:"REF-03",domain:"reference",name:"Supplier / contractor master",desc:"Governed supplier and subcontractor master data.",source:"SAP MDM",owner:"Ventia",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Governed master data.",hook:"App. B",rads:"Reference",horizon:"h2",target:"Supplier master linked to cost and works",action:"Join MDM to cost and works",value:"Supplier performance and spend view"},
+  {id:"REF-04",domain:"reference",name:"Resource / people master",desc:"Crew, role and resource master data.",source:"SAP HR",owner:"Ventia",spatial:"No",cadence:"Continuous",pds:"n/a",status:"exists",flag:"Governed master data.",hook:"n/a",rads:"Reference",horizon:"h2",target:"Resource master linked to works",action:"Join HR to activities",value:"Capacity and productivity view"},
+  {id:"REF-05",domain:"reference",name:"Cost indices (Rawlinsons, ABS PPI, TMR Bitumen)",desc:"External cost indices for rise-and-fall and benchmarking.",source:"External references",owner:"EdgeRed",spatial:"No",cadence:"Periodic",pds:"n/a",status:"exists",flag:"External and licensed; Rawlinsons, ABS cat. 6427.0, TMR C170.",hook:"App. B",rads:"Reference",horizon:"h2",target:"Indices driving rise-and-fall and benchmarking",action:"Automate the index feeds",value:"Defensible cost escalation"}
+];
+
+const USECASES=[
+  {id:"UC1",title:"Predictive pavement deterioration & treatment timing",type:"predictive",hook:"Clause 20 · dTIMS",datasets:["CON-01","CON-06","INV-01","INV-02","WRK-05","REF-01"],
+   outcome:"Forecast where pavements will fail and schedule the cheapest effective treatment before they do, lowering whole-of-life cost rather than reacting to failure."},
+  {id:"UC2",title:"Proactive drainage & culvert maintenance",type:"proactive",hook:"App. M",datasets:["INV-04","OVL-05","WRK-04","CON-05"],
+   outcome:"Clear and repair drainage ahead of the wet season to prevent washouts, cutting reactive callouts, road closures and safety risk."},
+  {id:"UC3",title:"Cost-to-condition value for money",type:"optimise",hook:"App. B fee defence",datasets:["FIN-01","FIN-02","FIN-03","WRK-01","CON-01","FIN-05"],
+   outcome:"See true cost per asset and per unit of condition improvement, so spend goes where it moves the network most and the Asset Management Services Fee is defensible."},
+  {id:"UC4",title:"Risk-based inspection & renewal prioritisation",type:"optimise",hook:"App. N",datasets:["CON-01","CON-04","CON-05","INV-03","REF-02"],
+   outcome:"Rank assets by consequence and condition so the highest-risk structures and pavements are inspected and renewed first."},
+  {id:"UC5",title:"Automated level-of-service & OPM compliance",type:"optimise",hook:"App. B · value at risk",datasets:["WRK-04","PERF-02","WRK-01","NET-01"],
+   outcome:"Track defect-to-response against LOS in real time, protecting the fee and avoiding suspension after repeated rejections."},
+  {id:"UC6",title:"Single view of assets & digital-twin enablement",type:"foundation",hook:"NextSpace · dTIMS",datasets:["NET-01","INV-01","CON-01","WRK-01","OVL-01"],
+   outcome:"One authoritative, spatially-linked record per asset in NextSpace as the single view; dTIMS then supplies the predictive layer that earns the twin label."},
+  {id:"UC7",title:"Environment & heritage-aware works planning",type:"proactive",hook:"App. L",datasets:["OVL-03","OVL-04","WRK-03","NET-01"],
+   outcome:"Screen forward works against environmental and cultural-heritage constraints automatically, de-risking delivery and avoiding breaches."},
+  {id:"UC8",title:"Anomaly detection for job costing",type:"optimise",hook:"App. B · financial integrity",datasets:["FIN-01","FIN-02","FIN-03","FIN-05","WRK-01","FIN-04"],
+   outcome:"Flag statistical outliers in material, labour and plant costs against the schedule of rates and historical norms — surfacing data entry errors and potential subcontractor overclaiming before claims are approved and paid."},
+  {id:"UC9",title:"Route optimisation for maintenance activities",type:"optimise",hook:"App. M · operational efficiency",datasets:["NET-01","NET-02","WRK-01","WRK-02","WRK-03","CON-05"],
+   outcome:"Sequence and route maintenance crews across the network to minimise travel time, reduce fuel cost and maximise productive hours — for routine patrols, defect response and programmed works runs."}
+];
+
+let data=structuredClone(SEED);
+let view="stocktake";
+const filters={search:"",layer:"",domain:"",source:"",status:new Set()};
+const $=s=>document.querySelector(s);
+const row=id=>data.find(d=>d.id===id);
+const statusMeta=k=>STATUSES.find(s=>s.key===k);
+const domainOf=k=>DOMAINS.find(d=>d.key===k);
+const horizonOf=k=>HORIZONS.find(h=>h.key===k);
+
+(function initSelects(){
+  const fl=$("#fLayer");Object.entries(LAYERS).forEach(([k,v])=>fl.insertAdjacentHTML("beforeend",`<option value="${k}">Layer ${k} · ${v}</option>`));
+  const fd=$("#fDomain");DOMAINS.forEach(d=>fd.insertAdjacentHTML("beforeend",`<option value="${d.key}">${d.name}</option>`));
+  const fs=$("#fSource");[...new Set(SEED.map(d=>d.source))].sort().forEach(s=>fs.insertAdjacentHTML("beforeend",`<option value="${s}">${s}</option>`));
+})();
+(function initStatusChips(){
+  const c=$("#statusChips");
+  STATUSES.forEach(s=>{
+    const b=document.createElement("button");b.className="schip";b.type="button";b.setAttribute("aria-pressed","false");b.dataset.status=s.key;
+    b.innerHTML=`<span class="sw ${s.key}"></span>${s.label}`;
+    b.addEventListener("click",()=>{filters.status.has(s.key)?(filters.status.delete(s.key),b.setAttribute("aria-pressed","false")):(filters.status.add(s.key),b.setAttribute("aria-pressed","true"));render();});
+    c.appendChild(b);
+  });
+})();
+
+document.querySelectorAll(".vbtn").forEach(b=>b.addEventListener("click",()=>{
+  view=b.dataset.view;
+  document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x===b?"true":"false"));
+  $("#controls").classList.toggle("no-filters",view==="usecases");
+  render();
+}));
+$("#search").addEventListener("input",e=>{filters.search=e.target.value.toLowerCase();render();});
+$("#fLayer").addEventListener("change",e=>{filters.layer=e.target.value;render();});
+$("#fDomain").addEventListener("change",e=>{filters.domain=e.target.value;render();});
+$("#fSource").addEventListener("change",e=>{filters.source=e.target.value;render();});
+$("#resetBtn").addEventListener("click",()=>{
+  filters.search="";filters.layer="";filters.domain="";filters.source="";filters.status.clear();
+  $("#search").value="";$("#fLayer").value="";$("#fDomain").value="";$("#fSource").value="";
+  document.querySelectorAll(".schip").forEach(b=>b.setAttribute("aria-pressed","false"));render();
+});
+$("#exportBtn").addEventListener("click",exportCSV);
+
+function passesFilters(r){
+  const dm=domainOf(r.domain);
+  if(filters.layer&&dm.layer!==filters.layer)return false;
+  if(filters.domain&&r.domain!==filters.domain)return false;
+  if(filters.source&&r.source!==filters.source)return false;
+  if(filters.status.size&&!filters.status.has(r.status))return false;
+  if(filters.search){const hay=(r.name+" "+r.desc+" "+r.source+" "+r.owner+" "+r.id+" "+r.hook+" "+r.flag+" "+r.action+" "+r.target).toLowerCase();if(!hay.includes(filters.search))return false;}
+  return true;
+}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));}
+function readiness(ids){const v=ids.reduce((a,id)=>a+READY[row(id).status],0);return Math.round((v/ids.length)*100);}
+function readyColor(pc){return pc>=70?"var(--exists)":pc>=40?"var(--partial)":"var(--gap)";}
+
+function render(){
+  if(view==="usecases"){renderSummaryUC();renderUsecases();return;}
+  const visible=data.filter(passesFilters);
+  renderSummary(visible);
+  view==="stocktake"?renderStocktake(visible):renderRoadmap(visible);
+}
+
+function renderSummary(rows){
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  if(view==="stocktake"){
+    $("#sumTitle").textContent="Data condition · current view";
+    const c={exists:0,partial:0,gap:0,unknown:0};rows.forEach(r=>c[r.status]++);const t=rows.length||1;
+    STATUSES.forEach(s=>{const seg=document.createElement("div");seg.className=`seg ${s.key}`;seg.style.flex=`${c[s.key]} 1 0`;seg.style.display=c[s.key]===0?"none":"flex";seg.innerHTML=`<span>${s.label} ${c[s.key]}</span>`;bar.appendChild(seg);});
+    STATUSES.forEach(s=>chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw ${s.key}"></span>${s.label} <b>${c[s.key]}</b> · ${Math.round(c[s.key]/t*100)}%</div>`));
+  }else{
+    $("#sumTitle").textContent="Roadmap · datasets by horizon";
+    const c={h1:0,h2:0,h3:0};rows.forEach(r=>c[r.horizon]++);const t=rows.length||1;
+    HORIZONS.forEach(h=>{const seg=document.createElement("div");seg.className=`seg ${h.key}`;seg.style.flex=`${c[h.key]} 1 0`;seg.style.display=c[h.key]===0?"none":"flex";seg.innerHTML=`<span>${h.code} · ${c[h.key]}</span>`;bar.appendChild(seg);});
+    HORIZONS.forEach(h=>chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="sw ${h.key}"></span>${h.code} <b>${c[h.key]}</b> · ${Math.round(c[h.key]/t*100)}%</div>`));
+  }
+  $("#shown").innerHTML=`<b>${rows.length}</b> of ${data.length} datasets shown`;
+}
+
+function renderSummaryUC(){
+  $("#sumTitle").textContent="Value cases · capability readiness";
+  const bar=$("#conditionBar"),chips=$("#statChips");bar.innerHTML="";chips.innerHTML="";
+  const avg=Math.round(USECASES.reduce((a,u)=>a+readiness(u.datasets),0)/USECASES.length);
+  const seg=document.createElement("div");seg.className="seg";seg.style.background=readyColor(avg);seg.style.flex=`${avg} 1 0`;seg.innerHTML=`<span>Ready ${avg}%</span>`;
+  const rest=document.createElement("div");rest.className="seg unknown";rest.style.flex=`${100-avg} 1 0`;rest.style.display=avg>=100?"none":"flex";rest.innerHTML=`<span>To close ${100-avg}%</span>`;
+  bar.appendChild(seg);bar.appendChild(rest);
+  const byType={foundation:0,optimise:0,proactive:0,predictive:0};USECASES.forEach(u=>byType[u.type]++);
+  Object.entries(byType).forEach(([k,n])=>{if(n)chips.insertAdjacentHTML("beforeend",`<div class="stat"><span class="uc-type ${k}" style="padding:2px 7px">${k}</span> <b>${n}</b></div>`);});
+  $("#shown").innerHTML=`<b>${USECASES.length}</b> capabilities · avg ${avg}% data-ready`;
+}
+
+function statusPill(r){const sm=statusMeta(r.status);return `<button class="pill ${r.status}" type="button" data-id="${r.id}" title="Click to re-rate"><span class="sw"></span>${sm.label}</button>`;}
+
+function renderStocktake(rows){
+  const main=$("#main");main.innerHTML="";
+  if(!rows.length){main.innerHTML=emptyMsg();return;}
+  ["A","B","C"].forEach(layer=>{
+    if(!rows.some(r=>domainOf(r.domain).layer===layer))return;
+    const sec=document.createElement("section");sec.className="layer";
+    sec.innerHTML=`<div class="layer-tag"><span class="lt-code">Layer ${layer}</span><h3>${LAYERS[layer]}</h3></div><div class="layer-rule"></div>`;
+    DOMAINS.filter(d=>d.layer===layer).forEach(dm=>{
+      const dRows=rows.filter(r=>r.domain===dm.key);if(!dRows.length)return;
+      const dv=document.createElement("div");dv.className="domain";
+      dv.innerHTML=`<div class="domain-head"><h4>${dm.name}</h4><span class="count">${dRows.length} dataset${dRows.length>1?"s":""}</span></div><p class="domain-note">${dm.note}</p>`;
+      const grid=document.createElement("div");grid.className="grid";
+      dRows.forEach(r=>grid.appendChild(stCard(r)));dv.appendChild(grid);sec.appendChild(dv);
+    });
+    main.appendChild(sec);
+  });
+  wirePills();wireEdits();
+}
+function stCard(r){
+  const el=document.createElement("article");el.className=`card ${r.status}`;
+  el.innerHTML=`<div class="card-top"><div><span class="card-id">${r.id}</span><span class="card-name">${escapeHtml(r.name)}</span></div>${statusPill(r)}</div>
+    <p class="card-desc">${escapeHtml(r.desc)}</p><p class="card-flag">${escapeHtml(r.flag)}</p>
+    <div class="meta">
+      <div class="m"><span class="k">Source system</span><span class="v edit" contenteditable="true" data-field="source" data-id="${r.id}">${escapeHtml(r.source)}</span></div>
+      ${r.owner==='Ventia'?'':`<div class="m"><span class="k">Owner</span><span class="v edit" contenteditable="true" data-field="owner" data-id="${r.id}">${escapeHtml(r.owner)}</span></div>`}
+      <div class="m"><span class="k">Spatial</span><span class="v">${escapeHtml(r.spatial)}</span></div>
+      <div class="m"><span class="k">Refresh</span><span class="v">${escapeHtml(r.cadence)}</span></div>
+      <div class="m"><span class="k">Austroads PDS</span><span class="v">${escapeHtml(r.pds)}</span></div>
+      <div class="m"><span class="k">RADS group</span><span class="v">${escapeHtml(r.rads)}</span></div>
+    </div>
+    <div class="tags"><span class="tag">RAMC · ${escapeHtml(r.hook)}</span><span class="tag rads">RADS · ${escapeHtml(r.rads)}</span></div>`;
+  return el;
+}
+
+const SOURCE_CLUSTERS=[
+  {key:"assetvision",label:"Asset Vision",test:s=>/asset vision/i.test(s)},
+  {key:"legacy",label:"ARMIS · dTIMS · BIS (TMR legacy)",test:s=>/armis|dtims|\bbis\b|chartview/i.test(s)},
+  {key:"sap",label:"SAP (Ventia ERP)",test:s=>/\bsap\b/i.test(s)},
+  {key:"gis",label:"GIS · cadastre",test:s=>/gis|cadastre/i.test(s)},
+  {key:"survey",label:"Survey · field capture",test:s=>/survey|field/i.test(s)},
+  {key:"reporting",label:"Reporting layer",test:s=>/report/i.test(s)},
+  {key:"external",label:"External / tender reference",test:s=>/tender|external|census/i.test(s)},
+  {key:"other",label:"Other / unclassified",test:()=>true}
+];
+function clusterOf(source){return SOURCE_CLUSTERS.find(c=>c.test(source));}
+const STATUS_HEX={exists:"#1F8F5F",partial:"#C98A00",gap:"#C43F28",unknown:"#8D9997"};
+const UCTYPE_HEX={foundation:"#0E7A78",optimise:"#3E8F68",proactive:"#8FA600",predictive:"#8FA600"};
+
+let roadmapMode="canvas";
+let lineageOn=true;
+let lineageFocus=null;
+function setLineageFocus(kind,key){
+  lineageFocus=(lineageFocus&&lineageFocus.kind===kind&&lineageFocus.key===key)?null:{kind,key};
+  render();
+}
+function renderRoadmap(rows){
+  const main=$("#main");main.innerHTML="";
+  const toggle=document.createElement("div");toggle.className="rm-toggle";
+  toggle.innerHTML=`<div class="rm-toggle-group" role="tablist" aria-label="Roadmap view">
+      <button class="rmt-btn" type="button" data-mode="canvas" role="tab" aria-selected="${roadmapMode==="canvas"}">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2.5" width="4" height="11" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="6.5" y="2.5" width="4" height="7" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="11.5" y="2.5" width="3" height="9" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+        Canvas</button>
+      <button class="rmt-btn" type="button" data-mode="cards" role="tab" aria-selected="${roadmapMode==="cards"}">
+        <svg width="13" height="13" viewBox="0 0 16 16" fill="none"><rect x="1.5" y="2" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1.5" y="6.8" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/><rect x="1.5" y="11.6" width="13" height="3.4" rx="1" stroke="currentColor" stroke-width="1.3"/></svg>
+        Detail cards</button>
+    </div>
+    ${roadmapMode==="canvas"?`<div class="rm-canvas-tools">
+      <button class="schip lin-toggle-btn" type="button" aria-pressed="${lineageOn}"><span class="sw" style="background:var(--teal)"></span>Show lineage</button>
+      ${lineageFocus?'<button class="btn" type="button" id="linClear">Clear focus</button>':""}
+    </div>`:""}`;
+  main.appendChild(toggle);
+  toggle.querySelectorAll(".rmt-btn").forEach(b=>b.addEventListener("click",()=>{
+    if(roadmapMode===b.dataset.mode)return;
+    roadmapMode=b.dataset.mode;render();
+  }));
+  const linToggleBtn=toggle.querySelector(".lin-toggle-btn");
+  if(linToggleBtn)linToggleBtn.addEventListener("click",()=>{lineageOn=!lineageOn;lineageFocus=null;render();});
+  const linClearBtn=toggle.querySelector("#linClear");
+  if(linClearBtn)linClearBtn.addEventListener("click",()=>{lineageFocus=null;render();});
+  if(!rows.length){main.insertAdjacentHTML("beforeend",emptyMsg());return;}
+  roadmapMode==="canvas"?renderRoadmapCanvas(main,rows):renderRoadmapCards(main,rows);
+}
+function renderRoadmapCards(main,rows){
+  HORIZONS.forEach(h=>{
+    const hRows=rows.filter(r=>r.horizon===h.key);if(!hRows.length)return;
+    const sec=document.createElement("section");sec.className="horizon";
+    sec.innerHTML=`<div class="h-tag"><span class="h-code ${h.key}">${h.code}</span><div><h3>${h.name}</h3><p class="h-desc">${h.desc}</p></div></div><div class="h-rule ${h.key}"></div>`;
+    const grid=document.createElement("div");grid.className="grid";
+    hRows.forEach(r=>grid.appendChild(rmCard(r)));sec.appendChild(grid);main.appendChild(sec);
+  });
+  wirePills();
+}
+function renderRoadmapCanvas(main,rows){
+  const visibleIds=new Set(rows.map(r=>r.id));
+  const byCluster={};
+  rows.forEach(r=>{const c=clusterOf(r.source);(byCluster[c.key]=byCluster[c.key]||{cluster:c,rows:[]}).rows.push(r);});
+  const related=(()=>{
+    if(!lineageFocus)return null;
+    const relDatasets=new Set(),relClusters=new Set(),relUcs=new Set();
+    if(lineageFocus.kind==="tile"){
+      const r=row(lineageFocus.key);if(!r)return null;
+      relDatasets.add(r.id);relClusters.add(clusterOf(r.source).key);
+      USECASES.forEach(u=>{if(u.datasets.includes(r.id))relUcs.add(u.id);});
+    }else if(lineageFocus.kind==="cluster"){
+      relClusters.add(lineageFocus.key);
+      rows.forEach(r=>{if(clusterOf(r.source).key===lineageFocus.key){relDatasets.add(r.id);USECASES.forEach(u=>{if(u.datasets.includes(r.id))relUcs.add(u.id);});}});
+    }else if(lineageFocus.kind==="uc"){
+      relUcs.add(lineageFocus.key);
+      const u=USECASES.find(x=>x.id===lineageFocus.key);
+      if(u)u.datasets.forEach(id=>{if(visibleIds.has(id)){relDatasets.add(id);relClusters.add(clusterOf(row(id).source).key);}});
+    }
+    return {relDatasets,relClusters,relUcs};
+  })();
+  const dimTile=id=>related&&!related.relDatasets.has(id);
+  const activeTile=id=>related&&related.relDatasets.has(id);
+  const dimCluster=k=>related&&!related.relClusters.has(k);
+  const activeCluster=k=>related&&related.relClusters.has(k);
+  const dimUc=id=>related&&!related.relUcs.has(id);
+  const activeUc=id=>related&&related.relUcs.has(id);
+
+  const board=document.createElement("div");board.className=`rm-canvas${lineageOn?" with-lineage":""}`;
+
+  if(lineageOn){
+    const srcRail=document.createElement("div");srcRail.className="lin-rail lin-rail-src";
+    srcRail.innerHTML=`<div class="lin-rail-title">Source systems</div>${
+      Object.values(byCluster).map(({cluster,rows:crows})=>
+        `<button class="lin-node${activeCluster(cluster.key)?" active":""}${dimCluster(cluster.key)?" dim":""}" type="button" data-cluster="${cluster.key}">
+          <b>${escapeHtml(cluster.label)}</b><span class="cnt">${crows.length} dataset${crows.length===1?"":"s"}</span></button>`
+      ).join("")}`;
+    board.appendChild(srcRail);
+  }
+
+  HORIZONS.forEach((h,i)=>{
+    const hRows=rows.filter(r=>r.horizon===h.key);
+    const col=document.createElement("div");col.className=`rmc-col ${h.key}`;
+    const counts={exists:0,partial:0,gap:0,unknown:0};hRows.forEach(r=>counts[r.status]++);
+    const total=hRows.length||1;
+    const barSegs=STATUSES.filter(s=>counts[s.key]).map(s=>`<span style="flex:${counts[s.key]} 1 0;background:var(--${s.key})" title="${s.label} · ${counts[s.key]}"></span>`).join("");
+    const notReady=hRows.filter(r=>r.status==="gap"||r.status==="unknown").length;
+    const byDomain={};hRows.forEach(r=>{(byDomain[r.domain]=byDomain[r.domain]||[]).push(r);});
+    const lanes=DOMAINS.filter(d=>byDomain[d.key]).map(d=>{
+      const tiles=byDomain[d.key].map(r=>{
+        const cls=["rmc-tile",r.status];
+        if(lineageOn){if(activeTile(r.id))cls.push("active");if(dimTile(r.id))cls.push("dim");}
+        const hint=lineageOn?"click to trace lineage":"click to re-rate";
+        return `<button class="${cls.join(" ")}" type="button" data-id="${r.id}" title="${escapeHtml(r.id)} · ${escapeHtml(r.name)} — ${escapeHtml(statusMeta(r.status).label)} (${hint})">${r.id}</button>`;
+      }).join("");
+      return `<div class="rmc-lane"><div class="rmc-lane-head"><span>${escapeHtml(d.name)}</span><span>${byDomain[d.key].length}</span></div><div class="rmc-tiles">${tiles}</div></div>`;
+    }).join("");
+    col.innerHTML=`
+      <div class="rmc-head"><span class="h-code ${h.key}">${h.code}</span><span class="rmc-count">${hRows.length} dataset${hRows.length===1?"":"s"}</span></div>
+      <h3 class="rmc-title">${escapeHtml(h.name)}</h3>
+      <p class="rmc-desc">${escapeHtml(h.desc)}</p>
+      <div class="rmc-bar">${barSegs}</div>
+      <div class="rmc-lanes">${lanes||'<p class="rmc-empty">No datasets match the current filters.</p>'}</div>
+      <div class="rmc-foot">${notReady?`<b>${notReady}</b> of ${total} not yet at "exists"`:"All datasets in this horizon exist"}${i<HORIZONS.length-1?` · feeds → ${HORIZONS[i+1].code}`:""}</div>`;
+    board.appendChild(col);
+  });
+
+  if(lineageOn){
+    const ucRail=document.createElement("div");ucRail.className="lin-rail lin-rail-uc";
+    ucRail.innerHTML=`<div class="lin-rail-title">Value cases</div>${
+      USECASES.map(u=>`<button class="lin-uc${activeUc(u.id)?" active":""}${dimUc(u.id)?" dim":""}" type="button" data-uc="${u.id}">
+          <div class="lin-uc-top"><span class="cid">${u.id}</span><span class="uc-type ${u.type}" style="padding:2px 6px;font-size:8.5px">${u.type}</span></div>
+          <div class="ttl">${escapeHtml(u.title)}</div></button>`).join("")}`;
+    board.appendChild(ucRail);
+    const svg=document.createElementNS("http://www.w3.org/2000/svg","svg");
+    svg.setAttribute("class","lin-svg");
+    board.appendChild(svg);
+  }
+
+  main.appendChild(board);
+  if(lineageOn)drawLineage(board,rows);
+  board.querySelectorAll(".lin-node").forEach(n=>n.addEventListener("click",()=>setLineageFocus("cluster",n.dataset.cluster)));
+  board.querySelectorAll(".lin-uc").forEach(n=>n.addEventListener("click",()=>setLineageFocus("uc",n.dataset.uc)));
+  board.querySelectorAll(".rmc-tile").forEach(t=>t.addEventListener("click",()=>{
+    lineageOn?setLineageFocus("tile",t.dataset.id):cycleStatus(t.dataset.id);
+  }));
+}
+function drawLineage(board,rows){
+  const svg=board.querySelector(".lin-svg");if(!svg)return;
+  const brect=board.getBoundingClientRect();
+  svg.setAttribute("width",brect.width);svg.setAttribute("height",brect.height);
+  svg.setAttribute("viewBox",`0 0 ${brect.width} ${brect.height}`);
+  const rightOf=el=>{const r=el.getBoundingClientRect();return{x:r.right-brect.left,y:r.top-brect.top+r.height/2};};
+  const leftOf=el=>{const r=el.getBoundingClientRect();return{x:r.left-brect.left,y:r.top-brect.top+r.height/2};};
+  const mkPath=(a,b,color,strong)=>{
+    const mx=(a.x+b.x)/2;
+    const p=document.createElementNS("http://www.w3.org/2000/svg","path");
+    p.setAttribute("d",`M${a.x},${a.y} C${mx},${a.y} ${mx},${b.y} ${b.x},${b.y}`);
+    p.setAttribute("fill","none");p.setAttribute("stroke",color);
+    p.setAttribute("stroke-width",strong?"2.2":"1.1");
+    p.setAttribute("opacity",strong?"0.9":(lineageFocus?"0.05":"0.28"));
+    p.setAttribute("stroke-linecap","round");
+    return p;
+  };
+  const frag=document.createDocumentFragment();
+  rows.forEach(r=>{
+    const tile=board.querySelector(`.rmc-tile[data-id="${r.id}"]`);if(!tile)return;
+    const cluster=clusterOf(r.source);
+    const clusterNode=board.querySelector(`.lin-node[data-cluster="${cluster.key}"]`);
+    const tileFocused=lineageFocus&&(
+      (lineageFocus.kind==="tile"&&lineageFocus.key===r.id)||
+      (lineageFocus.kind==="cluster"&&lineageFocus.key===cluster.key)
+    );
+    if(clusterNode)frag.appendChild(mkPath(rightOf(clusterNode),leftOf(tile),STATUS_HEX[r.status],tileFocused));
+    USECASES.forEach(u=>{
+      if(!u.datasets.includes(r.id))return;
+      const ucNode=board.querySelector(`.lin-uc[data-uc="${u.id}"]`);if(!ucNode)return;
+      const edgeFocused=lineageFocus&&(
+        (lineageFocus.kind==="tile"&&lineageFocus.key===r.id)||
+        (lineageFocus.kind==="cluster"&&lineageFocus.key===cluster.key)||
+        (lineageFocus.kind==="uc"&&lineageFocus.key===u.id)
+      );
+      frag.appendChild(mkPath(rightOf(tile),leftOf(ucNode),UCTYPE_HEX[u.type]||"#8D9997",edgeFocused));
+    });
+  });
+  svg.appendChild(frag);
+}
+function debounce(fn,ms){let t;return(...a)=>{clearTimeout(t);t=setTimeout(()=>fn(...a),ms);};}
+window.addEventListener("resize",debounce(()=>{if(view==="roadmap")render();},150));
+if(document.fonts&&document.fonts.ready)document.fonts.ready.then(()=>{if(view==="roadmap")render();});
+function rmCard(r){
+  const el=document.createElement("article");el.className=`rm-card ${r.status}`;
+  el.innerHTML=`<div class="rm-name"><span class="card-id">${r.id} · ${escapeHtml(domainOf(r.domain).name)}</span>${escapeHtml(r.name)}</div>
+    <div class="rm-flow">${statusPill(r)}
+      <svg class="rm-arrow" width="18" height="14" viewBox="0 0 18 14" fill="none"><path d="M1 7h14m0 0l-5-5m5 5l-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      <span class="rm-target">${escapeHtml(r.target)}</span></div>
+    <p class="rm-line"><span class="lab">Move</span><span class="val">${escapeHtml(r.action)}</span></p>
+    <p class="rm-line value"><span class="lab">Value</span><span class="val">${escapeHtml(r.value)}</span></p>
+    <div class="rm-tags"><span class="tag">RAMC · ${escapeHtml(r.hook)}</span><span class="tag rads">RADS · ${escapeHtml(r.rads)}</span></div>`;
+  return el;
+}
+
+function renderUsecases(){
+  const main=$("#main");
+  main.innerHTML=`<p class="uc-intro">Each capability below is a question the network needs answered, and the datasets that answer it. Readiness is computed live from the current-state status in the stocktake, so as you re-rate a dataset, every capability it feeds updates. Tap a dataset chip to jump to it.</p><div class="uc-grid" id="ucGrid"></div>`;
+  const grid=$("#ucGrid");
+  USECASES.forEach(u=>{
+    const pc=readiness(u.datasets);const col=readyColor(pc);
+    const chips=u.datasets.map(id=>{const d=row(id);return `<button class="uc-chip" type="button" data-goto="${id}"><span class="sw ${d.status}"></span><span class="cid">${id}</span> ${escapeHtml(d.name.split(" (")[0])}</button>`;}).join("");
+    const el=document.createElement("article");el.className="uc-card";
+    el.innerHTML=`<div class="uc-top"><div class="uc-title">${escapeHtml(u.title)}</div><span class="uc-type ${u.type}">${u.type}</span></div>
+      <p class="uc-outcome">${escapeHtml(u.outcome)}</p>
+      <div class="uc-ready"><div class="uc-ready-head"><span class="lab">Data readiness</span><span class="pc">${pc}%</span></div><div class="uc-bar"><span style="width:${pc}%;background:${col}"></span></div></div>
+      <div class="uc-needs"><span class="lab">Data it draws on</span><div class="uc-chips">${chips}</div></div>
+      <div class="uc-foot"><span class="uc-hook">RAMC · ${escapeHtml(u.hook)}</span></div>`;
+    grid.appendChild(el);
+  });
+  grid.querySelectorAll(".uc-chip").forEach(c=>c.addEventListener("click",()=>{
+    const id=c.dataset.goto;
+    view="stocktake";filters.search=id;$("#search").value=id;
+    document.querySelectorAll(".vbtn").forEach(x=>x.setAttribute("aria-selected",x.dataset.view==="stocktake"?"true":"false"));
+    $("#controls").classList.remove("no-filters");render();window.scrollTo({top:0,behavior:"smooth"});
+  }));
+}
+
+function wirePills(){document.querySelectorAll(".pill").forEach(p=>p.addEventListener("click",()=>cycleStatus(p.dataset.id)));}
+function wireEdits(){document.querySelectorAll(".edit").forEach(sp=>{
+  sp.addEventListener("blur",()=>{const r=row(sp.dataset.id);if(r)r[sp.dataset.field]=sp.textContent.trim();});
+  sp.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();sp.blur();}});
+});}
+function cycleStatus(id){const r=row(id);const order=STATUSES.map(s=>s.key);r.status=order[(order.indexOf(r.status)+1)%order.length];render();}
+function emptyMsg(){return `<div class="empty"><h4>No datasets match</h4><div>Try clearing a filter or the search box.</div></div>`;}
+
+function exportCSV(){
+  const cols=["id","layer","domain","name","description","source_system","owner","spatial","refresh","austroads_pds","rads_group","status","horizon","target_state","action","value","ramc_hook","note"];
+  const lines=[cols.join(",")];
+  data.forEach(r=>{const dm=domainOf(r.domain);
+    const vals=[r.id,dm.layer,dm.name,r.name,r.desc,r.source,r.owner,r.spatial,r.cadence,r.pds,r.rads,statusMeta(r.status).label,horizonOf(r.horizon).code,r.target,r.action,r.value,r.hook,r.flag];
+    lines.push(vals.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(","));
+  });
+  const blob=new Blob([lines.join("\r\n")],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob);const a=document.createElement("a");
+  a.href=url;a.download="EDA_Transport_Stocktake_Roadmap.csv";
+  document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
+}
+
+render();
+</script>
+</body>
+</html>
